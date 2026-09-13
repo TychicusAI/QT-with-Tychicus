@@ -292,7 +292,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
 
       {/* 6. Extended Study */}
       {day.extendedStudy && day.extendedStudy.length > 0 && (
-        <ExtendedStudySection items={day.extendedStudy} version={week.version} />
+        <ExtendedStudySection items={day.extendedStudy} version={week.version} fontSize={fontSize} />
       )}
 
       {/* Bottom Navigation: Prev / Next Day */}

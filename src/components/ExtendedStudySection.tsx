@@ -7,9 +7,14 @@ import { BookOpen, ExternalLink, ChevronDown } from "lucide-react";
 interface ExtendedStudySectionProps {
   items: ExtendedStudyItem[];
   version?: DevotionalVersion;
+  fontSize?: "normal" | "large" | "xlarge";
 }
 
-export function ExtendedStudySection({ items, version = "youth" }: ExtendedStudySectionProps) {
+export function ExtendedStudySection({
+  items,
+  version = "youth",
+  fontSize = "large",
+}: ExtendedStudySectionProps) {
   const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
 
   if (!items || items.length === 0) return null;
@@ -27,6 +32,24 @@ export function ExtendedStudySection({ items, version = "youth" }: ExtendedStudy
   };
 
   const isFamily = version === "family";
+
+  const commentaryClasses = {
+    normal: "text-sm leading-relaxed",
+    large: "text-base sm:text-lg leading-relaxed sm:leading-loose",
+    xlarge: "text-lg sm:text-xl leading-loose",
+  }[fontSize];
+
+  const scriptureClasses = {
+    normal: "text-sm sm:text-base leading-relaxed",
+    large: "text-base sm:text-lg leading-relaxed sm:leading-loose",
+    xlarge: "text-lg sm:text-xl leading-loose",
+  }[fontSize];
+
+  const titleClasses = {
+    normal: "text-xs sm:text-sm",
+    large: "text-sm sm:text-base",
+    xlarge: "text-base sm:text-lg",
+  }[fontSize];
 
   return (
     <section className="p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4">
@@ -74,7 +97,7 @@ export function ExtendedStudySection({ items, version = "youth" }: ExtendedStudy
               {/* Header: Title + Action Buttons */}
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <span
-                  className={`font-bold text-xs sm:text-sm tracking-tight ${
+                  className={`font-bold ${titleClasses} tracking-tight ${
                     isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-700 dark:text-amber-400"
                   }`}
                 >
@@ -118,7 +141,7 @@ export function ExtendedStudySection({ items, version = "youth" }: ExtendedStudy
               </div>
 
               {/* Box Body: Commentary (補述的內容) */}
-              <p className="pt-2 text-stone-700 dark:text-stone-200 leading-relaxed text-xs sm:text-[13.5px]">
+              <p className={`pt-2.5 text-stone-700 dark:text-stone-200 ${commentaryClasses}`}>
                 {item.question}
               </p>
 
@@ -144,7 +167,7 @@ export function ExtendedStudySection({ items, version = "youth" }: ExtendedStudy
 
                   {item.text ? (
                     <blockquote
-                      className={`p-3.5 sm:p-4 rounded-xl border font-serif text-xs sm:text-sm leading-relaxed whitespace-pre-line ${
+                      className={`p-4 sm:p-5 rounded-xl border font-serif ${scriptureClasses} whitespace-pre-line ${
                         isFamily
                           ? "bg-teal-500/5 dark:bg-teal-950/25 border-teal-200/50 dark:border-teal-800/40 text-stone-800 dark:text-stone-100"
                           : "bg-amber-500/5 dark:bg-amber-950/25 border-amber-200/50 dark:border-amber-800/40 text-stone-800 dark:text-stone-100"
