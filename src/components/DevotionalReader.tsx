@@ -30,8 +30,24 @@ interface DevotionalReaderProps {
 }
 
 export function DevotionalReader({ week, day }: DevotionalReaderProps) {
-  const [fontSize, setFontSize] = useState<"normal" | "large" | "xlarge">("normal");
+  const [fontSize, setFontSize] = useState<"normal" | "large" | "xlarge">("large");
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  React.useEffect(() => {
+    try {
+      const saved = localStorage.getItem("qt_font_size");
+      if (saved === "normal" || saved === "large" || saved === "xlarge") {
+        setFontSize(saved);
+      }
+    } catch {}
+  }, []);
+
+  const handleSetFontSize = (size: "normal" | "large" | "xlarge") => {
+    setFontSize(size);
+    try {
+      localStorage.setItem("qt_font_size", size);
+    } catch {}
+  };
 
   const isFamily = week.version === "family";
   const otherVersion: DevotionalVersion = isFamily ? "youth" : "family";
@@ -46,11 +62,23 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   const prevDay = currentIndex > 0 ? week.days[currentIndex - 1] : null;
   const nextDay = currentIndex < week.days.length - 1 ? week.days[currentIndex + 1] : null;
 
-  // Font size classes
+  // Font size classes - 預設為「中」字級 (large)
   const fontClasses = {
     normal: "text-base leading-relaxed sm:leading-loose",
     large: "text-lg leading-relaxed sm:leading-loose",
     xlarge: "text-xl leading-loose"
+  }[fontSize];
+
+  const meditationClasses = {
+    normal: "text-sm sm:text-base leading-relaxed font-medium",
+    large: "text-base sm:text-lg leading-relaxed font-medium",
+    xlarge: "text-lg sm:text-xl leading-loose font-medium",
+  }[fontSize];
+
+  const prayerClasses = {
+    normal: "text-sm sm:text-base leading-relaxed whitespace-pre-line space-y-3",
+    large: "text-base sm:text-lg leading-relaxed sm:leading-loose whitespace-pre-line space-y-3",
+    xlarge: "text-lg sm:text-xl leading-loose whitespace-pre-line space-y-4",
   }[fontSize];
 
   return (
@@ -83,7 +111,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           {/* Font size switcher */}
           <div className="flex items-center bg-stone-100 dark:bg-stone-800/80 rounded-lg p-0.5 border border-stone-200 dark:border-stone-700">
             <button
-              onClick={() => setFontSize("normal")}
+              onClick={() => handleSetFontSize("normal")}
               className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
                 fontSize === "normal"
                   ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
@@ -93,7 +121,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               小
             </button>
             <button
-              onClick={() => setFontSize("large")}
+              onClick={() => handleSetFontSize("large")}
               className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
                 fontSize === "large"
                   ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
@@ -103,7 +131,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               中
             </button>
             <button
-              onClick={() => setFontSize("xlarge")}
+              onClick={() => handleSetFontSize("xlarge")}
               className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
                 fontSize === "xlarge"
                   ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
@@ -174,11 +202,11 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       >
         <div className="flex items-center gap-2 mb-3">
           <BookOpen
-            className={`w-4 h-4 shrink-0 ${
+            className={`w-5 h-5 shrink-0 ${
               isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
             }`}
           />
-          <span className="font-bold text-sm text-stone-900 dark:text-stone-100">今日經文</span>
+          <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">今日經文</h3>
         </div>
         <blockquote className="text-lg sm:text-xl font-serif text-stone-900 dark:text-stone-100 leading-relaxed font-semibold">
           {day.scriptureText.replace(/^[「"“]|["”」]$/g, "")}
@@ -189,11 +217,11 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       <section className="space-y-6">
         <div className="flex items-center gap-2">
           <Quote
-            className={`w-4 h-4 rotate-180 shrink-0 ${
+            className={`w-5 h-5 rotate-180 shrink-0 ${
               isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
             }`}
           />
-          <span className="font-bold text-sm text-stone-900 dark:text-stone-100">今日信息</span>
+          <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">今日信息</h3>
         </div>
 
         <div
@@ -207,7 +235,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       {/* 3. Meditation Question Card */}
       {day.meditationQuestion && (
         <section
-          className={`rounded-2xl p-5 sm:p-6 border space-y-2 ${
+          className={`rounded-2xl p-5 sm:p-6 border space-y-3 ${
             isFamily
               ? "bg-teal-500/10 dark:bg-teal-950/30 border-teal-300/60 dark:border-teal-700/60"
               : "bg-amber-500/10 dark:bg-amber-950/30 border-amber-300/60 dark:border-amber-700/60"
@@ -215,13 +243,13 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         >
           <div className="flex items-center gap-2">
             <Sparkles
-              className={`w-4 h-4 shrink-0 ${
+              className={`w-5 h-5 shrink-0 ${
                 isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
               }`}
             />
-            <span className="font-bold text-sm text-stone-900 dark:text-stone-100">默想反思</span>
+            <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">默想反思</h3>
           </div>
-          <p className="text-sm font-medium text-stone-800 dark:text-stone-100 leading-relaxed">
+          <p className={`${meditationClasses} text-stone-800 dark:text-stone-100`}>
             {day.meditationQuestion.replace(/^[「"“]|["”」]$/g, "")}
           </p>
         </section>
@@ -234,6 +262,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         weekId={week.id}
         dayId={day.id}
         dayTitle={day.title}
+        fontSize={fontSize}
       />
 
       {/* 5. Suggested Prayer Section */}
@@ -246,14 +275,14 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       >
         <div className="flex items-center gap-2">
           <HandHeart
-            className={`w-4 h-4 shrink-0 ${
+            className={`w-5 h-5 shrink-0 ${
               isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
             }`}
           />
-          <span className="font-bold text-sm text-stone-900 dark:text-stone-100">建議禱告</span>
+          <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">建議禱告</h3>
         </div>
 
-        <div className="font-serif text-stone-800 dark:text-stone-200 text-sm sm:text-base leading-relaxed whitespace-pre-line space-y-3 bg-white/60 dark:bg-stone-950/40 p-5 rounded-2xl border border-stone-200/60 dark:border-stone-800">
+        <div className={`font-serif text-stone-800 dark:text-stone-200 ${prayerClasses} bg-white/60 dark:bg-stone-950/40 p-5 rounded-2xl border border-stone-200/60 dark:border-stone-800`}>
           {day.suggestedPrayer}
         </div>
 

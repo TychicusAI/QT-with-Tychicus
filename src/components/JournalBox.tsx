@@ -10,9 +10,10 @@ interface JournalBoxProps {
   weekId: string;
   dayId: string;
   dayTitle?: string;
+  fontSize?: "normal" | "large" | "xlarge";
 }
 
-export function JournalBox({ version, weekId, dayId }: JournalBoxProps) {
+export function JournalBox({ version, weekId, dayId, fontSize = "large" }: JournalBoxProps) {
   const [note, setNote] = useState(() => getJournalNote(version, weekId, dayId));
   const [savedStatus, setSavedStatus] = useState(false);
 
@@ -27,6 +28,18 @@ export function JournalBox({ version, weekId, dayId }: JournalBoxProps) {
 
   const isFamily = version === "family";
 
+  const promptClasses = {
+    normal: "text-xs sm:text-sm leading-relaxed",
+    large: "text-sm sm:text-base leading-relaxed",
+    xlarge: "text-base sm:text-lg leading-relaxed",
+  }[fontSize];
+
+  const textareaClasses = {
+    normal: "text-sm sm:text-base leading-relaxed",
+    large: "text-base sm:text-lg leading-relaxed",
+    xlarge: "text-lg sm:text-xl leading-relaxed",
+  }[fontSize];
+
   return (
     <div
       className={`rounded-2xl p-5 sm:p-6 border space-y-3 ${
@@ -38,12 +51,12 @@ export function JournalBox({ version, weekId, dayId }: JournalBoxProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <PenLine
-            className={`w-4 h-4 shrink-0 ${
+            className={`w-5 h-5 shrink-0 ${
               isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
             }`}
           />
-          <h4 className="font-bold text-sm text-stone-900 dark:text-stone-100">
-            {isFamily ? "家庭隨堂筆記與反思" : "我的靈修筆記本"}
+          <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
+            隨堂筆記
           </h4>
         </div>
 
@@ -58,7 +71,7 @@ export function JournalBox({ version, weekId, dayId }: JournalBoxProps) {
         </span>
       </div>
 
-      <p className="text-xs text-stone-500 dark:text-stone-400 leading-relaxed">
+      <p className={`${promptClasses} text-stone-600 dark:text-stone-300`}>
         {isFamily
           ? "面對家庭餐桌上的對話與代際張力，今天神給了你什麼智慧或同理的眼光？"
           : "這篇信息觸動了你的哪一部分？面對身邊的演算法焦慮或人際壓力，今天你有哪些具體的降服或轉向？"}
@@ -73,7 +86,7 @@ export function JournalBox({ version, weekId, dayId }: JournalBoxProps) {
             : "在此寫下今天神對你的說話、安靜中的領受、或是寫給天父的真實禱告..."
         }
         rows={4}
-        className={`w-full p-3.5 rounded-xl text-base sm:text-sm bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:outline-none focus:ring-2 resize-y leading-relaxed ${
+        className={`w-full p-3.5 rounded-xl ${textareaClasses} bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:outline-none focus:ring-2 resize-y ${
           isFamily ? "focus:ring-teal-600" : "focus:ring-amber-500"
         }`}
       />

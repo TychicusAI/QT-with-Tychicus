@@ -31,9 +31,9 @@ export function ExtendedStudySection({ items, version = "youth" }: ExtendedStudy
   return (
     <section className="p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4">
       <div className="flex items-center justify-between">
-        <h4 className="font-bold text-sm text-stone-900 dark:text-stone-100 flex items-center gap-2">
+        <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 flex items-center gap-2">
           <BookOpen
-            className={`w-4 h-4 ${
+            className={`w-5 h-5 shrink-0 ${
               isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
             }`}
           />
