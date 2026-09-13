@@ -120,3 +120,11 @@ html {
   margin-bottom: 0.5rem;
   line-height: 1.8;
 }
+
+.markdown-content > *:last-child,
+.markdown-content ul:last-child,
+.markdown-content ol:last-child,
+.markdown-content p:last-child,
+.markdown-content li:last-child {
+  margin-bottom: 0;
+}

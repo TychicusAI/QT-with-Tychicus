@@ -15,6 +15,7 @@ import {
   Building2,
   Compass
 } from "lucide-react";
+import { marked } from "marked";
 import { BookBibliography, BookCategory } from "@/types/book";
 
 interface BibliographyViewerProps {
@@ -342,13 +343,22 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
                         {categoryStyle.icon}
                         <span>{item.categoryLabel}</span>
                       </span>
-                      <span className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 font-medium">
-                        {item.series}
-                      </span>
+                      <span
+                        className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 font-medium"
+                        dangerouslySetInnerHTML={{
+                          __html: marked.parseInline(item.series) as string,
+                        }}
+                      />
                     </div>
 
                     <h2 className="text-lg sm:text-2xl font-extrabold text-stone-900 dark:text-stone-50 tracking-tight pt-1">
-                      {item.author} — <span className="font-serif italic font-semibold">{item.bookTitle}</span>
+                      {item.author} —{" "}
+                      <span
+                        className="font-serif italic font-semibold"
+                        dangerouslySetInnerHTML={{
+                          __html: marked.parseInline(item.bookTitle) as string,
+                        }}
+                      />
                     </h2>
                   </div>
 
@@ -374,9 +384,12 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
                           <Building2 className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                           <span>學者／牧者背景</span>
                         </div>
-                        <p className={`${contentFontClass} text-stone-600 dark:text-stone-300 whitespace-pre-line`}>
-                          {item.authorBackground}
-                        </p>
+                        <div
+                          className={`markdown-content ${contentFontClass} text-stone-600 dark:text-stone-300 leading-relaxed sm:leading-loose`}
+                          dangerouslySetInnerHTML={{
+                            __html: marked.parse(item.authorBackground, { breaks: true }) as string,
+                          }}
+                        />
                       </div>
                     )}
 
@@ -390,26 +403,26 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
 
                         <ul className={`space-y-2.5 ${contentFontClass} text-stone-700 dark:text-stone-200 pl-1`}>
                           {item.features.map((feat, fIdx) => {
-                            // Extract title before colon if present
-                            const colonMatch = feat.match(/^\*\*([^*]+)\*\*[：:]\s*(.*)$/);
-                            if (colonMatch) {
-                              return (
-                                <li key={fIdx} className="flex items-start gap-2.5">
-                                  <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 mt-2.5" />
-                                  <div>
-                                    <strong className="font-bold text-stone-900 dark:text-stone-100">
-                                      {colonMatch[1]}：
-                                    </strong>
-                                    <span>{colonMatch[2]}</span>
-                                  </div>
-                                </li>
-                              );
-                            }
+                            const isSubItem = /^\d+\./.test(feat.trim());
 
                             return (
-                              <li key={fIdx} className="flex items-start gap-2.5">
-                                <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 mt-2.5" />
-                                <span>{feat}</span>
+                              <li
+                                key={fIdx}
+                                className={
+                                  isSubItem
+                                    ? "ml-5 sm:ml-7 flex items-start gap-2 text-stone-600 dark:text-stone-300"
+                                    : "flex items-start gap-2.5"
+                                }
+                              >
+                                {!isSubItem && (
+                                  <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 mt-2.5" />
+                                )}
+                                <div
+                                  className="markdown-content flex-1"
+                                  dangerouslySetInnerHTML={{
+                                    __html: marked.parseInline(feat) as string,
+                                  }}
+                                />
                               </li>
                             );
                           })}
