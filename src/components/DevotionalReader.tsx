@@ -23,6 +23,7 @@ import { JournalBox } from "@/components/JournalBox";
 import { PrayerAmenButton } from "@/components/PrayerAmenButton";
 import { VerseShareModal } from "@/components/VerseShareModal";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BibliographyCard } from "@/components/BibliographyCard";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -294,6 +295,13 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       {day.extendedStudy && day.extendedStudy.length > 0 && (
         <ExtendedStudySection items={day.extendedStudy} version={week.version} fontSize={fontSize} />
       )}
+
+      {/* 7. Scholarly Foundations & Bibliography Link */}
+      <BibliographyCard
+        version={week.version}
+        bookSlug="2-corinthians"
+        bookName="哥林多後書"
+      />
 
       {/* Bottom Navigation: Prev / Next Day */}
       <footer className="pt-6 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between gap-2 sm:gap-4">

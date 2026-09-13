@@ -8,7 +8,8 @@ import { VerseShareModal } from "@/components/VerseShareModal";
 import { MeditationTimer } from "@/components/MeditationTimer";
 import { getCurrentWeek, getRecommendedDayIdForToday } from "@/lib/devotional-service";
 import { usePreferredVersion } from "@/lib/storage";
-import { Sparkles, Clock, Heart, Layers, Users, Sparkle } from "lucide-react";
+import Link from "next/link";
+import { Sparkles, Clock, Heart, Layers, Users, Sparkle, Library } from "lucide-react";
 
 export function HomeContainer() {
   const [isVerseModalOpen, setIsVerseModalOpen] = useState(false);
@@ -106,7 +107,7 @@ export function HomeContainer() {
             <span>靈修生活工具箱</span>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
             {/* Tool 1: Verse Generator */}
             <div
               onClick={() => setIsVerseModalOpen(true)}
@@ -164,6 +165,29 @@ export function HomeContainer() {
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
+
+            {/* Tool 3: Reference Books Library */}
+            <Link
+              href="/books/2-corinthians"
+              className="group cursor-pointer rounded-2xl p-6 bg-gradient-to-br from-amber-500/10 via-stone-50 to-orange-500/5 dark:from-stone-900 dark:via-stone-900 dark:to-slate-950 border border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-600 transition shadow-xs flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                <div className="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center shadow-md shadow-amber-600/20 group-hover:scale-110 transition-transform">
+                  <Library className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-base text-stone-900 dark:text-stone-100">
+                  釋經參考書目庫
+                </h3>
+                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+                  查閱本靈修材料奠基之 14 部權威註釋書（BECNT、NIGTC、NICNT、NIVAC 等）評介與導讀，探勘深度釋經脈絡。
+                </p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-amber-700 dark:text-amber-400 flex items-center justify-between">
+                <span>查閱 14 部書目導讀</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </Link>
           </div>
         </section>
 
