@@ -39,8 +39,8 @@ export function Navbar({
                 QT with Tychicus
               </span>
             </div>
-            <p className="text-[11px] text-stone-500 dark:text-stone-400 truncate max-w-[150px] sm:max-w-none">
-              每週經課・深度研經靈修
+            <p className="text-xs text-stone-500 dark:text-stone-400 truncate max-w-[210px] sm:max-w-none">
+              根據<strong className="font-bold text-stone-700 dark:text-stone-200">〈板新信友堂〉</strong>經課進度
             </p>
           </div>
         </Link>

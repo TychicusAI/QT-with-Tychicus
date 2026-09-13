@@ -174,8 +174,8 @@ function parseMarkdown(content, fileId, version) {
         const line = el.trim();
         if (!line) continue;
 
-        // Pattern 1: * **約翰一書 1:5-7**｜神就是光...
-        const pipeMatch = line.match(/^[*•-]?\s*\*\*([^*]+)\*\*\s*[｜|]\s*(.*)$/);
+        // Pattern 1: * **約翰一書 1:5-7**｜神就是光... (支援任意清單符號、序號或無前綴)
+        const pipeMatch = line.match(/^(?:(?:\d+\.|\*|•|-)\s*)?\*\*([^*]+)\*\*\s*[｜|]\s*(.*)$/);
         if (pipeMatch) {
           if (currentItem) extendedStudy.push(currentItem);
           const ref = pipeMatch[1].trim();
@@ -184,7 +184,7 @@ function parseMarkdown(content, fileId, version) {
             title: ref,
             reference: ref,
             text: "",
-            question: desc,
+            question: desc, // 符號「｜」右邊對這段經文的補述
             bibliaUrl: getBibliaUrl(ref),
           };
           continue;

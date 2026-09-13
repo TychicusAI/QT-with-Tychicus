@@ -16,6 +16,7 @@ import {
   Users,
   Sparkle
 } from "lucide-react";
+import { marked } from "marked";
 import { DevotionalDay, DevotionalWeek, DevotionalVersion } from "@/types/devotional";
 import { ExtendedStudySection } from "@/components/ExtendedStudySection";
 import { JournalBox } from "@/components/JournalBox";
@@ -35,6 +36,10 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   const isFamily = week.version === "family";
   const otherVersion: DevotionalVersion = isFamily ? "youth" : "family";
   const otherVersionLabel = isFamily ? "切換至青年版" : "切換至家庭版";
+
+  const messageHtml = React.useMemo(() => {
+    return marked.parse(day.message, { breaks: true }) as string;
+  }, [day.message]);
 
   // Find previous and next days
   const currentIndex = week.days.findIndex((d) => d.id === day.id);
@@ -188,24 +193,15 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
             }`}
           />
-          <span className="font-bold text-sm text-stone-900 dark:text-stone-100">今日信息深耕</span>
+          <span className="font-bold text-sm text-stone-900 dark:text-stone-100">今日信息</span>
         </div>
 
-        <div className={`max-w-none text-stone-900 dark:text-stone-100 ${fontClasses} space-y-5`}>
-          {day.message.split("\n\n").map((paragraph, idx) => {
-            const rendered = paragraph
-              .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-stone-900 dark:text-white">$1</strong>')
-              .replace(/\*(.*?)\*/g, '<em class="italic text-stone-800 dark:text-stone-200">$1</em>');
-
-            return (
-              <p
-                key={idx}
-                dangerouslySetInnerHTML={{ __html: rendered }}
-                className="leading-relaxed text-stone-900 dark:text-stone-100 font-sans"
-              />
-            );
-          })}
-        </div>
+        <div
+          className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${
+            isFamily ? "family-reader" : "youth-reader"
+          } ${fontClasses}`}
+          dangerouslySetInnerHTML={{ __html: messageHtml }}
+        />
       </section>
 
       {/* 3. Meditation Question Card */}
