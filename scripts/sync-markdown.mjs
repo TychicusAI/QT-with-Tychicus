@@ -1,6 +1,16 @@
 import fs from "fs";
 import path from "path";
 
+let BIBLE_CACHE = {};
+const bibleCachePath = path.join(process.cwd(), "data", "bible-cache.json");
+if (fs.existsSync(bibleCachePath)) {
+  try {
+    BIBLE_CACHE = JSON.parse(fs.readFileSync(bibleCachePath, "utf-8"));
+  } catch (e) {
+    console.warn("Failed to load bible-cache.json", e);
+  }
+}
+
 const DAY_MAP = {
   週一: { id: "mon", dayNumber: 1 },
   週二: { id: "tue", dayNumber: 2 },
@@ -177,13 +187,18 @@ function parseMarkdown(content, fileId, version) {
         // Pattern 1: * **約翰一書 1:5-7**｜神就是光... (支援任意清單符號、序號或無前綴)
         const pipeMatch = line.match(/^(?:(?:\d+\.|\*|•|-)\s*)?\*\*([^*]+)\*\*\s*[｜|]\s*(.*)$/);
         if (pipeMatch) {
-          if (currentItem) extendedStudy.push(currentItem);
+          if (currentItem) {
+            if (!currentItem.text && BIBLE_CACHE[currentItem.reference]) {
+              currentItem.text = BIBLE_CACHE[currentItem.reference];
+            }
+            extendedStudy.push(currentItem);
+          }
           const ref = pipeMatch[1].trim();
           const desc = pipeMatch[2].trim();
           currentItem = {
             title: ref,
             reference: ref,
-            text: "",
+            text: BIBLE_CACHE[ref] || "",
             question: desc, // 符號「｜」右邊對這段經文的補述
             bibliaUrl: getBibliaUrl(ref),
           };
@@ -193,12 +208,17 @@ function parseMarkdown(content, fileId, version) {
         // Pattern 2: 1. **以弗所書 1:3-4**  or * **以弗所書 1:3-4**
         const numMatch = line.match(/^(?:\d+\.|\*|-)\s*\*\*([^*]+)\*\*(?:\s*(.*))?$/);
         if (numMatch) {
-          if (currentItem) extendedStudy.push(currentItem);
+          if (currentItem) {
+            if (!currentItem.text && BIBLE_CACHE[currentItem.reference]) {
+              currentItem.text = BIBLE_CACHE[currentItem.reference];
+            }
+            extendedStudy.push(currentItem);
+          }
           const ref = numMatch[1].trim();
           currentItem = {
             title: ref,
             reference: ref,
-            text: "",
+            text: BIBLE_CACHE[ref] || "",
             question: numMatch[2] ? numMatch[2].trim() : "",
             bibliaUrl: getBibliaUrl(ref),
           };
@@ -208,7 +228,7 @@ function parseMarkdown(content, fileId, version) {
         // Sublines: > quote or *question*
         if (line.startsWith(">") && currentItem) {
           const scriptureQuote = line.replace(/^>\s*/, "").replace(/^[「"“]|["”」]$/g, "").trim();
-          currentItem.text = currentItem.text ? `${currentItem.text} ${scriptureQuote}` : scriptureQuote;
+          currentItem.text = currentItem.text ? `${currentItem.text}\n${scriptureQuote}` : scriptureQuote;
         } else if (line.startsWith("*") && currentItem) {
           const content = line.replace(/^\*+|\*+$/g, "").trim();
           currentItem.question = currentItem.question ? `${currentItem.question} ${content}` : content;
@@ -216,7 +236,12 @@ function parseMarkdown(content, fileId, version) {
           currentItem.question = currentItem.question ? `${currentItem.question} ${line}` : line;
         }
       }
-      if (currentItem) extendedStudy.push(currentItem);
+      if (currentItem) {
+        if (!currentItem.text && BIBLE_CACHE[currentItem.reference]) {
+          currentItem.text = BIBLE_CACHE[currentItem.reference];
+        }
+        extendedStudy.push(currentItem);
+      }
     }
 
     // Meditation Question

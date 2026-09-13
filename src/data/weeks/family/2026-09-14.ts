@@ -28,21 +28,21 @@ export const family_2026_09_14: DevotionalWeek = {
         {
           "title": "以弗所書 4:25",
           "reference": "以弗所書 4:25",
-          "text": "",
+          "text": "25 所以，你們要棄絕謊言，各人與鄰舍說實話，因為我們是互相為肢體。",
           "question": "經文教導信徒既然棄絕謊言，各人就要與鄰舍說實話，因為我們是互相為肢體，揭示家庭真誠對話的神學基石。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Eph4.25"
         },
         {
           "title": "詩篇 139:23-24",
           "reference": "詩篇 139:23-24",
-          "text": "",
+          "text": "23 神啊，求你鑒察我，知道我的心思，試煉我，知道我的意念，\n24 看在我裡面有甚麼惡行沒有，引導我走永生的道路。",
           "question": "大衛求神鑒察他的心靈、試煉他的心思，看在他裡面有甚麼惡行沒有，引導信徒在神面前保持純全良心。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Ps139.23-24"
         },
         {
           "title": "約翰一書 4:18",
           "reference": "約翰一書 4:18",
-          "text": "",
+          "text": "18 愛裡沒有懼怕；愛既完全，就把懼怕除去。因為懼怕裡含著刑罰，懼怕的人在愛裡未得完全。",
           "question": "愛裡沒有懼怕，愛既完全就把懼怕除去，教導家庭唯有在基督完全的愛中才能卸下防衛與恐懼。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1John4.18"
         }
@@ -65,21 +65,21 @@ export const family_2026_09_14: DevotionalWeek = {
         {
           "title": "箴言 3:5-6",
           "reference": "箴言 3:5-6",
-          "text": "",
+          "text": "5 你要專心仰賴耶和華，不可倚靠自己的聰明，\n6 在你一切所行的事上都要認定他，他必指引你的路。",
           "question": "專心仰賴耶和華，不可倚靠自己的聰明，在一切所行的事上都要認定祂，提醒家庭在計畫變動中單單信靠神的引導。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Prov3.5-6"
         },
         {
           "title": "馬太福音 5:37",
           "reference": "馬太福音 5:37",
-          "text": "",
+          "text": "37 你們的話，是，就說是；不是，就說不是；若再多說，就是出於那惡者（或譯：就是從惡裡出來的）。」",
           "question": "你們的話，是就說是，不是就說不是，勸勉家庭成員在言語承諾上追求純粹的誠實，不落入虛偽。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Matt5.37"
         },
         {
           "title": "詩篇 15:4",
           "reference": "詩篇 15:4",
-          "text": "",
+          "text": "4 他眼中藐視匪類，卻尊重那敬畏耶和華的人。他發了誓，雖然自己吃虧也不更改。",
           "question": "大衛描繪寄居耶和華帳幕之人的品格，指出他發了誓，雖然自己吃虧也不更改，強調持守純全動機的寶貴。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Ps15.4"
         }
@@ -102,21 +102,21 @@ export const family_2026_09_14: DevotionalWeek = {
         {
           "title": "以弗所書 1:13-14",
           "reference": "以弗所書 1:13-14",
-          "text": "",
+          "text": "13 你們既聽見真理的道，就是那叫你們得救的福音，也信了基督，既然信他，就受了所應許的聖靈為印記。\n14 這聖靈是我們得基業的憑據（原文是質），直等到神之民（民：原文是產業）被贖，使他的榮耀得著稱讚。",
           "question": "信徒聽見真理的道受了聖靈為印記，這聖靈是我們得基業的憑據，直等神之產業被贖，使祂的榮耀得著稱讚。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Eph1.13-14"
         },
         {
           "title": "希伯來書 10:23",
           "reference": "希伯來書 10:23",
-          "text": "",
+          "text": "23 也要堅守我們所承認的指望，不至搖動，因為那應許我們的是信實的。",
           "question": "也要堅守我們所承認的指望，不至搖動，因為那應許我們的是信實的，勉勵家庭緊抓神的約。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Heb10.23"
         },
         {
           "title": "約書亞記 24:15",
           "reference": "約書亞記 24:15",
-          "text": "",
+          "text": "15 若是你們以事奉耶和華為不好，今日就可以選擇所要事奉的：是你們列祖在大河那邊所事奉的神呢？是你們所住這地的亞摩利人的神呢？至於我和我家，我們必定事奉耶和華。」",
           "question": "約書亞宣告「至於我和我家，我們必定事奉耶和華」，展現全家將生命錨定於神信實的堅定抉擇。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Josh24.15"
         }
@@ -139,21 +139,21 @@ export const family_2026_09_14: DevotionalWeek = {
         {
           "title": "以弗所書 6:4",
           "reference": "以弗所書 6:4",
-          "text": "",
+          "text": "4 你們作父親的，不要惹兒女的氣，只要照著主的教訓和警戒養育他們。",
           "question": "你們作父親的，不要惹兒女的氣，只要照著主的教訓和警戒養育他們，教導父母以基督的溫柔取代血氣管教。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Eph6.4"
         },
         {
           "title": "希伯來書 12:10-11",
           "reference": "希伯來書 12:10-11",
-          "text": "",
+          "text": "10 生身的父都是暫隨己意管教我們；惟有萬靈的父管教我們，是要我們得益處，使我們在他的聖潔上有分。\n11 凡管教的事，當時不覺得快樂，反覺得愁苦；後來卻為那經練過的人結出平安的果子，就是義。",
           "question": "凡管教的事，當時不覺得快樂，反覺得愁苦；後來卻為那經練過的人結出平安的果子，就是義。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Heb12.10-11"
         },
         {
           "title": "路加福音 15:20-24",
           "reference": "路加福音 15:20-24",
-          "text": "",
+          "text": "20 於是起來，往他父親那裡去。相離還遠，他父親看見，就動了慈心，跑去抱著他的頸項，連連與他親嘴。\n21 兒子說：『父親！我得罪了天，又得罪了你；從今以後，我不配稱為你的兒子。』\n22 父親卻吩咐僕人說：『把那上好的袍子快拿出來給他穿；把戒指戴在他指頭上；把鞋穿在他腳上；\n23 把那肥牛犢牽來宰了，我們可以吃喝快樂；\n24 因為我這個兒子是死而復活，失而又得的。』他們就快樂起來。",
           "question": "浪子的父親在遠處看見歸家的孩子便動了慈心，奔跑擁抱，彰顯天父在悔改者身上的寬容與極大歡喜。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Luke15.20-24"
         }
@@ -176,21 +176,21 @@ export const family_2026_09_14: DevotionalWeek = {
         {
           "title": "歌羅西書 3:12-13",
           "reference": "歌羅西書 3:12-13",
-          "text": "",
+          "text": "12 所以，你們既是神的選民，聖潔蒙愛的人，就要存（原文是穿；下同）憐憫、恩慈、謙虛、溫柔、忍耐的心。\n13 倘若這人與那人有嫌隙，總要彼此包容，彼此饒恕；主怎樣饒恕了你們，你們也要怎樣饒恕人。",
           "question": "要穿上憐憫、恩慈、謙虛、溫柔、忍耐；倘若這人與那人有嫌隙，總要彼此包容，彼此饒恕；主怎樣饒恕了你們，你們也要怎樣饒恕人。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Col3.12-13"
         },
         {
           "title": "馬太福音 18:21-22",
           "reference": "馬太福音 18:21-22",
-          "text": "",
+          "text": "21 那時，彼得進前來，對耶穌說：「主啊，我弟兄得罪我，我當饒恕他幾次呢？到七次可以嗎？」\n22 耶穌說：「我對你說，不是到七次，乃是到七十個七次。",
           "question": "彼得問饒恕弟兄當到幾次，耶穌回答不是七次，乃是七十個七次，教導家庭饒恕乃是無止境的恩典功課。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Matt18.21-22"
         },
         {
           "title": "創世記 50:19-21",
           "reference": "創世記 50:19-21",
-          "text": "",
+          "text": "19 約瑟對他們說：「不要害怕，我豈能代替神呢？\n20 從前你們的意思是要害我，但神的意思原是好的，要保全許多人的性命，成就今日的光景。\n21 現在你們不要害怕，我必養活你們和你們的婦人孩子。」於是約瑟用親愛的話安慰他們。",
           "question": "約瑟面對曾出賣他的哥哥們，用親愛的話安慰他們，宣告神的意思原是好的，展現救贖性復和的至高境界。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Gen50.19-21"
         }
@@ -213,21 +213,21 @@ export const family_2026_09_14: DevotionalWeek = {
         {
           "title": "提摩太前書 5:8",
           "reference": "提摩太前書 5:8",
-          "text": "",
+          "text": "8 人若不看顧親屬，就是背了真道，比不信的人還不好，不看顧自己家裡的人，更是如此。",
           "question": "人若不看顧親屬，就是背了真道，比不信的人還不好，不看顧自己家裡的人更是如此，顯明家庭責任的絕對優先性。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1Tim5.8"
         },
         {
           "title": "馬可福音 8:36-37",
           "reference": "馬可福音 8:36-37",
-          "text": "",
+          "text": "36 人就是賺得全世界，賠上自己的生命，有甚麼益處呢？\n37 人還能拿甚麼換生命呢？",
           "question": "人就是賺得全世界，賠上自己的生命，有甚麼益處呢？人還能拿甚麼換生命呢？提醒家庭切勿為外在得失犧牲靈魂。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Mark8.36-37"
         },
         {
           "title": "腓立比書 2:3-4",
           "reference": "腓立比書 2:3-4",
-          "text": "",
+          "text": "3 凡事不可結黨，不可貪圖虛浮的榮耀；只要存心謙卑，各人看別人比自己強。\n4 各人不要單顧自己的事，也要顧別人的事。",
           "question": "凡事不可結黨，不可貪圖虛浮的榮耀；只要存心謙卑，各人看別人比自己強。各人不要單顧自己的事，也要顧別人的事。",
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Phil2.3-4"
         }
