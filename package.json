@@ -7,7 +7,7 @@
     "prebuild": "node scripts/sync-markdown.mjs",
     "predev": "node scripts/sync-markdown.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
