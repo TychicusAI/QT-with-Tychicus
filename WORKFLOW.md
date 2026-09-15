@@ -1,9 +1,9 @@
 # 每週經課靈修生成工作流（Workflow Specification）
 
-本專案旨在將每週教會經課與 NotebookLM 研經資料庫，自動化轉化為針對不同族群（「青年」與「父母與青少年」）的六日（週一至週六）靈修材料。
+本專案旨在將每週教會經課與 NotebookLM 研經資料庫，高品質轉化為針對不同族群（「青年」與「父母與青少年」）的六日（週一至週六）靈修材料。
 
 > **核心準則：以 `prompts/` 為唯一真理來源（SSOT），以 `study.md` 與 `illustrations.md` 為雙基石**  
-> 所有提示詞設計、內容細節、字數規範、釋經架構與排版要求，皆由 `prompts/` 目錄下的模板檔案直接定義與主導。本工作流文件專注於定義執行架構、環境配置、目錄映射與階段任務推進流程。**工作流強制實施「研經與素材先行」**：在規劃主題與撰寫靈修前，必須先以 `prompts/study.txt` 產生深度學術研經筆記 `study.md`，並以 `prompts/illustrations.txt` 產生專屬喻道素材庫 `illustrations.md`，作為後續所有內容的共同依歸。
+> 所有提示詞設計、內容細節、字數規範、釋經架構與排版要求，皆由 `prompts/` 目錄下的模板檔案直接定義與主導。本工作流文件專注於定義執行架構、環境配置、目錄映射與階段任務推進流程。**工作流強制實施「研經與素材先行」與「逐日深耕」**：在規劃主題與撰寫靈修前，必須先以 `prompts/study.txt` 產生深度學術研經筆記 `study.md`，並以 `prompts/illustrations.txt` 產生專屬喻道素材庫 `illustrations.md`；而在撰寫靈修信息時，**一律採行「一天一指令、逐日深耕打磨」**，徹底杜絕批量產出造成的細節稀釋與品質退化。
 
 ---
 
@@ -22,8 +22,10 @@
      * 使用者輸入「繼續」後，工作流將接續未完段落並以**追加寫入（Append）**更新至 `data/<YYYY-MM-DD>/study.md`，直至五大板塊完全收尾，確保最終的 `study.md` 是一份結構完整、無缺漏的學術研經文獻。
    * **後續所有主題進程規劃與靈修信息撰寫，皆必須以這兩份完整的 `study.md` 與 `illustrations.md` 為共同的唯一事實來源**，實現完全本地化、零矛盾的資料依託，徹底杜絕外求與幻覺。
 
-3. **執行模式：預設「模式 B：分步／逐日深耕生成」（Iterative Deep-Dive Mode）**：
-   * 為確保每一天的信息具備充分的釋經厚度（依 `prompts/qt_*.txt` 規範維持約 1,800–2,000 字散文）、希臘原文拆解、專屬喻道故事改寫與深刻真摯的禱告詞（約 300 字），**工作流支援分步推進（先研經基石，次定主題進程，再深耕每日信息）或全階段連續推進**，避免一次性大量輸出導致篇幅縮水或細節稀釋。
+3. **執行模式：唯一採行「逐日深耕模式」（Day-by-Day Deep-Dive Mode，一天一指令）**：
+   * **徹底廢除「一次生成全週 6 天」的批次指令**：單次輸出高達 1.2 萬字會導致模型注意力預算稀釋、句型模式化、故事被草草略述以及靈性深度扁平化。
+   * **落實一天一指令**：每天集中模型 100% 的推理與修辭算力，深耕約 1,800–2,000 字具文學呼吸感的深度散文、希臘原文語義場拆解、專屬喻道故事改寫與約 300 字的真摯第一人稱禱告詞。
+   * **單一檔案無縫追加**：每日信息直接依序寫入/追加至本機的 `qt_*.md` 檔案中，使用者無需手動建立多個檔案再費力複製合併，兼顧「極致精緻」與「操作流暢」。
 
 ---
 
@@ -47,7 +49,7 @@
 
 雖然在同一個對話中可以繼續進行下一週，但採用**「一週一工作」**是最佳實踐，原因如下：
 1. **防止上下文過度膨脹（Context Window Bloat）**：
-   * 每一週工作流包含學術研經筆記、喻道素材庫、兩份主題進程及兩份六日完整靈修信息，總字數達 2 萬字以上。若數週疊加在同一個對話中，龐大的歷史紀錄會消耗大量上下文，可能導致生成速度變慢或格式精確度下降。
+   * 每一週工作流包含學術研經筆記、喻道素材庫、兩份主題進程及逐日深耕生成的完整靈修信息，總字數達 2 萬字以上。若數週疊加在同一個對話中，龐大的歷史紀錄會消耗大量上下文，可能導致生成速度變慢或格式精確度下降。
 2. **乾淨的解經資料庫對應**：
    * 若進度切換至不同書卷（例如從《哥林多後書》換到《加拉太書》或《以弗所書》），在新工作中直接掛載對應卷別的 NotebookLM 筆記本，能確保資料來源純淨，不被前卷書的文獻干擾。
 3. **專案管理清晰**：
@@ -64,15 +66,15 @@
 | **第 1 階段：學術研經** | 全體共用 | `prompts/study.txt` | `data/<YYYY-MM-DD>/study.md` | 不限長度與深度的學術研經筆記（篇章論述、語義場、難解剖析、學者爭鳴、文獻駁斥） |
 | **第 1 階段：喻道素材** | 全體共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 從 NotebookLM 萃取之專屬喻道故事、現代生活類比、歷史軼事、文豪名言與教父隱喻 |
 | **第 2 階段：主題規劃** | 青年篇 | `prompts/topics_for_youth.txt` | `data/<YYYY-MM-DD>/topics_for_youth.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定青年總主題、導讀與週一至週六進程規劃 |
-| **第 2 階段：主題規劃** | 家庭篇 | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、說明與週一至週六進程規劃 |
-| **第 3 階段：每日深耕** | 青年篇 | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），生成週一至週六完整信息 |
-| **第 3 階段：每日深耕** | 家庭篇 | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），生成週一至週六完整信息 |
+| **第 2 階段：主題規劃** | 家庭篇 | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、導讀與週一至週六進程規劃 |
+| **第 3 階段：逐日深耕** | 青年篇 | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：逐日深耕** | 家庭篇 | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
 
 ---
 
-## 5. 標準操作流程（Mode B SOP）
+## 5. 標準操作流程（Day-by-Day Deep-Dive SOP）
 
-工作流採用「**研經奠基、定立骨架、分步深耕、同步驗證**」的推進流程：
+工作流全面採行「**研經奠基、定立骨架、逐日打磨、同步驗證**」的四階段推進流程：
 
 ```
 步驟 1：建立新工作 (New Task in Spark)
@@ -86,10 +88,16 @@
    │   └─ 3b. Spark 讀取 prompts/illustrations.txt，全面萃取筆記本喻道素材寫入 data/<YYYY-MM-DD>/illustrations.md
    │
 步驟 4【第 2 階段：主題骨架】：發送指令生成「主題進程規劃」
-   │   └─ Spark 讀取 prompts/topics_*.txt 並嚴格參考完整之 study.md (+ illustrations.md)，在 data/<YYYY-MM-DD>/ 覆蓋寫入 topics_for_youth.md 與 topics_for_family.md
+   │   └─ Spark 讀取 prompts/topics_*.txt 並嚴格參考完整之 study.md (+ illustrations.md)，在 data/<YYYY-MM-DD>/ 覆蓋寫入 topics_for_youth.md 或 topics_for_family.md
    │
-步驟 5【第 3 階段：每日深耕】：發送指令生成週一至週六每日深度靈修信息
-   │   └─ Spark 讀取 prompts/qt_*.txt 規範，以本機 study.md 為釋經依歸、以 illustrations.md 為例證依歸，依序寫入/覆蓋 qt_for_youth.md 與 qt_for_family.md
+步驟 5【第 3 階段：逐日深耕（一天一指令，打磨最極致品質）】：
+   │   ├─ 5a. 初始化全週檔案骨架（寫入頂部標籤與總主題導讀）
+   │   ├─ 5b. 週一深耕：發送週一指令 ──> Spark 調用 prompts/qt_*.txt 撰寫約 2,000 字散文，寫入 qt_*.md
+   │   ├─ 5c. 週二深耕：發送週二指令 ──> Spark 撰寫週二信息，無縫追加（Append）至 qt_*.md
+   │   ├─ 5d. 週三深耕：發送週三指令 ──> Spark 撰寫週三信息，無縫追加至 qt_*.md
+   │   ├─ 5e. 週四深耕：發送週四指令 ──> Spark 撰寫週四信息，無縫追加至 qt_*.md
+   │   ├─ 5f. 週五深耕：發送週五指令 ──> Spark 撰寫週五信息，無縫追加至 qt_*.md
+   │   └─ 5g. 週六深耕：發送週六指令 ──> Spark 撰寫週六信息，無縫追加至 qt_*.md
    │
 步驟 6【第 4 階段：同步與檢驗】：執行 npm run sync 與 npx tsc --noEmit
        └─ 自動解析 Markdown、生成前台 TypeScript 資料庫並通過型別編譯檢驗
@@ -97,18 +105,29 @@
 
 ### 標準觸發指令範例
 
-#### 模式一：分步推進指令範例（單階段逐步檢驗）
-* **第 1 階段（生成研經筆記與喻道庫）**：
-  > **「請根據 WORKFLOW.md，為 2026-09-14 的經課『哥林多後書 1:12-2:13』生成學術研經筆記 `study.md` 與喻道素材庫 `illustrations.md`。」**  
-  > *（若出現中斷提示時輸入：「繼續」以自動追加寫入直到第五大項完整結束）*
-* **第 2 階段（生成主題進程規劃）**：
-  > **「請根據剛剛產生的 study.md、illustrations.md 與 prompts/ 模板，為 2026-09-14 生成本週青年篇主題進程規劃 `topics_for_youth.md`。」**
-* **第 3 階段（生成每日完整靈修材料）**：
-  > **「請根據 study.md、illustrations.md 與已定主題規劃，以 prompts/qt_for_youth.txt 規範為準，生成週一至週六全部內容並覆蓋寫入至 `qt_for_youth.md`，完成後執行同步與型別檢驗。」**
+#### 第 1 階段：生成學術研經筆記與喻道素材庫（地基）
+> **「請根據 WORKFLOW.md，為 2026-09-14 的經課『哥林多後書 1:12-2:13』生成學術研經筆記 `study.md` 與喻道素材庫 `illustrations.md`。」**  
+* **續寫指令（若出現長度中斷提示時使用）**：  
+  > **「繼續」**  
+  > （Spark 自動接續未完小節，將後續內容無縫追加寫入 `study.md`，直到第五大項完整結束）
 
-#### 模式二：全流程一鍵推進指令範例（第 1～3 階段連續執行）
-* **全階段一鍵執行（青年篇）**：
-  > **「請根據 WORKFLOW.md，為 2026-09-14 的經課『哥林多後書 1:12-2:13』連續執行青年篇第 1 至第 3 階段任務：先生成 study.md 與 illustrations.md，再產生 topics_for_youth.md，最後依據這兩份地基深耕生成 qt_for_youth.md，並執行 npm run sync 與 npx tsc --noEmit 驗證。」**
+#### 第 2 階段：生成每週主題規劃（骨架）
+> **「請根據剛剛產生的 study.md、illustrations.md 與 prompts/topics_for_youth.txt 模板，為 2026-09-14 生成本週青年篇主題進程規劃 `topics_for_youth.md`。」**  
+*（家庭篇請將模板替換為 `prompts/topics_for_family.txt`，輸出為 `topics_for_family.md`）*
+
+#### 第 3 階段：逐日深耕靈修信息（一天一指令，打造極致精品）
+* **步驟 3-0（初始化全週檔案骨架）**：  
+  > **「請根據 topics_for_youth.md，在 `data/2026-09-14/qt_for_youth.md` 初始化建立全週檔案骨架（包含經文範圍、總主題與總主題導讀標頭）。」**
+* **步驟 3-1（深耕週一信息）**：  
+  > **「請根據 study.md、illustrations.md 與主題規劃，依據 prompts/qt_for_youth.txt 規範，為【週一】（1:12-14）撰寫約 2,000 字深度靈修散文與禱告，寫入 `qt_for_youth.md`。」**
+* **步驟 3-2（深耕週二信息）**：  
+  > **「週一確認無誤。請接著為【週二】（1:15-17）撰寫約 2,000 字深度靈修散文與禱告，無縫追加至 `qt_for_youth.md`。」**
+* **步驟 3-3 至 3-6（依序深耕週三至週六）**：  
+  > **「請接著為【週三】（1:18-22）撰寫完整信息，無縫追加至 `qt_for_youth.md`。」**  
+  *（使用者可於每日前進時檢驗前一日之文學質感與修辭，逐日推進至週六）*
+
+#### 第 4 階段：資料同步與型別檢驗
+> **「全週 6 天已生成完畢，請執行 npm run sync 與 npx tsc --noEmit 驗證資料庫同步與型別安全。」**
 
 ---
 
@@ -142,29 +161,36 @@
    * `data/<YYYY-MM-DD>/topics_for_youth.md`
    * `data/<YYYY-MM-DD>/topics_for_family.md`
 
-### 第 3 階段：模式 B 每日深耕靈修材料生成（Daily QT Generation）
-1. Spark 直接讀取對應生成模板、已定主題進程，並**以本機 `study.md`（釋經骨架）與 `illustrations.md`（喻道血肉）為唯一的雙基石資料源**：
-   * 青年篇：依據 `prompts/qt_for_youth.txt`、`topics_for_youth.md`、`study.md` 及 `illustrations.md`
-   * 家庭篇：依據 `prompts/qt_for_family.txt`、`topics_for_family.md`、`study.md` 及 `illustrations.md`
-2. **文件頂部標記（全週檔案統一規範）**：
-   * 寫入 `qt_for_youth.md` 與 `qt_for_family.md` 時，文件最頂部需包含週次元資料，以供前端與同步腳本自動解析：
+### 第 3 階段：逐日深耕靈修材料生成（Day-by-Day Deep-Dive Generation）
+1. **雙基石資料源**：
+   * 釋經骨架 100% 取材自本機 `study.md`。
+   * 敘事例證 100% 取材自本機 `illustrations.md`。
+   * 嚴格禁止脫離這兩份文件自行杜撰或調用外部未收錄的罐頭故事。
+2. **檔案初始化與標頭結構**：
+   * 先行在 `qt_*.md` 頂部寫入週次元資料（供前台同步腳本自動解析）：
      ```markdown
+     # 每日靈修：青年篇（YYYY-MM-DD）
+
      * **【經文範圍】** <經卷 章:節>
      * **【總主題】** <總主題名稱>
      * **【簡述】** <主題說明與前言導讀>
+
+     ---
      ```
 3. **每日信息內容結構**：
-   * 嚴格遵循 `prompts/qt_for_youth.txt` 與 `prompts/qt_for_family.txt` 所定義之各區塊規範（【經文】、【主題】、【信息】、【建議禱告】、【延伸研讀】、【默想問題】）。
-   * 信息篇幅約 1,800–2,000 字純散文，嚴禁任何編號清單、項目符號或過度切割的小標題。
-   * 建議禱告約 300 字，以第一人稱真誠撰寫。
-   * 延伸研讀提供 3 處跨卷經文，每處以 4–5 句話闡釋內在神學關聯（格式：`* **書卷 章:節**｜說明...`）。
-   * 默想問題提供 1 個具穿透力的高質感開放式反思問題。
+   * 嚴格遵循 `prompts/qt_for_youth.txt` 與 `prompts/qt_for_family.txt` 所定義之各區塊規範：
+     * **【經文】**：附上新標點和合本經文。
+     * **【主題】**：沿用主題規劃中該日名稱。
+     * **【信息】**：篇幅約 **1,800–2,000 字純散文**，嚴禁任何編號清單、項目符號或過度切割的小標題。
+     * **【建議禱告】**：約 **300 字**，以第一人稱真誠撰寫。
+     * **【延伸研讀】**：3 處跨卷經文，每處以 4–5 句話闡釋內在神學關聯（格式：`* **書卷 章:節**｜說明...`）。
+     * **【默想問題】**：1 個具穿透力的高質感開放式反思問題。
 4. **排版與專有名詞三大規範（強制執行）**：
    1. **非聖經耳熟能詳之現代學者/文豪人名**：首次出現時必須在中文譯名後括弧附上英文原名，如「哈夫曼（Scott Hafemann）」、「霍桑（Nathaniel Hawthorne）」、「加蘭（David Garland）」、「金口若望（John Chrysostom）」。
    2. **希臘原文與拉丁外語字詞**：一律使用 Markdown 斜體標註（例如：*syneidēsis*, *eilikrineia*, *arrhabōn*, *Coram Christo*）。
    3. **原文中文釋義**：若原文詞彙前後文未直接給予對應的中文和合本詞彙或字義解釋，必須緊隨於該詞後方以括號標明中文含義，例如「*synochē kardias*（心靈絞痛）」、「*ho adikēsas*（行虧負者）」，確保讀者能清晰理解。
-5. **輸出與寫入**：
-   * 依序生成週一至週六內容，完整覆蓋寫入至 `data/<YYYY-MM-DD>/qt_for_youth.md` 與 `data/<YYYY-MM-DD>/qt_for_family.md`。
+5. **逐日無縫追加寫入**：
+   * 每日產出後，Spark 直接使用追加模式（Append）無縫寫入至目標檔案，保持格式規範且不需手動合併檔案。
 
 ### 第 4 階段：資料同步與編譯檢驗（Data Sync & Verification）
 * 生成完成後，執行同步腳本驗證 Markdown 語法並自動生成前台 TypeScript 資料庫：
