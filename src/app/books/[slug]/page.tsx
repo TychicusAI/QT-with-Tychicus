@@ -19,13 +19,19 @@ export async function generateMetadata({
   const biblio = getBookBibliography(slug);
   if (!biblio) {
     return {
-      title: "找不到參考書目 | 靈修推基古",
+      title: "找不到參考書目",
     };
   }
 
+  const bookTitle = `${biblio.bookName} 釋經參考書目評介`;
   return {
-    title: `${biblio.title}（收錄 ${biblio.totalBooks} 部權威評介）| 靈修推基古`,
+    title: bookTitle,
     description: biblio.description,
+    openGraph: {
+      title: `${bookTitle} | 靈修推基古 (QT with Tychicus)`,
+      description: biblio.description,
+      siteName: "靈修推基古 (QT with Tychicus)",
+    },
   };
 }
 

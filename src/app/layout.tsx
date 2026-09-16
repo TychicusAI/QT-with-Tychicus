@@ -13,8 +13,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "靈修推基古 | 青年與家庭每日深度研經靈修",
-  description: "專為青年與家庭基督徒打造的每日深度研經靈修平台。提供「青年版」與「家庭版」雙軌教材，拆毀自我焦慮，重建信任與同行恩典。",
+  metadataBase: new URL("https://qt-with-tychicus.vercel.app"),
+  title: {
+    default: "靈修推基古 (QT with Tychicus)",
+    template: "%s | 靈修推基古 (QT with Tychicus)",
+  },
+  description: "專為青年與家庭基督徒打造的每日深度研經靈修平台。提供「青年版」與「家庭版」雙軌教材，根據〈板新信友堂〉經課進度，拆毀自我焦慮，重建信任與同行恩典。",
+  applicationName: "靈修推基古 (QT with Tychicus)",
+  openGraph: {
+    title: "靈修推基古 (QT with Tychicus)",
+    description: "專為青年與家庭基督徒打造的每日深度研經靈修平台。提供「青年版」與「家庭版」雙軌教材，根據〈板新信友堂〉經課進度，拆毀自我焦慮，重建信任與同行恩典。",
+    url: "https://qt-with-tychicus.vercel.app",
+    siteName: "靈修推基古 (QT with Tychicus)",
+    locale: "zh_TW",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "靈修推基古 (QT with Tychicus)",
+    description: "專為青年與家庭基督徒打造的每日深度研經靈修平台。提供「青年版」與「家庭版」雙軌教材，根據〈板新信友堂〉經課進度，拆毀自我焦慮，重建信任與同行恩典。",
+  },
 };
 
 export default function RootLayout({

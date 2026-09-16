@@ -18,14 +18,22 @@ export async function generateMetadata({
   const data = getDayById(version, weekId, dayId);
   if (!data) {
     return {
-      title: "找不到靈修內容 | 靈修推基古"
+      title: "找不到靈修內容",
     };
   }
 
   const vLabel = version === "family" ? "家庭版" : "青年版";
+  const dayTitle = `${data.day.dayLabel} ${data.day.title} (${vLabel})`;
+  const dayDesc = `【${data.day.scriptureRef}】${data.day.goldenVerse}`;
+
   return {
-    title: `${data.day.dayLabel} ${data.day.title} | ${vLabel}・靈修推基古`,
-    description: data.day.goldenVerse
+    title: dayTitle,
+    description: dayDesc,
+    openGraph: {
+      title: `${dayTitle} | 靈修推基古 (QT with Tychicus)`,
+      description: dayDesc,
+      siteName: "靈修推基古 (QT with Tychicus)",
+    },
   };
 }
 
