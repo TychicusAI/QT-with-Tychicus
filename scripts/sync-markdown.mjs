@@ -51,7 +51,7 @@ function getBibliaUrl(ref) {
   return `https://biblia.com/books/hlybbltrdshndtn/${passage}`;
 }
 
-function parseMarkdown(content, fileId, version) {
+function parseMarkdown(content, fileId, version, isCurrent = true) {
   const lines = content.split("\n");
 
   let title = "";
@@ -290,7 +290,7 @@ function parseMarkdown(content, fileId, version) {
     foreword,
     days,
     publishedAt: fileId,
-    isCurrentWeek: true,
+    isCurrentWeek: isCurrent,
   };
 }
 
@@ -309,7 +309,17 @@ const familyOutputDir = path.join(targetBaseDir, "family");
 fs.mkdirSync(youthOutputDir, { recursive: true });
 fs.mkdirSync(familyOutputDir, { recursive: true });
 
-const items = fs.readdirSync(dataDir);
+const items = fs.readdirSync(dataDir).sort();
+const weekDirs = items.filter((item) => {
+  const fullItemPath = path.join(dataDir, item);
+  return (
+    (fs.statSync(fullItemPath).isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(item)) ||
+    (fs.statSync(fullItemPath).isFile() && /^\d{4}-\d{2}-\d{2}\.md$/.test(item))
+  );
+}).map(item => item.replace(/\.md$/, "")).sort();
+
+const latestWeekId = weekDirs[weekDirs.length - 1];
+
 const youthWeeks = [];
 const familyWeeks = [];
 
@@ -320,12 +330,13 @@ for (const item of items) {
   // Subdirectory mode e.g. data/2026-09-14/
   if (stat.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(item)) {
     const weekId = item;
+    const isCurrent = (weekId === latestWeekId);
 
     // 1. Youth
     const youthPath = path.join(fullItemPath, "qt_for_youth.md");
     if (fs.existsSync(youthPath)) {
       const content = fs.readFileSync(youthPath, "utf-8");
-      const weekObj = parseMarkdown(content, weekId, "youth");
+      const weekObj = parseMarkdown(content, weekId, "youth", isCurrent);
       const outTs = path.join(youthOutputDir, `${weekId}.ts`);
       const varName = `youth_${weekId.replace(/-/g, "_")}`;
       fs.writeFileSync(
@@ -337,7 +348,7 @@ for (const item of items) {
         )};\n`,
         "utf-8"
       );
-      console.log(`✓ [Youth] Generated ${outTs} (${weekObj.title}, ${weekObj.days.length} days)`);
+      console.log(`✓ [Youth] Generated ${outTs} (${weekObj.title}, ${weekObj.days.length} days, isCurrent: ${isCurrent})`);
       youthWeeks.push({ weekId, varName });
     }
 
@@ -345,7 +356,7 @@ for (const item of items) {
     const familyPath = path.join(fullItemPath, "qt_for_family.md");
     if (fs.existsSync(familyPath)) {
       const content = fs.readFileSync(familyPath, "utf-8");
-      const weekObj = parseMarkdown(content, weekId, "family");
+      const weekObj = parseMarkdown(content, weekId, "family", isCurrent);
       const outTs = path.join(familyOutputDir, `${weekId}.ts`);
       const varName = `family_${weekId.replace(/-/g, "_")}`;
       fs.writeFileSync(
@@ -357,7 +368,7 @@ for (const item of items) {
         )};\n`,
         "utf-8"
       );
-      console.log(`✓ [Family] Generated ${outTs} (${weekObj.title}, ${weekObj.days.length} days)`);
+      console.log(`✓ [Family] Generated ${outTs} (${weekObj.title}, ${weekObj.days.length} days, isCurrent: ${isCurrent})`);
       familyWeeks.push({ weekId, varName });
     }
   }
@@ -366,8 +377,9 @@ for (const item of items) {
   if (stat.isFile() && item.endsWith(".md")) {
     const weekId = item.replace(/\.md$/, "");
     if (/^\d{4}-\d{2}-\d{2}$/.test(weekId)) {
+      const isCurrent = (weekId === latestWeekId);
       const content = fs.readFileSync(fullItemPath, "utf-8");
-      const weekObj = parseMarkdown(content, weekId, "youth");
+      const weekObj = parseMarkdown(content, weekId, "youth", isCurrent);
       const outTs = path.join(youthOutputDir, `${weekId}.ts`);
       const varName = `youth_${weekId.replace(/-/g, "_")}`;
       fs.writeFileSync(
