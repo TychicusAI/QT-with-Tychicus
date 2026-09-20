@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { marked } from "marked";
 import { DevotionalDay, DevotionalWeek, DevotionalVersion } from "@/types/devotional";
+import { getAdjacentDay } from "@/lib/devotional-service";
 import { ExtendedStudySection } from "@/components/ExtendedStudySection";
 import { JournalBox } from "@/components/JournalBox";
 import { PrayerAmenButton } from "@/components/PrayerAmenButton";
@@ -58,10 +59,10 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     return marked.parse(day.message, { breaks: true }) as string;
   }, [day.message]);
 
-  // Find previous and next days
-  const currentIndex = week.days.findIndex((d) => d.id === day.id);
-  const prevDay = currentIndex > 0 ? week.days[currentIndex - 1] : null;
-  const nextDay = currentIndex < week.days.length - 1 ? week.days[currentIndex + 1] : null;
+  // Find previous and next days (including cross-week navigation)
+  const { prev: adjacentPrev, next: adjacentNext } = React.useMemo(() => {
+    return getAdjacentDay(week.version, week.id, day.id);
+  }, [week.version, week.id, day.id]);
 
   // Font size classes - 預設為「中」字級 (large)
   const fontClasses = {
@@ -86,10 +87,14 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     <article className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
       {/* Top Breadcrumb & Controls Row */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500 dark:text-stone-400 pb-3 border-b border-stone-200 dark:border-stone-800">
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-2 flex-wrap">
           <Link href="/" className="hover:text-stone-900 dark:hover:text-stone-100 flex items-center gap-1 font-medium">
             <Home className="w-3.5 h-3.5" />
             <span>首頁</span>
+          </Link>
+          <span>/</span>
+          <Link href="/archive" className="hover:text-stone-900 dark:hover:text-stone-100 font-medium">
+            歷週存檔
           </Link>
           <span>/</span>
           <span className="font-semibold text-stone-800 dark:text-stone-200">{isFamily ? "家庭版" : "青年版"}</span>
@@ -303,48 +308,59 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         bookName="哥林多後書"
       />
 
-      {/* Bottom Navigation: Prev / Next Day */}
+      {/* Bottom Navigation: Prev / Next Day (supports cross-week navigation) */}
       <footer className="pt-6 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between gap-2 sm:gap-4">
-        {prevDay ? (
+        {adjacentPrev ? (
           <Link
-            href={`/devotional/${week.version}/${week.id}/${prevDay.id}`}
+            href={`/devotional/${adjacentPrev.version}/${adjacentPrev.weekId}/${adjacentPrev.dayId}`}
             className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-900 transition text-xs font-semibold group"
+            title={adjacentPrev.isCrossWeek ? `跨週前往：${adjacentPrev.title}` : adjacentPrev.title}
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform shrink-0" />
-            <span>上一日：{prevDay.dayLabel}</span>
+            <span>上一日：{adjacentPrev.dayLabel}</span>
           </Link>
         ) : (
           <div />
         )}
 
-        <Link
-          href="/"
-          className={`text-xs font-semibold hover:underline shrink-0 text-center ${
-            isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
-          }`}
-        >
-          返回六日目錄
-        </Link>
-
-        {nextDay ? (
+        <div className="flex items-center gap-2 sm:gap-3 text-xs font-semibold">
           <Link
-            href={`/devotional/${week.version}/${week.id}/${nextDay.id}`}
+            href="/"
+            className={`hover:underline shrink-0 text-center ${
+              isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+            }`}
+          >
+            返回首頁
+          </Link>
+          <span className="text-stone-300 dark:text-stone-700">|</span>
+          <Link
+            href="/archive"
+            className="text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 hover:underline shrink-0 text-center"
+          >
+            歷週存檔庫
+          </Link>
+        </div>
+
+        {adjacentNext ? (
+          <Link
+            href={`/devotional/${adjacentNext.version}/${adjacentNext.weekId}/${adjacentNext.dayId}`}
             className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl text-white transition text-xs font-semibold group shadow-md ${
               isFamily
                 ? "bg-teal-700 hover:bg-teal-600 shadow-teal-700/20"
                 : "bg-amber-600 hover:bg-amber-500 shadow-amber-600/20"
             }`}
+            title={adjacentNext.isCrossWeek ? `跨週前往：${adjacentNext.title}` : adjacentNext.title}
           >
-            <span>下一日：{nextDay.dayLabel}</span>
+            <span>下一日：{adjacentNext.dayLabel}</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform shrink-0" />
           </Link>
         ) : (
           <Link
-            href="/"
+            href="/archive"
             className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition text-xs font-semibold"
           >
             <CheckCircle2 className="w-4 h-4 shrink-0" />
-            <span>完成本週全部旅程</span>
+            <span>前往歷週存檔庫</span>
           </Link>
         )}
       </footer>

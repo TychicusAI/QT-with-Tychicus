@@ -13,6 +13,11 @@ export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] 
   return version === "family" ? allFamilyWeeks : allYouthWeeks;
 }
 
+export function getAllWeeksSorted(version: DevotionalVersion): DevotionalWeek[] {
+  const weeks = getWeeksByVersion(version);
+  return [...weeks].sort((a, b) => b.id.localeCompare(a.id));
+}
+
 export function getCurrentWeek(version: DevotionalVersion = "youth"): DevotionalWeek {
   const weeks = getWeeksByVersion(version);
   const current = weeks.find((w) => w.isCurrentWeek);
@@ -34,6 +39,86 @@ export function getDayById(
   const day = week.days.find((d) => d.id === dayId);
   if (!day) return null;
   return { week, day };
+}
+
+export interface AdjacentDayInfo {
+  version: DevotionalVersion;
+  weekId: string;
+  dayId: string;
+  dayLabel: string;
+  title: string;
+  isCrossWeek?: boolean;
+}
+
+export function getAdjacentDay(
+  version: DevotionalVersion,
+  weekId: string,
+  dayId: string
+): { prev: AdjacentDayInfo | null; next: AdjacentDayInfo | null } {
+  const weeksAsc = [...getWeeksByVersion(version)].sort((a, b) => a.id.localeCompare(b.id));
+  const weekIndex = weeksAsc.findIndex((w) => w.id === weekId);
+  if (weekIndex === -1) return { prev: null, next: null };
+
+  const currentWeek = weeksAsc[weekIndex];
+  const dayIndex = currentWeek.days.findIndex((d) => d.id === dayId);
+  if (dayIndex === -1) return { prev: null, next: null };
+
+  let prev: AdjacentDayInfo | null = null;
+  let next: AdjacentDayInfo | null = null;
+
+  // Previous Day
+  if (dayIndex > 0) {
+    const prevDay = currentWeek.days[dayIndex - 1];
+    prev = {
+      version,
+      weekId: currentWeek.id,
+      dayId: prevDay.id,
+      dayLabel: prevDay.dayLabel,
+      title: prevDay.title,
+      isCrossWeek: false,
+    };
+  } else if (weekIndex > 0) {
+    const prevWeek = weeksAsc[weekIndex - 1];
+    if (prevWeek.days.length > 0) {
+      const prevDay = prevWeek.days[prevWeek.days.length - 1];
+      prev = {
+        version,
+        weekId: prevWeek.id,
+        dayId: prevDay.id,
+        dayLabel: `${prevDay.dayLabel}（上週）`,
+        title: prevDay.title,
+        isCrossWeek: true,
+      };
+    }
+  }
+
+  // Next Day
+  if (dayIndex < currentWeek.days.length - 1) {
+    const nextDay = currentWeek.days[dayIndex + 1];
+    next = {
+      version,
+      weekId: currentWeek.id,
+      dayId: nextDay.id,
+      dayLabel: nextDay.dayLabel,
+      title: nextDay.title,
+      isCrossWeek: false,
+    };
+  } else if (weekIndex < weeksAsc.length - 1) {
+    const nextWeek = weeksAsc[weekIndex + 1];
+    if (nextWeek.days.length > 0) {
+      const nextDay = nextWeek.days[0];
+      next = {
+        version,
+        weekId: nextWeek.id,
+        dayId: nextDay.id,
+        dayLabel: `${nextDay.dayLabel}（下週）`,
+        title: nextDay.title,
+        isCrossWeek: true,
+      };
+    }
+  }
+
+  return { prev, next };
 }
 
 export function getAllParams(): { version: DevotionalVersion; weekId: string; dayId: string }[] {

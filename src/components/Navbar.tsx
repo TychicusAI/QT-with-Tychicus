@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { BookOpen, Flame, Sparkles, Clock, Users, Sparkle, Library } from "lucide-react";
+import { BookOpen, Flame, Sparkles, Clock, Users, Sparkle, Library, Calendar } from "lucide-react";
 import { DevotionalVersion } from "@/types/devotional";
 import { useStreak } from "@/lib/storage";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -106,6 +106,16 @@ export function Navbar({
               <span>靜心默想</span>
             </button>
           )}
+
+          {/* Devotional Archive Link */}
+          <Link
+            href="/archive"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition cursor-pointer"
+            title="查閱青年版與家庭版歷週靈修進度存檔庫"
+          >
+            <Calendar className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <span className="hidden sm:inline">歷週存檔</span>
+          </Link>
 
           {/* Bibliography / Reference Books Link */}
           <Link

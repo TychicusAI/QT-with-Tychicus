@@ -6,10 +6,10 @@ import { TodayHeroCard } from "@/components/TodayHeroCard";
 import { WeeklyTimeline } from "@/components/WeeklyTimeline";
 import { VerseShareModal } from "@/components/VerseShareModal";
 import { MeditationTimer } from "@/components/MeditationTimer";
-import { getCurrentWeek, getRecommendedDayIdForToday } from "@/lib/devotional-service";
+import { getCurrentWeek, getAllWeeksSorted, formatWeekDateRange, getRecommendedDayIdForToday } from "@/lib/devotional-service";
 import { usePreferredVersion } from "@/lib/storage";
 import Link from "next/link";
-import { Sparkles, Clock, Heart, Layers, Users, Sparkle, Library } from "lucide-react";
+import { Sparkles, Clock, Heart, Layers, Users, Sparkle, Library, Calendar, ChevronRight, History } from "lucide-react";
 
 export function HomeContainer() {
   const [isVerseModalOpen, setIsVerseModalOpen] = useState(false);
@@ -18,7 +18,12 @@ export function HomeContainer() {
   const [version, setVersion] = usePreferredVersion();
 
   const isFamily = version === "family";
+  const allWeeks = React.useMemo(() => getAllWeeksSorted(version), [version]);
   const currentWeek = getCurrentWeek(version);
+  const [selectedWeekId, setSelectedWeekId] = useState<string>(() => currentWeek.id);
+
+  // If version changed and selected week doesn't exist, fallback to currentWeek
+  const activeWeek = allWeeks.find((w) => w.id === selectedWeekId) || currentWeek;
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fbfbf9] dark:bg-[#090d16] text-stone-900 dark:text-stone-100 selection:bg-amber-500/20">
@@ -93,8 +98,85 @@ export function HomeContainer() {
         {/* 1. Hero: Today's Devotional Quick Card */}
         <TodayHeroCard key={`hero-${version}`} week={currentWeek} recommendedDayId={recommendedDayId} />
 
-        {/* 2. 6-Day Devotional Journey */}
-        <WeeklyTimeline key={`timeline-${version}`} week={currentWeek} recommendedDayId={recommendedDayId} />
+        {/* 2. Week Selector Bar & 6-Day Devotional Journey */}
+        <section className="space-y-4">
+          {/* Week Selector Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl bg-white/80 dark:bg-stone-900/80 border border-stone-200/80 dark:border-stone-800 shadow-xs">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-bold text-stone-500 dark:text-stone-400 flex items-center gap-1.5 mr-1">
+                <Calendar className="w-3.5 h-3.5 text-stone-400" />
+                <span>切換靈修週次：</span>
+              </span>
+              {allWeeks.map((w) => {
+                const isSelected = w.id === activeWeek.id;
+                const rangeText = formatWeekDateRange(w);
+                return (
+                  <button
+                    key={w.id}
+                    onClick={() => setSelectedWeekId(w.id)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+                      isSelected
+                        ? isFamily
+                          ? "bg-teal-700 text-white shadow-xs"
+                          : "bg-amber-600 text-white shadow-xs"
+                        : "bg-stone-100 dark:bg-stone-800/80 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/70"
+                    }`}
+                  >
+                    <span>{rangeText}</span>
+                    {w.isCurrentWeek && (
+                      <span
+                        className={`text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
+                          isSelected
+                            ? "bg-white/20 text-white"
+                            : isFamily
+                            ? "bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300"
+                            : "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300"
+                        }`}
+                      >
+                        當週
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            <Link
+              href="/archive"
+              className={`flex items-center gap-1 text-xs font-bold hover:underline transition ${
+                isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              }`}
+            >
+              <span>📜 查看全部歷週存檔</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Past week indicator banner if activeWeek is not currentWeek */}
+          {!activeWeek.isCurrentWeek && (
+            <div className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-300/60 dark:border-amber-700/60 text-xs text-amber-900 dark:text-amber-200">
+              <span className="flex items-center gap-1.5">
+                <History className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                <span>
+                  您目前檢視的是過往靈修週次（{formatWeekDateRange(activeWeek)}・{activeWeek.title}）。
+                </span>
+              </span>
+              <button
+                onClick={() => setSelectedWeekId(currentWeek.id)}
+                className="font-bold underline hover:text-amber-700 dark:hover:text-amber-100 cursor-pointer shrink-0"
+              >
+                回到最新當週
+              </button>
+            </div>
+          )}
+
+          {/* 6-Day Devotional Journey */}
+          <WeeklyTimeline
+            key={`timeline-${version}-${activeWeek.id}`}
+            week={activeWeek}
+            recommendedDayId={recommendedDayId}
+          />
+        </section>
 
         {/* 3. Interactive Faith Toolkit */}
         <section className="space-y-4">
@@ -107,11 +189,11 @@ export function HomeContainer() {
             <span>靈修生活工具箱</span>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Tool 1: Verse Generator */}
             <div
               onClick={() => setIsVerseModalOpen(true)}
-              className={`group cursor-pointer rounded-2xl p-6 border transition shadow-xs flex flex-col justify-between ${
+              className={`group cursor-pointer rounded-2xl p-5 border transition shadow-xs flex flex-col justify-between ${
                 isFamily
                   ? "bg-gradient-to-br from-teal-500/10 to-emerald-500/5 border-teal-300/40 dark:border-teal-800/40 hover:border-teal-400"
                   : "bg-gradient-to-br from-amber-500/10 to-orange-500/5 border-amber-300/40 dark:border-amber-800/40 hover:border-amber-400"
@@ -119,22 +201,22 @@ export function HomeContainer() {
             >
               <div className="space-y-2">
                 <div
-                  className={`w-10 h-10 rounded-xl text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform ${
+                  className={`w-9 h-9 rounded-xl text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform ${
                     isFamily ? "bg-teal-700 shadow-teal-700/20" : "bg-amber-500 shadow-amber-500/20"
                   }`}
                 >
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-base text-stone-900 dark:text-stone-100">
+                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
                   靈修金句卡片產生器
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                  將本週觸動你的經文，一鍵套用晨曦、星夜等四款專屬美感樣式，輕鬆分享至家人群組、社群動態或團契代禱。
+                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                  一鍵套用晨曦、星夜等四款專屬美感樣式，輕鬆分享至家人群組、社群動態或團契代禱。
                 </p>
               </div>
 
               <div
-                className={`mt-4 pt-3 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold flex items-center justify-between ${
+                className={`mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold flex items-center justify-between ${
                   isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
                 }`}
               >
@@ -146,45 +228,68 @@ export function HomeContainer() {
             {/* Tool 2: Meditation Timer */}
             <div
               onClick={() => setIsTimerModalOpen(true)}
-              className="group cursor-pointer rounded-2xl p-6 bg-gradient-to-br from-stone-100 to-stone-200/50 dark:from-stone-900 dark:to-stone-950 border border-stone-200 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 transition shadow-xs flex flex-col justify-between"
+              className="group cursor-pointer rounded-2xl p-5 bg-gradient-to-br from-stone-100 to-stone-200/50 dark:from-stone-900 dark:to-stone-950 border border-stone-200 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 transition shadow-xs flex flex-col justify-between"
             >
               <div className="space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-stone-700 dark:bg-stone-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                  <Clock className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-stone-700 dark:bg-stone-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                  <Clock className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-base text-stone-900 dark:text-stone-100">
+                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
                   靜心深呼吸計時器
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                  在展開繁重課業、工作或家庭瑣事之前，給自己 3~5 分鐘安靜在主前。跟隨節奏深呼吸，卸下心中的重擔與焦慮。
+                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                  在展開課業或繁忙工作前，給自己 3~5 分鐘安靜在主前。隨節奏深呼吸，卸下心中的重擔。
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-stone-200 dark:border-stone-800 text-xs font-semibold text-stone-700 dark:text-stone-300 flex items-center justify-between">
+              <div className="mt-4 pt-2.5 border-t border-stone-200 dark:border-stone-800 text-xs font-semibold text-stone-700 dark:text-stone-300 flex items-center justify-between">
                 <span>開啟靜心模式</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
 
-            {/* Tool 3: Reference Books Library */}
+            {/* Tool 3: Devotional Archive */}
             <Link
-              href="/books/2-corinthians"
-              className="group cursor-pointer rounded-2xl p-6 bg-gradient-to-br from-amber-500/10 via-stone-50 to-orange-500/5 dark:from-stone-900 dark:via-stone-900 dark:to-slate-950 border border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-600 transition shadow-xs flex flex-col justify-between"
+              href="/archive"
+              className="group cursor-pointer rounded-2xl p-5 bg-gradient-to-br from-blue-500/10 via-stone-50 to-indigo-500/5 dark:from-stone-900 dark:via-stone-900 dark:to-slate-950 border border-stone-200 dark:border-stone-800 hover:border-blue-400 dark:hover:border-blue-600 transition shadow-xs flex flex-col justify-between"
             >
               <div className="space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center shadow-md shadow-amber-600/20 group-hover:scale-110 transition-transform">
-                  <Library className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-600/20 group-hover:scale-110 transition-transform">
+                  <Calendar className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-base text-stone-900 dark:text-stone-100">
-                  釋經參考書目庫
+                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
+                  歷週靈修存檔庫
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                  查閱本靈修材料奠基之 14 部權威註釋書（BECNT、NIGTC、NICNT、NIVAC 等）評介與導讀，探勘深度釋經脈絡。
+                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                  完整查閱青年版與家庭版歷週經課系列，溫習過往信息、筆記心得與打卡進度。
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-amber-700 dark:text-amber-400 flex items-center justify-between">
-                <span>查閱 14 部書目導讀</span>
+              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-blue-700 dark:text-blue-400 flex items-center justify-between">
+                <span>瀏覽歷週存檔</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </Link>
+
+            {/* Tool 4: Reference Books Library */}
+            <Link
+              href="/books/2-corinthians"
+              className="group cursor-pointer rounded-2xl p-5 bg-gradient-to-br from-amber-500/10 via-stone-50 to-orange-500/5 dark:from-stone-900 dark:via-stone-900 dark:to-slate-950 border border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-600 transition shadow-xs flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                <div className="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center shadow-md shadow-amber-600/20 group-hover:scale-110 transition-transform">
+                  <Library className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
+                  釋經參考書目庫
+                </h3>
+                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                  奠基之 14 部權威註釋書（BECNT、NIGTC、NICNT、NIVAC 等）評介與導讀。
+                </p>
+              </div>
+
+              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-amber-700 dark:text-amber-400 flex items-center justify-between">
+                <span>查閱 14 部書目評介</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </Link>
