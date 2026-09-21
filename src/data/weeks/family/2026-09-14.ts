@@ -218,11 +218,11 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1Tim5.8"
         },
         {
-          "title": "馬太福音 8:36-37",
-          "reference": "馬太福音 8:36-37",
-          "text": "",
+          "title": "馬可福音 8:36-37",
+          "reference": "馬可福音 8:36-37",
+          "text": "36 人就是賺得全世界，賠上自己的生命，有甚麼益處呢？\n37 人還能拿甚麼換生命呢？",
           "question": "主耶穌向眾人發出震聾發聵的拷問：人就是賺得全世界，賠上自己的生命，有甚麼益處呢？人還能拿甚麼換生命呢？這項原則同樣精準切中現代家庭的致命盲點。許多父母在無休止的世俗奔馳中，誤以為賺取了豐厚的物質與社會地位就是對家庭最大的愛，卻在不知不覺間賠上了與兒女之間無價的親情連結，甚至賠上了兒女靈魂的健康成長。及時放緩腳步、在永恆的價值天平前重新對齊生活的焦點，是救贖家庭脫離悲劇的關鍵起點。",
-          "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Matt8.36-37"
+          "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Mark8.36-37"
         },
         {
           "title": "腓立比書 2:3-4",

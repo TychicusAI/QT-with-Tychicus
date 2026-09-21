@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { ExtendedStudyItem, DevotionalVersion } from "@/types/devotional";
-import { BookOpen, ExternalLink, ChevronDown } from "lucide-react";
+import { BookOpen, ExternalLink, ChevronDown, Loader2 } from "lucide-react";
+import { marked } from "marked";
 
 interface ExtendedStudySectionProps {
   items: ExtendedStudyItem[];
@@ -16,10 +17,15 @@ export function ExtendedStudySection({
   fontSize = "large",
 }: ExtendedStudySectionProps) {
   const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
+  const [dynamicTexts, setDynamicTexts] = useState<Record<number, string>>({});
+  const [loadingIndices, setLoadingIndices] = useState<Set<number>>(new Set());
 
   if (!items || items.length === 0) return null;
 
-  const toggleExpand = (idx: number) => {
+  const toggleExpand = async (idx: number) => {
+    const item = items[idx];
+    const willExpand = !expandedIndices.has(idx);
+
     setExpandedIndices((prev) => {
       const next = new Set(prev);
       if (next.has(idx)) {
@@ -29,6 +35,29 @@ export function ExtendedStudySection({
       }
       return next;
     });
+
+    // If expanding and there is no text yet, attempt to fetch from /api/bible
+    if (willExpand && !item.text && !dynamicTexts[idx] && !loadingIndices.has(idx)) {
+      setLoadingIndices((prev) => new Set(prev).add(idx));
+      try {
+        const queryRef = item.reference || item.title;
+        const res = await fetch(`/api/bible?ref=${encodeURIComponent(queryRef)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.text) {
+            setDynamicTexts((prev) => ({ ...prev, [idx]: data.text }));
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load scripture:", err);
+      } finally {
+        setLoadingIndices((prev) => {
+          const next = new Set(prev);
+          next.delete(idx);
+          return next;
+        });
+      }
+    }
   };
 
   const isFamily = version === "family";
@@ -52,7 +81,11 @@ export function ExtendedStudySection({
   }[fontSize];
 
   return (
-    <section className="p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4">
+    <section
+      className={`p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4 ${
+        isFamily ? "family-reader" : "youth-reader"
+      }`}
+    >
       <div className="flex items-center justify-between">
         <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 flex items-center gap-2">
           <BookOpen
@@ -70,6 +103,8 @@ export function ExtendedStudySection({
       <div className="space-y-3">
         {items.map((item, idx) => {
           const isExpanded = expandedIndices.has(idx);
+          const displayText = item.text || dynamicTexts[idx];
+          const isLoading = loadingIndices.has(idx);
 
           return (
             <div
@@ -100,9 +135,10 @@ export function ExtendedStudySection({
                   className={`font-bold ${titleClasses} tracking-tight ${
                     isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-700 dark:text-amber-400"
                   }`}
-                >
-                  {item.title}
-                </span>
+                  dangerouslySetInnerHTML={{
+                    __html: marked.parseInline(item.title) as string,
+                  }}
+                />
 
                 <div className="flex items-center gap-2">
                   <span
@@ -140,10 +176,15 @@ export function ExtendedStudySection({
                 </div>
               </div>
 
-              {/* Box Body: Commentary (補述的內容) */}
-              <p className={`pt-2.5 text-stone-700 dark:text-stone-200 ${commentaryClasses}`}>
-                {item.question}
-              </p>
+              {/* Box Body: Commentary (補述的內容) - 支援 Markdown 粗體與學術斜體樣式 */}
+              <div
+                className={`pt-2.5 text-stone-700 dark:text-stone-200 markdown-content ${
+                  isFamily ? "family-reader" : "youth-reader"
+                } ${commentaryClasses}`}
+                dangerouslySetInnerHTML={{
+                  __html: marked.parseInline(item.question) as string,
+                }}
+              />
 
               {/* Expandable Scripture Box below the commentary */}
               {isExpanded && (
@@ -165,19 +206,31 @@ export function ExtendedStudySection({
                     </span>
                   </div>
 
-                  {item.text ? (
+                  {displayText ? (
                     <blockquote
-                      className={`p-4 sm:p-5 rounded-xl border font-serif ${scriptureClasses} whitespace-pre-line ${
+                      className={`p-4 sm:p-5 rounded-xl border font-serif markdown-content ${
+                        isFamily ? "family-reader" : "youth-reader"
+                      } ${scriptureClasses} whitespace-pre-line ${
                         isFamily
                           ? "bg-teal-500/5 dark:bg-teal-950/25 border-teal-200/50 dark:border-teal-800/40 text-stone-800 dark:text-stone-100"
                           : "bg-amber-500/5 dark:bg-amber-950/25 border-amber-200/50 dark:border-amber-800/40 text-stone-800 dark:text-stone-100"
                       }`}
-                    >
-                      {item.text}
-                    </blockquote>
+                      dangerouslySetInnerHTML={{
+                        __html: marked.parseInline(displayText) as string,
+                      }}
+                    />
+                  ) : isLoading ? (
+                    <div className="flex items-center gap-2 py-3 text-xs text-stone-500 dark:text-stone-400">
+                      <Loader2
+                        className={`w-3.5 h-3.5 animate-spin ${
+                          isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+                        }`}
+                      />
+                      <span>正在載入經文內容...</span>
+                    </div>
                   ) : (
                     <p className="text-xs text-stone-400 italic py-2">
-                      經文載入中，或請點擊右上角「Biblia 查經」檢視完整前後文。
+                      未收錄本處經文文字，請點擊右上角「Biblia 查經」檢視完整前後文。
                     </p>
                   )}
                 </div>

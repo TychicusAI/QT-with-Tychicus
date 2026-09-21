@@ -84,11 +84,15 @@ html {
 }
 
 /* Family version theme adaptation */
-.family-reader .markdown-content em {
+.family-reader .markdown-content em,
+.family-reader.markdown-content em,
+.family-reader em {
   color: #0f766e; /* teal-700 */
 }
 
-.dark .family-reader .markdown-content em {
+.dark .family-reader .markdown-content em,
+.dark .family-reader.markdown-content em,
+.dark .family-reader em {
   color: #2dd4bf; /* teal-400 */
 }
 
@@ -100,7 +104,9 @@ html {
   opacity: 0.95;
 }
 
-.family-reader .markdown-content blockquote {
+.family-reader .markdown-content blockquote,
+.family-reader.markdown-content blockquote,
+.family-reader blockquote {
   border-left-color: #0f766e;
 }
 

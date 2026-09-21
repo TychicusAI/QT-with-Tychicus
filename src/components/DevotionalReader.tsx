@@ -255,9 +255,14 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             />
             <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">默想反思</h3>
           </div>
-          <p className={`${meditationClasses} text-stone-800 dark:text-stone-100`}>
-            {day.meditationQuestion.replace(/^[「"“]|["”」]$/g, "")}
-          </p>
+          <div
+            className={`${meditationClasses} text-stone-800 dark:text-stone-100 markdown-content ${
+              isFamily ? "family-reader" : "youth-reader"
+            }`}
+            dangerouslySetInnerHTML={{
+              __html: marked.parseInline(day.meditationQuestion.replace(/^[「"“]|["”」]$/g, "")) as string,
+            }}
+          />
         </section>
       )}
 
