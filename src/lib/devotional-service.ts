@@ -2,12 +2,14 @@ import { DevotionalDay, DevotionalWeek, DevotionalVersion } from "@/types/devoti
 
 import { youth_2026_09_14 } from "@/data/weeks/youth/2026-09-14";
 import { youth_2026_09_21 } from "@/data/weeks/youth/2026-09-21";
+import { youth_2026_09_28 } from "@/data/weeks/youth/2026-09-28";
 
 import { family_2026_09_14 } from "@/data/weeks/family/2026-09-14";
 import { family_2026_09_21 } from "@/data/weeks/family/2026-09-21";
+import { family_2026_09_28 } from "@/data/weeks/family/2026-09-28";
 
-export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21];
-export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21];
+export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21, youth_2026_09_28];
+export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
   return version === "family" ? allFamilyWeeks : allYouthWeeks;
