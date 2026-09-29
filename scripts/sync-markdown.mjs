@@ -6,6 +6,11 @@ const bibleCachePath = path.join(process.cwd(), "data", "bible-cache.json");
 if (fs.existsSync(bibleCachePath)) {
   try {
     BIBLE_CACHE = JSON.parse(fs.readFileSync(bibleCachePath, "utf-8"));
+    for (const [k, v] of Object.entries(BIBLE_CACHE)) {
+      if (typeof v === "string" && v.includes("\\n")) {
+        BIBLE_CACHE[k] = v.replace(/\\n/g, "\n");
+      }
+    }
   } catch (e) {
     console.warn("Failed to load bible-cache.json", e);
   }
@@ -186,6 +191,9 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
         if (!item) return;
         if (!item.text && BIBLE_CACHE[item.reference]) {
           item.text = BIBLE_CACHE[item.reference];
+        }
+        if (item.text) {
+          item.text = item.text.replace(/\\n/g, "\n");
         }
         if (!item.text) {
           missingCacheVerses.push({ fileId, version, day: dayLabel, ref: item.reference });

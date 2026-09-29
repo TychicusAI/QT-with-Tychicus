@@ -216,7 +216,7 @@ export function ExtendedStudySection({
                           : "bg-amber-500/5 dark:bg-amber-950/25 border-amber-200/50 dark:border-amber-800/40 text-stone-800 dark:text-stone-100"
                       }`}
                       dangerouslySetInnerHTML={{
-                        __html: marked.parseInline(displayText) as string,
+                        __html: marked.parseInline(displayText.replace(/\\n/g, "\n")) as string,
                       }}
                     />
                   ) : isLoading ? (
