@@ -11,6 +11,8 @@ if (fs.existsSync(bibleCachePath)) {
   }
 }
 
+const missingCacheVerses = [];
+
 const DAY_MAP = {
   週一: { id: "mon", dayNumber: 1 },
   週二: { id: "tue", dayNumber: 2 },
@@ -180,6 +182,17 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
       const extLines = extContent.split("\n");
       let currentItem = null;
 
+      const pushExtendedItem = (item) => {
+        if (!item) return;
+        if (!item.text && BIBLE_CACHE[item.reference]) {
+          item.text = BIBLE_CACHE[item.reference];
+        }
+        if (!item.text) {
+          missingCacheVerses.push({ fileId, version, day: dayLabel, ref: item.reference });
+        }
+        extendedStudy.push(item);
+      };
+
       for (const el of extLines) {
         const line = el.trim();
         if (!line) continue;
@@ -188,10 +201,7 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
         const pipeMatch = line.match(/^(?:(?:\d+\.|\*|•|-)\s*)?\*\*([^*]+)\*\*\s*[｜|]\s*(.*)$/);
         if (pipeMatch) {
           if (currentItem) {
-            if (!currentItem.text && BIBLE_CACHE[currentItem.reference]) {
-              currentItem.text = BIBLE_CACHE[currentItem.reference];
-            }
-            extendedStudy.push(currentItem);
+            pushExtendedItem(currentItem);
           }
           const ref = pipeMatch[1].trim();
           const desc = pipeMatch[2].trim();
@@ -209,10 +219,7 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
         const numMatch = line.match(/^(?:\d+\.|\*|-)\s*\*\*([^*]+)\*\*(?:\s*(.*))?$/);
         if (numMatch) {
           if (currentItem) {
-            if (!currentItem.text && BIBLE_CACHE[currentItem.reference]) {
-              currentItem.text = BIBLE_CACHE[currentItem.reference];
-            }
-            extendedStudy.push(currentItem);
+            pushExtendedItem(currentItem);
           }
           const ref = numMatch[1].trim();
           currentItem = {
@@ -237,10 +244,7 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
         }
       }
       if (currentItem) {
-        if (!currentItem.text && BIBLE_CACHE[currentItem.reference]) {
-          currentItem.text = BIBLE_CACHE[currentItem.reference];
-        }
-        extendedStudy.push(currentItem);
+        pushExtendedItem(currentItem);
       }
     }
 
@@ -395,6 +399,19 @@ for (const item of items) {
       youthWeeks.push({ weekId, varName });
     }
   }
+}
+
+if (missingCacheVerses.length > 0) {
+  console.error("\n=======================================================");
+  console.error("❌ [Bible Cache Verification Failed] 檢測到延伸研讀經文在 data/bible-cache.json 中缺失文字內容：");
+  missingCacheVerses.forEach(m => {
+    console.error(`  - [${m.fileId} ${m.version} ${m.day}] ${m.ref}`);
+  });
+  console.error("\n請務必將上述經文收錄至 data/bible-cache.json 中，以避免前台點擊展開經文時出現「未收錄本處經文文字」之缺失！");
+  console.error("=======================================================\n");
+  process.exit(1);
+} else {
+  console.log("✓ [Bible Cache Verified] 所有延伸研讀經文均已 100% 收錄於 data/bible-cache.json 中！");
 }
 
 // Generate devotional-service.ts

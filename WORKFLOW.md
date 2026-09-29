@@ -27,6 +27,11 @@
    * **落實一天一指令**：每天集中模型 100% 的推理與修辭算力，深耕約 1,800–2,000 字具文學呼吸感的深度散文、希臘原文語義場拆解、專屬喻道故事改寫與約 300 字的真摯第一人稱禱告詞。
    * **單一檔案無縫追加**：每日信息直接依序寫入/追加至本機的 `qt_*.md` 檔案中，使用者無需手動建立多個檔案再費力複製合併，兼顧「極致精緻」與「操作流暢」。
 
+4. **延伸研讀經文快取全覆蓋規範（Bible Cache Full Coverage Policy）**：
+   * 所有在靈修信息【延伸研讀】中引用的經文章節，必須同步收錄於 `data/bible-cache.json` 中（包含完整新標點和合本經文字句與節數標註）。
+   * 前台閱讀器採用點擊展開經文設計，若快取中無此經文，讀者展開時會顯示「未收錄本處經文文字」。
+   * **硬性中斷保護**：在執行 `npm run sync` 時，系統會自動嚴格校驗全站所有延伸研讀經文的快取覆蓋率；若檢測到任何未收錄之經文，同步腳本將**強制拋錯並中斷退出（Exit Code 1）**，徹底阻斷缺失經文發布到前台，嚴防此項疏漏。
+
 ---
 
 ## 2. Spark 環境配置與前置準備（Setup in Spark）
@@ -69,6 +74,7 @@
 | **第 2 階段：主題規劃** | 家庭篇 | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、導讀與週一至週六進程規劃 |
 | **第 3 階段：逐日深耕** | 青年篇 | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
 | **第 3 階段：逐日深耕** | 家庭篇 | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：經文快取** | 全體共用 | 靈修信息之【延伸研讀】經文引用 | `data/bible-cache.json` | 延伸研讀經文之完整和合本內文快取，確保前台點擊展開能即時檢視經文 |
 
 ---
 
@@ -99,8 +105,8 @@
    │   ├─ 5f. 週五深耕：發送週五指令 ──> Spark 撰寫週五信息，無縫追加至 qt_*.md
    │   └─ 5g. 週六深耕：發送週六指令 ──> Spark 撰寫週六信息，無縫追加至 qt_*.md
    │
-步驟 6【第 4 階段：同步與檢驗】：執行 npm run sync 與 npx tsc --noEmit
-       └─ 自動解析 Markdown、生成前台 TypeScript 資料庫並通過型別編譯檢驗
+步驟 6【第 4 階段：同步與檢驗】：確認 data/bible-cache.json 補全，執行 npm run sync 與 npx tsc --noEmit
+       └─ 自動校驗經文快取覆蓋率（100% 覆蓋方可通過）、解析 Markdown、生成前台 TypeScript 資料庫並通過型別編譯檢驗
 ```
 
 ### 標準觸發指令範例
@@ -193,11 +199,16 @@
    * 每日產出後，Spark 直接使用追加模式（Append）無縫寫入至目標檔案，保持格式規範且不需手動合併檔案。
 
 ### 第 4 階段：資料同步與編譯檢驗（Data Sync & Verification）
-* 生成完成後，執行同步腳本驗證 Markdown 語法並自動生成前台 TypeScript 資料庫：
-  ```bash
-  npm run sync
-  ```
-* 執行靜態型別檢驗確保前端相容性：
-  ```bash
-  npx tsc --noEmit
-  ```
+1. **延伸研讀經文快取檢查（Bible Cache Audit）**：
+   * 檢查本週 `qt_for_youth.md` 與 `qt_for_family.md` 中所有【延伸研讀】引用的經文，確認每一處皆已將完整和合本經文寫入 `data/bible-cache.json`。
+2. **執行同步與自動校驗**：
+   * 執行同步腳本驗證 Markdown 語法、嚴格校驗經文快取覆蓋率，並自動生成前台 TypeScript 資料庫：
+     ```bash
+     npm run sync
+     ```
+   * 若有經文未收錄於 `data/bible-cache.json`，腳本將明確列出缺失清單並中斷退出。
+3. **執行靜態型別檢驗**：
+   * 確保前端相容性：
+     ```bash
+     npx tsc --noEmit
+     ```
