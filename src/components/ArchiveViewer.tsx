@@ -81,7 +81,7 @@ export function ArchiveViewer() {
   }, 0);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbfbf9] dark:bg-[#090d16] text-stone-900 dark:text-stone-100 selection:bg-amber-500/20">
+    <div className="min-h-screen flex flex-col bg-[#fbfbf9] dark:bg-[#090d16] text-stone-900 dark:text-stone-100 selection:bg-amber-500/20 overflow-x-hidden w-full">
       <Navbar currentVersion={version} onVersionChange={setVersion} />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10">

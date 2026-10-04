@@ -35,7 +35,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
 
   return (
     <div
-      className={`relative overflow-hidden rounded-3xl border p-5 sm:p-8 md:p-10 shadow-xl transition-all ${
+      className={`relative overflow-hidden rounded-3xl border p-4 sm:p-8 md:p-10 shadow-xl transition-all ${
         isFamily
           ? "bg-gradient-to-br from-teal-500/15 via-emerald-500/10 to-teal-100/30 dark:from-teal-950/40 dark:via-slate-900/60 dark:to-slate-950 border-teal-300/40 dark:border-teal-700/40 shadow-teal-500/5"
           : "bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-amber-100/30 dark:from-amber-950/40 dark:via-slate-900/60 dark:to-slate-950 border-amber-300/40 dark:border-amber-700/40 shadow-amber-500/5"
@@ -55,23 +55,23 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
 
       {/* Top Header Row */}
       <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-6">
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 min-w-0">
           <span
-            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow-sm ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow-sm shrink-0 ${
               isFamily ? "bg-teal-700 shadow-teal-700/30" : "bg-amber-600 shadow-amber-600/30"
             }`}
           >
             {isFamily ? <Users className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5" />}
             <span>{isFamily ? "家庭版・今日特推" : "青年版・今日特推"}</span>
           </span>
-          <span className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 font-medium flex items-center gap-1">
+          <span className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 font-medium flex items-center gap-1 shrink-0">
             <Calendar className="w-3.5 h-3.5 text-stone-400 shrink-0" />
             {formatWeekDateRange(week)}・{currentDay.dayLabel}
           </span>
         </div>
 
         {/* 6-Day quick switcher pill bar */}
-        <div className="flex items-center gap-1 bg-white/70 dark:bg-stone-900/70 p-1 rounded-full border border-stone-200/80 dark:border-stone-800 backdrop-blur-sm text-xs max-w-full overflow-x-auto whitespace-nowrap">
+        <div className="flex items-center gap-1 bg-white/70 dark:bg-stone-900/70 p-1 rounded-full border border-stone-200/80 dark:border-stone-800 backdrop-blur-sm text-xs max-w-full min-w-0 overflow-x-auto whitespace-nowrap">
           {week.days.map((d) => {
             const isSelected = d.id === selectedDayId;
             return (

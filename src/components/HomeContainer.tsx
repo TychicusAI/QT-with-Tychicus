@@ -26,7 +26,7 @@ export function HomeContainer() {
   const activeWeek = allWeeks.find((w) => w.id === selectedWeekId) || currentWeek;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbfbf9] dark:bg-[#090d16] text-stone-900 dark:text-stone-100 selection:bg-amber-500/20">
+    <div className="min-h-screen flex flex-col bg-[#fbfbf9] dark:bg-[#090d16] text-stone-900 dark:text-stone-100 selection:bg-amber-500/20 overflow-x-hidden w-full">
       {/* Top Navigation */}
       <Navbar
         currentVersion={version}
@@ -36,7 +36,7 @@ export function HomeContainer() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12 min-w-0">
         {/* Welcome Tagline */}
         <section className="text-center max-w-2xl mx-auto space-y-4 pt-2 sm:pt-4">
           <div className="flex items-center justify-center gap-2">
@@ -68,7 +68,7 @@ export function HomeContainer() {
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-50">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-50">
             {isFamily ? (
               <>
                 在餐桌旁的真實與寬容中，
