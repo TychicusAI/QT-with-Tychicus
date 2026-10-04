@@ -43,7 +43,8 @@ export function Navbar({
               title="v. 2.0 根據〈板新信友堂〉經課進度"
               className="text-[11px] sm:text-xs text-stone-500 dark:text-stone-400 truncate max-w-[195px] sm:max-w-none"
             >
-              <span className="font-mono font-semibold text-amber-700 dark:text-amber-400">v. 2.0</span> 根據<strong className="font-bold text-stone-700 dark:text-stone-200">〈板新信友堂〉</strong>經課進度
+              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />2.0</span>{" "}
+              根據<strong className="font-bold text-stone-700 dark:text-stone-200">〈板新信友堂〉</strong>經課進度
             </p>
           </div>
         </Link>
