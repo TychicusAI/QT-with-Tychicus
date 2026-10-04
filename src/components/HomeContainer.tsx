@@ -90,8 +90,8 @@ export function HomeContainer() {
 
           <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mx-auto">
             {isFamily
-              ? "每天 6~8 分鐘，放下指責與防衛的面具，走進兩代溝通的恩典現場，讓家成為真誠與愛的避風港。"
-              : "拒絕廉價的世俗成功學，每天 6~8 分鐘走進聖經現場，拆毀自我信靠的焦慮堡壘，迎見那叫死人復活的神。"}
+              ? "每天 10~15 分鐘，放下指責與防衛的面具，走進兩代溝通的恩典現場，讓家成為真誠與愛的避風港。"
+              : "拒絕廉價的世俗成功學，每天 10~15 分鐘走進聖經現場，拆毀自我信靠的焦慮堡壘，迎見那叫死人復活的神。"}
           </p>
         </section>
 
