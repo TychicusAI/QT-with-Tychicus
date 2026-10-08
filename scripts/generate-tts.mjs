@@ -47,11 +47,12 @@ export function cleanMessageForTTS(rawMessage) {
   // 移除行內程式碼或代碼區塊
   text = text.replace(/`([^`]+)`/g, "$1");
 
-  // 3. 符號微調以利朗讀（方案 B：直角引號標準化為 F5-TTS 訓練集能精準識別的引號）
+  // 3. 符號微調以利朗讀
+  // 單獨冒號微調：若冒號後方未跟隨引號（包含直角引號「、『以及“、‘、"、'），轉換為逗號以利自然氣息停頓
+  text = text.replace(/[:：](?!\s*["“'‘「『])/g, "，");
+  // 方案 B：直角引號標準化為 F5-TTS 訓練集能精準識別的引號
   text = text.replace(/「/g, "“").replace(/」/g, "”");
   text = text.replace(/『/g, "‘").replace(/』/g, "’");
-  // 4. 單獨冒號微調：若冒號後方未跟隨引號，轉換為逗號以利自然氣息停頓
-  text = text.replace(/[:：](?!\s*["“'‘])/g, "，");
   text = text.replace(/，，+/g, "，");
   text = text.replace(/、、+/g, "、");
   text = text.replace(/……+/g, "。");

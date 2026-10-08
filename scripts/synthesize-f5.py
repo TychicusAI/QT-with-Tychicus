@@ -77,6 +77,11 @@ DEVOTIONAL_LEXICON = {
     "顯著": [["xian3"], ["zhu4"]],
     "著重": [["zhuo2"], ["zhong4"]],
     # 長字多音字校正（時間/空間長度讀作 chang2，年長/長輩/生長讀作 zhang3）
+    "長凳": [["chang2"], ["deng4"]],
+    "玄關長凳": [["xuan2"], ["guan1"], ["chang2"], ["deng4"]],
+    "長椅": [["chang2"], ["yi3"]],
+    "長桌": [["chang2"], ["zhuo1"]],
+    "長條": [["chang2"], ["tiao2"]],
     "長年": [["chang2"], ["nian2"]],
     "長久": [["chang2"], ["jiu3"]],
     "長期": [["chang2"], ["qi1"]],
@@ -85,12 +90,21 @@ DEVOTIONAL_LEXICON = {
     "長達": [["chang2"], ["da2"]],
     "長夜": [["chang2"], ["ye4"]],
     "長長": [["chang2"], ["chang2"]],
+    "越來越長": [["yue4"], ["lai2"], ["yue4"], ["chang2"]],
+    "越長": [["yue4"], ["chang2"]],
+    "更長": [["geng4"], ["chang2"]],
+    "很長": [["hen3"], ["chang2"]],
+    "較長": [["jiao4"], ["chang2"]],
+    "長短": [["chang2"], ["duan3"]],
+    "長度": [["chang2"], ["du4"]],
     "生長": [["sheng1"], ["zhang3"]],
     "成長": [["cheng2"], ["zhang3"]],
     "長大": [["zhang3"], ["da4"]],
     "長老": [["zhang3"], ["lao3"]],
     "長子": [["zhang3"], ["zi3"]],
     # 繁體中文「動詞/介詞 + 著」動態助詞（讀作 zhe）
+    "凝結著": [["ning2"], ["jie2"], ["zhe"]],
+    "注視著": [["zhu4"], ["shi4"], ["zhe"]],
     "藉著": [["jie4"], ["zhe"]],
     "照著": [["zhao4"], ["zhe"]],
     "按著": [["an4"], ["zhe"]],
@@ -344,13 +358,13 @@ def main():
     gen_text = normalize_numbers(gen_text)
     ref_text = normalize_numbers(ref_text)
 
+    # 單獨冒號微調為逗號（自然呼吸停頓；此時支援包含「、『在內的所有引號形態）
+    gen_text = normalize_colons(gen_text)
+    ref_text = normalize_colons(ref_text)
+
     # 方案 B：直角引號標準化
     gen_text = normalize_quotes(gen_text)
     ref_text = normalize_quotes(ref_text)
-
-    # 單獨冒號微調為逗號（自然呼吸停頓）
-    gen_text = normalize_colons(gen_text)
-    ref_text = normalize_colons(ref_text)
 
     # 讀取參考音檔
     audio, sr = sf.read(args.ref_audio)
