@@ -47,7 +47,9 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1John4.18"
         }
       ],
-      "meditationQuestion": "回想過去幾天的家庭生活，你是否曾為了「維護面子」或「害怕被指責」，而在家人面前隱藏了真實的感受？如果今晚在餐桌旁，你願意主動卸下一點防備對家人說一句真心話，那句話會是什麼？"
+      "meditationQuestion": "回想過去幾天的家庭生活，你是否曾為了「維護面子」或「害怕被指責」，而在家人面前隱藏了真實的感受？如果今晚在餐桌旁，你願意主動卸下一點防備對家人說一句真心話，那句話會是什麼？",
+      "audioUrl": "/audio/2026-09-14/family/mon.mp3",
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -84,7 +86,9 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Ps15.4"
         }
       ],
-      "meditationQuestion": "回想過去一段時間，家裡是否有哪一次「承諾落空」至今仍讓彼此心中存有芥蒂？今天，你是否願意主動向家人表達一份誠摯的歉意，或是主動釋懷對家人的那份失望？"
+      "meditationQuestion": "回想過去一段時間，家裡是否有哪一次「承諾落空」至今仍讓彼此心中存有芥蒂？今天，你是否願意主動向家人表達一份誠摯的歉意，或是主動釋懷對家人的那份失望？",
+      "audioUrl": "/audio/2026-09-14/family/tue.mp3",
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -121,7 +125,9 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Josh24.15"
         }
       ],
-      "meditationQuestion": "在你們目前的家庭生活中，最常引發父母焦慮、讓孩子感到窒息的「未來議題」是什麼？如果今晚全家願意相信神在基督裡的「是的」大於這一切憂慮，你們能放下什麼掌控、重拾彼此的平安？"
+      "meditationQuestion": "在你們目前的家庭生活中，最常引發父母焦慮、讓孩子感到窒息的「未來議題」是什麼？如果今晚全家願意相信神在基督裡的「是的」大於這一切憂慮，你們能放下什麼掌控、重拾彼此的平安？",
+      "audioUrl": "/audio/2026-09-14/family/wed.mp3",
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -158,7 +164,9 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Luke15.20-24"
         }
       ],
-      "meditationQuestion": "身為父母，你最近是否正試圖在某件事上「轄管」孩子的選擇？身為兒女，你是否曾感受到父母管教背後那份未曾說出口的愛與擔憂？今晚你們能否放下輸贏，真誠分享彼此心中的期待？"
+      "meditationQuestion": "身為父母，你最近是否正試圖在某件事上「轄管」孩子的選擇？身為兒女，你是否曾感受到父母管教背後那份未曾說出口的愛與擔憂？今晚你們能否放下輸贏，真誠分享彼此心中的期待？",
+      "audioUrl": "/audio/2026-09-14/family/thu.mp3",
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -195,7 +203,9 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Gen50.19-21"
         }
       ],
-      "meditationQuestion": "在你們的家中，是否正有一件早該翻篇的過錯，至今仍常在爭執中被翻出來當作「刺痛對方的武器」？今天在十字架面前，你是否願意主動走到那位家人身旁，向他宣告「那筆帳已經徹底勾銷了」？"
+      "meditationQuestion": "在你們的家中，是否正有一件早該翻篇的過錯，至今仍常在爭執中被翻出來當作「刺痛對方的武器」？今天在十字架面前，你是否願意主動走到那位家人身旁，向他宣告「那筆帳已經徹底勾銷了」？",
+      "audioUrl": "/audio/2026-09-14/family/fri.mp3",
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -232,7 +242,9 @@ export const family_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Phil2.3-4"
         }
       ],
-      "meditationQuestion": "檢視你本週的行事曆與家庭生活，你是否正因為某一項看似極其重要、甚至帶有神聖光環的「工作」或「事工」，而忽略了家中某位至親無聲的嘆息？今天，你願意為家中的哪一位「提多」，果斷放下手邊的事情，專注陪伴他一小時？"
+      "meditationQuestion": "檢視你本週的行事曆與家庭生活，你是否正因為某一項看似極其重要、甚至帶有神聖光環的「工作」或「事工」，而忽略了家中某位至親無聲的嘆息？今天，你願意為家中的哪一位「提多」，果斷放下手邊的事情，專注陪伴他一小時？",
+      "audioUrl": "/audio/2026-09-14/family/sat.mp3",
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-09-14",

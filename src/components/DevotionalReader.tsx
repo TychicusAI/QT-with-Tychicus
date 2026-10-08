@@ -25,6 +25,7 @@ import { PrayerAmenButton } from "@/components/PrayerAmenButton";
 import { VerseShareModal } from "@/components/VerseShareModal";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BibliographyCard } from "@/components/BibliographyCard";
+import { AudioPlayer } from "@/components/AudioPlayer";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -221,14 +222,13 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
 
       {/* 2. Deep Devotional Message */}
       <section className="space-y-6">
-        <div className="flex items-center gap-2">
-          <Quote
-            className={`w-5 h-5 rotate-180 shrink-0 ${
-              isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
-            }`}
-          />
-          <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">今日信息</h3>
-        </div>
+        <AudioPlayer
+          audioUrl={day.audioUrl}
+          hasAudio={day.hasAudio}
+          version={week.version}
+          dayTitle={day.title}
+          dayLabel={day.dayLabel}
+        />
 
         <div
           className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${

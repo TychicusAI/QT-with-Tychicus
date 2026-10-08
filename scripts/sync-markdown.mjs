@@ -269,6 +269,10 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
     const cleanQuote = scriptureText.replace(/^[「"“]|["”」]$/g, "");
     const goldenVerse = cleanQuote.length > 100 ? `${cleanQuote.slice(0, 100)}...` : cleanQuote;
 
+    const audioRelativePath = `/audio/${fileId}/${version}/${dayInfo.id}.mp3`;
+    const audioDiskPath = path.join(process.cwd(), "public", "audio", fileId, version, `${dayInfo.id}.mp3`);
+    const hasAudio = fs.existsSync(audioDiskPath);
+
     days.push({
       id: dayInfo.id,
       dayNumber: dayInfo.dayNumber,
@@ -283,6 +287,8 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
       suggestedPrayer,
       extendedStudy,
       meditationQuestion,
+      audioUrl: audioRelativePath,
+      hasAudio,
     });
   }
 

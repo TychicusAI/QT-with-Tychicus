@@ -23,6 +23,8 @@ export interface DevotionalDay {
   suggestedPrayer: string;
   extendedStudy: ExtendedStudyItem[];
   meditationQuestion?: string;
+  audioUrl?: string;
+  hasAudio?: boolean;
 }
 
 export interface DevotionalWeek {

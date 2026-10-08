@@ -47,7 +47,9 @@ export const youth_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1John4.18"
         }
       ],
-      "meditationQuestion": "檢視你最近在社群平台發布的動態或在同儕面前的言行，你是否正費盡心思維持某個「精緻而無瑕」的人設？如果今天要在基督純淨的日光下脫去這層偽裝的手套，你最害怕被看見的真實脆弱是什麼？你是否願意相信神的恩典完全足夠接納這樣的你？"
+      "meditationQuestion": "檢視你最近在社群平台發布的動態或在同儕面前的言行，你是否正費盡心思維持某個「精緻而無瑕」的人設？如果今天要在基督純淨的日光下脫去這層偽裝的手套，你最害怕被看見的真實脆弱是什麼？你是否願意相信神的恩典完全足夠接納這樣的你？",
+      "audioUrl": "/audio/2026-09-14/youth/mon.mp3",
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -84,7 +86,9 @@ export const youth_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Ps15.4"
         }
       ],
-      "meditationQuestion": "回想過去這段時間，是否曾有哪一次「計畫的意外破滅」或「重要承諾的落空」，至今仍讓你對某個人甚至對上帝感到憤懣難平？如果從保羅「在愛中動態順服」的眼光重新審視那次轉折，你是否能在挫敗中看見神對你生命更深層的保守與操練？"
+      "meditationQuestion": "回想過去這段時間，是否曾有哪一次「計畫的意外破滅」或「重要承諾的落空」，至今仍讓你對某個人甚至對上帝感到憤懣難平？如果從保羅「在愛中動態順服」的眼光重新審視那次轉折，你是否能在挫敗中看見神對你生命更深層的保守與操練？",
+      "audioUrl": "/audio/2026-09-14/youth/tue.mp3",
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -121,7 +125,9 @@ export const youth_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Josh24.15"
         }
       ],
-      "meditationQuestion": "當你面對就業市場的劇烈變動、求職挫折或對未來的強烈未知時，你通常是抓住什麼來穩住自己的情緒？在深夜感到「內在電量耗盡」的時刻，你是否願意將心靈重新插回三一上帝這座基座上，在基督永不改變的「是的」面前，向祂獻上你真實的「阿們」？"
+      "meditationQuestion": "當你面對就業市場的劇烈變動、求職挫折或對未來的強烈未知時，你通常是抓住什麼來穩住自己的情緒？在深夜感到「內在電量耗盡」的時刻，你是否願意將心靈重新插回三一上帝這座基座上，在基督永不改變的「是的」面前，向祂獻上你真實的「阿們」？",
+      "audioUrl": "/audio/2026-09-14/youth/wed.mp3",
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -158,7 +164,9 @@ export const youth_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Luke15.20-24"
         }
       ],
-      "meditationQuestion": "回顧你在校園團契、社團或小組中的人際經歷，你是否曾遭遇過以「屬靈管教」或「為你好」為名義的情感勒索與權力壓迫？當你默想保羅「不是轄管，乃是助成喜樂」的同工姿態時，這如何重塑你今天在團隊中對待身邊夥伴的言語與態度？"
+      "meditationQuestion": "回顧你在校園團契、社團或小組中的人際經歷，你是否曾遭遇過以「屬靈管教」或「為你好」為名義的情感勒索與權力壓迫？當你默想保羅「不是轄管，乃是助成喜樂」的同工姿態時，這如何重塑你今天在團隊中對待身邊夥伴的言語與態度？",
+      "audioUrl": "/audio/2026-09-14/youth/thu.mp3",
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -195,7 +203,9 @@ export const youth_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Gen50.19-21"
         }
       ],
-      "meditationQuestion": "在你的校園、社團或聊天群組中，是否正有一位曾犯過錯、如今被同儕以冷漠或群嘲「取消」的同伴？當你凝視基督在十字架上對你的無條件赦免時，你是否願意打破沉默，主動向他伸出恩典與接納的雙手？"
+      "meditationQuestion": "在你的校園、社團或聊天群組中，是否正有一位曾犯過錯、如今被同儕以冷漠或群嘲「取消」的同伴？當你凝視基督在十字架上對你的無條件赦免時，你是否願意打破沉默，主動向他伸出恩典與接納的雙手？",
+      "audioUrl": "/audio/2026-09-14/youth/fri.mp3",
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -232,7 +242,9 @@ export const youth_2026_09_14: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Phil2.3-4"
         }
       ],
-      "meditationQuestion": "檢視你目前的行事曆與精力分配，你是否正為某個看似極其耀眼、甚至帶有光鮮光環的「實習機會」、「學業專案」或「教會事工」全力狂奔，卻在無意間冷落了某位向你發出微弱求救訊號的朋友或屬靈同伴？今天，你是否願意為了成為他的「保羅」，果斷放下手邊的事情，專注陪伴他一小時？"
+      "meditationQuestion": "檢視你目前的行事曆與精力分配，你是否正為某個看似極其耀眼、甚至帶有光鮮光環的「實習機會」、「學業專案」或「教會事工」全力狂奔，卻在無意間冷落了某位向你發出微弱求救訊號的朋友或屬靈同伴？今天，你是否願意為了成為他的「保羅」，果斷放下手邊的事情，專注陪伴他一小時？",
+      "audioUrl": "/audio/2026-09-14/youth/sat.mp3",
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-09-14",

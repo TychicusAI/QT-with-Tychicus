@@ -47,7 +47,9 @@ export const family_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Gal6.9-10"
         }
       ],
-      "meditationQuestion": "回想最近一次全家在餐桌上或生活中的緊張對話：引發爭執的焦點，究竟是屬於「短暫可見的外在得失（如成績、表現、生活習慣）」，還是關乎「永恆不可見的內心品格與愛」？如果今天全家以保羅的「神聖天平」來重新對話，你們可以如何向彼此表達體諒與恩慈？"
+      "meditationQuestion": "回想最近一次全家在餐桌上或生活中的緊張對話：引發爭執的焦點，究竟是屬於「短暫可見的外在得失（如成績、表現、生活習慣）」，還是關乎「永恆不可見的內心品格與愛」？如果今天全家以保羅的「神聖天平」來重新對話，你們可以如何向彼此表達體諒與恩慈？",
+      "audioUrl": "/audio/2026-10-05/family/mon.mp3",
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -84,7 +86,9 @@ export const family_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Heb13.14"
         }
       ],
-      "meditationQuestion": "當家中長輩日漸老邁、或是家庭成員遭遇身體疾病與體力衰退時，全家通常會陷入怎樣的情緒氛圍中？這節經文所啟示的「拆卸帳棚、搬進天家」的眼光，能如何幫助你們在面對衰老與疾病時，放下恐慌與埋怨，轉而用恩慈與盼望彼此陪伴？"
+      "meditationQuestion": "當家中長輩日漸老邁、或是家庭成員遭遇身體疾病與體力衰退時，全家通常會陷入怎樣的情緒氛圍中？這節經文所啟示的「拆卸帳棚、搬進天家」的眼光，能如何幫助你們在面對衰老與疾病時，放下恐慌與埋怨，轉而用恩慈與盼望彼此陪伴？",
+      "audioUrl": "/audio/2026-10-05/family/tue.mp3",
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -121,7 +125,9 @@ export const family_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Isa25.8-9"
         }
       ],
-      "meditationQuestion": "在過去一週中，你是否曾聽見家人（配偶、父母或孩子）發出疲憊或無奈的歎息？你當時的第一反應是什麼？今天默想了「在歎息中渴望穿上生命大衣」的真理後，今晚你可以透過哪一個具體的愛心舉動（例如一句肯定、一個擁抱或安靜的傾聽），為家人披上屬天的溫暖？"
+      "meditationQuestion": "在過去一週中，你是否曾聽見家人（配偶、父母或孩子）發出疲憊或無奈的歎息？你當時的第一反應是什麼？今天默想了「在歎息中渴望穿上生命大衣」的真理後，今晚你可以透過哪一個具體的愛心舉動（例如一句肯定、一個擁抱或安靜的傾聽），為家人披上屬天的溫暖？",
+      "audioUrl": "/audio/2026-10-05/family/wed.mp3",
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -158,7 +164,9 @@ export const family_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1Thess5.23-24"
         }
       ],
-      "meditationQuestion": "檢視你們家庭當前的溝通狀況：是否有某個曾經許下的承諾（例如某次約定、某個改變生活習慣的保證）至今尚未兌現，以致在家人之間留下了隱隱的信任裂痕？今天全家能否在真誠與愛中敞開對話，為過去的疏漏尋求彼此饒恕，並靠著聖靈重新立下切實可行的信任約定？"
+      "meditationQuestion": "檢視你們家庭當前的溝通狀況：是否有某個曾經許下的承諾（例如某次約定、某個改變生活習慣的保證）至今尚未兌現，以致在家人之間留下了隱隱的信任裂痕？今天全家能否在真誠與愛中敞開對話，為過去的疏漏尋求彼此饒恕，並靠著聖靈重新立下切實可行的信任約定？",
+      "audioUrl": "/audio/2026-10-05/family/thu.mp3",
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -195,7 +203,9 @@ export const family_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Heb12.1-2"
         }
       ],
-      "meditationQuestion": "檢視你們家庭當前最感到焦慮的一件事（例如孩子的升學選系、工作前途，或是某個難以掌控的家庭變數）：在面對這件事時，父母是否正試圖用「肉眼的掌控（*eidos*）」去強加干涉？今天如果全家選擇切換為「憑信心盲降」的模式，父母與孩子可以各自做出怎樣的放手與交託行動？"
+      "meditationQuestion": "檢視你們家庭當前最感到焦慮的一件事（例如孩子的升學選系、工作前途，或是某個難以掌控的家庭變數）：在面對這件事時，父母是否正試圖用「肉眼的掌控（*eidos*）」去強加干涉？今天如果全家選擇切換為「憑信心盲降」的模式，父母與孩子可以各自做出怎樣的放手與交託行動？",
+      "audioUrl": "/audio/2026-10-05/family/fri.mp3",
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -232,7 +242,9 @@ export const family_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Eph6.6-8"
         }
       ],
-      "meditationQuestion": "檢視你在家庭中最常對某位家人（配偶、父母或兒女）產生的定罪與抱怨：你是否曾扮演了「家庭法官」，用言語敲下審判的木槌？今天如果深知自己終將在基督台前顯露並為自己的言語交帳，你願意如何走下法官席，向那位家人表達真誠的道歉與接納？"
+      "meditationQuestion": "檢視你在家庭中最常對某位家人（配偶、父母或兒女）產生的定罪與抱怨：你是否曾扮演了「家庭法官」，用言語敲下審判的木槌？今天如果深知自己終將在基督台前顯露並為自己的言語交帳，你願意如何走下法官席，向那位家人表達真誠的道歉與接納？",
+      "audioUrl": "/audio/2026-10-05/family/sat.mp3",
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-10-05",

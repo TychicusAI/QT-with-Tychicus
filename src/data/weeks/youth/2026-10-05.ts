@@ -47,7 +47,9 @@ export const youth_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Isa40.29-31"
         }
       ],
-      "meditationQuestion": "檢視你最近最感焦慮的一件事（例如職場考評、外貌年齡、經濟壓力或某項未竟的目標）：若將這件事放在上帝永恆的天平上，它究竟屬於「暫時可見的」，還是「永恆不可見的」？這項認知的轉變，如何能釋放你脫離當下的窒息感？"
+      "meditationQuestion": "檢視你最近最感焦慮的一件事（例如職場考評、外貌年齡、經濟壓力或某項未竟的目標）：若將這件事放在上帝永恆的天平上，它究竟屬於「暫時可見的」，還是「永恆不可見的」？這項認知的轉變，如何能釋放你脫離當下的窒息感？",
+      "audioUrl": "/audio/2026-10-05/youth/mon.mp3",
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -84,7 +86,9 @@ export const youth_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/1Pet2.11-12"
         }
       ],
-      "meditationQuestion": "檢視你目前的生活重心與財務、精力分配：你是否正花費過多的焦慮與力氣，試圖去「加固」或「裝飾」一頂隨時會拆卸的地標帳棚，卻忽略了投資那座「天上永存的房屋」？如果今天就是拔營起程的日子，你的行囊裡有哪些是必須放下的多餘重擔？"
+      "meditationQuestion": "檢視你目前的生活重心與財務、精力分配：你是否正花費過多的焦慮與力氣，試圖去「加固」或「裝飾」一頂隨時會拆卸的地標帳棚，卻忽略了投資那座「天上永存的房屋」？如果今天就是拔營起程的日子，你的行囊裡有哪些是必須放下的多餘重擔？",
+      "audioUrl": "/audio/2026-10-05/youth/tue.mp3",
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -121,7 +125,9 @@ export const youth_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Phil3.20-21"
         }
       ],
-      "meditationQuestion": "當你感到身體極度疲憊或面對容貌、體力的衰退時，你通常的反應是陷入焦慮、藉由消費/娛樂逃避，還是能在禱告中將這份「歎息」轉化為對基督復活生命的熱切渴求？這兩種反應會為你的日常生活帶來怎樣截然不同的心境？"
+      "meditationQuestion": "當你感到身體極度疲憊或面對容貌、體力的衰退時，你通常的反應是陷入焦慮、藉由消費/娛樂逃避，還是能在禱告中將這份「歎息」轉化為對基督復活生命的熱切渴求？這兩種反應會為你的日常生活帶來怎樣截然不同的心境？",
+      "audioUrl": "/audio/2026-10-05/youth/wed.mp3",
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -158,7 +164,9 @@ export const youth_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Titus3.5-7"
         }
       ],
-      "meditationQuestion": "回顧你過去一段感到最痛苦、挫折的經歷：如果在當時你就明白「上帝正在用鑿子培植雕琢你，使你能承受未來的榮耀」，這項認知會如何改變你面對那段苦難時的心態與反應？在今天的生活中，你願意將哪一塊頑固的「稜角」甘心交在神聖工匠的鑿子下？"
+      "meditationQuestion": "回顧你過去一段感到最痛苦、挫折的經歷：如果在當時你就明白「上帝正在用鑿子培植雕琢你，使你能承受未來的榮耀」，這項認知會如何改變你面對那段苦難時的心態與反應？在今天的生活中，你願意將哪一塊頑固的「稜角」甘心交在神聖工匠的鑿子下？",
+      "audioUrl": "/audio/2026-10-05/youth/thu.mp3",
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -195,7 +203,9 @@ export const youth_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Ps27.13-14"
         }
       ],
-      "meditationQuestion": "檢視你當前正面臨的一項重要抉擇或未知的挑戰：在做這個決定時，你更多是依據「肉眼所見的條件、世俗的利弊得失（*eidos*）」，還是依據「神話語的真理原則與聖靈的引導（*pistis*）」？如果今天你完全切換為「憑信心盲降」的模式，你的下一步行動會出現什麼具體的改變？"
+      "meditationQuestion": "檢視你當前正面臨的一項重要抉擇或未知的挑戰：在做這個決定時，你更多是依據「肉眼所見的條件、世俗的利弊得失（*eidos*）」，還是依據「神話語的真理原則與聖靈的引導（*pistis*）」？如果今天你完全切換為「憑信心盲降」的模式，你的下一步行動會出現什麼具體的改變？",
+      "audioUrl": "/audio/2026-10-05/youth/fri.mp3",
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -232,7 +242,9 @@ export const youth_2026_10_05: DevotionalWeek = {
           "bibliaUrl": "https://biblia.com/books/hlybbltrdshndtn/Col3.23-24"
         }
       ],
-      "meditationQuestion": "誠實省察你目前生活中最在乎的一項評價（例如老闆的考核、社群上的點閱/按讚、伴侶或父母的認可）：如果你現在就站在「基督的審判台（*bēma*）」前，這項評價還剩下多少分量？在接下來的一週裡，你要做哪一件具體的事情，純粹是「為了得基督的喜悅，而不是為了任何人的掌聲」？"
+      "meditationQuestion": "誠實省察你目前生活中最在乎的一項評價（例如老闆的考核、社群上的點閱/按讚、伴侶或父母的認可）：如果你現在就站在「基督的審判台（*bēma*）」前，這項評價還剩下多少分量？在接下來的一週裡，你要做哪一件具體的事情，純粹是「為了得基督的喜悅，而不是為了任何人的掌聲」？",
+      "audioUrl": "/audio/2026-10-05/youth/sat.mp3",
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-10-05",
