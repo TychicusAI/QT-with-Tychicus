@@ -50,10 +50,14 @@ export function cleanMessageForTTS(rawMessage) {
   // 3. 符號微調以利朗讀（方案 B：直角引號標準化為 F5-TTS 訓練集能精準識別的引號）
   text = text.replace(/「/g, "“").replace(/」/g, "”");
   text = text.replace(/『/g, "‘").replace(/』/g, "’");
+  // 4. 單獨冒號微調：若冒號後方未跟隨引號，轉換為逗號以利自然氣息停頓
+  text = text.replace(/[:：](?!\s*["“'‘])/g, "，");
   text = text.replace(/，，+/g, "，");
   text = text.replace(/、、+/g, "、");
   text = text.replace(/……+/g, "。");
   text = text.replace(/[—–-]{2,}/g, "，");
+  text = text.replace(/([。！？；])\s*，/g, "$1");
+  text = text.replace(/，\s*([。！？；])/g, "$1");
 
   // 4. 清理空白行，保留段落之間的單一換行
   const paragraphs = text

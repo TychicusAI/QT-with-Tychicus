@@ -31,14 +31,14 @@ from f5_tts_mlx.generate import (
     TARGET_RMS,
 )
 
-# 2. 自動繁體化 pypinyin 內建 4.7 萬詞庫（解決繁體字如 沒、難、藉 找不到詞典退回單字錯誤發音問題）
+# 2. 自動繁體化 pypinyin 內建 4.7 萬詞庫（使用 s2tw 確保「着->著」、「长->長」完整對齊）
 try:
     import opencc
     from pypinyin.phrases_dict import phrases_dict
-    s2t = opencc.OpenCC("s2t")
+    s2tw = opencc.OpenCC("s2tw")
     trad_auto_dict = {}
     for s_phrase, pinyin_list in phrases_dict.items():
-        t_phrase = s2t.convert(s_phrase)
+        t_phrase = s2tw.convert(s_phrase)
         if t_phrase != s_phrase:
             trad_auto_dict[t_phrase] = pinyin_list
     load_phrases_dict(trad_auto_dict)
@@ -58,6 +58,11 @@ DEVOTIONAL_LEXICON = {
     "沒頂": [["mo4"], ["ding3"]],
     "沒落": [["mo4"], ["luo4"]],
     # 著字多音字與助詞校正（避免繁體「著」退回單字被誤念為 zhu4）
+    "意味著": [["yi4"], ["wei4"], ["zhe"]],
+    "標誌著": [["biao1"], ["zhi4"], ["zhe"]],
+    "象徵著": [["xiang4"], ["zheng1"], ["zhe"]],
+    "顯明著": [["xian3"], ["ming2"], ["zhe"]],
+    "伴隨著": [["ban4"], ["sui2"], ["zhe"]],
     "得著": [["de2"], ["zhao2"]],
     "摸著": [["mo1"], ["zhao2"]],
     "尋著": [["xun2"], ["zhao2"]],
@@ -71,6 +76,20 @@ DEVOTIONAL_LEXICON = {
     "執著": [["zhi2"], ["zhuo2"]],
     "顯著": [["xian3"], ["zhu4"]],
     "著重": [["zhuo2"], ["zhong4"]],
+    # 長字多音字校正（時間/空間長度讀作 chang2，年長/長輩/生長讀作 zhang3）
+    "長年": [["chang2"], ["nian2"]],
+    "長久": [["chang2"], ["jiu3"]],
+    "長期": [["chang2"], ["qi1"]],
+    "長遠": [["chang2"], ["yuan3"]],
+    "長存": [["chang2"], ["cun2"]],
+    "長達": [["chang2"], ["da2"]],
+    "長夜": [["chang2"], ["ye4"]],
+    "長長": [["chang2"], ["chang2"]],
+    "生長": [["sheng1"], ["zhang3"]],
+    "成長": [["cheng2"], ["zhang3"]],
+    "長大": [["zhang3"], ["da4"]],
+    "長老": [["zhang3"], ["lao3"]],
+    "長子": [["zhang3"], ["zi3"]],
     # 繁體中文「動詞/介詞 + 著」動態助詞（讀作 zhe）
     "藉著": [["jie4"], ["zhe"]],
     "照著": [["zhao4"], ["zhe"]],
@@ -283,6 +302,17 @@ def normalize_quotes(text):
     text = text.replace("『", "‘").replace("』", "’")
     return text
 
+def normalize_colons(text):
+    """
+    單獨冒號微調：若冒號後方未緊跟引號（“、"、‘、'、「、『），轉換為逗號以利 TTS 進行自然呼吸停頓。
+    """
+    if not text:
+        return ""
+    text = re.sub(r'[:：](?!\s*["“\'‘「『])', '，', text)
+    text = re.sub(r'([。！？；])\s*，', r'\1', text)
+    text = re.sub(r'，\s*([。！？；])', r'\1', text)
+    return text
+
 def main():
     parser = argparse.ArgumentParser(description="F5-TTS MLX Synthesis Pipeline for Devotionals")
     parser.add_argument("--text-file", required=True, help="Path to input text file")
@@ -317,6 +347,10 @@ def main():
     # 方案 B：直角引號標準化
     gen_text = normalize_quotes(gen_text)
     ref_text = normalize_quotes(ref_text)
+
+    # 單獨冒號微調為逗號（自然呼吸停頓）
+    gen_text = normalize_colons(gen_text)
+    ref_text = normalize_colons(ref_text)
 
     # 讀取參考音檔
     audio, sr = sf.read(args.ref_audio)
