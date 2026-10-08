@@ -129,7 +129,7 @@ function synthesizeTTS(text, versionKey, outputPath) {
 
   try {
     fs.writeFileSync(tmpTextFile, text, "utf-8");
-    const cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
+    const cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
     execSync(cmd, { stdio: "pipe" });
   } finally {
     if (fs.existsSync(tmpTextFile)) {

@@ -221,6 +221,58 @@ def split_chinese_sentences(text, max_len=75):
         sentences.append(current)
     return sentences
 
+try:
+    import cn2an
+    HAS_CN2AN = True
+except ImportError:
+    HAS_CN2AN = False
+
+def normalize_numbers(text):
+    """
+    將文本中的阿拉伯數字、經文章節、年份及數量等標準化為流暢的中文數字，
+    以避免 TTS 引擎將 ASCII 數字以英文或破碎的拼字音節朗讀。
+    """
+    if not text or not HAS_CN2AN:
+        return text
+
+    # 1. 經文範圍：如「4:16-18」->「四章十六至十八節」
+    text = re.sub(
+        r'(\d+):(\d+)\s*[–—~至到\-]\s*(\d+)',
+        lambda m: f'{cn2an.an2cn(m.group(1))}章{cn2an.an2cn(m.group(2))}至{cn2an.an2cn(m.group(3))}節',
+        text
+    )
+    # 2. 單一經文：如「4:16」->「四章十六節」
+    text = re.sub(
+        r'(\d+):(\d+)',
+        lambda m: f'{cn2an.an2cn(m.group(1))}章{cn2an.an2cn(m.group(2))}節',
+        text
+    )
+    # 3. 數字範圍：如「51–52」->「五十一至五十二」
+    text = re.sub(
+        r'(\d+)\s*[–—~至到\-]\s*(\d+)',
+        lambda m: f'{cn2an.an2cn(m.group(1))}至{cn2an.an2cn(m.group(2))}',
+        text
+    )
+    # 4. 處理帶空格的章節或序號，如「4 章 17 節」->「4章17節」、「第 17 節」->「第17節」
+    text = re.sub(r'(第)\s*(\d+)', r'\1\2', text)
+    text = re.sub(r'(\d+)\s*([章節篇卷條個天年歲度代次種位雙本隻面點分秒])', r'\1\2', text)
+    
+    # 5. 轉換其餘所有阿拉伯數字為中文數字 (an2cn)
+    try:
+        text = cn2an.transform(text, "an2cn")
+    except Exception:
+        pass
+        
+    # 6. 繁體字修正（避免 cn2an 產出簡體「点」字）
+    text = text.replace("点", "點")
+    
+    # 7. 清理轉換後量詞與數字間的多餘空白
+    text = re.sub(r'([零一二三四五六七八九十百千萬億]+)\s+([章節篇卷條個天年歲度代次種位雙本隻面點分秒人])', r'\1\2', text)
+    text = re.sub(r'([章節篇卷])\s+([零一二三四五六七八九十百千萬億]+)', r'\1\2', text)
+    text = re.sub(r'(百分之[零一二三四五六七八九十百千萬億]+)\s+', r'\1', text)
+    text = re.sub(r'([零一二三四五六七八九十百千萬億]+)\s+(多[章節篇卷條個天年歲度代次種位雙本隻面點分秒人])', r'\1\2', text)
+    return text
+
 def normalize_quotes(text):
     """
     方案 B：將繁體直角引號「」與『』標準化為 F5-TTS 訓練集能精準識別的引號 “” 與 ‘’
@@ -257,6 +309,10 @@ def main():
 
     with open(args.ref_text_file, "r", encoding="utf-8") as f:
         ref_text = f.read().strip()
+
+    # 阿拉伯數字轉中文數字標準化
+    gen_text = normalize_numbers(gen_text)
+    ref_text = normalize_numbers(ref_text)
 
     # 方案 B：直角引號標準化
     gen_text = normalize_quotes(gen_text)
