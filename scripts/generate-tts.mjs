@@ -109,9 +109,9 @@ function parseMessagesFromMarkdown(content) {
 
 /**
  * 執行 TTS MLX 在地合成（Apple Silicon GPU 加速 / 零樣本聲音克隆）
- * 支援 cosyvoice (預設, CosyVoice 3.0) 與 f5 (F5-TTS MLX)
+ * 支援 f5 (預設, F5-TTS MLX) 與 cosyvoice (可選實驗, CosyVoice 3.0)
  */
-function synthesizeTTS(text, versionKey, outputPath, engine = "cosyvoice") {
+function synthesizeTTS(text, versionKey, outputPath, engine = "f5") {
   const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
   fs.mkdirSync(tmpDir, { recursive: true });
   const tmpTextFile = path.join(tmpDir, `${engine}-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
@@ -136,10 +136,10 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "cosyvoice") {
   try {
     fs.writeFileSync(tmpTextFile, text, "utf-8");
     let cmd;
-    if (engine === "f5") {
-      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
-    } else {
+    if (engine === "cosyvoice") {
       cmd = `uv run --with mlx-audio-plus --with cn2an python3 scripts/synthesize-cosyvoice.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
+    } else {
+      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
     }
     execSync(cmd, { stdio: "pipe" });
   } finally {
@@ -165,9 +165,9 @@ async function main() {
   const verArgIdx = args.indexOf("--version");
   const specifiedVersion = verArgIdx !== -1 ? args[verArgIdx + 1] : null;
   const engineArgIdx = args.indexOf("--engine");
-  const engine = engineArgIdx !== -1 ? args[engineArgIdx + 1] : "cosyvoice";
+  const engine = engineArgIdx !== -1 ? args[engineArgIdx + 1] : "f5";
 
-  const engineName = engine === "f5" ? "F5-TTS MLX" : "CosyVoice 3.0 (Fun-CosyVoice3-0.5B MLX)";
+  const engineName = engine === "cosyvoice" ? "CosyVoice 3.0 (Fun-CosyVoice3-0.5B MLX)" : "F5-TTS MLX";
 
   const dataDir = path.join(process.cwd(), "data");
   if (!fs.existsSync(dataDir)) {

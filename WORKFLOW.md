@@ -229,18 +229,18 @@
 
 ### 第 5 階段：TTS 語音生成（Text-to-Speech Generation）
 
-專案採用 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)** 作為預設語音合成引擎（亦保留 **F5-TTS MLX** 供彈性切換）。CosyVoice 3 搭載 Qwen2.5-0.5B 語言模型語意預測與 DiT Flow Matching，具備極高語音自然度、深層情感起伏與精準字音表現，運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動執行文本清洗（小括號過濾、阿拉伯數字轉中文數字、未帶引號冒號轉逗號）：
+專案預設採用 **F5-TTS MLX 原生架構**（具備 100% 繁體多音字專用詞庫校正與精準 G2P 控制，發音零差錯率，音質清澈穩定），亦整合支援 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)** 作為實驗性語音引擎。全管線運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動執行文本清洗（小括號過濾、阿拉伯數字轉中文數字、未帶引號冒號轉逗號）：
 
 1. **一鍵全自動語音克隆生成**：
    * 執行專屬語音生成腳本，依據 `data/voices/` 音色庫為青年版（沉穩男聲）與家庭版（溫和女聲）批次生成長篇 MP3：
      ```bash
      npm run tts
      ```
-   * 預設採用 **CosyVoice 3.0** 為最新一週進行增量生成（已存在的音檔自動略過）。
+   * 預設採用 **F5-TTS MLX** 為最新一週進行增量生成（已存在的音檔自動略過）。
 
 2. **語音引擎切換（`--engine`）**：
-   * 預設引擎（CosyVoice 3.0）：`npm run tts -- --engine cosyvoice`（語調極度自然、深層理解散文行氣）
-   * 切換為 F5-TTS：`npm run tts -- --engine f5`
+   * 預設引擎（F5-TTS MLX）：`npm run tts`（精準掌控聖經人名地名、多音字完全受控無誤讀）
+   * 切換為 CosyVoice 3.0：`npm run tts -- --engine cosyvoice`（實驗性語意起伏與自然呼吸感）
 
 3. **客製化專屬音色庫（`data/voices/`）**：
    * 音色來源直接依賴 `data/voices/` 中的參考音訊與對應文字檔：
