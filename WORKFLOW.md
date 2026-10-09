@@ -229,26 +229,30 @@
 
 ### 第 5 階段：TTS 語音生成（Text-to-Speech Generation）
 
-專案採用 **F5-TTS MLX 原生架構**，運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動過濾正文中的所有小括號註記與 Markdown 語法：
+專案採用 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)** 作為預設語音合成引擎（亦保留 **F5-TTS MLX** 供彈性切換）。CosyVoice 3 搭載 Qwen2.5-0.5B 語言模型語意預測與 DiT Flow Matching，具備極高語音自然度、深層情感起伏與精準字音表現，運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動執行文本清洗（小括號過濾、阿拉伯數字轉中文數字、未帶引號冒號轉逗號）：
 
 1. **一鍵全自動語音克隆生成**：
    * 執行專屬語音生成腳本，依據 `data/voices/` 音色庫為青年版（沉穩男聲）與家庭版（溫和女聲）批次生成長篇 MP3：
      ```bash
      npm run tts
      ```
-   * 預設為最新一週進行增量生成（已存在的音檔自動略過）。
+   * 預設採用 **CosyVoice 3.0** 為最新一週進行增量生成（已存在的音檔自動略過）。
 
-2. **客製化專屬音色庫（`data/voices/`）**：
+2. **語音引擎切換（`--engine`）**：
+   * 預設引擎（CosyVoice 3.0）：`npm run tts -- --engine cosyvoice`（語調極度自然、深層理解散文行氣）
+   * 切換為 F5-TTS：`npm run tts -- --engine f5`
+
+3. **客製化專屬音色庫（`data/voices/`）**：
    * 音色來源直接依賴 `data/voices/` 中的參考音訊與對應文字檔：
      * `youth_male.wav` + `youth_male.txt`（青年版參考聲音，約 5～10 秒）
      * `family_female.wav` + `family_female.txt`（家庭版參考聲音，約 5～10 秒）
    * 您可隨時將教會牧者、傳道人或您自己的 5～10 秒安靜錄音放入該目錄，即可一鍵克隆專屬的心靈伴讀聲音！
 
-3. **常用篩選與覆蓋參數**：
+4. **常用篩選與覆蓋參數**：
    * 強制覆蓋重新生成：`npm run tts -- --force`
    * 指定特定週次與天數：`npm run tts -- --week 2026-10-05 --day mon`
    * 僅生成特定族群版本：`npm run tts -- --version youth`
 
-4. **重新同步前台資料庫**：
+5. **重新同步前台資料庫**：
    * 生成音檔後，再次執行 `npm run sync`（或直接 `npm run dev` / `npm run build`），系統會自動偵測 `public/audio/` 中的音檔並在前台閱讀器啟動播放器膠囊按鈕。
 

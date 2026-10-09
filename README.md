@@ -11,11 +11,12 @@
    * **家庭版（Family）**：專注於餐桌旁的真實對話、管教與赦免的界線拿捏、代際溝通與家庭避風港的建立。
    * 首頁與每日閱讀頁面均設有一鍵切換按鈕，可即時對照同一段經文對青年與家庭的不同生活應用。
 
-2. **🎙️ AI 靈修語音伴讀播放器（F5-TTS MLX Voice Player）**：
+2. **🎙️ AI 靈修語音伴讀播放器（CosyVoice 3.0 & F5-TTS MLX Dual Engine）**：
    * **膠囊展開式播放卡片**：收合於「今日信息」標題右側，點擊平滑展開高質感專屬播放器。支援播放／暫停、快退 10 秒／快進 10 秒、時間軸拖曳與 4 檔倍速切換（`0.8x` 默想沉思、`1.0x` 標準、`1.25x`、`1.5x`）。
    * **吸底懸浮播放條（Sticky Mini-Player）**：向下滑動閱讀長文且正在播放時，畫面底部自動滑出懸浮微型控制條，邊讀邊聽無拘束。
    * **鎖定螢幕與系統控制（MediaSession API）**：支援 iOS 鎖屏畫面與 Android 系統通知列，散步、通勤或睡前皆可閉眼沉浸聆聽。
-   * **Apple Silicon 原生 GPU 加速（F5-TTS MLX）**：完全於 Mac 本機離線運算，利用 M 系列 GPU 統一記憶體進行零樣本語音克隆（Zero-Shot Voice Cloning），具備自然呼吸感與心靈厚度。
+   * **旗艦預設 CosyVoice 3.0 (`Fun-CosyVoice3-0.5B` MLX 8-bit)**：搭載 Qwen2.5 語言模型語意預測與 DiT Flow Matching，深層理解散文行氣與神學語境，重音自然、呼吸感真實，具備極致心靈厚度。
+   * **Apple Silicon 原生 GPU 加速**：完全於 Mac 本機離線運算，利用 M 系列 GPU 統一記憶體進行零樣本語音克隆（Zero-Shot Voice Cloning），雙引擎（CosyVoice 3.0 / F5-TTS）自由切換。
    * **客製化聲音克隆**：只需提供牧者或傳道人 5～10 秒乾淨錄音，即可為全站靈修一鍵克隆專屬心靈伴讀聲線！
 
 3. **六日靈修旅程（6-Day Journey）**：
@@ -58,14 +59,17 @@ npm run start
 
 ---
 
-## 🎙️ F5-TTS MLX 本地語音伴讀管線指南
+## 🎙️ 本地語音伴讀管線指南（CosyVoice 3.0 & F5-TTS）
 
-專案全面採用專為 Apple Silicon（M1/M2/M3/M4/M5）深度優化的 **F5-TTS MLX** 本地神經網路語音模型，具備智慧切句、小括號註記過濾與零樣本克隆能力。
+專案全面採用專為 Apple Silicon（M1/M2/M3/M4/M5）深度優化的 MLX 本地神經網路語音模型，預設啟用阿里通義實驗室 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)**，亦支援切換為 **F5-TTS MLX**。全管線具備智慧語意切句、小括號註記過濾、阿拉伯數字轉中文數字標準化與零樣本聲音克隆能力。
 
 ### 1. 產生音檔指令
 ```bash
-# 為當週（最新週次）生成所有雙版本音檔（已存在者自動略過）
+# 預設以 CosyVoice 3.0 為當週（最新週次）生成所有雙版本音檔（已存在者自動略過）
 npm run tts
+
+# 切換為 F5-TTS MLX 生成
+npm run tts -- --engine f5
 
 # 強制重新生成並覆蓋
 npm run tts -- --force
