@@ -208,6 +208,10 @@ DEVOTIONAL_LEXICON = {
     "降世": [["jiang4"], ["shi4"]],
     "降生": [["jiang4"], ["sheng1"]],
     "投降": [["tou2"], ["xiang2"]],
+    # 從字族（從容讀作 cong1 rong2）
+    "從容": [["cong1"], ["rong2"]],
+    "從容不迫": [["cong1"], ["rong2"], ["bu4"], ["po4"]],
+    "從容面對": [["cong1"], ["rong2"], ["mian4"], ["dui4"]],
     # 分字族
     "分量": [["fen4"], ["liang4"]],
     "名分": [["ming2"], ["fen4"]],
