@@ -40,11 +40,11 @@ export function Navbar({
               </span>
             </div>
             <p
-              title="v. 2.1 根據〈板新信友堂〉經課進度"
+              title="v. 2.2 循序讀經 Lectio Continua"
               className="text-[11px] sm:text-xs text-stone-500 dark:text-stone-400 truncate max-w-[195px] sm:max-w-none"
             >
-              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />2.1</span>{" "}
-              根據<strong className="font-bold text-stone-700 dark:text-stone-200">〈板新信友堂〉</strong>經課進度
+              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />2.2</span>{" "}
+              循序讀經 Lectio Continua
             </p>
           </div>
         </Link>
