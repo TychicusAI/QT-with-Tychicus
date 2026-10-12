@@ -297,29 +297,35 @@ def custom_convert_char_to_pinyin(text_list, polyphone=True):
                 if char_list and seg_byte_len > 1 and char_list[-1] not in " :'\"":
                     char_list.append(" ")
                 char_list.extend(seg)
-            elif polyphone and seg_byte_len == 3 * len(seg):  # 若為純中文字詞
-                # 關鍵防護：若斷詞後為單字詞「著」，一律轉為輕聲 zhe（即 zhe5）
-                if seg == "著":
-                    seg_pinyin = ["zhe"]
+            elif polyphone and seg_byte_len == 3 * len(seg):  # 若為純中文字詞或全形標點
+                if seg in "。，、；：？！《》【】—…":
+                    char_list.append(seg)
                 else:
-                    seg_pinyin = lazy_pinyin(seg, style=Style.TONE3, tone_sandhi=True)
-                for c in seg_pinyin:
-                    if c not in "。，、；：？！《》【】—…":
+                    # 關鍵防護：若斷詞後為單字詞「著」，一律轉為輕聲 zhe（即 zhe5）
+                    if seg == "著":
+                        seg_pinyin = ["zhe"]
+                    else:
+                        seg_pinyin = lazy_pinyin(seg, style=Style.TONE3, tone_sandhi=True)
+
+                    # 詞級別 Token 綁定：詞與詞之間保留一個空白，但詞內部音節緊密連續相連，不插入任何空白 Token！
+                    if char_list and char_list[-1] not in " :'\"。，、；：？！《》【】—…":
                         char_list.append(" ")
-                    char_list.append(c)
+                    for c in seg_pinyin:
+                        char_list.append(c)
             else:  # 若為中英混合或符號混合
                 for c in seg:
                     if ord(c) < 256:
                         char_list.extend(c)
                     else:
-                        if c not in "。，、；：？！《》【】—…":
-                            char_list.append(" ")
+                        if c in "。，、；：？！《》【】—…":
+                            char_list.append(c)
+                        else:
+                            if char_list and char_list[-1] not in " :'\"。，、；：？！《》【】—…":
+                                char_list.append(" ")
                             if c == "著":
                                 char_list.append("zhe")
                             else:
                                 char_list.extend(lazy_pinyin(c, style=Style.TONE3, tone_sandhi=True))
-                        else:
-                            char_list.append(c)
         final_text_list.append(char_list)
 
     return final_text_list
@@ -487,8 +493,9 @@ def main():
     parser.add_argument("--ref-audio", required=True, help="Path to reference audio file (WAV)")
     parser.add_argument("--ref-text-file", required=True, help="Path to reference text file")
     parser.add_argument("--output-mp3", required=True, help="Path to output MP3 file")
-    parser.add_argument("--speed", type=float, default=1.0, help="Speech rate multiplier")
-    parser.add_argument("--steps", type=int, default=24, help="Diffusion inference steps (default: 24)")
+    parser.add_argument("--speed", type=float, default=1.03, help="Speech rate multiplier (default: 1.03)")
+    parser.add_argument("--steps", type=int, default=32, help="Diffusion inference steps (default: 32)")
+    parser.add_argument("--cfg", type=float, default=1.2, help="Classifier-free guidance strength (default: 1.2)")
     parser.add_argument("--target-sr", type=int, default=44100, help="Target MP3 sample rate in Hz (default: 44100)")
     parser.add_argument("--bitrate", default="192k", help="Target MP3 bitrate (default: 192k)")
     parser.add_argument("--max-len", type=int, default=40, help="Max chunk length in characters (default: 40)")
@@ -571,7 +578,7 @@ def main():
             steps=args.steps,
             method="rk4",
             speed=args.speed,
-            cfg_strength=2.0,
+            cfg_strength=args.cfg,
             sway_sampling_coef=-1.0,
         )
 

@@ -111,7 +111,7 @@ function parseMessagesFromMarkdown(content) {
  * 執行 TTS MLX 在地合成（Apple Silicon GPU 加速 / 零樣本聲音克隆）
  * 支援 f5 (預設, F5-TTS MLX) 與 cosyvoice (可選實驗, CosyVoice 3.0)
  */
-function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePause, paraPause, clausePause, maxLen } = {}) {
+function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePause, paraPause, clausePause, maxLen, steps, cfg, speed } = {}) {
   const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
   fs.mkdirSync(tmpDir, { recursive: true });
   const tmpTextFile = path.join(tmpDir, `${engine}-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
@@ -138,6 +138,9 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
   if (paraPause) extraArgs += ` --para-pause ${paraPause}`;
   if (clausePause) extraArgs += ` --clause-pause ${clausePause}`;
   if (maxLen) extraArgs += ` --max-len ${maxLen}`;
+  if (steps) extraArgs += ` --steps ${steps}`;
+  if (cfg) extraArgs += ` --cfg ${cfg}`;
+  if (speed) extraArgs += ` --speed ${speed}`;
 
   try {
     fs.writeFileSync(tmpTextFile, text, "utf-8");
