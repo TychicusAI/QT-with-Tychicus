@@ -111,7 +111,7 @@ function parseMessagesFromMarkdown(content) {
  * 執行 TTS MLX 在地合成（Apple Silicon GPU 加速 / 零樣本聲音克隆）
  * 支援 f5 (預設, F5-TTS MLX) 與 cosyvoice (可選實驗, CosyVoice 3.0)
  */
-function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePause, paraPause } = {}) {
+function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePause, paraPause, clausePause, maxLen } = {}) {
   const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
   fs.mkdirSync(tmpDir, { recursive: true });
   const tmpTextFile = path.join(tmpDir, `${engine}-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
@@ -136,6 +136,8 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
   let extraArgs = "";
   if (sentencePause) extraArgs += ` --sentence-pause ${sentencePause}`;
   if (paraPause) extraArgs += ` --para-pause ${paraPause}`;
+  if (clausePause) extraArgs += ` --clause-pause ${clausePause}`;
+  if (maxLen) extraArgs += ` --max-len ${maxLen}`;
 
   try {
     fs.writeFileSync(tmpTextFile, text, "utf-8");
@@ -145,7 +147,7 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
     } else {
       cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
     }
-    execSync(cmd, { stdio: "pipe" });
+    execSync(cmd, { stdio: "inherit", env: { ...process.env, HF_HUB_OFFLINE: "1" } });
   } finally {
     if (fs.existsSync(tmpTextFile)) {
       try {
@@ -174,6 +176,10 @@ async function main() {
   const specifiedParaPause = paraPauseIdx !== -1 ? args[paraPauseIdx + 1] : null;
   const sentencePauseIdx = args.indexOf("--sentence-pause");
   const specifiedSentencePause = sentencePauseIdx !== -1 ? args[sentencePauseIdx + 1] : null;
+  const clausePauseIdx = args.indexOf("--clause-pause");
+  const specifiedClausePause = clausePauseIdx !== -1 ? args[clausePauseIdx + 1] : null;
+  const maxLenIdx = args.indexOf("--max-len");
+  const specifiedMaxLen = maxLenIdx !== -1 ? args[maxLenIdx + 1] : null;
 
   const engineName = engine === "cosyvoice" ? "CosyVoice 3.0 (Fun-CosyVoice3-0.5B MLX)" : "F5-TTS MLX";
 
@@ -264,6 +270,8 @@ async function main() {
           synthesizeTTS(item.cleanMsg, v.key, outPath, engine, {
             sentencePause: specifiedSentencePause,
             paraPause: specifiedParaPause,
+            clausePause: specifiedClausePause,
+            maxLen: specifiedMaxLen,
           });
           const durationSec = ((Date.now() - startTime) / 1000).toFixed(1);
           const stats = fs.statSync(outPath);

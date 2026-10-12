@@ -93,51 +93,73 @@ def normalize_colons(text):
     text = re.sub(r'，\s*([。！？；])', r'\1', text)
     return text
 
-def split_chinese_sentences(text, max_len=65):
+def split_chinese_sentences(text, max_len=40):
     """
-    依據中文句號、問號、驚嘆號、分號以及換行符號進行自然切句，
-    合併為每段約 30~65 字左右的最佳呼吸長度（避免 LLM 自回歸生成過長導致循環或發音不穩）。
+    智慧分句與三級呼吸停頓分類器：
+    1. 依段落（換行）切分大組，確保段落末尾擁有最長默想停頓（para_pause: 0.8s）。
+    2. 保護英文字母縮寫/名號（如 J. I. 巴刻）之小數點，防止被誤判為英文句點而破裂。
+    3. 依據中文句號、問號、驚嘆號（。！？）及句末英文句號進行完整句子切分（sentence_pause: 0.3s）。
+    4. 當完整句子長度超過 max_len（40 字）時，進一步依逗號、分號、頓號（，；、）切分為子意群（clause_pause: 0.18s）。
+
+    回傳：[(chunk_text, pause_type), ...]
+    其中 pause_type 為 "clause"（子句微停頓）、"sentence"（完整句換氣）或 "paragraph"（段落深呼吸停頓）。
     """
-    # 依段落先分大組
     paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
     all_chunks = []
 
+    def protect_initials(t):
+        return re.sub(r"\b([A-Za-z])\.", lambda m: m.group(1) + "\u2024", t)
+
+    def unprotect_initials(t):
+        return t.replace("\u2024", ".")
+
     for para in paragraphs:
-        parts = re.split(r"([。！？；]+|[.!?;]+)", para)
-        current = ""
+        para_protected = protect_initials(para)
+        parts = re.split(r"([。！？]+[”\"」』]*|(?<!\b[A-Za-z])\.[”\"」』]*(?:\s+|$))", para_protected)
+
+        sentences = []
         for i in range(0, len(parts), 2):
             chunk = parts[i].strip()
             delim = parts[i + 1].strip() if i + 1 < len(parts) else ""
-            combined = chunk + delim
-            if not combined:
-                continue
-            if len(current) + len(combined) <= max_len:
-                current += combined
+            comb = chunk + delim
+            if comb:
+                sentences.append(unprotect_initials(comb))
+
+        para_chunks = []
+        for s_idx, sentence in enumerate(sentences):
+            is_last_sentence = (s_idx == len(sentences) - 1)
+
+            if len(sentence) <= max_len:
+                p_type = "paragraph" if is_last_sentence else "sentence"
+                para_chunks.append((sentence, p_type))
             else:
-                if current:
-                    all_chunks.append((current, False))
-                # 若單句本身即超過 max_len，嘗試以逗號再切分
-                if len(combined) > max_len:
-                    sub_parts = re.split(r"([，,]+)", combined)
-                    sub_curr = ""
-                    for j in range(0, len(sub_parts), 2):
-                        s_chunk = sub_parts[j].strip()
-                        s_delim = sub_parts[j + 1].strip() if j + 1 < len(sub_parts) else ""
-                        s_comb = s_chunk + s_delim
-                        if not s_comb:
-                            continue
-                        if len(sub_curr) + len(s_comb) <= max_len:
-                            sub_curr += s_comb
-                        else:
-                            if sub_curr:
-                                all_chunks.append((sub_curr, False))
-                            sub_curr = s_comb
-                    current = sub_curr
-                else:
-                    current = combined
-        if current:
-            # 標記段落末尾（供段間微調停頓時長）
-            all_chunks.append((current, True))
+                sub_parts = re.split(r"([，；、,;]+)", sentence)
+                clauses = []
+                for j in range(0, len(sub_parts), 2):
+                    c_chunk = sub_parts[j].strip()
+                    c_delim = sub_parts[j + 1].strip() if j + 1 < len(sub_parts) else ""
+                    c_comb = c_chunk + c_delim
+                    if c_comb:
+                        clauses.append(c_comb)
+
+                sub_curr = ""
+                for c_idx, cl in enumerate(clauses):
+                    if len(sub_curr) + len(cl) <= max_len:
+                        sub_curr += cl
+                    else:
+                        if sub_curr:
+                            para_chunks.append((sub_curr, "clause"))
+                            sub_curr = ""
+                        while len(cl) > max_len:
+                            para_chunks.append((cl[:max_len], "clause"))
+                            cl = cl[max_len:]
+                        sub_curr = cl
+
+                if sub_curr:
+                    p_type = "paragraph" if is_last_sentence else "sentence"
+                    para_chunks.append((sub_curr, p_type))
+
+        all_chunks.extend(para_chunks)
 
     return all_chunks
 
@@ -149,8 +171,10 @@ def main():
     parser.add_argument("--output-mp3", required=True, help="Path to output MP3 file")
     parser.add_argument("--model-id", default="mlx-community/Fun-CosyVoice3-0.5B-2512-8bit", help="HuggingFace model ID")
     parser.add_argument("--speed", type=float, default=1.0, help="Speech rate multiplier")
-    parser.add_argument("--sentence-pause", type=float, default=0.25, help="Pause between sentences within paragraph in seconds (default: 0.25)")
-    parser.add_argument("--para-pause", type=float, default=0.8, help="Pause between paragraphs in seconds (default: 0.8)")
+    parser.add_argument("--max-len", type=int, default=40, help="Max chunk length in characters (default: 40)")
+    parser.add_argument("--clause-pause", type=float, default=0.18, help="Pause between sub-clauses in seconds (default: 0.18)")
+    parser.add_argument("--sentence-pause", type=float, default=0.30, help="Pause between sentences within paragraph in seconds (default: 0.30)")
+    parser.add_argument("--para-pause", type=float, default=0.80, help="Pause between paragraphs in seconds (default: 0.80)")
     args = parser.parse_args()
 
     if not os.path.exists(args.text_file):
@@ -191,23 +215,25 @@ def main():
 
     ref_audio_arr = load_audio(args.ref_audio, sample_rate=target_sr)
 
-    # 4. 文本智慧分句
-    chunk_items = split_chinese_sentences(gen_text, max_len=65)
+    # 4. 文本智慧分句（三級呼吸停頓分類）
+    chunk_items = split_chinese_sentences(gen_text, max_len=args.max_len)
     print(f"  📝 正文共 {len(gen_text)} 字，切分為 {len(chunk_items)} 個語意片段進行批次合成...")
-    print(f"  ⏱️ 停頓設定：句間停頓 {args.sentence_pause:.2f} 秒，段落間停頓 {args.para_pause:.2f} 秒")
+    print(f"  ⏱️ 停頓設定：子句微停頓 {args.clause_pause:.2f} 秒，句間換氣 {args.sentence_pause:.2f} 秒，段落間停頓 {args.para_pause:.2f} 秒 (最大長度 {args.max_len} 字)")
 
     # 停頓取樣數設定
+    pause_clause = np.zeros(int(target_sr * args.clause_pause), dtype=np.float32)
     pause_sentence = np.zeros(int(target_sr * args.sentence_pause), dtype=np.float32)
     pause_paragraph = np.zeros(int(target_sr * args.para_pause), dtype=np.float32)
 
     output_waves = []
     t_start = datetime.datetime.now()
 
-    for idx, (chunk_text, is_para_end) in enumerate(tqdm(chunk_items, desc="  🎙️ 合成進度", unit="句")):
+    for idx, (chunk_text, pause_type) in enumerate(tqdm(chunk_items, desc="  🎙️ 合成進度", unit="句")):
         if not chunk_text.strip():
             continue
 
         try:
+            chunk_audio_parts = []
             for res in model.generate(
                 text=chunk_text,
                 ref_audio=ref_audio_arr,
@@ -215,10 +241,17 @@ def main():
                 speed=args.speed,
                 verbose=False
             ):
-                audio_np = np.array(res.audio, dtype=np.float32)
-                output_waves.append(audio_np)
+                chunk_audio_parts.append(np.array(res.audio, dtype=np.float32))
+
+            if chunk_audio_parts:
+                output_waves.extend(chunk_audio_parts)
                 if idx < len(chunk_items) - 1:
-                    output_waves.append(pause_paragraph if is_para_end else pause_sentence)
+                    if pause_type == "paragraph":
+                        output_waves.append(pause_paragraph)
+                    elif pause_type == "sentence":
+                        output_waves.append(pause_sentence)
+                    else:
+                        output_waves.append(pause_clause)
         except Exception as e:
             print(f"\n  ⚠️ 片段 [{chunk_text[:15]}...] 合成出錯: {e}，跳過。", file=sys.stderr)
 
@@ -241,7 +274,8 @@ def main():
         ffmpeg_cmd = [
             "ffmpeg", "-y",
             "-i", tmp_wav_path,
-            "-b:a", "64k",
+            "-ar", "44100",
+            "-b:a", "192k",
             args.output_mp3
         ]
         subprocess.run(ffmpeg_cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
