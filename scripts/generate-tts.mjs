@@ -111,7 +111,7 @@ function parseMessagesFromMarkdown(content) {
  * 執行 TTS MLX 在地合成（Apple Silicon GPU 加速 / 零樣本聲音克隆）
  * 支援 f5 (預設, F5-TTS MLX) 與 cosyvoice (可選實驗, CosyVoice 3.0)
  */
-function synthesizeTTS(text, versionKey, outputPath, engine = "f5") {
+function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePause, paraPause } = {}) {
   const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
   fs.mkdirSync(tmpDir, { recursive: true });
   const tmpTextFile = path.join(tmpDir, `${engine}-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
@@ -133,13 +133,17 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5") {
     throw new Error(`找不到音色參考檔案: ${refAudio} 或 ${refText}`);
   }
 
+  let extraArgs = "";
+  if (sentencePause) extraArgs += ` --sentence-pause ${sentencePause}`;
+  if (paraPause) extraArgs += ` --para-pause ${paraPause}`;
+
   try {
     fs.writeFileSync(tmpTextFile, text, "utf-8");
     let cmd;
     if (engine === "cosyvoice") {
-      cmd = `uv run --with mlx-audio-plus --with cn2an python3 scripts/synthesize-cosyvoice.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
+      cmd = `uv run --with mlx-audio-plus --with cn2an python3 scripts/synthesize-cosyvoice.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
     } else {
-      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"`;
+      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
     }
     execSync(cmd, { stdio: "pipe" });
   } finally {
@@ -166,6 +170,10 @@ async function main() {
   const specifiedVersion = verArgIdx !== -1 ? args[verArgIdx + 1] : null;
   const engineArgIdx = args.indexOf("--engine");
   const engine = engineArgIdx !== -1 ? args[engineArgIdx + 1] : "f5";
+  const paraPauseIdx = args.indexOf("--para-pause");
+  const specifiedParaPause = paraPauseIdx !== -1 ? args[paraPauseIdx + 1] : null;
+  const sentencePauseIdx = args.indexOf("--sentence-pause");
+  const specifiedSentencePause = sentencePauseIdx !== -1 ? args[sentencePauseIdx + 1] : null;
 
   const engineName = engine === "cosyvoice" ? "CosyVoice 3.0 (Fun-CosyVoice3-0.5B MLX)" : "F5-TTS MLX";
 
@@ -253,7 +261,10 @@ async function main() {
         console.log(`  🎙️ 正在以 [${engineName}] 生成 [${v.name}][${item.dayLabel}] (字數: ${item.cleanMsg.length} 字)...`);
         const startTime = Date.now();
         try {
-          synthesizeTTS(item.cleanMsg, v.key, outPath, engine);
+          synthesizeTTS(item.cleanMsg, v.key, outPath, engine, {
+            sentencePause: specifiedSentencePause,
+            paraPause: specifiedParaPause,
+          });
           const durationSec = ((Date.now() - startTime) / 1000).toFixed(1);
           const stats = fs.statSync(outPath);
           const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);

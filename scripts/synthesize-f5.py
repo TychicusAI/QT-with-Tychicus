@@ -9,7 +9,7 @@ import datetime
 import numpy as np
 import soundfile as sf
 import jieba
-from pypinyin import load_phrases_dict
+from pypinyin import load_phrases_dict, load_single_dict, lazy_pinyin, Style
 from tqdm import tqdm
 
 # 1. 補丁修復 MLX normal 接受 scalar 參數問題
@@ -24,7 +24,6 @@ mx.random.normal = _safe_normal
 
 from f5_tts_mlx.generate import (
     F5TTS,
-    convert_char_to_pinyin,
     estimated_duration,
     SAMPLE_RATE,
     FRAMES_PER_SEC,
@@ -45,6 +44,12 @@ try:
 except Exception as e:
     pass
 
+# 繁體「著」單字預設音強制轉為輕聲 zhe（避免退回 pypinyin 單字庫時誤讀為 zhu4）
+try:
+    load_single_dict({ord("著"): "zhe"})
+except Exception:
+    pass
+
 # 3. 聖經/神學專用發音與繁體高頻多音字核心詞庫（最高優先級覆蓋）
 DEVOTIONAL_LEXICON = {
     # 沒字多音字校正（避免被 pypinyin 單字 fallback 誤念為 mei2）
@@ -57,7 +62,27 @@ DEVOTIONAL_LEXICON = {
     "覆沒": [["fu4"], ["mo4"]],
     "沒頂": [["mo4"], ["ding3"]],
     "沒落": [["mo4"], ["luo4"]],
-    # 著字多音字與助詞校正（避免繁體「著」退回單字被誤念為 zhu4）
+    # 著字多音字校正（非 zhe 之名詞/動詞明確覆蓋，其餘助詞一律為 zhe）
+    "著名": [["zhu4"], ["ming2"]],
+    "著作": [["zhu4"], ["zuo4"]],
+    "著作等身": [["zhu4"], ["zuo4"], ["deng3"], ["shen1"]],
+    "名著": [["ming2"], ["zhu4"]],
+    "著述": [["zhu4"], ["shu4"]],
+    "專著": [["zhuan1"], ["zhu4"]],
+    "原著": [["yuan2"], ["zhu4"]],
+    "著稱": [["zhu4"], ["cheng1"]],
+    "土著": [["tu3"], ["zhu4"]],
+    "編著": [["bian1"], ["zhu4"]],
+    "巨著": [["ju4"], ["zhu4"]],
+    "著文": [["zhu4"], ["wen2"]],
+    "著手": [["zhuo2"], ["shou3"]],
+    "著眼": [["zhuo2"], ["yan3"]],
+    "著力": [["zhuo2"], ["li4"]],
+    "著陸": [["zhuo2"], ["lu4"]],
+    "著想": [["zhuo2"], ["xiang3"]],
+    "穿著": [["chuan1"], ["zhuo2"]],
+    "膠著": [["jiao1"], ["zhuo2"]],
+    "沉著": [["chen2"], ["zhuo2"]],
     "意味著": [["yi4"], ["wei4"], ["zhe"]],
     "標誌著": [["biao1"], ["zhi4"], ["zhe"]],
     "象徵著": [["xiang4"], ["zheng1"], ["zhe"]],
@@ -243,29 +268,103 @@ for _w in DEVOTIONAL_LEXICON.keys():
     jieba.add_word(_w)
 load_phrases_dict(DEVOTIONAL_LEXICON)
 
+def custom_convert_char_to_pinyin(text_list, polyphone=True):
+    """
+    自訂 G2P 轉換器：
+    1. 支援 F5-TTS 的雙引號與英文標點轉換
+    2. 斷詞後是單字詞「著」時，G2P 強制轉為輕聲 zhe（即 zhe5），杜絕誤讀為 zhu4
+    3. 保留 multi-character 詞庫（如 著名、執著、著急）之精準詞義發音
+    """
+    final_text_list = []
+    god_knows_why_en_testset_contains_zh_quote = str.maketrans(
+        {"“": '"', "”": '"', "‘": "'", "’": "'"}
+    )
+    custom_trans = str.maketrans({";": ","})
+    for text in text_list:
+        char_list = []
+        text = text.translate(god_knows_why_en_testset_contains_zh_quote)
+        text = text.translate(custom_trans)
+        for seg in jieba.cut(text):
+            seg_byte_len = len(bytes(seg, "UTF-8"))
+            if seg_byte_len == len(seg):  # 若為純英文字母與 ASCII 符號
+                if char_list and seg_byte_len > 1 and char_list[-1] not in " :'\"":
+                    char_list.append(" ")
+                char_list.extend(seg)
+            elif polyphone and seg_byte_len == 3 * len(seg):  # 若為純中文字詞
+                # 關鍵防護：若斷詞後為單字詞「著」，一律轉為輕聲 zhe（即 zhe5）
+                if seg == "著":
+                    seg_pinyin = ["zhe"]
+                else:
+                    seg_pinyin = lazy_pinyin(seg, style=Style.TONE3, tone_sandhi=True)
+                for c in seg_pinyin:
+                    if c not in "。，、；：？！《》【】—…":
+                        char_list.append(" ")
+                    char_list.append(c)
+            else:  # 若為中英混合或符號混合
+                for c in seg:
+                    if ord(c) < 256:
+                        char_list.extend(c)
+                    else:
+                        if c not in "。，、；：？！《》【】—…":
+                            char_list.append(" ")
+                            if c == "著":
+                                char_list.append("zhe")
+                            else:
+                                char_list.extend(lazy_pinyin(c, style=Style.TONE3, tone_sandhi=True))
+                        else:
+                            char_list.append(c)
+        final_text_list.append(char_list)
+
+    return final_text_list
+
 def split_chinese_sentences(text, max_len=75):
     """
-    依據中文句號、問號、驚嘆號、分號以及換行符號進行自然切句，
+    依據段落（換行）先切分大組，再依據中文句號、問號、驚嘆號、分號進行自然切句，
     合併為每段約 30~75 字左右的呼吸長度，避免過長溢出或過短碎裂。
+    回傳：[(chunk_text, is_para_end), ...]
+    其中 is_para_end 為 True 表示該 chunk 為該段落的末尾，後續應插入較長之段落停頓（silence）。
     """
-    parts = re.split(r"([。！？；\n\r]+|[.!?;]+)", text)
-    sentences = []
-    current = ""
-    for i in range(0, len(parts), 2):
-        chunk = parts[i].strip()
-        delim = parts[i + 1].strip() if i + 1 < len(parts) else ""
-        combined = chunk + delim
-        if not combined:
-            continue
-        if len(current) + len(combined) <= max_len:
-            current += combined
-        else:
-            if current:
-                sentences.append(current)
-            current = combined
-    if current:
-        sentences.append(current)
-    return sentences
+    paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
+    all_chunks = []
+
+    for para in paragraphs:
+        parts = re.split(r"([。！？；]+|[.!?;]+)", para)
+        current = ""
+        for i in range(0, len(parts), 2):
+            chunk = parts[i].strip()
+            delim = parts[i + 1].strip() if i + 1 < len(parts) else ""
+            combined = chunk + delim
+            if not combined:
+                continue
+            if len(current) + len(combined) <= max_len:
+                current += combined
+            else:
+                if current:
+                    all_chunks.append((current, False))
+                # 若單句本身長度即超過 max_len，以逗號再微切
+                if len(combined) > max_len:
+                    sub_parts = re.split(r"([，,]+)", combined)
+                    sub_curr = ""
+                    for j in range(0, len(sub_parts), 2):
+                        s_chunk = sub_parts[j].strip()
+                        s_delim = sub_parts[j + 1].strip() if j + 1 < len(sub_parts) else ""
+                        s_comb = s_chunk + s_delim
+                        if not s_comb:
+                            continue
+                        if len(sub_curr) + len(s_comb) <= max_len:
+                            sub_curr += s_comb
+                        else:
+                            if sub_curr:
+                                all_chunks.append((sub_curr, False))
+                            sub_curr = s_comb
+                    current = sub_curr
+                else:
+                    current = combined
+        if current:
+            # 標記段落末尾（供段間較長停頓）
+            all_chunks.append((current, True))
+
+    return all_chunks
 
 try:
     import cn2an
@@ -347,6 +446,8 @@ def main():
     parser.add_argument("--ref-text-file", required=True, help="Path to reference text file")
     parser.add_argument("--output-mp3", required=True, help="Path to output MP3 file")
     parser.add_argument("--speed", type=float, default=1.0, help="Speech rate multiplier")
+    parser.add_argument("--sentence-pause", type=float, default=0.25, help="Pause between sentences within paragraph in seconds (default: 0.25)")
+    parser.add_argument("--para-pause", type=float, default=0.8, help="Pause between paragraphs in seconds (default: 0.8)")
     args = parser.parse_args()
 
     if not os.path.exists(args.text_file):
@@ -390,24 +491,28 @@ def main():
     if rms < TARGET_RMS:
         audio = audio * TARGET_RMS / rms
 
-    # 中文智慧分句
-    chunks = split_chinese_sentences(gen_text, max_len=75)
-    print(f"  📝 正文共 {len(gen_text)} 字，切分為 {len(chunks)} 個語音片段進行批次合成...")
+    # 中文智慧分句（依段落結構化處理）
+    chunk_items = split_chinese_sentences(gen_text, max_len=75)
+    print(f"  📝 正文共 {len(gen_text)} 字，切分為 {len(chunk_items)} 個語音片段進行批次合成...")
+    print(f"  ⏱️ 停頓設定：句間停頓 {args.sentence_pause:.2f} 秒，段落間停頓 {args.para_pause:.2f} 秒")
 
     # 載入 F5-TTS 模型
     print("  🧠 正在載入 F5-TTS MLX 模型至 Apple Silicon GPU...")
     f5tts = F5TTS.from_pretrained("lucasnewman/f5-tts-mlx")
 
-    # 句間自然停頓靜音（0.15 秒）
-    pause_samples = int(SAMPLE_RATE * 0.15)
-    pause_wave = mx.zeros((pause_samples,))
+    # 句間停頓波形與段落停頓波形
+    pause_sentence_samples = int(SAMPLE_RATE * args.sentence_pause)
+    pause_sentence_wave = mx.zeros((pause_sentence_samples,))
+
+    pause_para_samples = int(SAMPLE_RATE * args.para_pause)
+    pause_para_wave = mx.zeros((pause_para_samples,))
 
     output_waves = []
     t_start = datetime.datetime.now()
 
-    for idx, chunk in enumerate(chunks):
+    for idx, (chunk, is_para_end) in enumerate(chunk_items):
         dur = int(estimated_duration(audio, ref_text, chunk, args.speed) * FRAMES_PER_SEC)
-        text_pinyin = convert_char_to_pinyin([ref_text + " " + chunk])
+        text_pinyin = custom_convert_char_to_pinyin([ref_text + " " + chunk])
 
         wave, _ = f5tts.sample(
             mx.expand_dims(audio, axis=0),
@@ -425,8 +530,11 @@ def main():
         mx.eval(wave)
 
         output_waves.append(wave)
-        if idx < len(chunks) - 1:
-            output_waves.append(pause_wave)
+        if idx < len(chunk_items) - 1:
+            if is_para_end:
+                output_waves.append(pause_para_wave)
+            else:
+                output_waves.append(pause_sentence_wave)
 
     full_wave = mx.concatenate(output_waves, axis=0)
     total_audio_sec = full_wave.shape[0] / SAMPLE_RATE

@@ -149,6 +149,8 @@ def main():
     parser.add_argument("--output-mp3", required=True, help="Path to output MP3 file")
     parser.add_argument("--model-id", default="mlx-community/Fun-CosyVoice3-0.5B-2512-8bit", help="HuggingFace model ID")
     parser.add_argument("--speed", type=float, default=1.0, help="Speech rate multiplier")
+    parser.add_argument("--sentence-pause", type=float, default=0.25, help="Pause between sentences within paragraph in seconds (default: 0.25)")
+    parser.add_argument("--para-pause", type=float, default=0.8, help="Pause between paragraphs in seconds (default: 0.8)")
     args = parser.parse_args()
 
     if not os.path.exists(args.text_file):
@@ -192,11 +194,11 @@ def main():
     # 4. 文本智慧分句
     chunk_items = split_chinese_sentences(gen_text, max_len=65)
     print(f"  📝 正文共 {len(gen_text)} 字，切分為 {len(chunk_items)} 個語意片段進行批次合成...")
+    print(f"  ⏱️ 停頓設定：句間停頓 {args.sentence_pause:.2f} 秒，段落間停頓 {args.para_pause:.2f} 秒")
 
     # 停頓取樣數設定
-    # 句間停頓: 0.18s, 段落停頓: 0.35s
-    pause_sentence = np.zeros(int(target_sr * 0.18), dtype=np.float32)
-    pause_paragraph = np.zeros(int(target_sr * 0.35), dtype=np.float32)
+    pause_sentence = np.zeros(int(target_sr * args.sentence_pause), dtype=np.float32)
+    pause_paragraph = np.zeros(int(target_sr * args.para_pause), dtype=np.float32)
 
     output_waves = []
     t_start = datetime.datetime.now()
