@@ -10,6 +10,7 @@ import datetime
 import numpy as np
 import soundfile as sf
 import jieba
+from scipy.signal import butter, sosfiltfilt
 from pypinyin import load_phrases_dict, load_single_dict, lazy_pinyin, Style
 from tqdm import tqdm
 
@@ -246,6 +247,11 @@ DEVOTIONAL_LEXICON = {
     "身分": [["shen1"], ["fen4"]],
     "本分": [["ben3"], ["fen4"]],
     # 聖經專用人名/地名/詞彙
+    "耶和華": [["ye1"], ["he2"], ["hua2"]],
+    "宣教": [["xuan1"], ["jiao4"]],
+    "調校": [["tiao2"], ["jiao4"]],
+    "校準": [["jiao4"], ["zhun3"]],
+    "校對": [["jiao4"], ["dui4"]],
     "便雅憫": [["bian4"], ["ya3"], ["min3"]],
     "腓利門": [["fei2"], ["li4"], ["men2"]],
     "帖撒羅尼迦": [["tie1"], ["sa1"], ["luo2"], ["ni2"], ["jia1"]],
@@ -317,6 +323,20 @@ def custom_convert_char_to_pinyin(text_list, polyphone=True):
         final_text_list.append(char_list)
 
     return final_text_list
+
+def apply_micro_fade(wave_np, fade_samples=120):
+    """
+    對音訊片段的開頭與結尾施加 5ms Hann 平滑微漸層（fade-in / fade-out），
+    消除分句拼接時因為直流偏移或非零振幅產生的邊界階躍雜音（pop/click）。
+    """
+    if len(wave_np) <= fade_samples * 2:
+        return wave_np
+    fade_in = 0.5 * (1.0 - np.cos(np.pi * np.linspace(0, 1, fade_samples)))
+    fade_out = 0.5 * (1.0 + np.cos(np.pi * np.linspace(0, 1, fade_samples)))
+    wave_np = wave_np.copy()
+    wave_np[:fade_samples] *= fade_in
+    wave_np[-fade_samples:] *= fade_out
+    return wave_np
 
 def split_chinese_sentences(text, max_len=40):
     """
@@ -529,13 +549,13 @@ def main():
 
     # 三級停頓波形
     pause_clause_samples = int(SAMPLE_RATE * args.clause_pause)
-    pause_clause_wave = mx.zeros((pause_clause_samples,))
+    pause_clause_wave = np.zeros(pause_clause_samples, dtype=np.float32)
 
     pause_sentence_samples = int(SAMPLE_RATE * args.sentence_pause)
-    pause_sentence_wave = mx.zeros((pause_sentence_samples,))
+    pause_sentence_wave = np.zeros(pause_sentence_samples, dtype=np.float32)
 
     pause_para_samples = int(SAMPLE_RATE * args.para_pause)
-    pause_para_wave = mx.zeros((pause_para_samples,))
+    pause_para_wave = np.zeros(pause_para_samples, dtype=np.float32)
 
     output_waves = []
     t_start = datetime.datetime.now()
@@ -558,8 +578,10 @@ def main():
         # 裁切掉前面的參考音檔部分
         wave = wave[audio.shape[0]:]
         mx.eval(wave)
+        wave_np = np.array(wave)
+        wave_np = apply_micro_fade(wave_np, fade_samples=120)
 
-        output_waves.append(wave)
+        output_waves.append(wave_np)
         if idx < len(chunk_items) - 1:
             if pause_type == "paragraph":
                 output_waves.append(pause_para_wave)
@@ -568,8 +590,18 @@ def main():
             else:
                 output_waves.append(pause_clause_wave)
 
-    full_wave = mx.concatenate(output_waves, axis=0)
-    total_audio_sec = full_wave.shape[0] / SAMPLE_RATE
+    full_wave = np.concatenate(output_waves, axis=0)
+
+    # 消除 Vocos 神經聲碼器高頻 Nyquist 共振突波 (10kHz 4階零相位 Butterworth 低通濾波)
+    sos = butter(4, 10000, btype="lowpass", fs=SAMPLE_RATE, output="sos")
+    full_wave = sosfiltfilt(sos, full_wave)
+
+    # 峰值限制防破音（預留 -0.45 dBFS 動態餘裕，避免重取樣與 MP3 壓縮產生 inter-sample clipping）
+    peak = float(np.max(np.abs(full_wave)))
+    if peak > 0.95:
+        full_wave = full_wave * (0.95 / peak)
+
+    total_audio_sec = len(full_wave) / SAMPLE_RATE
     total_time_cost = (datetime.datetime.now() - t_start).total_seconds()
 
     print(f"  ⚡ 合成完畢！產出語音時長: {total_audio_sec:.1f} 秒，M5 Max 耗時: {total_time_cost:.1f} 秒 (約 {total_audio_sec/max(1,total_time_cost):.1f}x 實時速度)")
@@ -579,10 +611,11 @@ def main():
         tmp_wav_path = tmp_wav.name
 
     try:
-        sf.write(tmp_wav_path, np.array(full_wave), SAMPLE_RATE)
+        sf.write(tmp_wav_path, full_wave.astype(np.float32), SAMPLE_RATE)
         ffmpeg_cmd = [
             "ffmpeg", "-y",
             "-i", tmp_wav_path,
+            "-af", "lowpass=f=10500",
             "-ar", str(args.target_sr),
             "-b:a", args.bitrate,
             args.output_mp3

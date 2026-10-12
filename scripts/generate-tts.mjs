@@ -145,7 +145,7 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
     if (engine === "cosyvoice") {
       cmd = `uv run --with mlx-audio-plus --with cn2an python3 scripts/synthesize-cosyvoice.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
     } else {
-      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
+      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an --with scipy python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
     }
     execSync(cmd, { stdio: "inherit", env: { ...process.env, HF_HUB_OFFLINE: "1" } });
   } finally {
