@@ -340,7 +340,18 @@ export function HomeContainer() {
           </div>
 
           <div className="text-center sm:text-right">
-            <span>由 Tychicus AI 事工推動</span>
+            <span>
+              由
+              <a
+                href="https://web.ntnu.edu.tw/~hslee/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
+              >
+                李鴻欣 (Hung-Shin Lee)
+              </a>
+              製作
+            </span>
             <span className="mx-2">•</span>
             <span>每週定時更新當週教材</span>
           </div>
