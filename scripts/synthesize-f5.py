@@ -408,10 +408,11 @@ def custom_convert_char_to_pinyin(text_list, polyphone=True):
     """
     自訂 G2P 轉換器：
     1. 支援 F5-TTS 的雙引號與英文標點轉換
-    2. 雙層精準切詞（Dual-Layer Segmentation）：透過 tw2s 投影確保繁體詞彙完整辨識
+    2. 雙層精準切詞（Dual-Layer Segmentation）：透過 tw2s 投影確保繁體詞彙完整辨識（「成為」、「關係」、「真誠」等）
     3. 斷詞後是單字詞「著」時，G2P 強制轉為輕聲 zhe（即 zhe5），杜絕誤讀為 zhu4
-    4. 保留 multi-character 詞庫（如 著名、執著、著急）之精準詞義發音
-    5. 詞級別 Token 綁定：詞內部音節緊密連續相連，詞間保留一個空格
+    4. 保留 multi-character 詞庫（如 著名、執著、著急、乾涸、福分）之精準詞義發音
+    5. 嚴格遵循 F5-TTS 原生預訓練規格：每個拼音音節皆以空格 ' ' 作為音素邊界引導，
+       杜絕音節緊縮黏合造成的吃字（如「至聖」丟失「聖」）與連音變形（如「寶座」變音）！
     """
     final_text_list = []
     god_knows_why_en_testset_contains_zh_quote = str.maketrans(
@@ -432,16 +433,16 @@ def custom_convert_char_to_pinyin(text_list, polyphone=True):
                 if seg in "。，、；：？！《》【】—…":
                     char_list.append(seg)
                 else:
-                    # 關鍵防護：若斷詞後為單字詞「著」，一律轉為輕聲 zhe（即 zhe5）
+                    # 關鍵防護：若斷詞後為單字詞「著」，一律轉為輕聲 zhe
                     if seg == "著":
                         seg_pinyin = ["zhe"]
                     else:
                         seg_pinyin = lazy_pinyin(seg, style=Style.TONE3, tone_sandhi=True)
 
-                    # 詞級別 Token 綁定：詞與詞之間保留一個空白，但詞內部音節緊密連續相連，不插入任何空白 Token！
-                    if char_list and char_list[-1] not in " :'\"。，、；：？！《》【】—…":
-                        char_list.append(" ")
+                    # F5-TTS 原生架構規範：每個音節皆須以空格作為音素邊界引導
                     for c in seg_pinyin:
+                        if c not in "。，、；：？！《》【】—…":
+                            char_list.append(" ")
                         char_list.append(c)
             else:  # 若為中英混合或符號混合
                 for c in seg:
@@ -451,12 +452,13 @@ def custom_convert_char_to_pinyin(text_list, polyphone=True):
                         if c in "。，、；：？！《》【】—…":
                             char_list.append(c)
                         else:
-                            if char_list and char_list[-1] not in " :'\"。，、；：？！《》【】—…":
-                                char_list.append(" ")
                             if c == "著":
+                                char_list.append(" ")
                                 char_list.append("zhe")
                             else:
-                                char_list.extend(lazy_pinyin(c, style=Style.TONE3, tone_sandhi=True))
+                                for py in lazy_pinyin(c, style=Style.TONE3, tone_sandhi=True):
+                                    char_list.append(" ")
+                                    char_list.append(py)
         final_text_list.append(char_list)
 
     return final_text_list
