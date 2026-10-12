@@ -32,11 +32,15 @@ from f5_tts_mlx.generate import (
     TARGET_RMS,
 )
 
-# 2. 自動繁體化 pypinyin 內建 4.7 萬詞庫（使用 s2tw 確保「着->著」、「长->長」完整對齊）
+# 2. 自動繁體化 pypinyin 內建 4.7 萬詞庫，並初始化 tw2s 以支援 Jieba 繁簡雙層精準切詞
 try:
     import opencc
     from pypinyin.phrases_dict import phrases_dict
     s2tw = opencc.OpenCC("s2tw")
+    try:
+        tw2s = opencc.OpenCC("tw2s")
+    except Exception:
+        tw2s = opencc.OpenCC("t2s")
     trad_auto_dict = {}
     for s_phrase, pinyin_list in phrases_dict.items():
         t_phrase = s2tw.convert(s_phrase)
@@ -44,7 +48,8 @@ try:
             trad_auto_dict[t_phrase] = pinyin_list
     load_phrases_dict(trad_auto_dict)
 except Exception as e:
-    pass
+    s2tw = None
+    tw2s = None
 
 # 繁體「著」單字預設音強制轉為輕聲 zhe（避免退回 pypinyin 單字庫時誤讀為 zhu4）
 try:
@@ -268,19 +273,145 @@ DEVOTIONAL_LEXICON = {
     "迦百農": [["jia1"], ["bai3"], ["nong2"]],
     "客西馬尼": [["ke4"], ["xi1"], ["ma3"], ["ni2"]],
     "各各他": [["ge4"], ["ge4"], ["ta1"]],
+    # 乾涸多音字校正（乾涸讀作 gan1 he2，杜絕誤讀為 qian2 he2）
+    "乾涸": [["gan1"], ["he2"]],
+    "乾渴": [["gan1"], ["ke3"]],
+    "乾燥": [["gan1"], ["zao4"]],
+    # 為字多音字校正（成為、稱為、稱之為、經文為、化為、變為、視為等讀作 wei2）
+    "成為": [["cheng2"], ["wei2"]],
+    "稱為": [["cheng1"], ["wei2"]],
+    "稱之為": [["cheng1"], ["zhi1"], ["wei2"]],
+    "經文為": [["jing1"], ["wen2"], ["wei2"]],
+    "以為": [["yi3"], ["wei2"]],
+    "以此為": [["yi3"], ["ci3"], ["wei2"]],
+    "以其為": [["yi3"], ["qi2"], ["wei2"]],
+    "以神為": [["yi3"], ["shen2"], ["wei2"]],
+    "以主為": [["yi3"], ["zhu3"], ["wei2"]],
+    "化為": [["hua4"], ["wei2"]],
+    "變為": [["bian4"], ["wei2"]],
+    "轉為": [["zhuan3"], ["wei2"]],
+    "視為": [["shi4"], ["wei2"]],
+    "為裝飾": [["wei2"], ["zhuang1"], ["shi4"]],
+    "為首": [["wei2"], ["shou3"]],
+    "為業": [["wei2"], ["ye4"]],
+    # 體恤與討好校正
+    "體恤": [["ti3"], ["xu4"]],
+    "討好": [["tao3"], ["hao3"]],
+    # 聖經救贖神學專有名詞
+    "救贖": [["jiu4"], ["shu2"]],
+    "贖罪": [["shu2"], ["zui4"]],
+    "贖罪祭": [["shu2"], ["zui4"], ["ji4"]],
+    "贖愆祭": [["shu2"], ["qian1"], ["ji4"]],
+    "燔祭": [["fan2"], ["ji4"]],
+    "平安祭": [["ping2"], ["an1"], ["ji4"]],
+    "素祭": [["su4"], ["ji4"]],
+    "罪孽": [["zui4"], ["nie4"]],
+    "過犯": [["guo4"], ["fan4"]],
+    "代求": [["dai4"], ["qiu2"]],
+    "代贖": [["dai4"], ["shu2"]],
+    "代筆人": [["dai4"], ["bi3"], ["ren2"]],
+    "破產者": [["po4"], ["chan3"], ["zhe3"]],
+    "至聖": [["zhi4"], ["sheng4"]],
+    "至聖所": [["zhi4"], ["sheng4"], ["suo3"]],
+    "死囚": [["si3"], ["qiu2"]],
+    "乞丐": [["qi3"], ["gai4"]],
+    "襤褸": [["lan2"], ["lv3"]],
+    "純金": [["chun2"], ["jin1"]],
+    "禮袍": [["li3"], ["pao2"]],
+    "義袍": [["yi4"], ["pao2"]],
+    "衣袍": [["yi1"], ["pao2"]],
+    "歸算": [["gui1"], ["suan4"]],
+    "聖子": [["sheng4"], ["zi3"]],
+    "聖父": [["sheng4"], ["fu4"]],
+    "聖靈": [["sheng4"], ["ling2"]],
+    "三位一體": [["san1"], ["wei4"], ["yi1"], ["ti3"]],
+    "哥林多前書": [["ge1"], ["lin2"], ["duo1"], ["qian2"], ["shu1"]],
+    "哥林多後書": [["ge1"], ["lin2"], ["duo1"], ["hou4"], ["shu1"]],
+    "加拉太書": [["jia1"], ["la1"], ["tai4"], ["shu1"]],
+    "以弗所書": [["yi3"], ["fu2"], ["suo3"], ["shu1"]],
+    "腓立比書": [["fei2"], ["li4"], ["bi3"], ["shu1"]],
+    "歌羅西書": [["ge1"], ["luo2"], ["xi1"], ["shu1"]],
+    "腓利門書": [["fei2"], ["li4"], ["men2"], ["shu1"]],
+    "希伯來書": [["xi1"], ["bo2"], ["lai2"], ["shu1"]],
+    "彼得前書": [["bi3"], ["de2"], ["qian2"], ["shu1"]],
+    "彼得後書": [["bi3"], ["de2"], ["hou4"], ["shu1"]],
+    "約翰一書": [["yue1"], ["han4"], ["yi1"], ["shu1"]],
+    "啟示錄": [["qi3"], ["shi4"], ["lu4"]],
+    "創世記": [["chuang4"], ["shi4"], ["ji4"]],
+    "出埃及記": [["chu1"], ["ai1"], ["ji2"], ["ji4"]],
+    "利未記": [["li4"], ["wei4"], ["ji4"]],
+    "民數記": [["min2"], ["shu4"], ["ji4"]],
+    "申命記": [["shen1"], ["ming4"], ["ji4"]],
+    "以賽亞書": [["yi3"], ["sai4"], ["ya3"], ["shu1"]],
+    "耶利米書": [["ye1"], ["li4"], ["mi3"], ["shu1"]],
+    "以西結書": [["yi3"], ["xi1"], ["jie2"], ["shu1"]],
+    "但以理書": [["dan4"], ["yi3"], ["li3"], ["shu1"]],
+    # 助詞「著」安全防護網
+    "著一個": [["zhe"], ["yi1"], ["ge4"]],
+    "著一件": [["zhe"], ["yi2"], ["jian4"]],
+    "著一位": [["zhe"], ["yi2"], ["wei4"]],
+    "著一份": [["zhe"], ["yi2"], ["fen4"]],
+    "著一條": [["zhe"], ["yi4"], ["tiao2"]],
+    "著一雙": [["zhe"], ["yi4"], ["shuang1"]],
+    "著一顆": [["zhe"], ["yi4"], ["ke1"]],
+    "著一場": [["zhe"], ["yi4"], ["chang3"]],
+    "著一次": [["zhe"], ["yi2"], ["ci4"]],
+    "著他的": [["zhe"], ["ta1"], ["de5"]],
+    "著她的": [["zhe"], ["ta1"], ["de5"]],
+    "著它的": [["zhe"], ["ta1"], ["de5"]],
+    "著你的": [["zhe"], ["ni3"], ["de5"]],
+    "著我的": [["zhe"], ["wo3"], ["de5"]],
+    "著神的": [["zhe"], ["shen2"], ["de5"]],
+    "披戴著": [["pi1"], ["dai4"], ["zhe"]],
+    "圍繞著": [["wei2"], ["rao4"], ["zhe"]],
+    "沉浸著": [["chen2"], ["jin4"], ["zhe"]],
+    "籠罩著": [["long3"], ["zhao4"], ["zhe"]],
+    "流淌著": [["liu2"], ["tang3"], ["zhe"]],
+    "洋溢著": [["yang2"], ["yi4"], ["zhe"]],
 }
 
 # 注入詞庫至 jieba 與 pypinyin（最高優先級）
+# 同時加入繁體與簡體至 jieba，以確保無論繁簡切詞皆能精準保護專有名詞
 for _w in DEVOTIONAL_LEXICON.keys():
     jieba.add_word(_w)
+    if tw2s:
+        try:
+            jieba.add_word(tw2s.convert(_w))
+        except Exception:
+            pass
 load_phrases_dict(DEVOTIONAL_LEXICON)
+
+def segment_text(text):
+    """
+    雙層精準切詞（Dual-Layer Segmentation）：
+    利用 OpenCC tw2s 將繁體中文轉換至簡體中文對齊 Jieba 內建之 34.9 萬簡體詞庫切詞，
+    再將簡體詞切片長度嚴格 1:1 投影回繁體字串。
+    徹底解決 Jieba 內建詞庫缺繁體詞彙導致之碎片化誤切、多音字 fallback 誤讀與斷詞停頓瑕疵！
+    """
+    if tw2s:
+        try:
+            simp = tw2s.convert(text)
+            if len(simp) == len(text):
+                simp_segs = list(jieba.cut(simp))
+                trad_segs = []
+                idx = 0
+                for s in simp_segs:
+                    l = len(s)
+                    trad_segs.append(text[idx : idx + l])
+                    idx += l
+                return trad_segs
+        except Exception:
+            pass
+    return list(jieba.cut(text))
 
 def custom_convert_char_to_pinyin(text_list, polyphone=True):
     """
     自訂 G2P 轉換器：
     1. 支援 F5-TTS 的雙引號與英文標點轉換
-    2. 斷詞後是單字詞「著」時，G2P 強制轉為輕聲 zhe（即 zhe5），杜絕誤讀為 zhu4
-    3. 保留 multi-character 詞庫（如 著名、執著、著急）之精準詞義發音
+    2. 雙層精準切詞（Dual-Layer Segmentation）：透過 tw2s 投影確保繁體詞彙完整辨識
+    3. 斷詞後是單字詞「著」時，G2P 強制轉為輕聲 zhe（即 zhe5），杜絕誤讀為 zhu4
+    4. 保留 multi-character 詞庫（如 著名、執著、著急）之精準詞義發音
+    5. 詞級別 Token 綁定：詞內部音節緊密連續相連，詞間保留一個空格
     """
     final_text_list = []
     god_knows_why_en_testset_contains_zh_quote = str.maketrans(
@@ -291,7 +422,7 @@ def custom_convert_char_to_pinyin(text_list, polyphone=True):
         char_list = []
         text = text.translate(god_knows_why_en_testset_contains_zh_quote)
         text = text.translate(custom_trans)
-        for seg in jieba.cut(text):
+        for seg in segment_text(text):
             seg_byte_len = len(bytes(seg, "UTF-8"))
             if seg_byte_len == len(seg):  # 若為純英文字母與 ASCII 符號
                 if char_list and seg_byte_len > 1 and char_list[-1] not in " :'\"":
