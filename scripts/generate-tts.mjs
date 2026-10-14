@@ -116,18 +116,20 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
   fs.mkdirSync(tmpDir, { recursive: true });
   const tmpTextFile = path.join(tmpDir, `${engine}-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
 
-  const refAudio = path.join(
-    process.cwd(),
-    "data",
-    "voices",
-    versionKey === "youth" ? "youth_male.wav" : "family_female.wav"
-  );
-  const refText = path.join(
-    process.cwd(),
-    "data",
-    "voices",
-    versionKey === "youth" ? "youth_male.txt" : "family_female.txt"
-  );
+  const voicesDir = path.join(process.cwd(), "data", "voices");
+  let voiceStem = versionKey === "youth" ? "youth_male" : "family_female";
+  if (versionKey === "encore") {
+    if (fs.existsSync(path.join(voicesDir, "encore_male.wav"))) {
+      voiceStem = "encore_male";
+    } else if (fs.existsSync(path.join(voicesDir, "encore_female.wav"))) {
+      voiceStem = "encore_female";
+    } else {
+      voiceStem = "family_female";
+    }
+  }
+
+  const refAudio = path.join(voicesDir, `${voiceStem}.wav`);
+  const refText = path.join(voicesDir, `${voiceStem}.txt`);
 
   if (!fs.existsSync(refAudio) || !fs.existsSync(refText)) {
     throw new Error(`找不到音色參考檔案: ${refAudio} 或 ${refText}`);
@@ -236,6 +238,7 @@ async function main() {
     let versions = [
       { key: "youth", file: "qt_for_youth.md", name: "青年版" },
       { key: "family", file: "qt_for_family.md", name: "家庭版" },
+      { key: "encore", file: "qt_for_encore.md", name: "樂齡版" },
     ];
     if (specifiedVersion) {
       versions = versions.filter((v) => v.key === specifiedVersion);

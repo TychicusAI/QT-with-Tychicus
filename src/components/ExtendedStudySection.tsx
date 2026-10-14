@@ -61,6 +61,8 @@ export function ExtendedStudySection({
   };
 
   const isFamily = version === "family";
+  const isEncore = version === "encore";
+  const readerThemeClass = isEncore ? "encore-reader" : isFamily ? "family-reader" : "youth-reader";
 
   const commentaryClasses = {
     normal: "text-sm leading-relaxed",
@@ -82,15 +84,17 @@ export function ExtendedStudySection({
 
   return (
     <section
-      className={`p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4 ${
-        isFamily ? "family-reader" : "youth-reader"
-      }`}
+      className={`p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4 ${readerThemeClass}`}
     >
       <div className="flex items-center justify-between">
         <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 flex items-center gap-2">
           <BookOpen
             className={`w-5 h-5 shrink-0 ${
-              isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-600 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-600 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           />
           <span>延伸研讀</span>
@@ -121,9 +125,13 @@ export function ExtendedStudySection({
               }}
               className={`group p-4 sm:p-5 rounded-2xl bg-white dark:bg-stone-950 border transition-all duration-200 shadow-2xs cursor-pointer select-none ${
                 isExpanded
-                  ? isFamily
+                  ? isEncore
+                    ? "border-rose-500/80 shadow-sm ring-1 ring-rose-500/20"
+                    : isFamily
                     ? "border-teal-500/80 shadow-sm ring-1 ring-teal-500/20"
                     : "border-amber-500/80 shadow-sm ring-1 ring-amber-500/20"
+                  : isEncore
+                  ? "border-stone-200/90 dark:border-stone-800/90 hover:border-rose-500/60 hover:shadow-xs"
                   : isFamily
                   ? "border-stone-200/90 dark:border-stone-800/90 hover:border-teal-500/60 hover:shadow-xs"
                   : "border-stone-200/90 dark:border-stone-800/90 hover:border-amber-500/60 hover:shadow-xs"
@@ -133,7 +141,11 @@ export function ExtendedStudySection({
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <span
                   className={`font-bold ${titleClasses} tracking-tight ${
-                    isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-700 dark:text-amber-400"
+                    isEncore
+                      ? "text-rose-700 dark:text-rose-400"
+                      : isFamily
+                      ? "text-teal-700 dark:text-teal-400"
+                      : "text-amber-700 dark:text-amber-400"
                   }`}
                   dangerouslySetInnerHTML={{
                     __html: marked.parseInline(item.title) as string,
@@ -144,9 +156,13 @@ export function ExtendedStudySection({
                   <span
                     className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium transition ${
                       isExpanded
-                        ? isFamily
+                        ? isEncore
+                          ? "bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200"
+                          : isFamily
                           ? "bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-teal-200"
                           : "bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200"
+                        : isEncore
+                        ? "bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-300 group-hover:bg-rose-50 dark:group-hover:bg-rose-950/40 group-hover:text-rose-700"
                         : isFamily
                         ? "bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-300 group-hover:bg-teal-50 dark:group-hover:bg-teal-950/40 group-hover:text-teal-700"
                         : "bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-300 group-hover:bg-amber-50 dark:group-hover:bg-amber-950/40 group-hover:text-amber-700"
@@ -178,9 +194,7 @@ export function ExtendedStudySection({
 
               {/* Box Body: Commentary (補述的內容) - 支援 Markdown 粗體與學術斜體樣式 */}
               <div
-                className={`pt-2.5 text-stone-700 dark:text-stone-200 markdown-content ${
-                  isFamily ? "family-reader" : "youth-reader"
-                } ${commentaryClasses}`}
+                className={`pt-2.5 text-stone-700 dark:text-stone-200 markdown-content ${readerThemeClass} ${commentaryClasses}`}
                 dangerouslySetInnerHTML={{
                   __html: marked.parseInline(item.question) as string,
                 }}
@@ -196,7 +210,11 @@ export function ExtendedStudySection({
                     <span className="flex items-center gap-1.5">
                       <BookOpen
                         className={`w-3.5 h-3.5 ${
-                          isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+                          isEncore
+                            ? "text-rose-600 dark:text-rose-400"
+                            : isFamily
+                            ? "text-teal-600 dark:text-teal-400"
+                            : "text-amber-600 dark:text-amber-400"
                         }`}
                       />
                       <span className="font-semibold text-stone-800 dark:text-stone-200">【經文內容】</span>
@@ -208,10 +226,10 @@ export function ExtendedStudySection({
 
                   {displayText ? (
                     <blockquote
-                      className={`p-4 sm:p-5 rounded-xl border font-serif markdown-content ${
-                        isFamily ? "family-reader" : "youth-reader"
-                      } ${scriptureClasses} whitespace-pre-line ${
-                        isFamily
+                      className={`p-4 sm:p-5 rounded-xl border font-serif markdown-content ${readerThemeClass} ${scriptureClasses} whitespace-pre-line ${
+                        isEncore
+                          ? "bg-rose-500/5 dark:bg-rose-950/25 border-rose-200/50 dark:border-rose-800/40 text-stone-800 dark:text-stone-100"
+                          : isFamily
                           ? "bg-teal-500/5 dark:bg-teal-950/25 border-teal-200/50 dark:border-teal-800/40 text-stone-800 dark:text-stone-100"
                           : "bg-amber-500/5 dark:bg-amber-950/25 border-amber-200/50 dark:border-amber-800/40 text-stone-800 dark:text-stone-100"
                       }`}
@@ -223,7 +241,11 @@ export function ExtendedStudySection({
                     <div className="flex items-center gap-2 py-3 text-xs text-stone-500 dark:text-stone-400">
                       <Loader2
                         className={`w-3.5 h-3.5 animate-spin ${
-                          isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+                          isEncore
+                            ? "text-rose-600 dark:text-rose-400"
+                            : isFamily
+                            ? "text-teal-600 dark:text-teal-400"
+                            : "text-amber-600 dark:text-amber-400"
                         }`}
                       />
                       <span>正在載入經文內容...</span>

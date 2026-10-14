@@ -100,6 +100,19 @@ html {
   color: #2dd4bf; /* teal-400 */
 }
 
+/* Encore (50+) version theme adaptation */
+.encore-reader .markdown-content em,
+.encore-reader.markdown-content em,
+.encore-reader em {
+  color: #be123c; /* rose-700 */
+}
+
+.dark .encore-reader .markdown-content em,
+.dark .encore-reader.markdown-content em,
+.dark .encore-reader em {
+  color: #fb7185; /* rose-400 */
+}
+
 .markdown-content blockquote {
   border-left: 3px solid #d97706;
   padding-left: 1rem;
@@ -112,6 +125,12 @@ html {
 .family-reader.markdown-content blockquote,
 .family-reader blockquote {
   border-left-color: #0f766e;
+}
+
+.encore-reader .markdown-content blockquote,
+.encore-reader.markdown-content blockquote,
+.encore-reader blockquote {
+  border-left-color: #be123c;
 }
 
 .markdown-content ul {

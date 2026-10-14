@@ -11,13 +11,12 @@ import {
   Sparkle,
   Users,
   Home,
-  Clock,
-  Sparkles,
   ArrowRight,
   Library,
+  Sun,
 } from "lucide-react";
-import { DevotionalWeek, DevotionalVersion } from "@/types/devotional";
-import { allYouthWeeks, allFamilyWeeks, formatWeekDateRange } from "@/lib/devotional-service";
+import { DevotionalWeek } from "@/types/devotional";
+import { getWeeksByVersion, formatWeekDateRange } from "@/lib/devotional-service";
 import { usePreferredVersion, useCompletedDays } from "@/lib/storage";
 import { Navbar } from "@/components/Navbar";
 
@@ -27,7 +26,8 @@ export function ArchiveViewer() {
   const completedMap = useCompletedDays();
 
   const isFamily = version === "family";
-  const allWeeks: DevotionalWeek[] = isFamily ? allFamilyWeeks : allYouthWeeks;
+  const isEncore = version === "encore";
+  const allWeeks: DevotionalWeek[] = getWeeksByVersion(version);
 
   // Sort descending: newest week first
   const sortedWeeks = useMemo(() => {
@@ -101,7 +101,9 @@ export function ArchiveViewer() {
               <div className="flex items-center gap-2">
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                    isFamily
+                    isEncore
+                      ? "bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 border border-rose-300/60 dark:border-rose-700/50"
+                      : isFamily
                       ? "bg-teal-100 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300 border border-teal-300/60 dark:border-teal-700/50"
                       : "bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-300/60 dark:border-amber-700/50"
                   }`}
@@ -125,11 +127,11 @@ export function ArchiveViewer() {
 
             {/* Version Switcher Tabs */}
             <div className="flex items-center gap-2 shrink-0">
-              <div className="inline-flex items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs">
+              <div className="inline-flex flex-wrap items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs">
                 <button
                   onClick={() => setVersion("youth")}
                   className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
-                    !isFamily
+                    version === "youth"
                       ? "bg-amber-500 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                   }`}
@@ -148,6 +150,18 @@ export function ArchiveViewer() {
                 >
                   <Users className="w-3.5 h-3.5" />
                   <span>家庭版</span>
+                </button>
+
+                <button
+                  onClick={() => setVersion("encore")}
+                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                    isEncore
+                      ? "bg-rose-700 text-white shadow-xs"
+                      : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                  }`}
+                >
+                  <Sun className="w-3.5 h-3.5" />
+                  <span>樂齡版</span>
                 </button>
               </div>
             </div>
@@ -181,14 +195,20 @@ export function ArchiveViewer() {
             <div className="flex items-center gap-1.5">
               <CheckCircle2
                 className={`w-4 h-4 ${
-                  isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-500"
+                  isEncore
+                    ? "text-rose-600 dark:text-rose-400"
+                    : isFamily
+                    ? "text-teal-600 dark:text-teal-400"
+                    : "text-amber-500"
                 }`}
               />
               <span>累積打卡進度</span>
             </div>
             <span
               className={`px-2 py-0.5 rounded-full font-bold ${
-                isFamily
+                isEncore
+                  ? "bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300"
+                  : isFamily
                   ? "bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300"
                   : "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300"
               }`}
@@ -206,7 +226,7 @@ export function ArchiveViewer() {
               查無相符的靈修週次
             </h3>
             <p className="text-xs text-stone-500 dark:text-stone-400">
-              請嘗試更換搜尋關鍵字，或切換青年版／家庭版查看。
+              請嘗試更換搜尋關鍵字，或切換青年版／家庭版／樂齡版查看。
             </p>
           </div>
         ) : (
@@ -217,7 +237,7 @@ export function ArchiveViewer() {
                 <div className="flex items-center gap-2.5">
                   <div
                     className={`w-2 h-5 rounded-full ${
-                      isFamily ? "bg-teal-600" : "bg-amber-500"
+                      isEncore ? "bg-rose-600" : isFamily ? "bg-teal-600" : "bg-amber-500"
                     }`}
                   />
                   <h2 className="font-bold text-lg sm:text-xl text-stone-900 dark:text-stone-100 tracking-tight">
@@ -246,7 +266,9 @@ export function ArchiveViewer() {
                         key={week.id}
                         className={`rounded-3xl p-6 sm:p-7 border transition-all duration-200 ${
                           week.isCurrentWeek
-                            ? isFamily
+                            ? isEncore
+                              ? "bg-gradient-to-br from-rose-500/10 via-white dark:via-stone-900 to-rose-500/5 border-rose-400/80 dark:border-rose-700/80 shadow-md shadow-rose-500/5"
+                              : isFamily
                               ? "bg-gradient-to-br from-teal-500/10 via-white dark:via-stone-900 to-teal-500/5 border-teal-400/80 dark:border-teal-700/80 shadow-md shadow-teal-500/5"
                               : "bg-gradient-to-br from-amber-500/10 via-white dark:via-stone-900 to-amber-500/5 border-amber-400/80 dark:border-amber-700/80 shadow-md shadow-amber-500/5"
                             : "bg-white dark:bg-stone-900/70 border-stone-200 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 shadow-xs"
@@ -259,7 +281,11 @@ export function ArchiveViewer() {
                               {week.isCurrentWeek && (
                                 <span
                                   className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold text-white shadow-xs ${
-                                    isFamily ? "bg-teal-700" : "bg-amber-600"
+                                    isEncore
+                                      ? "bg-rose-700"
+                                      : isFamily
+                                      ? "bg-teal-700"
+                                      : "bg-amber-600"
                                   }`}
                                 >
                                   ✨ 當前靈修週
@@ -271,7 +297,9 @@ export function ArchiveViewer() {
                               </span>
                               <span
                                 className={`text-xs font-semibold px-2 py-0.5 rounded-md border ${
-                                  isFamily
+                                  isEncore
+                                    ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800"
+                                    : isFamily
                                     ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border-teal-200 dark:border-teal-800"
                                     : "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800"
                                 }`}
@@ -303,7 +331,11 @@ export function ArchiveViewer() {
                             <div className="w-24 h-2 rounded-full bg-stone-200 dark:bg-stone-700 overflow-hidden">
                               <div
                                 className={`h-full rounded-full transition-all duration-300 ${
-                                  isFamily ? "bg-teal-600" : "bg-amber-500"
+                                  isEncore
+                                    ? "bg-rose-600"
+                                    : isFamily
+                                    ? "bg-teal-600"
+                                    : "bg-amber-500"
                                 }`}
                                 style={{ width: `${weekProgress}%` }}
                               />
@@ -341,7 +373,9 @@ export function ArchiveViewer() {
                                     <div className="flex items-center justify-between gap-1 mb-1.5">
                                       <span
                                         className={`text-xs font-extrabold px-1.5 py-0.5 rounded-md ${
-                                          isFamily
+                                          isEncore
+                                            ? "bg-rose-700 text-white"
+                                            : isFamily
                                             ? "bg-teal-700 text-white"
                                             : "bg-amber-600 text-white"
                                         }`}
@@ -356,7 +390,9 @@ export function ArchiveViewer() {
 
                                     <div
                                       className={`text-[11px] font-bold truncate line-clamp-1 transition-colors ${
-                                        isFamily
+                                        isEncore
+                                          ? "group-hover:text-rose-700 dark:group-hover:text-rose-300"
+                                          : isFamily
                                           ? "group-hover:text-teal-700 dark:group-hover:text-teal-300"
                                           : "group-hover:text-amber-600 dark:group-hover:text-amber-400"
                                       }`}
@@ -384,7 +420,9 @@ export function ArchiveViewer() {
                           <Link
                             href={`/devotional/${version}/${week.id}/mon`}
                             className={`inline-flex items-center gap-1 font-bold hover:underline ${
-                              isFamily
+                              isEncore
+                                ? "text-rose-700 dark:text-rose-400"
+                                : isFamily
                                 ? "text-teal-700 dark:text-teal-400"
                                 : "text-amber-600 dark:text-amber-400"
                             }`}
@@ -427,7 +465,7 @@ export function ArchiveViewer() {
               返回靈修首頁
             </Link>
             <span>
-              由{' '}
+              由{" "}
               <a
                 href="https://web.ntnu.edu.tw/~hslee/"
                 target="_blank"
@@ -435,8 +473,8 @@ export function ArchiveViewer() {
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
                 李鴻欣 (Hung-Shin Lee)
-              </a>{' '}
-              使用{' '}
+              </a>{" "}
+              使用{" "}
               <a
                 href="https://gemini.google.com/app"
                 target="_blank"
@@ -444,7 +482,7 @@ export function ArchiveViewer() {
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
                 Gemini Task
-              </a>{' '}
+              </a>{" "}
               製作
             </span>
           </div>

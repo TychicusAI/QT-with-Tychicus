@@ -7,14 +7,14 @@ import {
   ChevronRight,
   Home,
   BookOpen,
-  Quote,
   Clock,
   Share2,
   CheckCircle2,
   Sparkles,
   HandHeart,
   Users,
-  Sparkle
+  Sparkle,
+  Sun
 } from "lucide-react";
 import { marked } from "marked";
 import { DevotionalDay, DevotionalWeek, DevotionalVersion } from "@/types/devotional";
@@ -53,8 +53,15 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   };
 
   const isFamily = week.version === "family";
-  const otherVersion: DevotionalVersion = isFamily ? "youth" : "family";
-  const otherVersionLabel = isFamily ? "切換至青年版" : "切換至家庭版";
+  const isEncore = week.version === "encore";
+  const versionLabel = isEncore ? "樂齡版" : isFamily ? "家庭版" : "青年版";
+  const readerThemeClass = isEncore ? "encore-reader" : isFamily ? "family-reader" : "youth-reader";
+
+  const versionOptions: { id: DevotionalVersion; label: string; icon: React.ReactNode }[] = [
+    { id: "youth", label: "青年版", icon: <Sparkle className="w-3 h-3 text-amber-500" /> },
+    { id: "family", label: "家庭版", icon: <Users className="w-3 h-3 text-teal-600" /> },
+    { id: "encore", label: "樂齡版", icon: <Sun className="w-3 h-3 text-rose-600" /> },
+  ];
 
   const messageHtml = React.useMemo(() => {
     return marked.parse(day.message, { breaks: true }) as string;
@@ -98,73 +105,95 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             歷週存檔
           </Link>
           <span>/</span>
-          <span className="font-semibold text-stone-800 dark:text-stone-200">{isFamily ? "家庭版" : "青年版"}</span>
+          <span className="font-semibold text-stone-800 dark:text-stone-200">{versionLabel}</span>
           <span>/</span>
           <span className="font-semibold text-stone-800 dark:text-stone-200">{day.dayLabel}</span>
         </nav>
 
-        {/* Dual Version Switcher & Reader Controls */}
-        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-          {/* Quick Version Toggle for this day */}
-          <Link
-            href={`/devotional/${otherVersion}/${week.id}/${day.id}`}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 transition"
-            title={`對照查看${otherVersionLabel}的靈修信息`}
-          >
-            {isFamily ? <Sparkle className="w-3 h-3 text-amber-500" /> : <Users className="w-3 h-3 text-teal-600" />}
-            <span>{otherVersionLabel}</span>
-          </Link>
-
-          {/* Font size switcher */}
-          <div className="flex items-center bg-stone-100 dark:bg-stone-800/80 rounded-lg p-0.5 border border-stone-200 dark:border-stone-700">
-            <button
-              onClick={() => handleSetFontSize("normal")}
-              className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
-                fontSize === "normal"
-                  ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
-                  : "text-stone-500"
-              }`}
-            >
-              小
-            </button>
-            <button
-              onClick={() => handleSetFontSize("large")}
-              className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
-                fontSize === "large"
-                  ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
-                  : "text-stone-500"
-              }`}
-            >
-              中
-            </button>
-            <button
-              onClick={() => handleSetFontSize("xlarge")}
-              className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
-                fontSize === "xlarge"
-                  ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
-                  : "text-stone-500"
-              }`}
-            >
-              大
-            </button>
+        {/* Three-Track Version Switcher & Reader Controls */}
+        <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2.5 flex-wrap w-full sm:w-auto">
+          {/* Quick Version Switcher for this day */}
+          <div className="flex items-center gap-0.5 sm:gap-1 bg-stone-100 dark:bg-stone-800/80 p-0.5 rounded-full border border-stone-200 dark:border-stone-700 shrink-0">
+            {versionOptions.map((opt) => {
+              const active = opt.id === week.version;
+              return (
+                <Link
+                  key={opt.id}
+                  href={`/devotional/${opt.id}/${week.id}/${day.id}`}
+                  className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap ${
+                    active
+                      ? opt.id === "encore"
+                        ? "bg-rose-700 text-white shadow-xs"
+                        : opt.id === "family"
+                        ? "bg-teal-700 text-white shadow-xs"
+                        : "bg-amber-600 text-white shadow-xs"
+                      : "text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white"
+                  }`}
+                  title={`查看${opt.label}的靈修信息`}
+                >
+                  {!active && <span className="hidden xs:inline-flex">{opt.icon}</span>}
+                  <span>{opt.label}</span>
+                </Link>
+              );
+            })}
           </div>
 
-          <button
-            onClick={() => setIsShareModalOpen(true)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition cursor-pointer ${
-              isFamily
-                ? "bg-teal-500/10 hover:bg-teal-500/20 text-teal-800 dark:text-teal-300"
-                : "bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300"
-            }`}
-          >
-            <Share2 className="w-3.5 h-3.5" />
-            <span>分享金句</span>
-          </button>
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Font size switcher */}
+            <div className="flex items-center bg-stone-100 dark:bg-stone-800/80 rounded-lg p-0.5 border border-stone-200 dark:border-stone-700">
+              <button
+                onClick={() => handleSetFontSize("normal")}
+                className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
+                  fontSize === "normal"
+                    ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
+                    : "text-stone-500"
+                }`}
+              >
+                小
+              </button>
+              <button
+                onClick={() => handleSetFontSize("large")}
+                className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
+                  fontSize === "large"
+                    ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
+                    : "text-stone-500"
+                }`}
+              >
+                中
+              </button>
+              <button
+                onClick={() => handleSetFontSize("xlarge")}
+                className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
+                  fontSize === "xlarge"
+                    ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
+                    : "text-stone-500"
+                }`}
+              >
+                大
+              </button>
+            </div>
 
-          <ThemeToggle
-            iconSize="sm"
-            className="p-1.5 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition cursor-pointer"
-          />
+            <button
+              onClick={() => setIsShareModalOpen(true)}
+              className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg font-medium transition cursor-pointer whitespace-nowrap ${
+                isEncore
+                  ? "bg-rose-500/10 hover:bg-rose-500/20 text-rose-800 dark:text-rose-300"
+                  : isFamily
+                  ? "bg-teal-500/10 hover:bg-teal-500/20 text-teal-800 dark:text-teal-300"
+                  : "bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300"
+              }`}
+            >
+              <Share2 className="w-3.5 h-3.5 shrink-0" />
+              <span>
+                分享<span className="hidden sm:inline">金句</span>
+              </span>
+            </button>
+
+            <ThemeToggle
+              iconSize="sm"
+              className="p-1.5 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition cursor-pointer"
+            />
+          </div>
         </div>
       </div>
 
@@ -173,14 +202,20 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         <div className="flex flex-wrap items-center gap-2.5">
           <span
             className={`px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm ${
-              isFamily ? "bg-teal-700 shadow-teal-700/20" : "bg-amber-600 shadow-amber-600/20"
+              isEncore
+                ? "bg-rose-700 shadow-rose-700/20"
+                : isFamily
+                ? "bg-teal-700 shadow-teal-700/20"
+                : "bg-amber-600 shadow-amber-600/20"
             }`}
           >
-            {isFamily ? `家庭版・${day.dayLabel}` : `青年版・${day.dayLabel}`}
+            {`${versionLabel}・${day.dayLabel}`}
           </span>
           <span
             className={`text-xs font-semibold px-2.5 py-1 rounded-md border ${
-              isFamily
+              isEncore
+                ? "text-rose-800 dark:text-rose-300 bg-rose-100/70 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800"
+                : isFamily
                 ? "text-teal-800 dark:text-teal-300 bg-teal-100/70 dark:bg-teal-950/60 border-teal-200 dark:border-teal-800"
                 : "text-amber-700 dark:text-amber-400 bg-amber-100/70 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800"
             }`}
@@ -202,7 +237,9 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       {/* 1. Scripture Reading Card */}
       <section
         className={`rounded-3xl p-6 sm:p-8 border relative overflow-hidden shadow-xs ${
-          isFamily
+          isEncore
+            ? "bg-rose-500/5 dark:bg-rose-950/20 border-rose-300/50 dark:border-rose-700/40"
+            : isFamily
             ? "bg-teal-500/5 dark:bg-teal-950/20 border-teal-300/50 dark:border-teal-700/40"
             : "bg-amber-500/5 dark:bg-amber-950/20 border-amber-300/50 dark:border-amber-700/40"
         }`}
@@ -210,7 +247,11 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         <div className="flex items-center gap-2 mb-3">
           <BookOpen
             className={`w-5 h-5 shrink-0 ${
-              isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-600 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-600 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           />
           <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">今日經文</h3>
@@ -231,9 +272,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         />
 
         <div
-          className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${
-            isFamily ? "family-reader" : "youth-reader"
-          } ${fontClasses}`}
+          className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
           dangerouslySetInnerHTML={{ __html: messageHtml }}
         />
       </section>
@@ -242,7 +281,9 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       {day.meditationQuestion && (
         <section
           className={`rounded-2xl p-5 sm:p-6 border space-y-3 ${
-            isFamily
+            isEncore
+              ? "bg-rose-500/10 dark:bg-rose-950/30 border-rose-300/60 dark:border-rose-700/60"
+              : isFamily
               ? "bg-teal-500/10 dark:bg-teal-950/30 border-teal-300/60 dark:border-teal-700/60"
               : "bg-amber-500/10 dark:bg-amber-950/30 border-amber-300/60 dark:border-amber-700/60"
           }`}
@@ -250,15 +291,17 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           <div className="flex items-center gap-2">
             <Sparkles
               className={`w-5 h-5 shrink-0 ${
-                isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+                isEncore
+                  ? "text-rose-600 dark:text-rose-400"
+                  : isFamily
+                  ? "text-teal-600 dark:text-teal-400"
+                  : "text-amber-600 dark:text-amber-400"
               }`}
             />
             <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">默想反思</h3>
           </div>
           <div
-            className={`${meditationClasses} text-stone-800 dark:text-stone-100 markdown-content ${
-              isFamily ? "family-reader" : "youth-reader"
-            }`}
+            className={`${meditationClasses} text-stone-800 dark:text-stone-100 markdown-content ${readerThemeClass}`}
             dangerouslySetInnerHTML={{
               __html: marked.parseInline(day.meditationQuestion.replace(/^[「"“]|["”」]$/g, "")) as string,
             }}
@@ -279,7 +322,9 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       {/* 5. Suggested Prayer Section */}
       <section
         className={`rounded-3xl p-6 sm:p-8 border space-y-4 ${
-          isFamily
+          isEncore
+            ? "bg-gradient-to-br from-rose-500/10 via-pink-500/5 to-rose-100/20 dark:from-slate-900 dark:via-stone-900 dark:to-slate-950 border-rose-300/60 dark:border-rose-800/60"
+            : isFamily
             ? "bg-gradient-to-br from-teal-500/10 via-emerald-500/5 to-teal-100/20 dark:from-slate-900 dark:via-stone-900 dark:to-slate-950 border-teal-300/60 dark:border-teal-800/60"
             : "bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-amber-100/20 dark:from-slate-900 dark:via-stone-900 dark:to-slate-950 border-amber-300/60 dark:border-amber-800/60"
         }`}
@@ -287,7 +332,11 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         <div className="flex items-center gap-2">
           <HandHeart
             className={`w-5 h-5 shrink-0 ${
-              isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-600 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-600 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           />
           <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">建議禱告</h3>
@@ -314,25 +363,29 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       />
 
       {/* Bottom Navigation: Prev / Next Day (supports cross-week navigation) */}
-      <footer className="pt-6 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between gap-2 sm:gap-4">
+      <footer className="pt-6 border-t border-stone-200 dark:border-stone-800 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
         {adjacentPrev ? (
           <Link
             href={`/devotional/${adjacentPrev.version}/${adjacentPrev.weekId}/${adjacentPrev.dayId}`}
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-900 transition text-xs font-semibold group"
+            className="order-1 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-900 transition text-xs font-semibold group"
             title={adjacentPrev.isCrossWeek ? `跨週前往：${adjacentPrev.title}` : adjacentPrev.title}
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform shrink-0" />
             <span>上一日：{adjacentPrev.dayLabel}</span>
           </Link>
         ) : (
-          <div />
+          <div className="order-1" />
         )}
 
-        <div className="flex items-center gap-2 sm:gap-3 text-xs font-semibold">
+        <div className="order-3 sm:order-2 w-full sm:w-auto flex items-center justify-center gap-3 pt-1 sm:pt-0 text-xs font-semibold">
           <Link
             href="/"
             className={`hover:underline shrink-0 text-center ${
-              isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-700 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-700 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           >
             返回首頁
@@ -349,8 +402,10 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         {adjacentNext ? (
           <Link
             href={`/devotional/${adjacentNext.version}/${adjacentNext.weekId}/${adjacentNext.dayId}`}
-            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl text-white transition text-xs font-semibold group shadow-md ${
-              isFamily
+            className={`order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl text-white transition text-xs font-semibold group shadow-md ${
+              isEncore
+                ? "bg-rose-700 hover:bg-rose-600 shadow-rose-700/20"
+                : isFamily
                 ? "bg-teal-700 hover:bg-teal-600 shadow-teal-700/20"
                 : "bg-amber-600 hover:bg-amber-500 shadow-amber-600/20"
             }`}
@@ -362,7 +417,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         ) : (
           <Link
             href="/archive"
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition text-xs font-semibold"
+            className="order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition text-xs font-semibold"
           >
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>前往歷週存檔庫</span>

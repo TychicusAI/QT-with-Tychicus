@@ -40,6 +40,7 @@ export function AudioPlayer({
   dayLabel,
 }: AudioPlayerProps) {
   const isFamily = version === "family";
+  const isEncore = version === "encore";
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const headerContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -51,10 +52,17 @@ export function AudioPlayer({
   const [isExpanded, setIsExpanded] = useState(false);
   const [isStickyVisible, setIsStickyVisible] = useState(false);
   const [isAvailable, setIsAvailable] = useState(hasAudio);
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  const voiceName = isFamily ? "家庭版伴讀（溫和女聲）" : "青年版伴讀（沉穩男聲）";
-  const versionTitle = isFamily ? "家庭版靈修伴讀" : "青年版靈修伴讀";
+  const voiceName = isEncore
+    ? "樂齡版伴讀（溫潤女聲）"
+    : isFamily
+    ? "家庭版伴讀（溫和女聲）"
+    : "青年版伴讀（沉穩男聲）";
+  const versionTitle = isEncore
+    ? "樂齡版靈修伴讀"
+    : isFamily
+    ? "家庭版靈修伴讀"
+    : "青年版靈修伴讀";
 
   // IntersectionObserver to detect when the main player header scrolls out of view
   useEffect(() => {
@@ -82,7 +90,6 @@ export function AudioPlayer({
   const handleLoadedMetadata = useCallback(() => {
     if (audioRef.current) {
       setDuration(audioRef.current.duration);
-      setIsLoaded(true);
       setIsAvailable(true);
     }
   }, []);
@@ -166,7 +173,11 @@ export function AudioPlayer({
       <div className="flex items-center gap-2">
         <Quote
           className={`w-5 h-5 rotate-180 shrink-0 ${
-            isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+            isEncore
+              ? "text-rose-600 dark:text-rose-400"
+              : isFamily
+              ? "text-teal-600 dark:text-teal-400"
+              : "text-amber-600 dark:text-amber-400"
           }`}
         />
         <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">今日信息</h3>
@@ -175,7 +186,19 @@ export function AudioPlayer({
   }
 
   // Accent styles according to version
-  const theme = isFamily
+  const theme = isEncore
+    ? {
+        badgeBg: "bg-rose-500/10 text-rose-800 dark:text-rose-200 border-rose-300/40 dark:border-rose-700/40",
+        pillActive: "bg-rose-700 text-white shadow-sm dark:bg-rose-600",
+        pillIdle: "bg-rose-500/10 text-rose-800 dark:text-rose-200 hover:bg-rose-500/20 border border-rose-300/50 dark:border-rose-700/50",
+        cardBg: "bg-rose-500/5 dark:bg-rose-950/20 border-rose-300/50 dark:border-rose-700/40",
+        accentColor: "accent-rose-700 dark:accent-rose-400",
+        progressColor: "bg-rose-700 dark:bg-rose-400",
+        buttonHover: "hover:bg-rose-500/10 text-rose-700 dark:text-rose-300",
+        speedActive: "bg-rose-700 text-white dark:bg-rose-600",
+        playBtn: "bg-rose-700 hover:bg-rose-800 text-white dark:bg-rose-600 dark:hover:bg-rose-700 shadow-md",
+      }
+    : isFamily
     ? {
         badgeBg: "bg-teal-500/10 text-teal-800 dark:text-teal-200 border-teal-300/40 dark:border-teal-700/40",
         pillActive: "bg-teal-600 text-white shadow-sm dark:bg-teal-500",
@@ -199,8 +222,6 @@ export function AudioPlayer({
         playBtn: "bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-500 dark:hover:bg-amber-600 shadow-md",
       };
 
-  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
-
   return (
     <div className="space-y-4" ref={headerContainerRef}>
       {/* Hidden HTML5 Audio Element */}
@@ -219,7 +240,11 @@ export function AudioPlayer({
         <div className="flex items-center gap-2">
           <Quote
             className={`w-5 h-5 rotate-180 shrink-0 ${
-              isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-600 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-600 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           />
           <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">今日信息</h3>
@@ -306,7 +331,7 @@ export function AudioPlayer({
             </div>
 
             {/* Main Buttons Row */}
-            <div className="flex items-center justify-between gap-2 pt-1">
+            <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 pt-1">
               {/* Left Speed Selector */}
               <div className="flex items-center gap-1">
                 <span className="text-[11px] text-stone-500 dark:text-stone-400 mr-1 hidden sm:inline">
@@ -329,7 +354,7 @@ export function AudioPlayer({
               </div>
 
               {/* Center Playback Controls */}
-              <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-2.5 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => handleSkip(-10)}
@@ -363,7 +388,7 @@ export function AudioPlayer({
               </div>
 
               {/* Right Spacer / Volume icon */}
-              <div className="flex items-center text-xs text-stone-400 justify-end w-[80px]">
+              <div className="hidden sm:flex items-center text-xs text-stone-400 justify-end sm:w-[80px]">
                 <Volume2 className="w-4 h-4" />
               </div>
             </div>
@@ -380,7 +405,11 @@ export function AudioPlayer({
               type="button"
               onClick={togglePlay}
               className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                isFamily ? "bg-teal-500 text-stone-950" : "bg-amber-500 text-stone-950"
+                isEncore
+                  ? "bg-rose-500 text-stone-950"
+                  : isFamily
+                  ? "bg-teal-500 text-stone-950"
+                  : "bg-amber-500 text-stone-950"
               }`}
             >
               {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}

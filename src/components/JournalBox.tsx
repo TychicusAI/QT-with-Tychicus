@@ -27,6 +27,7 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
   };
 
   const isFamily = version === "family";
+  const isEncore = version === "encore";
 
   const promptClasses = {
     normal: "text-xs sm:text-sm leading-relaxed",
@@ -43,7 +44,9 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
   return (
     <div
       className={`rounded-2xl p-5 sm:p-6 border space-y-3 ${
-        isFamily
+        isEncore
+          ? "bg-rose-500/5 dark:bg-rose-950/20 border-rose-300/40 dark:border-rose-900/40"
+          : isFamily
           ? "bg-teal-500/5 dark:bg-teal-950/20 border-teal-300/40 dark:border-teal-900/40"
           : "bg-amber-500/5 dark:bg-stone-900/60 border-amber-300/40 dark:border-stone-800"
       }`}
@@ -52,7 +55,11 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
         <div className="flex items-center gap-2">
           <PenLine
             className={`w-5 h-5 shrink-0 ${
-              isFamily ? "text-teal-600 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-600 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-600 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           />
           <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
@@ -72,7 +79,9 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
       </div>
 
       <p className={`${promptClasses} text-stone-600 dark:text-stone-300`}>
-        {isFamily
+        {isEncore
+          ? "回顧走過的半生歲月與當前的放手課題，今天神透過這段經文賜給你什麼樣的安慰、釋放或下半場亮光？"
+          : isFamily
           ? "面對家庭餐桌上的對話與代際張力，今天神給了你什麼智慧或同理的眼光？"
           : "這篇信息觸動了你的哪一部分？面對身邊的演算法焦慮或人際壓力，今天你有哪些具體的降服或轉向？"}
       </p>
@@ -81,13 +90,19 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
         value={note}
         onChange={handleChange}
         placeholder={
-          isFamily
+          isEncore
+            ? "在此寫下今天數算的恩典、為成年兒女或年邁雙親交託的代禱、或與主同行的心靈手記..."
+            : isFamily
             ? "在此寫下今晚能與家人分享的心裡話、或在安靜中為兒女/父母獻上的真摯代禱..."
             : "在此寫下今天神對你的說話、安靜中的領受、或是寫給天父的真實禱告..."
         }
         rows={4}
         className={`w-full p-3.5 rounded-xl ${textareaClasses} bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:outline-none focus:ring-2 resize-y ${
-          isFamily ? "focus:ring-teal-600" : "focus:ring-amber-500"
+          isEncore
+            ? "focus:ring-rose-600"
+            : isFamily
+            ? "focus:ring-teal-600"
+            : "focus:ring-amber-500"
         }`}
       />
     </div>

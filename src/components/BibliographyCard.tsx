@@ -17,11 +17,14 @@ export function BibliographyCard({
   bookName = "哥林多後書",
 }: BibliographyCardProps) {
   const isFamily = version === "family";
+  const isEncore = version === "encore";
 
   return (
     <div
       className={`rounded-2xl p-5 sm:p-6 border transition-all duration-200 shadow-2xs ${
-        isFamily
+        isEncore
+          ? "bg-gradient-to-r from-rose-500/5 via-rose-500/10 to-pink-500/5 border-rose-300/50 dark:border-rose-800/40"
+          : isFamily
           ? "bg-gradient-to-r from-teal-500/5 via-teal-500/10 to-emerald-500/5 border-teal-300/50 dark:border-teal-800/40"
           : "bg-gradient-to-r from-amber-500/5 via-amber-500/10 to-orange-500/5 border-amber-300/50 dark:border-amber-800/40"
       }`}
@@ -30,7 +33,9 @@ export function BibliographyCard({
         <div className="flex items-start gap-3.5">
           <div
             className={`p-2.5 rounded-xl shrink-0 ${
-              isFamily
+              isEncore
+                ? "bg-rose-600/10 text-rose-700 dark:text-rose-300"
+                : isFamily
                 ? "bg-teal-600/10 text-teal-700 dark:text-teal-300"
                 : "bg-amber-600/10 text-amber-700 dark:text-amber-300"
             }`}
@@ -45,7 +50,9 @@ export function BibliographyCard({
               </span>
               <span
                 className={`inline-flex items-center gap-1 text-xs sm:text-sm font-semibold px-2.5 py-0.5 rounded-full ${
-                  isFamily
+                  isEncore
+                    ? "bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200"
+                    : isFamily
                     ? "bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-teal-200"
                     : "bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200"
                 }`}
@@ -63,7 +70,9 @@ export function BibliographyCard({
         <Link
           href={`/books/${bookSlug}`}
           className={`shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition shadow-xs group ${
-            isFamily
+            isEncore
+              ? "bg-rose-700 hover:bg-rose-600 text-white shadow-rose-700/20"
+              : isFamily
               ? "bg-teal-700 hover:bg-teal-600 text-white shadow-teal-700/20"
               : "bg-amber-600 hover:bg-amber-500 text-white shadow-amber-600/20"
           }`}

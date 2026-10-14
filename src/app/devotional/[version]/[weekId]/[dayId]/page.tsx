@@ -8,13 +8,19 @@ export function generateStaticParams() {
   return getAllParams();
 }
 
+function normalizeVersion(rawVersion: string): DevotionalVersion {
+  if (rawVersion === "family") return "family";
+  if (rawVersion === "encore") return "encore";
+  return "youth";
+}
+
 export async function generateMetadata({
   params
 }: {
   params: Promise<{ version: string; weekId: string; dayId: string }>;
 }): Promise<Metadata> {
   const { version: rawVersion, weekId, dayId } = await params;
-  const version = (rawVersion === "family" ? "family" : "youth") as DevotionalVersion;
+  const version = normalizeVersion(rawVersion);
   const data = getDayById(version, weekId, dayId);
   if (!data) {
     return {
@@ -22,7 +28,7 @@ export async function generateMetadata({
     };
   }
 
-  const vLabel = version === "family" ? "家庭版" : "青年版";
+  const vLabel = version === "encore" ? "樂齡版" : version === "family" ? "家庭版" : "青年版";
   const dayTitle = `${data.day.dayLabel} ${data.day.title} (${vLabel})`;
   const dayDesc = `【${data.day.scriptureRef}】${data.day.goldenVerse}`;
 
@@ -43,12 +49,12 @@ export default async function DevotionalDayRoute({
   params: Promise<{ version: string; weekId: string; dayId: string }>;
 }) {
   const { version: rawVersion, weekId, dayId } = await params;
-  const version = (rawVersion === "family" ? "family" : "youth") as DevotionalVersion;
+  const version = normalizeVersion(rawVersion);
   const data = getDayById(version, weekId, dayId);
 
   if (!data) {
     notFound();
   }
 
-  return <DevotionalReader week={data.week} day={data.day} />;
+  return <DevotionalReader week={{ ...data.week, version }} day={data.day} />;
 }

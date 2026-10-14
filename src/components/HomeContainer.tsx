@@ -9,7 +9,7 @@ import { MeditationTimer } from "@/components/MeditationTimer";
 import { getCurrentWeek, getAllWeeksSorted, formatWeekDateRange, getRecommendedDayIdForToday } from "@/lib/devotional-service";
 import { usePreferredVersion } from "@/lib/storage";
 import Link from "next/link";
-import { Sparkles, Clock, Heart, Layers, Users, Sparkle, Library, Calendar, ChevronRight, History } from "lucide-react";
+import { Sparkles, Clock, Heart, Layers, Users, Sparkle, Library, Calendar, ChevronRight, History, Sun } from "lucide-react";
 
 export function HomeContainer() {
   const [isVerseModalOpen, setIsVerseModalOpen] = useState(false);
@@ -18,12 +18,15 @@ export function HomeContainer() {
   const [version, setVersion] = usePreferredVersion();
 
   const isFamily = version === "family";
+  const isEncore = version === "encore";
   const allWeeks = React.useMemo(() => getAllWeeksSorted(version), [version]);
   const currentWeek = getCurrentWeek(version);
   const [selectedWeekId, setSelectedWeekId] = useState<string>(() => currentWeek.id);
 
   // If version changed and selected week doesn't exist, fallback to currentWeek
-  const activeWeek = allWeeks.find((w) => w.id === selectedWeekId) || currentWeek;
+  const rawActiveWeek = allWeeks.find((w) => w.id === selectedWeekId) || currentWeek;
+  const activeWeek = React.useMemo(() => ({ ...rawActiveWeek, version }), [rawActiveWeek, version]);
+  const heroWeek = React.useMemo(() => ({ ...currentWeek, version }), [currentWeek, version]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fbfbf9] dark:bg-[#090d16] text-stone-900 dark:text-stone-100 selection:bg-amber-500/20 overflow-x-hidden w-full">
@@ -39,37 +42,60 @@ export function HomeContainer() {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12 min-w-0">
         {/* Welcome Tagline */}
         <section className="text-center max-w-2xl mx-auto space-y-4 pt-2 sm:pt-4">
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center">
             {/* Version Switcher Buttons */}
-            <div className="inline-flex items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs">
+            <div className="inline-flex items-center justify-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs max-w-full">
               <button
                 onClick={() => setVersion("youth")}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
-                  !isFamily
+                className={`flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  version === "youth"
                     ? "bg-amber-500 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                 }`}
               >
-                <Sparkle className="w-3.5 h-3.5" />
-                <span>青年版 Youth</span>
+                <Sparkle className="w-3.5 h-3.5 shrink-0" />
+                <span>青年版</span>
+                <span className="hidden sm:inline">Youth</span>
               </button>
 
               <button
                 onClick={() => setVersion("family")}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                   isFamily
                     ? "bg-teal-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                 }`}
               >
-                <Users className="w-3.5 h-3.5" />
-                <span>家庭版 Family</span>
+                <Users className="w-3.5 h-3.5 shrink-0" />
+                <span>家庭版</span>
+                <span className="hidden sm:inline">Family</span>
+              </button>
+
+              <button
+                onClick={() => setVersion("encore")}
+                className={`flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  isEncore
+                    ? "bg-rose-700 text-white shadow-xs"
+                    : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                }`}
+              >
+                <Sun className="w-3.5 h-3.5 shrink-0" />
+                <span>樂齡版</span>
+                <span className="hidden sm:inline">Encore</span>
               </button>
             </div>
           </div>
 
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-50">
-            {isFamily ? (
+            {isEncore ? (
+              <>
+                在歲月淬煉的安可樂章裡，
+                <br />
+                <span className="bg-gradient-to-r from-rose-700 via-pink-600 to-rose-500 bg-clip-text text-transparent">
+                  活出日新又新的榮耀盼望
+                </span>
+              </>
+            ) : isFamily ? (
               <>
                 在餐桌旁的真實與寬容中，
                 <br />
@@ -89,14 +115,16 @@ export function HomeContainer() {
           </h1>
 
           <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mx-auto">
-            {isFamily
+            {isEncore
+              ? "每天 10~15 分鐘，卸下前半生的重擔與牽掛，在肉身漸衰卻內心日新的恩典中，將人生下半場活成自由榮耀的安可曲。"
+              : isFamily
               ? "每天 10~15 分鐘，放下指責與防衛的面具，走進兩代溝通的恩典現場，讓家成為真誠與愛的避風港。"
               : "拒絕廉價的世俗成功學，每天 10~15 分鐘走進聖經現場，拆毀自我信靠的焦慮堡壘，迎見那叫死人復活的神。"}
           </p>
         </section>
 
         {/* 1. Hero: Today's Devotional Quick Card */}
-        <TodayHeroCard key={`hero-${version}`} week={currentWeek} recommendedDayId={recommendedDayId} />
+        <TodayHeroCard key={`hero-${version}`} week={heroWeek} recommendedDayId={recommendedDayId} />
 
         {/* 2. Week Selector Bar & 6-Day Devotional Journey */}
         <section className="space-y-4">
@@ -116,7 +144,9 @@ export function HomeContainer() {
                     onClick={() => setSelectedWeekId(w.id)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
                       isSelected
-                        ? isFamily
+                        ? isEncore
+                          ? "bg-rose-700 text-white shadow-xs"
+                          : isFamily
                           ? "bg-teal-700 text-white shadow-xs"
                           : "bg-amber-600 text-white shadow-xs"
                         : "bg-stone-100 dark:bg-stone-800/80 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-200/70"
@@ -128,6 +158,8 @@ export function HomeContainer() {
                         className={`text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
                           isSelected
                             ? "bg-white/20 text-white"
+                            : isEncore
+                            ? "bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300"
                             : isFamily
                             ? "bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300"
                             : "bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300"
@@ -144,7 +176,11 @@ export function HomeContainer() {
             <Link
               href="/archive"
               className={`flex items-center gap-1 text-xs font-bold hover:underline transition ${
-                isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+                isEncore
+                  ? "text-rose-700 dark:text-rose-400"
+                  : isFamily
+                  ? "text-teal-700 dark:text-teal-400"
+                  : "text-amber-600 dark:text-amber-400"
               }`}
             >
               <span>📜 查看全部歷週存檔</span>
@@ -182,7 +218,11 @@ export function HomeContainer() {
         <section className="space-y-4">
           <div
             className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider ${
-              isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+              isEncore
+                ? "text-rose-700 dark:text-rose-400"
+                : isFamily
+                ? "text-teal-700 dark:text-teal-400"
+                : "text-amber-600 dark:text-amber-400"
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -194,7 +234,9 @@ export function HomeContainer() {
             <div
               onClick={() => setIsVerseModalOpen(true)}
               className={`group cursor-pointer rounded-2xl p-5 border transition shadow-xs flex flex-col justify-between ${
-                isFamily
+                isEncore
+                  ? "bg-gradient-to-br from-rose-500/10 to-pink-500/5 border-rose-300/40 dark:border-rose-800/40 hover:border-rose-400"
+                  : isFamily
                   ? "bg-gradient-to-br from-teal-500/10 to-emerald-500/5 border-teal-300/40 dark:border-teal-800/40 hover:border-teal-400"
                   : "bg-gradient-to-br from-amber-500/10 to-orange-500/5 border-amber-300/40 dark:border-amber-800/40 hover:border-amber-400"
               }`}
@@ -202,7 +244,11 @@ export function HomeContainer() {
               <div className="space-y-2">
                 <div
                   className={`w-9 h-9 rounded-xl text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform ${
-                    isFamily ? "bg-teal-700 shadow-teal-700/20" : "bg-amber-500 shadow-amber-500/20"
+                    isEncore
+                      ? "bg-rose-700 shadow-rose-700/20"
+                      : isFamily
+                      ? "bg-teal-700 shadow-teal-700/20"
+                      : "bg-amber-500 shadow-amber-500/20"
                   }`}
                 >
                   <Sparkles className="w-4 h-4" />
@@ -217,7 +263,11 @@ export function HomeContainer() {
 
               <div
                 className={`mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold flex items-center justify-between ${
-                  isFamily ? "text-teal-700 dark:text-teal-400" : "text-amber-600 dark:text-amber-400"
+                  isEncore
+                    ? "text-rose-700 dark:text-rose-400"
+                    : isFamily
+                    ? "text-teal-700 dark:text-teal-400"
+                    : "text-amber-600 dark:text-amber-400"
                 }`}
               >
                 <span>立即製作卡片</span>
@@ -238,7 +288,7 @@ export function HomeContainer() {
                   靜心深呼吸計時器
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
-                  在展開課業或繁忙工作前，給自己 3~5 分鐘安靜在主前。隨節奏深呼吸，卸下心中的重擔。
+                  在展開一日生活或繁忙事務前，給自己 3~5 分鐘安靜在主前。隨節奏深呼吸，卸下心中的重擔。
                 </p>
               </div>
 
@@ -261,7 +311,7 @@ export function HomeContainer() {
                   歷週靈修存檔庫
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
-                  完整查閱青年版與家庭版歷週經課系列，溫習過往信息、筆記心得與打卡進度。
+                  完整查閱青年版、家庭版與樂齡版歷週經課系列，溫習過往信息、筆記心得與打卡進度。
                 </p>
               </div>
 
@@ -300,27 +350,43 @@ export function HomeContainer() {
         <section className="rounded-3xl p-6 sm:p-10 bg-gradient-to-r from-stone-900 via-stone-800 to-stone-900 text-stone-100 border border-stone-800 shadow-xl relative overflow-hidden">
           <div
             className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none ${
-              isFamily ? "bg-teal-500/15" : "bg-amber-500/10"
+              isEncore ? "bg-rose-500/15" : isFamily ? "bg-teal-500/15" : "bg-amber-500/10"
             }`}
           />
           <div className="relative z-10 max-w-2xl space-y-3">
             <div
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${
-                isFamily
+                isEncore
+                  ? "bg-rose-500/20 text-rose-300 border-rose-500/30"
+                  : isFamily
                   ? "bg-teal-500/20 text-teal-300 border-teal-500/30"
                   : "bg-amber-500/20 text-amber-300 border-amber-500/30"
               }`}
             >
-              <Heart className={`w-3.5 h-3.5 ${isFamily ? "text-teal-400" : "text-amber-400"}`} />
-              <span>{isFamily ? "恩典相系・家是基督的避風港" : "屬靈痛覺共生・跨越孤島"}</span>
+              <Heart
+                className={`w-3.5 h-3.5 ${
+                  isEncore ? "text-rose-400" : isFamily ? "text-teal-400" : "text-amber-400"
+                }`}
+              />
+              <span>
+                {isEncore
+                  ? "歲月淬煉・內心一天新似一天"
+                  : isFamily
+                  ? "恩典相系・家是基督的避風港"
+                  : "屬靈痛覺共生・跨越孤島"}
+              </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
-              {isFamily
+              {isEncore
+                ? "「所以，我們不喪膽。外體雖然毀壞，內心卻一天新似一天。」"
+                : isFamily
                 ? "「各人不要單顧自己的事，也要顧別人的事。你們當以基督耶穌的心為心。」"
                 : "「你們以祈禱幫助我們，好叫許多人為我們得恩的緣故格外謝恩。」"}
             </h3>
             <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-              {isFamily
+              {isEncore
+                ? "人生下半場不是緩步退場的謝幕，而是卸下世俗成敗包袱後最自由的安可樂章。當我們學習鬆開緊握兒女與頭銜的雙手，基督永恆的榮耀就要在瓦器般的歲月裡愈發明亮。"
+                : isFamily
                 ? "家庭的修復不是靠誰贏得了爭論，而是靠兩代人願意在十字架前放下手套與面具，以日光下的純全良心，彼此體諒、同心仰望那信實的主。"
                 : "基督徒從來不是孤軍奮戰的個體。當我們在深淵中學會專靠上帝，那無數張原本憂傷發顫的臉龐，將在同心仰望中被神照亮，匯聚成奪眶而出的感恩洪流。"}
             </p>
@@ -336,12 +402,12 @@ export function HomeContainer() {
               靈修推基古 (QT with Tychicus)
             </span>
             <span>•</span>
-            <span>青年與家庭每日研經靈修平台</span>
+            <span>青年、家庭與樂齡每日研經靈修平台</span>
           </div>
 
           <div className="text-center sm:text-right">
             <span>
-              由{' '}
+              由{" "}
               <a
                 href="https://web.ntnu.edu.tw/~hslee/"
                 target="_blank"
@@ -349,8 +415,8 @@ export function HomeContainer() {
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
                 李鴻欣 (Hung-Shin Lee)
-              </a>{' '}
-              使用{' '}
+              </a>{" "}
+              使用{" "}
               <a
                 href="https://gemini.google.com/app"
                 target="_blank"
@@ -358,7 +424,7 @@ export function HomeContainer() {
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
                 Gemini Task
-              </a>{' '}
+              </a>{" "}
               製作
             </span>
             <span className="mx-2">•</span>
@@ -371,7 +437,7 @@ export function HomeContainer() {
       <VerseShareModal
         isOpen={isVerseModalOpen}
         onClose={() => setIsVerseModalOpen(false)}
-        week={currentWeek}
+        week={activeWeek}
       />
 
       <MeditationTimer

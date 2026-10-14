@@ -12,11 +12,16 @@ import { family_2026_09_28 } from "@/data/weeks/family/2026-09-28";
 import { family_2026_10_05 } from "@/data/weeks/family/2026-10-05";
 import { family_2026_10_12 } from "@/data/weeks/family/2026-10-12";
 
+import { encore_2026_10_12 } from "@/data/weeks/encore/2026-10-12";
+
 export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21, youth_2026_09_28, youth_2026_10_05, youth_2026_10_12];
 export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28, family_2026_10_05, family_2026_10_12];
+export const allEncoreWeeks: DevotionalWeek[] = [encore_2026_10_12];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
-  return version === "family" ? allFamilyWeeks : allYouthWeeks;
+  if (version === "family") return allFamilyWeeks;
+  if (version === "encore") return allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks;
+  return allYouthWeeks;
 }
 
 export function getAllWeeksSorted(version: DevotionalVersion): DevotionalWeek[] {
@@ -27,12 +32,17 @@ export function getAllWeeksSorted(version: DevotionalVersion): DevotionalWeek[] 
 export function getCurrentWeek(version: DevotionalVersion = "youth"): DevotionalWeek {
   const weeks = getWeeksByVersion(version);
   const current = weeks.find((w) => w.isCurrentWeek);
-  return current || weeks[0];
+  return current || weeks[weeks.length - 1] || weeks[0];
 }
 
 export function getWeekById(version: DevotionalVersion, weekId: string): DevotionalWeek | undefined {
   const weeks = getWeeksByVersion(version);
-  return weeks.find((w) => w.id === weekId);
+  const found = weeks.find((w) => w.id === weekId);
+  if (found) return found;
+  if (version === "encore") {
+    return allFamilyWeeks.find((w) => w.id === weekId) || allYouthWeeks.find((w) => w.id === weekId);
+  }
+  return undefined;
 }
 
 export function getDayById(
@@ -137,6 +147,20 @@ export function getAllParams(): { version: DevotionalVersion; weekId: string; da
   for (const week of allFamilyWeeks) {
     for (const day of week.days) {
       params.push({ version: "family", weekId: week.id, dayId: day.id });
+    }
+  }
+  const encoreWeekIds = new Set<string>();
+  for (const week of allEncoreWeeks) {
+    encoreWeekIds.add(week.id);
+    for (const day of week.days) {
+      params.push({ version: "encore", weekId: week.id, dayId: day.id });
+    }
+  }
+  for (const week of allFamilyWeeks) {
+    if (!encoreWeekIds.has(week.id)) {
+      for (const day of week.days) {
+        params.push({ version: "encore", weekId: week.id, dayId: day.id });
+      }
     }
   }
   return params;

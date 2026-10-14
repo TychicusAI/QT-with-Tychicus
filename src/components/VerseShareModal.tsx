@@ -52,7 +52,8 @@ export function VerseShareModal({ isOpen, onClose, week }: VerseShareModalProps)
 
   if (!isOpen) return null;
 
-  const versionLabel = week.version === "family" ? "家庭版" : "青年版";
+  const versionLabel =
+    week.version === "encore" ? "樂齡版" : week.version === "family" ? "家庭版" : "青年版";
 
   const verseOptions = [
     {
