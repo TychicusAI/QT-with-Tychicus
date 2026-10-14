@@ -350,6 +350,15 @@ export function HomeContainer() {
               >
                 李鴻欣 (Hung-Shin Lee)
               </a>
+              使用{' '}
+              <a
+                href="https://gemini.google.com/app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
+              >
+                Gemini Task
+              </a>{' '}
               製作
             </span>
             <span className="mx-2">•</span>
