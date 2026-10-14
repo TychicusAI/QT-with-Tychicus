@@ -427,7 +427,7 @@ export function ArchiveViewer() {
               返回靈修首頁
             </Link>
             <span>
-              由
+              由{' '}
               <a
                 href="https://web.ntnu.edu.tw/~hslee/"
                 target="_blank"
@@ -435,7 +435,7 @@ export function ArchiveViewer() {
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
                 李鴻欣 (Hung-Shin Lee)
-              </a>
+              </a>{' '}
               使用{' '}
               <a
                 href="https://gemini.google.com/app"
