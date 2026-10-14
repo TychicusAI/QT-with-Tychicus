@@ -644,92 +644,59 @@ def normalize_colons(text):
     text = re.sub(r'，\s*([。！？；])', r'\1', text)
     return text
 
-def main():
-    parser = argparse.ArgumentParser(description="F5-TTS MLX Synthesis Pipeline for Devotionals")
-    parser.add_argument("--text-file", required=True, help="Path to input text file")
-    parser.add_argument("--ref-audio", required=True, help="Path to reference audio file (WAV)")
-    parser.add_argument("--ref-text-file", required=True, help="Path to reference text file")
-    parser.add_argument("--output-mp3", required=True, help="Path to output MP3 file")
-    parser.add_argument("--speed", type=float, default=1.03, help="Speech rate multiplier (default: 1.03)")
-    parser.add_argument("--steps", type=int, default=32, help="Diffusion inference steps (default: 32)")
-    parser.add_argument("--cfg", type=float, default=1.2, help="Classifier-free guidance strength (default: 1.2)")
-    parser.add_argument("--target-sr", type=int, default=44100, help="Target MP3 sample rate in Hz (default: 44100)")
-    parser.add_argument("--bitrate", default="192k", help="Target MP3 bitrate (default: 192k)")
-    parser.add_argument("--max-len", type=int, default=40, help="Max chunk length in characters (default: 40)")
-    parser.add_argument("--clause-pause", type=float, default=0.18, help="Pause between sub-clauses in seconds (default: 0.18)")
-    parser.add_argument("--sentence-pause", type=float, default=0.30, help="Pause between sentences within paragraph in seconds (default: 0.30)")
-    parser.add_argument("--para-pause", type=float, default=0.80, help="Pause between paragraphs in seconds (default: 0.80)")
-    args = parser.parse_args()
-
-    if not os.path.exists(args.text_file):
-        print(f"Error: Text file not found: {args.text_file}", file=sys.stderr)
-        sys.exit(1)
-
-    if not os.path.exists(args.ref_audio):
-        print(f"Error: Ref audio not found: {args.ref_audio}", file=sys.stderr)
-        sys.exit(1)
-
-    if not os.path.exists(args.ref_text_file):
-        print(f"Error: Ref text file not found: {args.ref_text_file}", file=sys.stderr)
-        sys.exit(1)
-
-    with open(args.text_file, "r", encoding="utf-8") as f:
-        gen_text = f.read().strip()
-
-    with open(args.ref_text_file, "r", encoding="utf-8") as f:
-        ref_text = f.read().strip()
-
-    # 阿拉伯數字轉中文數字標準化
-    gen_text = normalize_numbers(gen_text)
-    ref_text = normalize_numbers(ref_text)
-
-    # 單獨冒號微調為逗號（自然呼吸停頓；此時支援包含「、『在內的所有引號形態）
+def synthesize_single_job(
+    f5tts,
+    gen_text,
+    ref_audio_path,
+    ref_text_path,
+    output_mp3_path,
+    args,
+    ref_cache,
+    job_label="",
+):
+    gen_text = normalize_numbers(gen_text.strip())
     gen_text = normalize_colons(gen_text)
-    ref_text = normalize_colons(ref_text)
-
-    # 方案 B：直角引號標準化
     gen_text = normalize_quotes(gen_text)
-    ref_text = normalize_quotes(ref_text)
 
-    # 讀取參考音檔
-    audio, sr = sf.read(args.ref_audio)
-    if sr != SAMPLE_RATE:
-        raise ValueError(f"Reference audio must have a sample rate of {SAMPLE_RATE}Hz")
-    audio = mx.array(audio)
+    cache_key = (os.path.abspath(ref_audio_path), os.path.abspath(ref_text_path))
+    if cache_key not in ref_cache:
+        with open(ref_text_path, "r", encoding="utf-8") as f:
+            raw_ref_text = f.read().strip()
+        norm_ref_text = normalize_quotes(normalize_colons(normalize_numbers(raw_ref_text)))
 
-    # RMS 音量標準化
-    rms = mx.sqrt(mx.mean(mx.square(audio)))
-    if rms < TARGET_RMS:
-        audio = audio * TARGET_RMS / rms
+        audio_np, sr = sf.read(ref_audio_path)
+        if sr != SAMPLE_RATE:
+            raise ValueError(f"Reference audio must have a sample rate of {SAMPLE_RATE}Hz")
+        audio_mx = mx.array(audio_np)
+        rms = mx.sqrt(mx.mean(mx.square(audio_mx)))
+        if rms < TARGET_RMS:
+            audio_mx = audio_mx * TARGET_RMS / rms
+        mx.eval(audio_mx)
+        ref_cache[cache_key] = (audio_mx, norm_ref_text, len(audio_np) / SAMPLE_RATE)
+
+    audio, ref_text, ref_sec = ref_cache[cache_key]
 
     # 中文智慧分句（三級呼吸停頓分類）
     chunk_items = split_chinese_sentences(gen_text, max_len=args.max_len)
-    print(f"  📝 正文共 {len(gen_text)} 字，切分為 {len(chunk_items)} 個語音片段進行批次合成...")
-    print(f"  ⏱️ 停頓設定：子句微停頓 {args.clause_pause:.2f} 秒，句間換氣 {args.sentence_pause:.2f} 秒，段落間停頓 {args.para_pause:.2f} 秒 (最大長度 {args.max_len} 字, steps={args.steps}, {args.target_sr}Hz @ {args.bitrate})")
-
-    # 載入 F5-TTS 模型
-    print("  🧠 正在載入 F5-TTS MLX 模型至 Apple Silicon GPU...")
-    f5tts = F5TTS.from_pretrained("lucasnewman/f5-tts-mlx")
+    prefix_str = f"[{job_label}] " if job_label else ""
+    print(f"\n  📝 {prefix_str}正文共 {len(gen_text)} 字，切分為 {len(chunk_items)} 個語音片段 (參考音檔: {ref_sec:.2f}s)...")
+    print(f"  ⏱️ 停頓設定：子句微停頓 {args.clause_pause:.2f} 秒，句間換氣 {args.sentence_pause:.2f} 秒，段落間停頓 {args.para_pause:.2f} 秒 (最大長度 {args.max_len} 字, steps={args.steps}, cfg={args.cfg}, {args.target_sr}Hz @ {args.bitrate})")
 
     # 三級停頓波形
-    pause_clause_samples = int(SAMPLE_RATE * args.clause_pause)
-    pause_clause_wave = np.zeros(pause_clause_samples, dtype=np.float32)
-
-    pause_sentence_samples = int(SAMPLE_RATE * args.sentence_pause)
-    pause_sentence_wave = np.zeros(pause_sentence_samples, dtype=np.float32)
-
-    pause_para_samples = int(SAMPLE_RATE * args.para_pause)
-    pause_para_wave = np.zeros(pause_para_samples, dtype=np.float32)
+    pause_clause_wave = np.zeros(int(SAMPLE_RATE * args.clause_pause), dtype=np.float32)
+    pause_sentence_wave = np.zeros(int(SAMPLE_RATE * args.sentence_pause), dtype=np.float32)
+    pause_para_wave = np.zeros(int(SAMPLE_RATE * args.para_pause), dtype=np.float32)
 
     output_waves = []
     t_start = datetime.datetime.now()
+    audio_batched = mx.expand_dims(audio, axis=0)
 
-    for idx, (chunk, pause_type) in enumerate(tqdm(chunk_items, desc="  🎙️ 合成進度", unit="句")):
+    for idx, (chunk, pause_type) in enumerate(tqdm(chunk_items, desc=f"  🎙️ {prefix_str}合成進度", unit="句")):
         dur = int(estimated_duration(audio, ref_text, chunk, args.speed) * FRAMES_PER_SEC)
         text_pinyin = custom_convert_char_to_pinyin([ref_text + " " + chunk])
 
         wave, _ = f5tts.sample(
-            mx.expand_dims(audio, axis=0),
+            audio_batched,
             text=text_pinyin,
             duration=dur,
             steps=args.steps,
@@ -768,9 +735,9 @@ def main():
     total_audio_sec = len(full_wave) / SAMPLE_RATE
     total_time_cost = (datetime.datetime.now() - t_start).total_seconds()
 
-    print(f"  ⚡ 合成完畢！產出語音時長: {total_audio_sec:.1f} 秒，M5 Max 耗時: {total_time_cost:.1f} 秒 (約 {total_audio_sec/max(1,total_time_cost):.1f}x 實時速度)")
+    print(f"  ⚡ {prefix_str}合成完畢！產出語音時長: {total_audio_sec:.1f} 秒，耗時: {total_time_cost:.1f} 秒 (約 {total_audio_sec/max(0.1,total_time_cost):.2f}x 實時速度)")
 
-    os.makedirs(os.path.dirname(os.path.abspath(args.output_mp3)), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(output_mp3_path)), exist_ok=True)
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_wav:
         tmp_wav_path = tmp_wav.name
 
@@ -782,12 +749,95 @@ def main():
             "-af", "lowpass=f=10500",
             "-ar", str(args.target_sr),
             "-b:a", args.bitrate,
-            args.output_mp3
+            output_mp3_path
         ]
         subprocess.run(ffmpeg_cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     finally:
         if os.path.exists(tmp_wav_path):
             os.remove(tmp_wav_path)
+
+    # 釋放單日 MLX GPU 暫存快取，避免多日連續合成時統一記憶體累積膨脹
+    try:
+        if hasattr(mx, "clear_cache"):
+            mx.clear_cache()
+        elif hasattr(mx, "metal") and hasattr(mx.metal, "clear_cache"):
+            mx.metal.clear_cache()
+    except Exception:
+        pass
+
+
+def main():
+    import json
+    parser = argparse.ArgumentParser(description="F5-TTS MLX Synthesis Pipeline for Devotionals")
+    parser.add_argument("--batch-json", help="Path to JSON file containing a batch of synthesis jobs")
+    parser.add_argument("--text-file", help="Path to input text file (single-job mode)")
+    parser.add_argument("--ref-audio", help="Path to reference audio file (WAV, single-job mode)")
+    parser.add_argument("--ref-text-file", help="Path to reference text file (single-job mode)")
+    parser.add_argument("--output-mp3", help="Path to output MP3 file (single-job mode)")
+    parser.add_argument("--speed", type=float, default=1.03, help="Speech rate multiplier (default: 1.03)")
+    parser.add_argument("--steps", type=int, default=32, help="Diffusion inference steps (default: 32)")
+    parser.add_argument("--cfg", type=float, default=1.2, help="Classifier-free guidance strength (default: 1.2)")
+    parser.add_argument("--target-sr", type=int, default=44100, help="Target MP3 sample rate in Hz (default: 44100)")
+    parser.add_argument("--bitrate", default="192k", help="Target MP3 bitrate (default: 192k)")
+    parser.add_argument("--max-len", type=int, default=48, help="Max chunk length in characters (default: 48)")
+    parser.add_argument("--clause-pause", type=float, default=0.18, help="Pause between sub-clauses in seconds (default: 0.18)")
+    parser.add_argument("--sentence-pause", type=float, default=0.30, help="Pause between sentences within paragraph in seconds (default: 0.30)")
+    parser.add_argument("--para-pause", type=float, default=0.80, help="Pause between paragraphs in seconds (default: 0.80)")
+    args = parser.parse_args()
+
+    jobs = []
+    if args.batch_json:
+        if not os.path.exists(args.batch_json):
+            print(f"Error: Batch JSON file not found: {args.batch_json}", file=sys.stderr)
+            sys.exit(1)
+        with open(args.batch_json, "r", encoding="utf-8") as bf:
+            batch_data = json.load(bf)
+        for item in batch_data:
+            jobs.append({
+                "label": item.get("label", ""),
+                "text": item["text"],
+                "ref_audio": item["refAudio"],
+                "ref_text_file": item["refText"],
+                "output_mp3": item["outputPath"],
+            })
+    else:
+        if not (args.text_file and args.ref_audio and args.ref_text_file and args.output_mp3):
+            print("Error: Either --batch-json or (--text-file, --ref-audio, --ref-text-file, --output-mp3) is required.", file=sys.stderr)
+            sys.exit(1)
+        if not os.path.exists(args.text_file):
+            print(f"Error: Text file not found: {args.text_file}", file=sys.stderr)
+            sys.exit(1)
+        with open(args.text_file, "r", encoding="utf-8") as f:
+            single_text = f.read().strip()
+        jobs.append({
+            "label": "",
+            "text": single_text,
+            "ref_audio": args.ref_audio,
+            "ref_text_file": args.ref_text_file,
+            "output_mp3": args.output_mp3,
+        })
+
+    if not jobs:
+        print("  ℹ️ 沒有需要合成的語音任務。")
+        return
+
+    # 載入 F5-TTS 模型（全批次僅載入一次！）
+    print(f"  🖥️  MLX 預設加速裝置: {mx.default_device()}")
+    print(f"  🧠 正在載入 F5-TTS MLX 模型至 Apple Silicon GPU (共 {len(jobs)} 項任務共用單一常駐模型)...")
+    f5tts = F5TTS.from_pretrained("lucasnewman/f5-tts-mlx")
+
+    ref_cache = {}
+    for job in jobs:
+        synthesize_single_job(
+            f5tts=f5tts,
+            gen_text=job["text"],
+            ref_audio_path=job["ref_audio"],
+            ref_text_path=job["ref_text_file"],
+            output_mp3_path=job["output_mp3"],
+            args=args,
+            ref_cache=ref_cache,
+            job_label=job["label"],
+        )
 
 if __name__ == "__main__":
     main()

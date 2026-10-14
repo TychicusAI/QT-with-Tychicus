@@ -108,14 +108,9 @@ function parseMessagesFromMarkdown(content) {
 }
 
 /**
- * 執行 TTS MLX 在地合成（Apple Silicon GPU 加速 / 零樣本聲音克隆）
- * 支援 f5 (預設, F5-TTS MLX) 與 cosyvoice (可選實驗, CosyVoice 3.0)
+ * 依據版本代碼解析參考音檔與參考文本路徑
  */
-function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePause, paraPause, clausePause, maxLen, steps, cfg, speed } = {}) {
-  const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
-  fs.mkdirSync(tmpDir, { recursive: true });
-  const tmpTextFile = path.join(tmpDir, `${engine}-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
-
+function resolveVoicePaths(versionKey) {
   const voicesDir = path.join(process.cwd(), "data", "voices");
   let voiceStem = versionKey === "youth" ? "youth_male" : "family_female";
   if (versionKey === "encore") {
@@ -134,7 +129,10 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
   if (!fs.existsSync(refAudio) || !fs.existsSync(refText)) {
     throw new Error(`找不到音色參考檔案: ${refAudio} 或 ${refText}`);
   }
+  return { refAudio, refText };
+}
 
+function buildExtraArgs({ sentencePause, paraPause, clausePause, maxLen, steps, cfg, speed } = {}) {
   let extraArgs = "";
   if (sentencePause) extraArgs += ` --sentence-pause ${sentencePause}`;
   if (paraPause) extraArgs += ` --para-pause ${paraPause}`;
@@ -143,15 +141,44 @@ function synthesizeTTS(text, versionKey, outputPath, engine = "f5", { sentencePa
   if (steps) extraArgs += ` --steps ${steps}`;
   if (cfg) extraArgs += ` --cfg ${cfg}`;
   if (speed) extraArgs += ` --speed ${speed}`;
+  return extraArgs;
+}
+
+/**
+ * 單一常駐程序批次執行 F5-TTS MLX 合成（僅載入一次 58.4 萬詞大字典與 1.35GB 模型權重）
+ */
+function synthesizeF5Batch(jobs, options = {}) {
+  if (!jobs || jobs.length === 0) return;
+  const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
+  fs.mkdirSync(tmpDir, { recursive: true });
+  const batchJsonFile = path.join(tmpDir, `f5-batch-${Date.now()}-${Math.random().toString(36).slice(2)}.json`);
+  const extraArgs = buildExtraArgs(options);
+
+  try {
+    fs.writeFileSync(batchJsonFile, JSON.stringify(jobs, null, 2), "utf-8");
+    const cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an --with scipy python3 scripts/synthesize-f5.py --batch-json "${batchJsonFile}"${extraArgs}`;
+    execSync(cmd, { stdio: "inherit", env: { ...process.env, HF_HUB_OFFLINE: "1" } });
+  } finally {
+    if (fs.existsSync(batchJsonFile)) {
+      try {
+        fs.unlinkSync(batchJsonFile);
+      } catch {}
+    }
+  }
+}
+
+/**
+ * 執行 CosyVoice 3.0 單篇合成
+ */
+function synthesizeCosyVoiceSingle(text, refAudio, refText, outputPath, options = {}) {
+  const tmpDir = path.join(process.cwd(), ".next", "cache", "tts-tmp");
+  fs.mkdirSync(tmpDir, { recursive: true });
+  const tmpTextFile = path.join(tmpDir, `cosyvoice-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
+  const extraArgs = buildExtraArgs(options);
 
   try {
     fs.writeFileSync(tmpTextFile, text, "utf-8");
-    let cmd;
-    if (engine === "cosyvoice") {
-      cmd = `uv run --with mlx-audio-plus --with cn2an python3 scripts/synthesize-cosyvoice.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
-    } else {
-      cmd = `uv run --with f5-tts-mlx --with opencc-python-reimplemented --with cn2an --with scipy python3 scripts/synthesize-f5.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
-    }
+    const cmd = `uv run --with mlx-audio-plus --with cn2an python3 scripts/synthesize-cosyvoice.py --text-file "${tmpTextFile}" --ref-audio "${refAudio}" --ref-text-file "${refText}" --output-mp3 "${outputPath}"${extraArgs}`;
     execSync(cmd, { stdio: "inherit", env: { ...process.env, HF_HUB_OFFLINE: "1" } });
   } finally {
     if (fs.existsSync(tmpTextFile)) {
@@ -185,8 +212,14 @@ async function main() {
   const specifiedClausePause = clausePauseIdx !== -1 ? args[clausePauseIdx + 1] : null;
   const maxLenIdx = args.indexOf("--max-len");
   const specifiedMaxLen = maxLenIdx !== -1 ? args[maxLenIdx + 1] : null;
+  const stepsIdx = args.indexOf("--steps");
+  const specifiedSteps = stepsIdx !== -1 ? args[stepsIdx + 1] : null;
+  const cfgIdx = args.indexOf("--cfg");
+  const specifiedCfg = cfgIdx !== -1 ? args[cfgIdx + 1] : null;
+  const speedIdx = args.indexOf("--speed");
+  const specifiedSpeed = speedIdx !== -1 ? args[speedIdx + 1] : null;
 
-  const engineName = engine === "cosyvoice" ? "CosyVoice 3.0 (Fun-CosyVoice3-0.5B MLX)" : "F5-TTS MLX";
+  const engineName = engine === "cosyvoice" ? "CosyVoice 3.0 (Fun-CosyVoice3-0.5B MLX)" : "F5-TTS MLX (常駐批次加速)";
 
   const dataDir = path.join(process.cwd(), "data");
   if (!fs.existsSync(dataDir)) {
@@ -228,12 +261,12 @@ async function main() {
   console.log(`🎙️   強制覆蓋: ${force ? "是 (Force)" : "否 (已存在則跳過)"}`);
   console.log(`🎙️ ========================================================\n`);
 
-  let totalProcessed = 0;
   let totalSkipped = 0;
+  const pendingJobs = [];
 
   for (const weekId of targetWeeks) {
     const weekPath = path.join(dataDir, weekId);
-    console.log(`\n📅 正在處理週次：${weekId}`);
+    console.log(`\n📅 正在掃描週次：${weekId}`);
 
     let versions = [
       { key: "youth", file: "qt_for_youth.md", name: "青年版" },
@@ -259,6 +292,7 @@ async function main() {
 
       const outDir = path.join(process.cwd(), "public", "audio", weekId, v.key);
       fs.mkdirSync(outDir, { recursive: true });
+      const { refAudio, refText } = resolveVoicePaths(v.key);
 
       for (const item of dayMessages) {
         const outPath = path.join(outDir, `${item.dayId}.mp3`);
@@ -270,28 +304,58 @@ async function main() {
           continue;
         }
 
-        console.log(`  🎙️ 正在以 [${engineName}] 生成 [${v.name}][${item.dayLabel}] (字數: ${item.cleanMsg.length} 字)...`);
-        const startTime = Date.now();
-        try {
-          synthesizeTTS(item.cleanMsg, v.key, outPath, engine, {
-            sentencePause: specifiedSentencePause,
-            paraPause: specifiedParaPause,
-            clausePause: specifiedClausePause,
-            maxLen: specifiedMaxLen,
-          });
-          const durationSec = ((Date.now() - startTime) / 1000).toFixed(1);
-          const stats = fs.statSync(outPath);
-          const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
-          console.log(`  ✅ 完成 [${v.name}][${item.dayLabel}] -> ${relativeOut} (${sizeMB} MB, 耗時 ${durationSec}s)`);
-          totalProcessed++;
-        } catch (err) {
-          console.error(`  ❌ 合成失敗 [${v.name}][${item.dayLabel}]:`, err.message);
-        }
+        pendingJobs.push({
+          label: `${weekId} ${v.name} ${item.dayLabel}`,
+          text: item.cleanMsg,
+          refAudio,
+          refText,
+          outputPath: outPath,
+          relativeOut,
+        });
       }
     }
   }
 
-  console.log(`\n🎉 TTS 生成完成！生成 ${totalProcessed} 個音檔，略過 ${totalSkipped} 個音檔。\n`);
+  if (pendingJobs.length === 0) {
+    console.log(`\n🎉 無需新增音檔（共略過 ${totalSkipped} 個已存在音檔）。\n`);
+    return;
+  }
+
+  const synthOptions = {
+    sentencePause: specifiedSentencePause,
+    paraPause: specifiedParaPause,
+    clausePause: specifiedClausePause,
+    maxLen: specifiedMaxLen,
+    steps: specifiedSteps,
+    cfg: specifiedCfg,
+    speed: specifiedSpeed,
+  };
+
+  let totalProcessed = 0;
+  const startTime = Date.now();
+
+  if (engine === "cosyvoice") {
+    for (const job of pendingJobs) {
+      console.log(`  🎙️ 正在以 [${engineName}] 生成 [${job.label}] (字數: ${job.text.length} 字)...`);
+      try {
+        synthesizeCosyVoiceSingle(job.text, job.refAudio, job.refText, job.outputPath, synthOptions);
+        totalProcessed++;
+      } catch (err) {
+        console.error(`  ❌ 合成失敗 [${job.label}]:`, err.message);
+      }
+    }
+  } else {
+    console.log(`\n🚀 共排入 ${pendingJobs.length} 個語音合成任務，啟動單一常駐 F5-TTS MLX GPU 程序批次處理...`);
+    try {
+      synthesizeF5Batch(pendingJobs, synthOptions);
+      totalProcessed = pendingJobs.filter((j) => fs.existsSync(j.outputPath)).length;
+    } catch (err) {
+      console.error(`  ❌ 批次合成發生錯誤:`, err.message);
+    }
+  }
+
+  const totalSec = ((Date.now() - startTime) / 1000).toFixed(1);
+  console.log(`\n🎉 TTS 生成完成！成功生成 ${totalProcessed} 個音檔，略過 ${totalSkipped} 個音檔（總耗時 ${totalSec}s）。\n`);
 }
 
 main().catch((err) => {
