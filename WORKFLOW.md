@@ -1,9 +1,9 @@
 # 每週經課靈修生成工作流（Workflow Specification）
 
-本專案旨在將每週教會經課與 NotebookLM 研經資料庫，高品質轉化為針對不同族群（「青年」與「父母與青少年」）的六日（週一至週六）靈修材料。
+本專案旨在將每週教會經課與 NotebookLM 研經資料庫，高品質轉化為針對三個不同生命階段族群——**「青年版 Youth」**、**「家庭版 Family（父母與青少年）」**與**「樂齡版 Encore（50 歲以上熟齡與樂齡）」**——的六日（週一至週六）靈修材料。
 
 > **核心準則：以 `prompts/` 為唯一真理來源（SSOT），以 `study.md` 與 `illustrations.md` 為雙基石**  
-> 所有提示詞設計、內容細節、字數規範、釋經架構與排版要求，皆由 `prompts/` 目錄下的模板檔案直接定義與主導。本工作流文件專注於定義執行架構、環境配置、目錄映射與階段任務推進流程。**工作流強制實施「研經與素材先行」與「逐日深耕」**：在規劃主題與撰寫靈修前，必須先以 `prompts/study.txt` 產生深度學術研經筆記 `study.md`，並以 `prompts/illustrations.txt` 產生專屬喻道素材庫 `illustrations.md`；而在撰寫靈修信息時，**一律採行「一天一指令、逐日深耕打磨」**，徹底杜絕批量產出造成的細節稀釋與品質退化。
+> 所有提示詞設計、內容細節、字數規範、釋經架構與排版要求，皆由 `prompts/` 目錄下的模板檔案直接定義與主導。本工作流文件專注於定義執行架構、環境配置、目錄映射、三軌版本牧養定位與階段任務推進流程。**工作流強制實施「研經與素材先行」與「逐日深耕」**：在規劃主題與撰寫靈修前，必須先以 `prompts/study.txt` 產生深度學術研經筆記 `study.md`，並以 `prompts/illustrations.txt` 產生專屬喻道素材庫 `illustrations.md`；而在撰寫靈修信息時，**一律採行「一天一指令、逐日深耕打磨」**，徹底杜絕批量產出造成的細節稀釋與品質退化。
 
 ---
 
@@ -16,7 +16,7 @@
 2. **核心解經與素材雙基石：預設「研經與素材先行」（Study & Illustrations First Policy）**：
    * 在進行任何群體主題規劃或每日靈修寫作之前，**必須優先執行 `prompts/study.txt` 生成 `study.md`，並執行 `prompts/illustrations.txt` 生成 `illustrations.md`**。
    * `study.md` 是對該段經文在篇章論述、逐節希臘原文語義場、難解經文剖析、學者爭鳴與文獻駁斥上的深度學術沉澱（嚴格僅依賴 NotebookLM 註釋書文獻，經文參考新標點和合本）。
-   * `illustrations.md` 是從 NotebookLM 來源中全面萃取之專屬喻道故事、現代生活類比、歷史軼事、文豪名言與教父隱喻的素材庫。
+   * `illustrations.md` 是從 NotebookLM 來源中全面萃取之專屬喻道故事、現代生活類比、歷史軼事、文豪名言與教父隱喻的素材庫（同時提供青年、家庭、樂齡三種轉譯視角切入建議）。
    * **完整性保障與中斷續寫機制（Continuation & Append Protocol）**：
      * 由於學術研經追求高規格的深度與逐節詳解，若單次輸出達到長度上限而中斷，模型會在最後一句提示「內容未完，可輸入『繼續』以產出剩餘部分」。
      * 使用者輸入「繼續」後，工作流將接續未完段落並以**追加寫入（Append）**更新至 `data/<YYYY-MM-DD>/study.md`，直至五大板塊完全收尾，確保最終的 `study.md` 是一份結構完整、無缺漏的學術研經文獻。
@@ -24,7 +24,7 @@
 
 3. **執行模式：唯一採行「逐日深耕模式」（Day-by-Day Deep-Dive Mode，一天一指令）**：
    * **徹底廢除「一次生成全週 6 天」的批次指令**：單次輸出高達 1.2 萬字會導致模型注意力預算稀釋、句型模式化、故事被草草略述以及靈性深度扁平化。
-   * **落實一天一指令**：每天集中模型 100% 的推理與修辭算力，深耕約 1,800–2,000 字具文學呼吸感的深度散文、希臘原文語義場拆解、專屬喻道故事改寫與約 300 字的真摯第一人稱禱告詞。
+   * **落實一天一指令**：每天集中模型 100% 的推理與修辭算力，深耕約 2,000 字具文學呼吸感的深度散文、希臘原文語義場拆解、專屬喻道故事改寫與約 300 字的真摯第一人稱禱告詞。
    * **單一檔案無縫追加**：每日信息直接依序寫入/追加至本機的 `qt_*.md` 檔案中，使用者無需手動建立多個檔案再費力複製合併，兼顧「極致精緻」與「操作流暢」。
 
 4. **延伸研讀經文快取全覆蓋規範（Bible Cache Full Coverage Policy）**：
@@ -55,7 +55,7 @@
 
 雖然在同一個對話中可以繼續進行下一週，但採用**「一週一工作」**是最佳實踐，原因如下：
 1. **防止上下文過度膨脹（Context Window Bloat）**：
-   * 每一週工作流包含學術研經筆記、喻道素材庫、兩份主題進程及逐日深耕生成的完整靈修信息，總字數達 2 萬字以上。若數週疊加在同一個對話中，龐大的歷史紀錄會消耗大量上下文，可能導致生成速度變慢或格式精確度下降。
+   * 每一週工作流包含學術研經筆記、喻道素材庫、主題進程及逐日深耕生成的完整靈修信息，總字數達 2 萬至 4 萬字以上。若數週疊加在同一個對話中，龐大的歷史紀錄會消耗大量上下文，可能導致生成速度變慢或格式精確度下降。
 2. **乾淨的解經資料庫對應**：
    * 若進度切換至不同書卷（例如從《哥林多後書》換到《加拉太書》或《以弗所書》），在新工作中直接掛載對應卷別的 NotebookLM 筆記本，能確保資料來源純淨，不被前卷書的文獻干擾。
 3. **專案管理清晰**：
@@ -70,12 +70,30 @@
 | 階段 | 族群版本 | Prompt 來源模板（SSOT） | 輸出目標檔案 | 產出說明 |
 | :--- | :--- | :--- | :--- | :--- |
 | **第 1 階段：學術研經** | 全體共用 | `prompts/study.txt` | `data/<YYYY-MM-DD>/study.md` | 不限長度與深度的學術研經筆記（篇章論述、語義場、難解剖析、學者爭鳴、文獻駁斥） |
-| **第 1 階段：喻道素材** | 全體共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 從 NotebookLM 萃取之專屬喻道故事、現代生活類比、歷史軼事、文豪名言與教父隱喻 |
-| **第 2 階段：主題規劃** | 青年篇 | `prompts/topics_for_youth.txt` | `data/<YYYY-MM-DD>/topics_for_youth.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定青年總主題、導讀與週一至週六進程規劃 |
-| **第 2 階段：主題規劃** | 家庭篇 | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、導讀與週一至週六進程規劃 |
-| **第 3 階段：逐日深耕** | 青年篇 | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
-| **第 3 階段：逐日深耕** | 家庭篇 | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 1 階段：喻道素材** | 全體共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 從 NotebookLM 萃取之專屬喻道故事、現代生活類比、歷史軼事、文豪名言與教父隱喻（含青年／家庭／樂齡三視角切入點） |
+| **第 2 階段：主題規劃** | 青年篇 (`youth`) | `prompts/topics_for_youth.txt` | `data/<YYYY-MM-DD>/topics_for_youth.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定青年總主題、導讀與週一至週六進程規劃 |
+| **第 2 階段：主題規劃** | 家庭篇 (`family`) | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、導讀與週一至週六進程規劃 |
+| **第 2 階段：主題規劃** | 樂齡篇 (`encore`) | `prompts/topics_for_encore.txt` | `data/<YYYY-MM-DD>/topics_for_encore.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定樂齡總主題、導讀與週一至週六進程規劃 |
+| **第 3 階段：逐日深耕** | 青年篇 (`youth`) | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：逐日深耕** | 家庭篇 (`family`) | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：逐日深耕** | 樂齡篇 (`encore`) | `prompts/qt_for_encore.txt` | `data/<YYYY-MM-DD>/qt_for_encore.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
 | **第 3 階段：經文快取** | 全體共用 | 靈修信息之【延伸研讀】經文引用 | `data/bible-cache.json` | 延伸研讀經文之完整和合本內文快取，確保前台點擊展開能即時檢視經文 |
+
+### 4.1 三軌版本牧養定位與文風設定總覽（Three-Track Persona & Style Matrix）
+
+以下記錄三個版本的受眾定位、五大牧養痛點與文風設定，作為日後動態調整各版 Prompt 模板之基準：
+
+| 設定維度 | 青年版 Youth (`youth`) | 家庭版 Family (`family`) | 樂齡版 Encore (`encore`) |
+| :--- | :--- | :--- | :--- |
+| **目標受眾** | 升學、初入職場、面臨生涯未知與信仰拉扯的當代青年 | 面對家庭教養、溝通張力與同行成長的父母與青少年 | 步入 50 歲以上人生下半場（含 50–65 歲熟齡轉折與 65+ 退休樂齡）的基督徒 |
+| **Markdown 標頭** | `# 每日靈修：青年篇（YYYY-MM-DD）` | `# 每日靈修：家庭篇（YYYY-MM-DD）` | `# 每日靈修：樂齡篇（YYYY-MM-DD）` |
+| **作者人設與語氣** | 敏銳、熱血、直球破除虛假人設的屬靈導師 | 溫柔、同理兩代張力、引導換位思考的家庭牧者 | 溫厚、沉靜、同走過半生風雨的屬靈同行摯友（嚴禁「哄長輩」或「晚輩說教」口吻） |
+| **文風與節奏氣質** | 如擊石出火，節奏明快、穿透力強 | 如餐桌夜談，溫暖平實、具對話感 | 如陳年醇酒與晨間微光，洗鍊從容、飽含歲月餘韻與安慰力道 |
+| **五大核心牧養痛點** | 1. 社群人設防衛與冒牌者症候群<br>2. 計畫變折的猜忌與生涯焦慮<br>3. 職場權力壓迫與績效偶像<br>4. 群體冷暴力與取消文化<br>5. 盲目追求產能效率而失去安息 | 1. 餐桌防衛與兩代沉默<br>2. 承諾落空的信任裂痕<br>3. 以愛為名的掌控與轄管界線<br>4. 犯錯後的冷戰與翻舊帳<br>5. 追求外在成敗而忽略家人呼求 | 1. 外體漸衰與面對有限的從容<br>2. 空巢期的放手與成年親子界線（從掌舵者轉為代禱守望者）<br>3. 職場交棒與自我價值重尋（從 Do 轉向 Be）<br>4. 照顧年邁雙親的長照負荷與面對生離死別<br>5. 半生回顧的遺憾和解與安可使命（Encore） |
+| **開篇禁用詞（防呆）** | 演算法、內耗、人設、容貌焦慮、三十歲焦慮、精神內耗 | 餐桌沉默、刺蝟心態、以愛為名的掌控、柴米油鹽、代溝撕裂 | 嚴禁每天以「步入人生下半場／隨著年歲漸長」起筆；禁用「夕陽無限好、白髮蒼蒼、含飴弄孫、老驥伏櫪、孤苦無依、風燭殘年」 |
+| **範式 C（微觀切片）** | 深夜滑手機的孤獨、打卡下班的捷運車廂 | 晚歸時客廳留著的一盞燈、一扇輕輕關上的門、欲言又止的對視 | 清晨五點自然醒來時窗外的微光、餐桌上少了一副碗筷的安靜、配戴老花眼鏡讀信的瞬間、醫院候診室的叫號燈號、翻閱舊相簿或整理舊物時的停頓 |
+| **建議禱告（300字）** | 「主啊，我……」聚焦突破懼怕與委身呼召 | 「天父，我們……」聚焦全家關係修復與彼此饒恕 | 「主啊，走過這許多年日，我……」聚焦數算恩典、交託兒女與年邁雙親、接納肉身軟弱與迎向永恆盼望 |
+| **默想問題（1題）** | 檢視自我動機、恐懼與偶像 | 適合父母與孩子餐桌敞開對話 | 適合個人晨間靜思、與老伴散步對談或熟齡團契分享的生命回顧與放手練習 |
 
 ---
 
@@ -95,7 +113,7 @@
    │   └─ 3b. Spark 讀取 prompts/illustrations.txt，全面萃取筆記本喻道素材寫入 data/<YYYY-MM-DD>/illustrations.md
    │
 步驟 4【第 2 階段：主題骨架】：發送指令生成「主題進程規劃」
-   │   └─ Spark 讀取 prompts/topics_*.txt 並嚴格參考完整之 study.md (+ illustrations.md)，在 data/<YYYY-MM-DD>/ 覆蓋寫入 topics_for_youth.md 或 topics_for_family.md
+   │   └─ Spark 讀取 prompts/topics_*.txt 並嚴格參考完整之 study.md (+ illustrations.md)，在 data/<YYYY-MM-DD>/ 覆蓋寫入 topics_for_youth.md、topics_for_family.md 或 topics_for_encore.md
    │
 步驟 5【第 3 階段：逐日深耕（一天一指令，打磨最極致品質）】：
    │   ├─ 5a. 初始化全週檔案骨架（寫入頂部標籤與總主題導讀）
@@ -113,7 +131,7 @@
 ### ⚡ 一鍵觸發專屬技能（Recommended Shortcut）
 專案已配置 Gemini Spark 專屬技能 **`tychicus-qt-generator`**，只要輸入以下指令即可全自動執行四階段工作流：
 ```text
-@tychicus-qt-generator 請為我生成 [YYYY-MM-DD]（[書卷 章:節–章:節]）的青年篇與家庭篇全套靈修材料。
+@tychicus-qt-generator 請為我生成 [YYYY-MM-DD]（[書卷 章:節–章:節]）的青年篇、家庭篇與樂齡篇全套靈修材料。
 ```
 > **提示**：即使不記完整指令，只要在對話框輸入 `@tychicus` 或以日常口吻說「**幫我生成 [日期] 的靈修材料（經文：[經卷]）**」，系統即會自動啟動此技能。
 
@@ -129,7 +147,7 @@
 
 #### 第 2 階段：生成每週主題規劃（骨架）
 > **「請根據剛剛產生的 study.md、illustrations.md 與 prompts/topics_for_youth.txt 模板，為 2026-09-14 生成本週青年篇主題進程規劃 `topics_for_youth.md`。」**  
-*（家庭篇請將模板替換為 `prompts/topics_for_family.txt`，輸出為 `topics_for_family.md`）*
+*（家庭篇請替換為 `prompts/topics_for_family.txt` 輸出 `topics_for_family.md`；樂齡篇請替換為 `prompts/topics_for_encore.txt` 輸出 `topics_for_encore.md`）*
 
 #### 第 3 階段：逐日深耕靈修信息（一天一指令，打造極致精品）
 * **步驟 3-0（初始化全週檔案骨架）**：  
@@ -165,17 +183,19 @@
 3. **1b. 喻道素材庫（Illustrations Knowledge Base）**：
    * Spark 讀取 `prompts/illustrations.txt` 生成 `data/<YYYY-MM-DD>/illustrations.md`。
    * 檢索優先順序：第一優先為筆記本中 `[Illustrations]` 專題文件；備援為註釋書與講章中引用的文學名著、歷史軼事、教父隱喻與現代生活類比；嚴禁外求。
-   * 依六日經文小段結構化萃取：包含出處來源、類型、對應核心神學與原文、完整敘事與情境詳情、青年/家庭切入視角建議。
+   * 依六日經文小段結構化萃取：包含出處來源、類型、對應核心神學與原文、完整敘事與情境詳情、青年／家庭／樂齡切入視角建議。
    * **階段準入門檻**：必須確認 `study.md` 與 `illustrations.md` 均完整產出後，方可進入第 2 階段的主題規劃。
 
 ### 第 2 階段：生成每週主題規劃（Topics Planning）
 1. Spark 直接讀取對應模板執行生成：
    * 青年篇：讀取 `prompts/topics_for_youth.txt`
    * 家庭篇：讀取 `prompts/topics_for_family.txt`
-2. **強制依據 `study.md` 與 `illustrations.md`**：主題設計必須汲取完整版 `study.md` 整理出的文脈進程與核心神學，並輔以 `illustrations.md` 的喻道脈絡，分別切入青年與家庭的真實生命處境。
+   * 樂齡篇：讀取 `prompts/topics_for_encore.txt`
+2. **強制依據 `study.md` 與 `illustrations.md`**：主題設計必須汲取完整版 `study.md` 整理出的文脈進程與核心神學，並輔以 `illustrations.md` 的喻道脈絡，分別切入青年、家庭與樂齡的真實生命處境。
 3. 輸出並覆蓋寫入：
    * `data/<YYYY-MM-DD>/topics_for_youth.md`
    * `data/<YYYY-MM-DD>/topics_for_family.md`
+   * `data/<YYYY-MM-DD>/topics_for_encore.md`
 
 ### 第 3 階段：逐日深耕靈修材料生成（Day-by-Day Deep-Dive Generation）
 1. **雙基石資料源**：
@@ -193,11 +213,12 @@
 
      ---
      ```
+     *（家庭篇標題為 `# 每日靈修：家庭篇（YYYY-MM-DD）`；樂齡篇標題為 `# 每日靈修：樂齡篇（YYYY-MM-DD）`）*
 3. **每日信息內容結構**：
-   * 嚴格遵循 `prompts/qt_for_youth.txt` 與 `prompts/qt_for_family.txt` 所定義之各區塊規範：
+   * 嚴格遵循 `prompts/qt_for_youth.txt`、`prompts/qt_for_family.txt` 與 `prompts/qt_for_encore.txt` 所定義之各區塊規範：
      * **【經文】**：附上新標點和合本經文。
      * **【主題】**：沿用主題規劃中該日名稱。
-     * **【信息】**：篇幅約 **1,800–2,000 字純散文**，嚴禁任何編號清單、項目符號或過度切割的小標題。
+     * **【信息】**：篇幅約 **2,000 字純散文**，嚴禁任何編號清單、項目符號或過度切割的小標題。
      * **【建議禱告】**：約 **300 字**，以第一人稱真誠撰寫。
      * **【延伸研讀】**：3 處跨卷經文，每處以 4–5 句話闡釋內在神學關聯（格式：`* **書卷 章:節**｜說明...`）。
      * **【默想問題】**：1 個具穿透力的高質感開放式反思問題。
@@ -214,7 +235,7 @@
 
 ### 第 4 階段：資料同步與編譯檢驗（Data Sync & Verification）
 1. **延伸研讀經文快取檢查（Bible Cache Audit）**：
-   * 檢查本週 `qt_for_youth.md` 與 `qt_for_family.md` 中所有【延伸研讀】引用的經文，確認每一處皆已將完整和合本經文寫入 `data/bible-cache.json`。
+   * 檢查本週 `qt_for_youth.md`、`qt_for_family.md` 與 `qt_for_encore.md` 中所有【延伸研讀】引用的經文，確認每一處皆已將完整和合本經文寫入 `data/bible-cache.json`。
 2. **執行同步與自動校驗**：
    * 執行同步腳本驗證 Markdown 語法、嚴格校驗經文快取覆蓋率，並自動生成前台 TypeScript 資料庫：
      ```bash
@@ -229,30 +250,74 @@
 
 ### 第 5 階段：TTS 語音生成（Text-to-Speech Generation）
 
-專案預設採用 **F5-TTS MLX 原生架構**（具備 100% 繁體多音字專用詞庫校正與精準 G2P 控制，發音零差錯率，音質清澈穩定），亦整合支援 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)** 作為實驗性語音引擎。全管線運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動執行文本清洗（小括號過濾、阿拉伯數字轉中文數字、未帶引號冒號轉逗號）：
+專案預設採用 **F5-TTS MLX 原生架構**（具備 58.4 萬詞繁體原生大辭典、繁體多音字專用詞庫校正與精準 G2P 控制，發音零差錯率，音質清澈穩定），亦整合支援 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)** 作為實驗性語音引擎。全管線運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動執行文本清洗（小括號過濾、阿拉伯數字轉中文數字、未帶引號冒號轉逗號）：
 
-1. **一鍵全自動語音克隆生成**：
-   * 執行專屬語音生成腳本，依據 `data/voices/` 音色庫為青年版（沉穩男聲）與家庭版（溫和女聲）批次生成長篇 MP3：
-     ```bash
-     npm run tts
-     ```
-   * 預設採用 **F5-TTS MLX** 為最新一週進行增量生成（已存在的音檔自動略過）。
+#### 5.1 一鍵全自動語音克隆指令
+```bash
+# 預設採用 F5-TTS MLX 為最新一週進行增量生成（已存在的音檔自動略過）
+npm run tts
 
-2. **語音引擎切換（`--engine`）**：
-   * 預設引擎（F5-TTS MLX）：`npm run tts`（精準掌控聖經人名地名、多音字完全受控無誤讀）
-   * 切換為 CosyVoice 3.0：`npm run tts -- --engine cosyvoice`（實驗性語意起伏與自然呼吸感）
+# 切換為 CosyVoice 3.0 MLX 生成（實驗性語意起伏與自然呼吸感）
+npm run tts -- --engine cosyvoice
 
-3. **客製化專屬音色庫（`data/voices/`）**：
-   * 音色來源直接依賴 `data/voices/` 中的參考音訊與對應文字檔：
-     * `youth_male.wav` + `youth_male.txt`（青年版參考聲音，約 5～10 秒）
-     * `family_female.wav` + `family_female.txt`（家庭版參考聲音，約 5～10 秒）
-   * 您可隨時將教會牧者、傳道人或您自己的 5～10 秒安靜錄音放入該目錄，即可一鍵克隆專屬的心靈伴讀聲音！
+# 強制覆蓋重新生成全週音檔
+npm run tts -- --force
 
-4. **常用篩選與覆蓋參數**：
-   * 強制覆蓋重新生成：`npm run tts -- --force`
-   * 指定特定週次與天數：`npm run tts -- --week 2026-10-05 --day mon`
-   * 僅生成特定族群版本：`npm run tts -- --version youth`
+# 指定特定週次與天數
+npm run tts -- --week 2026-10-12 --day sat
 
-5. **重新同步前台資料庫**：
-   * 生成音檔後，再次執行 `npm run sync`（或直接 `npm run dev` / `npm run build`），系統會自動偵測 `public/audio/` 中的音檔並在前台閱讀器啟動播放器膠囊按鈕。
+# 僅為特定族群版本生成
+npm run tts -- --version youth        # 青年版
+npm run tts -- --version family       # 家庭版
+npm run tts -- --version encore       # 樂齡版
+```
 
+#### 5.2 客製化專屬音色庫（`data/voices/`）
+音色來源直接依賴 `data/voices/` 中的參考音訊與對應文字檔：
+* `youth_male.wav` + `youth_male.txt`（青年版參考聲音，約 5～10 秒）
+* `family_female.wav` + `family_female.txt`（家庭版參考聲音，約 5～10 秒）
+* `encore_male.wav` / `encore_female.wav`（樂齡版參考聲音，約 5～10 秒）
+
+**錄音原則**：
+1. 長度約 5～10 秒（約 15～25 個字）。
+2. 環境背景完全安靜、**無背景音樂（BGM）**、無空曠回音。
+3. 語氣溫和、安靜、沉穩。
+4. 文字檔內容必須與錄音完全一致（模型以此建立聲學特徵對齊）。
+
+#### 5.3 語音工程黃金標準與避坑備忘錄（TTS Engineering Standards & Gotchas）
+
+> [!IMPORTANT]
+> **給所有協助開發此專案之 AI（Gemini, Claude, GPT 等）的關鍵技術備忘**：  
+> 本專案的 TTS 管線歷經深度聲學實驗與 ASR 語音辨識反覆驗證，確立了以下五大黃金工程標準。接手之 AI 必須嚴格遵守，切勿自行更改底層設計或推翻已驗證之最佳設定：
+
+1. **黃金聲學參數配方（Sample 4）**：
+   * **最佳設定值**：`steps=32, cfg=1.2, speed=1.03`，音訊規格為 44.1 kHz / 192 kbps MP3。
+   * **切勿調大 `cfg`（防機械音與破音）**：`cfg`（Classifier-Free Guidance）控制模型對文字條件的依從權重。調高 `cfg`（如 > 2.0）會引發嚴重的金屬機械僵硬音、破音與緊繃感；`cfg=1.2` 為多次雙盲試聽評選出的最佳黃金平衡點，兼具極致溫暖自然的人性呼吸感與高保真度。
+
+2. **G2P 切詞與斷詞三重防護體系（Triple-Layer Segmentation Architecture）**：
+   * **底層：Jieba 官方繁體大詞庫（[`scripts/dict.txt.big`](file:///Users/winston/Repo/QT-with-Tychicus/scripts/dict.txt.big)）**：
+     * `pip install jieba` 預設僅內建 34.9 萬簡體字典，直接處理繁體會造成「交換關 / 係」、「成 / 為」等嚴重碎裂。
+     * 本專案已在 `scripts/dict.txt.big` 收納 Jieba 官方 58.4 萬詞繁簡大字典，並由 `synthesize-f5.py` 原生優先加載。
+   * **中層：`tw2s` 投影機制（在 `segment_text` 中）**：
+     * 透過 `OpenCC tw2s` 將繁體對齊簡體切詞後投影回繁體。在簡體中，動態助詞「著」嚴格對應「着」，絕不會與前後字錯誤粘連（徹底杜絕「著一個」或「著滿」被誤判為單一非標準詞彙）。
+     * 確保所有動態助詞「著」100% 獨立成字並鎖定為輕聲 `zhe`。
+   * **頂層：聖經神學專用核心辭典（`DEVOTIONAL_LEXICON`）**：
+     * 收錄大量專有神學詞彙與高頻多音字（如「乾涸」`gan1 he2`、「成為/稱為/稱之為/經文為」`wei2`、「救贖/贖罪祭」`shu2`、「體恤」`ti3 xu4`、「討好」`tao3 hao3`、「耶和華」`ye1 he2 hua2`、「差派」`chai1` 等），具備最高優先級覆蓋權。
+
+3. **音節邊界空格規範（不得移除音節間的空格，防吃字與發音形變）**：
+   * **核心聲學機理**：F5-TTS 預訓練神經網路是以 `<空格> + <拼音音節>`（空格 token id = 0）作為單一漢字音素對齊邊界標記。
+   * **嚴格規範**：在 `custom_convert_char_to_pinyin` 中，**每一個拼音音節前面必須保留空格**（例如 `[' ', 'zhi4', ' ', 'sheng4']`）。
+   * **禁忌**：嚴禁為了消減微頓挫而將詞內的空格拿掉（如改成 `['zhi4', 'sheng4']`）！此舉會導致神經網路跨注意力機制發生 OOD（分佈外錯位），導致嚴重的**吃字吞音**（「至聖」丟失「聖」讀成「制」）以及**連音變形**（「寶座」變音為「寶做」）。
+
+4. **文本寫作與排版鐵律（外文退居括弧原則，確保 TTS 零外文發音事故）**：
+   * **括號剝離規範**：所有希臘原文、拉丁文或英文術語，正文中一律嚴格遵循「**中文為主體、原文退居括弧**」原則（例如：`「全新」（*kainos*）`、`「替」這個介系詞（*hyper*）`、`「奇妙大交換」（*Mirifica Commutatio*）`）。
+   * TTS 語音清洗腳本 `cleanMessageForTTS` 會自動遞迴剝離所有半形 `()` 與全形 `（）` 及其內容。只要外文在括號內，語音引擎便能 100% 自然流暢朗讀中文，絕不會逐字母拼讀外文（如 H-Y-P-E-R）。
+
+5. **如何新增需特別注意的詞彙或修正讀音**：
+   * 若使用者在對話中告知某個詞彙發音有誤或需要加入辭典：
+     1. 打開 [`scripts/synthesize-f5.py`](file:///Users/winston/Repo/QT-with-Tychicus/scripts/synthesize-f5.py)，在 `DEVOTIONAL_LEXICON` 字典中新增該詞彙及其各字標準拼音（帶聲調數字 1-5，如 `"乾涸": [["gan1"], ["he2"]]`）。
+     2. 腳本啟動時會自動注入 Jieba 斷詞字典與 Pypinyin 覆蓋庫，完成全自動保護。
+     3. 執行語音生成後，以 ASR 驗證並發布。
+
+#### 5.4 重新同步前台資料庫
+生成音檔後，再次執行 `npm run sync`（或直接 `npm run dev` / `npm run build`），系統會自動偵測 `public/audio/` 中的音檔並在前台閱讀器啟動播放器膠囊按鈕。
