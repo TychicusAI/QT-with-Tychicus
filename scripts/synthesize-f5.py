@@ -32,7 +32,16 @@ from f5_tts_mlx.generate import (
     TARGET_RMS,
 )
 
-# 2. 自動繁體化 pypinyin 內建 4.7 萬詞庫，並初始化 tw2s 以支援 Jieba 繁簡雙層精準切詞
+# 2. 載入 Jieba 官方繁體大詞庫（dict.txt.big，含 58.4 萬繁體與簡體通用詞條）
+dict_big_path = os.path.join(os.path.dirname(__file__), "dict.txt.big")
+if os.path.exists(dict_big_path):
+    try:
+        jieba.set_dictionary(dict_big_path)
+        jieba.initialize()
+    except Exception:
+        pass
+
+# 3. 自動繁體化 pypinyin 內建 4.7 萬詞庫，並初始化 tw2s 以支援 Jieba 繁簡雙層精準切詞
 try:
     import opencc
     from pypinyin.phrases_dict import phrases_dict
