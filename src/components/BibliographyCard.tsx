@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Library, ArrowRight, BookCheck } from "lucide-react";
 import { DevotionalVersion } from "@/types/devotional";
+import { getBookBibliography } from "@/lib/books-service";
 
 interface BibliographyCardProps {
   version?: DevotionalVersion;
@@ -18,6 +19,7 @@ export function BibliographyCard({
 }: BibliographyCardProps) {
   const isFamily = version === "family";
   const isEncore = version === "encore";
+  const totalBooks = getBookBibliography(bookSlug)?.totalBooks ?? 15;
 
   return (
     <div
@@ -62,7 +64,7 @@ export function BibliographyCard({
               </span>
             </div>
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed">
-              本材料嚴謹奠基於當代 14 部頂尖福音派註釋書與神學著作（BECNT、NIGTC、NICNT、NIVAC 等），深入剖析歷史、社會修辭與救贖神學。
+              本材料嚴謹奠基於當代 {totalBooks} 部頂尖釋經註釋書與神學著作（BECNT、NIGTC、NICNT、NTL、NIVAC 等），深入剖析歷史、社會修辭與救贖神學。
             </p>
           </div>
         </div>
@@ -77,7 +79,7 @@ export function BibliographyCard({
               : "bg-amber-600 hover:bg-amber-500 text-white shadow-amber-600/20"
           }`}
         >
-          <span>查閱 14 部書目導讀評介</span>
+          <span>查閱 {totalBooks} 部書目導讀評介</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </Link>
       </div>

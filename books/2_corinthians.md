@@ -44,7 +44,21 @@
 
 ---
 
-### 4. G. K. Beale & D. A. Carson (Eds.) — *Commentary on the New Testament Use of the Old Testament*
+### 4. Frank Matera — *II Corinthians: A Commentary* (NTL)
+
+* **書系**：*The New Testament Library*（Westminster John Knox Press）
+* **作者背景**：
+馬特拉（Frank J. Matera）曾長期擔任美國天主教大學（The Catholic University of America）安德魯斯-凱利-萊恩聖經研究講座教授（Andrews-Kelly-Ryan Professor of Biblical Studies），並曾任美國天主教聖經學會（Catholic Biblical Association of America）會長，亦具備豐富的地方堂區牧職經驗。他是當代著名的新約神學、基督論與新約倫理學學者，另著有《加拉太書》（Sacra Pagina）與《羅馬書》（Paideia）等重要註釋書。
+* **內容特色**：
+* **捍衛正典書信的文學與神學統一性**：作者在序言中坦言原本傾向書信拼湊假說，但在深入研究後轉而堅定主張現存《哥林多後書》具備高度的文學、歷史與神學連貫性，將全書梳理為三大有機段落（1–7 章使徒誠信的危機、8–9 章耶路撒冷捐獻、10–13 章第三次造訪前的辯護與警告）。
+* **聚焦「使徒苦難與復活信仰」**：深刻剖析保羅如何區分「外在表象」（appearance）與「屬靈實相」（reality），闡明使徒的受苦與軟弱並非事工的挫敗，而是基督死而復活大能在信徒身上彰顯的真實記號。
+* **兼顧原文字義與教會事工省思**：提供作者根據古抄本親自重譯的流暢經文，在嚴謹剖析歷史背景與修辭脈絡之餘，處處流露對當代教會事工本質的深刻神學洞見。
+
+
+
+---
+
+### 5. G. K. Beale & D. A. Carson (Eds.) — *Commentary on the New Testament Use of the Old Testament*
 
 * **書系**：獨立權威專著（Baker Academic，中文常稱《新約引用舊約註釋》）
 * **作者／編者背景**：
@@ -61,7 +75,7 @@
 
 ---
 
-### 5. George Guthrie — *2 Corinthians* (BECNT)
+### 6. George Guthrie — *2 Corinthians* (BECNT)
 
 * **書系**：*Baker Exegetical Commentary on the New Testament*（Baker Academic）
 * **作者背景**：
@@ -75,7 +89,7 @@
 
 ---
 
-### 6. J. I. Packer — *Weakness Is the Way: Life with Christ Our Strength*
+### 7. J. I. Packer — *Weakness Is the Way: Life with Christ Our Strength*
 
 * **書系**：專題性神學靈修短著（Crossway 出版）
 * **作者背景**：
@@ -89,7 +103,7 @@
 
 ---
 
-### 7. Judith Diehl — *2 Corinthians* (SoGBC)
+### 8. Judith Diehl — *2 Corinthians* (SoGBC)
 
 * **書系**：*The Story of God Bible Commentary*（Zondervan，由 Scot McKnight 與 Tremper Longman III 主編）
 * **作者背景**：
@@ -107,7 +121,7 @@
 
 ---
 
-### 8. Mark Seifrid — *The Second Letter to the Corinthians* (PNTC)
+### 9. Mark Seifrid — *The Second Letter to the Corinthians* (PNTC)
 
 * **書系**：*The Pillar New Testament Commentary*（Eerdmans，由 D. A. Carson 主編）
 * **作者背景**：
@@ -121,7 +135,7 @@
 
 ---
 
-### 9. Moyer Hubbard — *2 Corinthians* (TTCS)
+### 10. Moyer Hubbard — *2 Corinthians* (TTCS)
 
 * **書系**：*Teach the Text Commentary Series*（Baker Books）
 * **作者背景**：
@@ -135,7 +149,7 @@
 
 ---
 
-### 10. Murray Harris — *The Second Epistle to the Corinthians* (NIGTC)
+### 11. Murray Harris — *The Second Epistle to the Corinthians* (NIGTC)
 
 * **書系**：*The New International Greek Testament Commentary*（Eerdmans）
 * **作者背景**：
@@ -149,7 +163,7 @@
 
 ---
 
-### 11. N. T. Wright — *Paul for Everyone: 2 Corinthians*
+### 12. N. T. Wright — *Paul for Everyone: 2 Corinthians*
 
 * **書系**：*For Everyone* 系列（SPCK / Westminster John Knox）
 * **作者背景**：
@@ -163,7 +177,7 @@
 
 ---
 
-### 12. Paul Barnett — *The Message of 2 Corinthians* (BST)
+### 13. Paul Barnett — *The Message of 2 Corinthians* (BST)
 
 * **書系**：*The Bible Speaks Today*（聖經信息系列，IVP）
 * **作者背景**：
@@ -176,11 +190,11 @@
 
 ---
 
-### 13. Paul Barnett — *The Second Epistle to the Corinthians* (NICNT)
+### 14. Paul Barnett — *The Second Epistle to the Corinthians* (NICNT)
 
 * **書系**：*The New International Commentary on the New Testament*（Eerdmans）
 * **作者背景**：
-與第 12 本同為保羅·巴奈特（Paul Barnett），但本著作屬於嚴謹的高階學術註釋書系 NICNT（取代了早年 P. E. Hughes 的舊版）。
+與第 13 本同為保羅·巴奈特（Paul Barnett），但本著作屬於嚴謹的高階學術註釋書系 NICNT（取代了早年 P. E. Hughes 的舊版）。
 * **內容特色**：
 * **兼具歷史學家視角**：巴奈特發揮古代史學專長，對保羅宣教歷史、耶路撒冷捐獻（8–9 章）的社會意義，以及「超等使徒」（Super-apostles）的猶太背景進行了深度的歷史考證。
 * **平衡的學術性與神學性**：註腳充滿對希臘原文、同時代文獻與學界前沿觀點的對話，但內文保留清晰的論述結構，極具閱讀流暢度。
@@ -190,7 +204,7 @@
 
 ---
 
-### 14. Scott Hafemann — *2 Corinthians* (NIVAC)
+### 15. Scott Hafemann — *2 Corinthians* (NIVAC)
 
 * **書系**：*The NIV Application Commentary*（國際釋經應用系列，Zondervan）
 * **作者背景**：

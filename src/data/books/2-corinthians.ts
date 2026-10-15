@@ -4,8 +4,8 @@ export const biblio_2_corinthians: BookBibliography = {
   "slug": "2-corinthians",
   "title": "哥林多後書 釋經參考書目",
   "bookName": "哥林多後書",
-  "description": "本靈修材料奠基於當代 14 部福音派頂尖釋經著作與神學專論，涵蓋社會修辭學、語篇結構分析、歷史背景考證與牧養實踐。",
-  "totalBooks": 14,
+  "description": "本靈修材料奠基於當代 15 部福音派頂尖釋經著作與神學專論，涵蓋社會修辭學、語篇結構分析、歷史背景考證與牧養實踐。",
+  "totalBooks": 15,
   "items": [
     {
       "id": 1,
@@ -52,6 +52,20 @@ export const biblio_2_corinthians: BookBibliography = {
     },
     {
       "id": 4,
+      "author": "Frank Matera",
+      "bookTitle": "*II Corinthians: A Commentary* (NTL)",
+      "series": "*The New Testament Library*（Westminster John Knox Press）",
+      "authorBackground": "馬特拉（Frank J. Matera）曾長期擔任美國天主教大學（The Catholic University of America）安德魯斯-凱利-萊恩聖經研究講座教授（Andrews-Kelly-Ryan Professor of Biblical Studies），並曾任美國天主教聖經學會（Catholic Biblical Association of America）會長，亦具備豐富的地方堂區牧職經驗。他是當代著名的新約神學、基督論與新約倫理學學者，另著有《加拉太書》（Sacra Pagina）與《羅馬書》（Paideia）等重要註釋書。",
+      "category": "academic",
+      "categoryLabel": "嚴謹釋經與高階學術",
+      "features": [
+        "**捍衛正典書信的文學與神學統一性**：作者在序言中坦言原本傾向書信拼湊假說，但在深入研究後轉而堅定主張現存《哥林多後書》具備高度的文學、歷史與神學連貫性，將全書梳理為三大有機段落（1–7 章使徒誠信的危機、8–9 章耶路撒冷捐獻、10–13 章第三次造訪前的辯護與警告）。",
+        "**聚焦「使徒苦難與復活信仰」**：深刻剖析保羅如何區分「外在表象」（appearance）與「屬靈實相」（reality），闡明使徒的受苦與軟弱並非事工的挫敗，而是基督死而復活大能在信徒身上彰顯的真實記號。",
+        "**兼顧原文字義與教會事工省思**：提供作者根據古抄本親自重譯的流暢經文，在嚴謹剖析歷史背景與修辭脈絡之餘，處處流露對當代教會事工本質的深刻神學洞見。"
+      ]
+    },
+    {
+      "id": 5,
       "author": "G. K. Beale & D. A. Carson (Eds.)",
       "bookTitle": "*Commentary on the New Testament Use of the Old Testament*",
       "series": "獨立權威專著（Baker Academic，中文常稱《新約引用舊約註釋》）",
@@ -65,7 +79,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "author": "George Guthrie",
       "bookTitle": "*2 Corinthians* (BECNT)",
       "series": "*Baker Exegetical Commentary on the New Testament*（Baker Academic）",
@@ -79,7 +93,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 6,
+      "id": 7,
       "author": "J. I. Packer",
       "bookTitle": "*Weakness Is the Way: Life with Christ Our Strength*",
       "series": "專題性神學靈修短著（Crossway 出版）",
@@ -93,7 +107,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 7,
+      "id": 8,
       "author": "Judith Diehl",
       "bookTitle": "*2 Corinthians* (SoGBC)",
       "series": "*The Story of God Bible Commentary*（Zondervan，由 Scot McKnight 與 Tremper Longman III 主編）",
@@ -109,7 +123,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 8,
+      "id": 9,
       "author": "Mark Seifrid",
       "bookTitle": "*The Second Letter to the Corinthians* (PNTC)",
       "series": "*The Pillar New Testament Commentary*（Eerdmans，由 D. A. Carson 主編）",
@@ -123,7 +137,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 9,
+      "id": 10,
       "author": "Moyer Hubbard",
       "bookTitle": "*2 Corinthians* (TTCS)",
       "series": "*Teach the Text Commentary Series*（Baker Books）",
@@ -137,7 +151,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 10,
+      "id": 11,
       "author": "Murray Harris",
       "bookTitle": "*The Second Epistle to the Corinthians* (NIGTC)",
       "series": "*The New International Greek Testament Commentary*（Eerdmans）",
@@ -151,7 +165,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 11,
+      "id": 12,
       "author": "N. T. Wright",
       "bookTitle": "*Paul for Everyone: 2 Corinthians*",
       "series": "*For Everyone* 系列（SPCK / Westminster John Knox）",
@@ -165,7 +179,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 12,
+      "id": 13,
       "author": "Paul Barnett",
       "bookTitle": "*The Message of 2 Corinthians* (BST)",
       "series": "*The Bible Speaks Today*（聖經信息系列，IVP）",
@@ -178,11 +192,11 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 13,
+      "id": 14,
       "author": "Paul Barnett",
       "bookTitle": "*The Second Epistle to the Corinthians* (NICNT)",
       "series": "*The New International Commentary on the New Testament*（Eerdmans）",
-      "authorBackground": "與第 12 本同為保羅·巴奈特（Paul Barnett），但本著作屬於嚴謹的高階學術註釋書系 NICNT（取代了早年 P. E. Hughes 的舊版）。",
+      "authorBackground": "與第 13 本同為保羅·巴奈特（Paul Barnett），但本著作屬於嚴謹的高階學術註釋書系 NICNT（取代了早年 P. E. Hughes 的舊版）。",
       "category": "academic",
       "categoryLabel": "嚴謹釋經與高階學術",
       "features": [
@@ -192,7 +206,7 @@ export const biblio_2_corinthians: BookBibliography = {
       ]
     },
     {
-      "id": 14,
+      "id": 15,
       "author": "Scott Hafemann",
       "bookTitle": "*2 Corinthians* (NIVAC)",
       "series": "*The NIV Application Commentary*（國際釋經應用系列，Zondervan）",
