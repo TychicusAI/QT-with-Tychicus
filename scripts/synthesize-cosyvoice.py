@@ -93,6 +93,18 @@ def normalize_colons(text):
     text = re.sub(r'，\s*([。！？；])', r'\1', text)
     return text
 
+def normalize_initials(text):
+    """
+    英文人名縮寫過濾但書：
+    若遇到英文人名縮寫（如 N. T.、J. I.、G. K. 等），TTS 朗讀時自動略過，保留中文全名。
+    """
+    if not text:
+        return ""
+    text = re.sub(r'\b(?:[A-Z]\.\s*)+', '', text)
+    text = re.sub(r'([\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])\s+(?=[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])', r'\1', text)
+    text = re.sub(r'(?<=[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])\s+([\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])', r'\1', text)
+    return text
+
 def split_chinese_sentences(text, max_len=40):
     """
     智慧分句與三級呼吸停頓分類器：
@@ -204,6 +216,8 @@ def main():
 
     gen_text = normalize_quotes(gen_text)
     ref_text = normalize_quotes(ref_text)
+
+    gen_text = normalize_initials(gen_text)
 
     # 2. 構建 CosyVoice 3 核心指令 Prompt (<|endofprompt|>)
     formatted_prompt = f"You are a helpful assistant.<|endofprompt|>{ref_text}"

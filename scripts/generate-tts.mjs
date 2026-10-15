@@ -30,6 +30,12 @@ export function cleanMessageForTTS(rawMessage) {
     text = text.replace(/[（(][^（）()]*[）)]/g, "");
   } while (text !== prev);
 
+  // 1.1 英文縮寫過濾但書：若遇到英文人名縮寫（如 N. T.、J. I.、G. K. 等），TTS 朗讀時自動略過，保留中文全名
+  text = text.replace(/\b(?:[A-Z]\.\s*)+/g, "");
+  // 壓縮中文字元與中文字元/標點之間因移除縮寫產生的多餘空白
+  text = text.replace(/([\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])\s+(?=[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])/g, "$1");
+  text = text.replace(/(?<=[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])\s+([\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])/g, "$1");
+
   // 2. 移除 Markdown 語法
   // 移除圖片語法 ![alt](url)
   text = text.replace(/!\[[^\]]*\]\([^)]*\)/g, "");

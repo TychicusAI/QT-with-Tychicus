@@ -264,6 +264,9 @@ DEVOTIONAL_LEXICON = {
     "降世": [["jiang4"], ["shi4"]],
     "降生": [["jiang4"], ["sheng1"]],
     "投降": [["tou2"], ["xiang2"]],
+    "降書": [["xiang2"], ["shu1"]],
+    "降表": [["xiang2"], ["biao3"]],
+    "勸降": [["quan4"], ["xiang2"]],
     # 從字族（從容讀作 cong1 rong2）
     "從容": [["cong1"], ["rong2"]],
     "從容不迫": [["cong1"], ["rong2"], ["bu4"], ["po4"]],
@@ -644,6 +647,18 @@ def normalize_colons(text):
     text = re.sub(r'，\s*([。！？；])', r'\1', text)
     return text
 
+def normalize_initials(text):
+    """
+    英文人名縮寫過濾但書：
+    若遇到英文人名縮寫（如 N. T.、J. I.、G. K. 等），TTS 朗讀時自動略過，保留中文全名。
+    """
+    if not text:
+        return ""
+    text = re.sub(r'\b(?:[A-Z]\.\s*)+', '', text)
+    text = re.sub(r'([\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])\s+(?=[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])', r'\1', text)
+    text = re.sub(r'(?<=[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])\s+([\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef])', r'\1', text)
+    return text
+
 def synthesize_single_job(
     f5tts,
     gen_text,
@@ -657,6 +672,7 @@ def synthesize_single_job(
     gen_text = normalize_numbers(gen_text.strip())
     gen_text = normalize_colons(gen_text)
     gen_text = normalize_quotes(gen_text)
+    gen_text = normalize_initials(gen_text)
 
     cache_key = (os.path.abspath(ref_audio_path), os.path.abspath(ref_text_path))
     if cache_key not in ref_cache:
