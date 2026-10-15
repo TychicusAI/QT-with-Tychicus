@@ -40,10 +40,10 @@ export function Navbar({
               </span>
             </div>
             <p
-              title="v. 2.3 循序讀經 Lectio Continua"
+              title="v. 2.4 循序讀經 Lectio Continua"
               className="text-[11px] sm:text-xs text-stone-500 dark:text-stone-400 truncate max-w-[195px] sm:max-w-none"
             >
-              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />2.3</span>{" "}
+              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />2.4</span>{" "}
               循序讀經 Lectio Continua
             </p>
           </div>
