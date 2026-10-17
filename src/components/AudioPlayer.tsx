@@ -41,6 +41,7 @@ export function AudioPlayer({
 }: AudioPlayerProps) {
   const isFamily = version === "family";
   const isEncore = version === "encore";
+  const isMission = version === "mission";
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const headerContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,12 +54,16 @@ export function AudioPlayer({
   const [isStickyVisible, setIsStickyVisible] = useState(false);
   const [isAvailable, setIsAvailable] = useState(hasAudio);
 
-  const voiceName = isEncore
+  const voiceName = isMission
+    ? "宣教版伴讀（溫厚男聲）"
+    : isEncore
     ? "樂齡版伴讀（溫潤女聲）"
     : isFamily
     ? "家庭版伴讀（溫和女聲）"
     : "青年版伴讀（沉穩男聲）";
-  const versionTitle = isEncore
+  const versionTitle = isMission
+    ? "宣教版靈修伴讀"
+    : isEncore
     ? "樂齡版靈修伴讀"
     : isFamily
     ? "家庭版靈修伴讀"
@@ -173,7 +178,9 @@ export function AudioPlayer({
       <div className="flex items-center gap-2">
         <Quote
           className={`w-5 h-5 rotate-180 shrink-0 ${
-            isEncore
+            isMission
+              ? "text-indigo-600 dark:text-indigo-400"
+              : isEncore
               ? "text-rose-600 dark:text-rose-400"
               : isFamily
               ? "text-teal-600 dark:text-teal-400"
@@ -186,7 +193,19 @@ export function AudioPlayer({
   }
 
   // Accent styles according to version
-  const theme = isEncore
+  const theme = isMission
+    ? {
+        badgeBg: "bg-indigo-500/10 text-indigo-800 dark:text-indigo-200 border-indigo-300/40 dark:border-indigo-700/40",
+        pillActive: "bg-indigo-700 text-white shadow-sm dark:bg-indigo-600",
+        pillIdle: "bg-indigo-500/10 text-indigo-800 dark:text-indigo-200 hover:bg-indigo-500/20 border border-indigo-300/50 dark:border-indigo-700/50",
+        cardBg: "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-300/50 dark:border-indigo-700/40",
+        accentColor: "accent-indigo-700 dark:accent-indigo-400",
+        progressColor: "bg-indigo-700 dark:bg-indigo-400",
+        buttonHover: "hover:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300",
+        speedActive: "bg-indigo-700 text-white dark:bg-indigo-600",
+        playBtn: "bg-indigo-700 hover:bg-indigo-800 text-white dark:bg-indigo-600 dark:hover:bg-indigo-700 shadow-md",
+      }
+    : isEncore
     ? {
         badgeBg: "bg-rose-500/10 text-rose-800 dark:text-rose-200 border-rose-300/40 dark:border-rose-700/40",
         pillActive: "bg-rose-700 text-white shadow-sm dark:bg-rose-600",
@@ -240,7 +259,9 @@ export function AudioPlayer({
         <div className="flex items-center gap-2">
           <Quote
             className={`w-5 h-5 rotate-180 shrink-0 ${
-              isEncore
+              isMission
+                ? "text-indigo-600 dark:text-indigo-400"
+                : isEncore
                 ? "text-rose-600 dark:text-rose-400"
                 : isFamily
                 ? "text-teal-600 dark:text-teal-400"
@@ -405,7 +426,9 @@ export function AudioPlayer({
               type="button"
               onClick={togglePlay}
               className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                isEncore
+                isMission
+                  ? "bg-indigo-500 text-stone-950"
+                  : isEncore
                   ? "bg-rose-500 text-stone-950"
                   : isFamily
                   ? "bg-teal-500 text-stone-950"

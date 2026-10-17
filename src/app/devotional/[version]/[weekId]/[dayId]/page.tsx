@@ -11,6 +11,7 @@ export function generateStaticParams() {
 function normalizeVersion(rawVersion: string): DevotionalVersion {
   if (rawVersion === "family") return "family";
   if (rawVersion === "encore") return "encore";
+  if (rawVersion === "mission") return "mission";
   return "youth";
 }
 
@@ -28,7 +29,14 @@ export async function generateMetadata({
     };
   }
 
-  const vLabel = version === "encore" ? "樂齡版" : version === "family" ? "家庭版" : "青年版";
+  const vLabel =
+    version === "mission"
+      ? "宣教版"
+      : version === "encore"
+      ? "樂齡版"
+      : version === "family"
+      ? "家庭版"
+      : "青年版";
   const dayTitle = `${data.day.dayLabel} ${data.day.title} (${vLabel})`;
   const dayDesc = `【${data.day.scriptureRef}】${data.day.goldenVerse}`;
 

@@ -19,12 +19,15 @@ export function BibliographyCard({
 }: BibliographyCardProps) {
   const isFamily = version === "family";
   const isEncore = version === "encore";
+  const isMission = version === "mission";
   const totalBooks = getBookBibliography(bookSlug)?.totalBooks ?? 15;
 
   return (
     <div
       className={`rounded-2xl p-5 sm:p-6 border transition-all duration-200 shadow-2xs ${
-        isEncore
+        isMission
+          ? "bg-gradient-to-r from-indigo-500/5 via-indigo-500/10 to-violet-500/5 border-indigo-300/50 dark:border-indigo-800/40"
+          : isEncore
           ? "bg-gradient-to-r from-rose-500/5 via-rose-500/10 to-pink-500/5 border-rose-300/50 dark:border-rose-800/40"
           : isFamily
           ? "bg-gradient-to-r from-teal-500/5 via-teal-500/10 to-emerald-500/5 border-teal-300/50 dark:border-teal-800/40"
@@ -35,7 +38,9 @@ export function BibliographyCard({
         <div className="flex items-start gap-3.5">
           <div
             className={`p-2.5 rounded-xl shrink-0 ${
-              isEncore
+              isMission
+                ? "bg-indigo-600/10 text-indigo-700 dark:text-indigo-300"
+                : isEncore
                 ? "bg-rose-600/10 text-rose-700 dark:text-rose-300"
                 : isFamily
                 ? "bg-teal-600/10 text-teal-700 dark:text-teal-300"
@@ -52,7 +57,9 @@ export function BibliographyCard({
               </span>
               <span
                 className={`inline-flex items-center gap-1 text-xs sm:text-sm font-semibold px-2.5 py-0.5 rounded-full ${
-                  isEncore
+                  isMission
+                    ? "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-200"
+                    : isEncore
                     ? "bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200"
                     : isFamily
                     ? "bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-teal-200"
@@ -72,7 +79,9 @@ export function BibliographyCard({
         <Link
           href={`/books/${bookSlug}`}
           className={`shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition shadow-xs group ${
-            isEncore
+            isMission
+              ? "bg-indigo-700 hover:bg-indigo-600 text-white shadow-indigo-700/20"
+              : isEncore
               ? "bg-rose-700 hover:bg-rose-600 text-white shadow-rose-700/20"
               : isFamily
               ? "bg-teal-700 hover:bg-teal-600 text-white shadow-teal-700/20"

@@ -14,13 +14,17 @@ import { family_2026_10_12 } from "@/data/weeks/family/2026-10-12";
 
 import { encore_2026_10_12 } from "@/data/weeks/encore/2026-10-12";
 
+import { mission_2026_10_12 } from "@/data/weeks/mission/2026-10-12";
+
 export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21, youth_2026_09_28, youth_2026_10_05, youth_2026_10_12];
 export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28, family_2026_10_05, family_2026_10_12];
 export const allEncoreWeeks: DevotionalWeek[] = [encore_2026_10_12];
+export const allMissionWeeks: DevotionalWeek[] = [mission_2026_10_12];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
   if (version === "family") return allFamilyWeeks;
   if (version === "encore") return allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks;
+  if (version === "mission") return allMissionWeeks.length > 0 ? allMissionWeeks : allYouthWeeks;
   return allYouthWeeks;
 }
 
@@ -41,6 +45,9 @@ export function getWeekById(version: DevotionalVersion, weekId: string): Devotio
   if (found) return found;
   if (version === "encore") {
     return allFamilyWeeks.find((w) => w.id === weekId) || allYouthWeeks.find((w) => w.id === weekId);
+  }
+  if (version === "mission") {
+    return allYouthWeeks.find((w) => w.id === weekId) || allFamilyWeeks.find((w) => w.id === weekId);
   }
   return undefined;
 }
@@ -160,6 +167,20 @@ export function getAllParams(): { version: DevotionalVersion; weekId: string; da
     if (!encoreWeekIds.has(week.id)) {
       for (const day of week.days) {
         params.push({ version: "encore", weekId: week.id, dayId: day.id });
+      }
+    }
+  }
+  const missionWeekIds = new Set<string>();
+  for (const week of allMissionWeeks) {
+    missionWeekIds.add(week.id);
+    for (const day of week.days) {
+      params.push({ version: "mission", weekId: week.id, dayId: day.id });
+    }
+  }
+  for (const week of allYouthWeeks) {
+    if (!missionWeekIds.has(week.id)) {
+      for (const day of week.days) {
+        params.push({ version: "mission", weekId: week.id, dayId: day.id });
       }
     }
   }

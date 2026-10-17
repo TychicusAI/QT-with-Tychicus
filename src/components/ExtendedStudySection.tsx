@@ -62,7 +62,14 @@ export function ExtendedStudySection({
 
   const isFamily = version === "family";
   const isEncore = version === "encore";
-  const readerThemeClass = isEncore ? "encore-reader" : isFamily ? "family-reader" : "youth-reader";
+  const isMission = version === "mission";
+  const readerThemeClass = isMission
+    ? "mission-reader"
+    : isEncore
+    ? "encore-reader"
+    : isFamily
+    ? "family-reader"
+    : "youth-reader";
 
   const commentaryClasses = {
     normal: "text-sm leading-relaxed",
@@ -90,7 +97,9 @@ export function ExtendedStudySection({
         <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 flex items-center gap-2">
           <BookOpen
             className={`w-5 h-5 shrink-0 ${
-              isEncore
+              isMission
+                ? "text-indigo-600 dark:text-indigo-400"
+                : isEncore
                 ? "text-rose-600 dark:text-rose-400"
                 : isFamily
                 ? "text-teal-600 dark:text-teal-400"
@@ -125,11 +134,15 @@ export function ExtendedStudySection({
               }}
               className={`group p-4 sm:p-5 rounded-2xl bg-white dark:bg-stone-950 border transition-all duration-200 shadow-2xs cursor-pointer select-none ${
                 isExpanded
-                  ? isEncore
+                  ? isMission
+                    ? "border-indigo-500/80 shadow-sm ring-1 ring-indigo-500/20"
+                    : isEncore
                     ? "border-rose-500/80 shadow-sm ring-1 ring-rose-500/20"
                     : isFamily
                     ? "border-teal-500/80 shadow-sm ring-1 ring-teal-500/20"
                     : "border-amber-500/80 shadow-sm ring-1 ring-amber-500/20"
+                  : isMission
+                  ? "border-stone-200/90 dark:border-stone-800/90 hover:border-indigo-500/60 hover:shadow-xs"
                   : isEncore
                   ? "border-stone-200/90 dark:border-stone-800/90 hover:border-rose-500/60 hover:shadow-xs"
                   : isFamily
@@ -141,7 +154,9 @@ export function ExtendedStudySection({
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <span
                   className={`font-bold ${titleClasses} tracking-tight ${
-                    isEncore
+                    isMission
+                      ? "text-indigo-700 dark:text-indigo-400"
+                      : isEncore
                       ? "text-rose-700 dark:text-rose-400"
                       : isFamily
                       ? "text-teal-700 dark:text-teal-400"
@@ -156,11 +171,15 @@ export function ExtendedStudySection({
                   <span
                     className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium transition ${
                       isExpanded
-                        ? isEncore
+                        ? isMission
+                          ? "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-200"
+                          : isEncore
                           ? "bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200"
                           : isFamily
                           ? "bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-teal-200"
                           : "bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200"
+                        : isMission
+                        ? "bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-300 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-950/40 group-hover:text-indigo-700"
                         : isEncore
                         ? "bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-300 group-hover:bg-rose-50 dark:group-hover:bg-rose-950/40 group-hover:text-rose-700"
                         : isFamily
@@ -210,7 +229,9 @@ export function ExtendedStudySection({
                     <span className="flex items-center gap-1.5">
                       <BookOpen
                         className={`w-3.5 h-3.5 ${
-                          isEncore
+                          isMission
+                            ? "text-indigo-600 dark:text-indigo-400"
+                            : isEncore
                             ? "text-rose-600 dark:text-rose-400"
                             : isFamily
                             ? "text-teal-600 dark:text-teal-400"
@@ -227,7 +248,9 @@ export function ExtendedStudySection({
                   {displayText ? (
                     <blockquote
                       className={`p-4 sm:p-5 rounded-xl border font-serif markdown-content ${readerThemeClass} ${scriptureClasses} whitespace-pre-line ${
-                        isEncore
+                        isMission
+                          ? "bg-indigo-500/5 dark:bg-indigo-950/25 border-indigo-200/50 dark:border-indigo-800/40 text-stone-800 dark:text-stone-100"
+                          : isEncore
                           ? "bg-rose-500/5 dark:bg-rose-950/25 border-rose-200/50 dark:border-rose-800/40 text-stone-800 dark:text-stone-100"
                           : isFamily
                           ? "bg-teal-500/5 dark:bg-teal-950/25 border-teal-200/50 dark:border-teal-800/40 text-stone-800 dark:text-stone-100"
@@ -241,7 +264,9 @@ export function ExtendedStudySection({
                     <div className="flex items-center gap-2 py-3 text-xs text-stone-500 dark:text-stone-400">
                       <Loader2
                         className={`w-3.5 h-3.5 animate-spin ${
-                          isEncore
+                          isMission
+                            ? "text-indigo-600 dark:text-indigo-400"
+                            : isEncore
                             ? "text-rose-600 dark:text-rose-400"
                             : isFamily
                             ? "text-teal-600 dark:text-teal-400"

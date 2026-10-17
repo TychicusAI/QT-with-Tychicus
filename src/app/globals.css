@@ -113,6 +113,19 @@ html {
   color: #fb7185; /* rose-400 */
 }
 
+/* Mission version theme adaptation */
+.mission-reader .markdown-content em,
+.mission-reader.markdown-content em,
+.mission-reader em {
+  color: #4338ca; /* indigo-700 */
+}
+
+.dark .mission-reader .markdown-content em,
+.dark .mission-reader.markdown-content em,
+.dark .mission-reader em {
+  color: #818cf8; /* indigo-400 */
+}
+
 .markdown-content blockquote {
   border-left: 3px solid #d97706;
   padding-left: 1rem;
@@ -131,6 +144,12 @@ html {
 .encore-reader.markdown-content blockquote,
 .encore-reader blockquote {
   border-left-color: #be123c;
+}
+
+.mission-reader .markdown-content blockquote,
+.mission-reader.markdown-content blockquote,
+.mission-reader blockquote {
+  border-left-color: #4338ca;
 }
 
 .markdown-content ul {

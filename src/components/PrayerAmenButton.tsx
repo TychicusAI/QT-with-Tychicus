@@ -29,6 +29,7 @@ export function PrayerAmenButton({ version, weekId, dayId }: PrayerAmenButtonPro
 
   const isFamily = version === "family";
   const isEncore = version === "encore";
+  const isMission = version === "mission";
 
   return (
     <div className="flex flex-col items-center justify-center pt-4 pb-2 space-y-3">
@@ -37,6 +38,8 @@ export function PrayerAmenButton({ version, weekId, dayId }: PrayerAmenButtonPro
         className={`flex items-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-base transition-all duration-300 shadow-xl active:scale-95 cursor-pointer ${
           completed
             ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/30"
+            : isMission
+            ? "bg-indigo-700 hover:bg-indigo-600 text-white shadow-indigo-700/30 hover:shadow-indigo-600/40"
             : isEncore
             ? "bg-rose-700 hover:bg-rose-600 text-white shadow-rose-700/30 hover:shadow-rose-600/40"
             : isFamily

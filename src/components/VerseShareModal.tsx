@@ -53,7 +53,13 @@ export function VerseShareModal({ isOpen, onClose, week }: VerseShareModalProps)
   if (!isOpen) return null;
 
   const versionLabel =
-    week.version === "encore" ? "樂齡版" : week.version === "family" ? "家庭版" : "青年版";
+    week.version === "mission"
+      ? "宣教版"
+      : week.version === "encore"
+      ? "樂齡版"
+      : week.version === "family"
+      ? "家庭版"
+      : "青年版";
 
   const verseOptions = [
     {

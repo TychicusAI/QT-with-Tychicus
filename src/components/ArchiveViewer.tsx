@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Library,
   Sun,
+  Compass,
 } from "lucide-react";
 import { DevotionalWeek } from "@/types/devotional";
 import { getWeeksByVersion, formatWeekDateRange } from "@/lib/devotional-service";
@@ -27,6 +28,7 @@ export function ArchiveViewer() {
 
   const isFamily = version === "family";
   const isEncore = version === "encore";
+  const isMission = version === "mission";
   const allWeeks: DevotionalWeek[] = getWeeksByVersion(version);
 
   // Sort descending: newest week first
@@ -101,7 +103,9 @@ export function ArchiveViewer() {
               <div className="flex items-center gap-2">
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                    isEncore
+                    isMission
+                      ? "bg-indigo-100 dark:bg-indigo-950/70 text-indigo-800 dark:text-indigo-300 border border-indigo-300/60 dark:border-indigo-700/50"
+                      : isEncore
                       ? "bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 border border-rose-300/60 dark:border-rose-700/50"
                       : isFamily
                       ? "bg-teal-100 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300 border border-teal-300/60 dark:border-teal-700/50"
@@ -130,7 +134,7 @@ export function ArchiveViewer() {
               <div className="inline-flex flex-wrap items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs">
                 <button
                   onClick={() => setVersion("youth")}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     version === "youth"
                       ? "bg-amber-500 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -142,7 +146,7 @@ export function ArchiveViewer() {
 
                 <button
                   onClick={() => setVersion("family")}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     isFamily
                       ? "bg-teal-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -154,7 +158,7 @@ export function ArchiveViewer() {
 
                 <button
                   onClick={() => setVersion("encore")}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     isEncore
                       ? "bg-rose-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -162,6 +166,18 @@ export function ArchiveViewer() {
                 >
                   <Sun className="w-3.5 h-3.5" />
                   <span>樂齡版</span>
+                </button>
+
+                <button
+                  onClick={() => setVersion("mission")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                    isMission
+                      ? "bg-indigo-700 text-white shadow-xs"
+                      : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                  }`}
+                >
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>宣教版</span>
                 </button>
               </div>
             </div>
@@ -195,7 +211,9 @@ export function ArchiveViewer() {
             <div className="flex items-center gap-1.5">
               <CheckCircle2
                 className={`w-4 h-4 ${
-                  isEncore
+                  isMission
+                    ? "text-indigo-600 dark:text-indigo-400"
+                    : isEncore
                     ? "text-rose-600 dark:text-rose-400"
                     : isFamily
                     ? "text-teal-600 dark:text-teal-400"
@@ -206,7 +224,9 @@ export function ArchiveViewer() {
             </div>
             <span
               className={`px-2 py-0.5 rounded-full font-bold ${
-                isEncore
+                isMission
+                  ? "bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300"
+                  : isEncore
                   ? "bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300"
                   : isFamily
                   ? "bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300"
@@ -226,7 +246,7 @@ export function ArchiveViewer() {
               查無相符的靈修週次
             </h3>
             <p className="text-xs text-stone-500 dark:text-stone-400">
-              請嘗試更換搜尋關鍵字，或切換青年版／家庭版／樂齡版查看。
+              請嘗試更換搜尋關鍵字，或切換青年版／家庭版／樂齡版／宣教版查看。
             </p>
           </div>
         ) : (
@@ -237,7 +257,13 @@ export function ArchiveViewer() {
                 <div className="flex items-center gap-2.5">
                   <div
                     className={`w-2 h-5 rounded-full ${
-                      isEncore ? "bg-rose-600" : isFamily ? "bg-teal-600" : "bg-amber-500"
+                      isMission
+                        ? "bg-indigo-600"
+                        : isEncore
+                        ? "bg-rose-600"
+                        : isFamily
+                        ? "bg-teal-600"
+                        : "bg-amber-500"
                     }`}
                   />
                   <h2 className="font-bold text-lg sm:text-xl text-stone-900 dark:text-stone-100 tracking-tight">
@@ -266,7 +292,9 @@ export function ArchiveViewer() {
                         key={week.id}
                         className={`rounded-3xl p-6 sm:p-7 border transition-all duration-200 ${
                           week.isCurrentWeek
-                            ? isEncore
+                            ? isMission
+                              ? "bg-gradient-to-br from-indigo-500/10 via-white dark:via-stone-900 to-indigo-500/5 border-indigo-400/80 dark:border-indigo-700/80 shadow-md shadow-indigo-500/5"
+                              : isEncore
                               ? "bg-gradient-to-br from-rose-500/10 via-white dark:via-stone-900 to-rose-500/5 border-rose-400/80 dark:border-rose-700/80 shadow-md shadow-rose-500/5"
                               : isFamily
                               ? "bg-gradient-to-br from-teal-500/10 via-white dark:via-stone-900 to-teal-500/5 border-teal-400/80 dark:border-teal-700/80 shadow-md shadow-teal-500/5"
@@ -281,7 +309,9 @@ export function ArchiveViewer() {
                               {week.isCurrentWeek && (
                                 <span
                                   className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold text-white shadow-xs ${
-                                    isEncore
+                                    isMission
+                                      ? "bg-indigo-700"
+                                      : isEncore
                                       ? "bg-rose-700"
                                       : isFamily
                                       ? "bg-teal-700"
@@ -297,7 +327,9 @@ export function ArchiveViewer() {
                               </span>
                               <span
                                 className={`text-xs font-semibold px-2 py-0.5 rounded-md border ${
-                                  isEncore
+                                  isMission
+                                    ? "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800"
+                                    : isEncore
                                     ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800"
                                     : isFamily
                                     ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border-teal-200 dark:border-teal-800"
@@ -331,7 +363,9 @@ export function ArchiveViewer() {
                             <div className="w-24 h-2 rounded-full bg-stone-200 dark:bg-stone-700 overflow-hidden">
                               <div
                                 className={`h-full rounded-full transition-all duration-300 ${
-                                  isEncore
+                                  isMission
+                                    ? "bg-indigo-600"
+                                    : isEncore
                                     ? "bg-rose-600"
                                     : isFamily
                                     ? "bg-teal-600"
@@ -373,7 +407,9 @@ export function ArchiveViewer() {
                                     <div className="flex items-center justify-between gap-1 mb-1.5">
                                       <span
                                         className={`text-xs font-extrabold px-1.5 py-0.5 rounded-md ${
-                                          isEncore
+                                          isMission
+                                            ? "bg-indigo-700 text-white"
+                                            : isEncore
                                             ? "bg-rose-700 text-white"
                                             : isFamily
                                             ? "bg-teal-700 text-white"
@@ -390,7 +426,9 @@ export function ArchiveViewer() {
 
                                     <div
                                       className={`text-[11px] font-bold truncate line-clamp-1 transition-colors ${
-                                        isEncore
+                                        isMission
+                                          ? "group-hover:text-indigo-700 dark:group-hover:text-indigo-300"
+                                          : isEncore
                                           ? "group-hover:text-rose-700 dark:group-hover:text-rose-300"
                                           : isFamily
                                           ? "group-hover:text-teal-700 dark:group-hover:text-teal-300"
@@ -420,7 +458,9 @@ export function ArchiveViewer() {
                           <Link
                             href={`/devotional/${version}/${week.id}/mon`}
                             className={`inline-flex items-center gap-1 font-bold hover:underline ${
-                              isEncore
+                              isMission
+                                ? "text-indigo-700 dark:text-indigo-400"
+                                : isEncore
                                 ? "text-rose-700 dark:text-rose-400"
                                 : isFamily
                                 ? "text-teal-700 dark:text-teal-400"

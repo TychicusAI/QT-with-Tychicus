@@ -127,6 +127,14 @@ function resolveVoicePaths(versionKey) {
     } else {
       voiceStem = "family_female";
     }
+  } else if (versionKey === "mission") {
+    if (fs.existsSync(path.join(voicesDir, "mission_male.wav"))) {
+      voiceStem = "mission_male";
+    } else if (fs.existsSync(path.join(voicesDir, "mission_female.wav"))) {
+      voiceStem = "mission_female";
+    } else {
+      voiceStem = "youth_male";
+    }
   }
 
   const refAudio = path.join(voicesDir, `${voiceStem}.wav`);
@@ -278,6 +286,7 @@ async function main() {
       { key: "youth", file: "qt_for_youth.md", name: "青年版" },
       { key: "family", file: "qt_for_family.md", name: "家庭版" },
       { key: "encore", file: "qt_for_encore.md", name: "樂齡版" },
+      { key: "mission", file: "qt_for_mission.md", name: "宣教版" },
     ];
     if (specifiedVersion) {
       versions = versions.filter((v) => v.key === specifiedVersion);
