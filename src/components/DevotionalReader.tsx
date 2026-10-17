@@ -120,16 +120,16 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         </nav>
 
         {/* Four-Track Version Switcher & Reader Controls */}
-        <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2.5 flex-wrap w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 sm:gap-2.5 w-full sm:w-auto">
           {/* Quick Version Switcher for this day */}
-          <div className="flex items-center gap-0.5 sm:gap-1 bg-stone-100 dark:bg-stone-800/80 p-0.5 rounded-full border border-stone-200 dark:border-stone-700 shrink-0">
+          <div className="grid grid-cols-4 sm:flex items-center gap-0.5 sm:gap-1 bg-stone-100 dark:bg-stone-800/80 p-1 sm:p-0.5 rounded-full border border-stone-200 dark:border-stone-700 w-full sm:w-auto shrink-0">
             {versionOptions.map((opt) => {
               const active = opt.id === week.version;
               return (
                 <Link
                   key={opt.id}
                   href={`/devotional/${opt.id}/${week.id}/${day.id}`}
-                  className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 px-2 sm:px-2.5 py-1.5 sm:py-1 rounded-full text-xs font-semibold transition whitespace-nowrap ${
                     active
                       ? opt.id === "mission"
                         ? "bg-indigo-700 text-white shadow-xs"
@@ -142,14 +142,14 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
                   }`}
                   title={`查看${opt.label}的靈修信息`}
                 >
-                  {!active && <span className="hidden xs:inline-flex">{opt.icon}</span>}
+                  <span className="hidden sm:inline-flex">{opt.icon}</span>
                   <span>{opt.label}</span>
                 </Link>
               );
             })}
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 shrink-0">
             {/* Font size switcher */}
             <div className="flex items-center bg-stone-100 dark:bg-stone-800/80 rounded-lg p-0.5 border border-stone-200 dark:border-stone-700">
               <button

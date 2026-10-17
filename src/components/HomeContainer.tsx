@@ -43,59 +43,59 @@ export function HomeContainer() {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12 min-w-0">
         {/* Welcome Tagline */}
         <section className="text-center max-w-2xl mx-auto space-y-4 pt-2 sm:pt-4">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center w-full">
             {/* Version Switcher Buttons */}
-            <div className="inline-flex flex-wrap items-center justify-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs max-w-full">
+            <div className="grid grid-cols-4 sm:inline-flex items-center justify-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs w-full max-w-md sm:w-auto sm:max-w-full">
               <button
                 onClick={() => setVersion("youth")}
-                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                   version === "youth"
                     ? "bg-amber-500 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                 }`}
               >
-                <Sparkle className="w-3.5 h-3.5 shrink-0" />
+                <Sparkle className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>青年版</span>
-                <span className="hidden sm:inline">Youth</span>
+                <span className="hidden md:inline">Youth</span>
               </button>
 
               <button
                 onClick={() => setVersion("family")}
-                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                   isFamily
                     ? "bg-teal-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                 }`}
               >
-                <Users className="w-3.5 h-3.5 shrink-0" />
+                <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>家庭版</span>
-                <span className="hidden sm:inline">Family</span>
+                <span className="hidden md:inline">Family</span>
               </button>
 
               <button
                 onClick={() => setVersion("encore")}
-                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                   isEncore
                     ? "bg-rose-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                 }`}
               >
-                <Sun className="w-3.5 h-3.5 shrink-0" />
+                <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>樂齡版</span>
-                <span className="hidden sm:inline">Encore</span>
+                <span className="hidden md:inline">Encore</span>
               </button>
 
               <button
                 onClick={() => setVersion("mission")}
-                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3.5 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                   isMission
                     ? "bg-indigo-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                 }`}
               >
-                <Compass className="w-3.5 h-3.5 shrink-0" />
+                <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>宣教版</span>
-                <span className="hidden sm:inline">Mission</span>
+                <span className="hidden md:inline">Mission</span>
               </button>
             </div>
           </div>

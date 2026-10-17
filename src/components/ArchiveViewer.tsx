@@ -130,53 +130,53 @@ export function ArchiveViewer() {
             </div>
 
             {/* Version Switcher Tabs */}
-            <div className="flex items-center gap-2 shrink-0">
-              <div className="inline-flex flex-wrap items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs">
+            <div className="flex items-center gap-2 shrink-0 w-full md:w-auto">
+              <div className="grid grid-cols-4 sm:inline-flex items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs w-full sm:w-auto">
                 <button
                   onClick={() => setVersion("youth")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     version === "youth"
                       ? "bg-amber-500 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                   }`}
                 >
-                  <Sparkle className="w-3.5 h-3.5" />
+                  <Sparkle className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                   <span>青年版</span>
                 </button>
 
                 <button
                   onClick={() => setVersion("family")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isFamily
                       ? "bg-teal-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                   }`}
                 >
-                  <Users className="w-3.5 h-3.5" />
+                  <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                   <span>家庭版</span>
                 </button>
 
                 <button
                   onClick={() => setVersion("encore")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isEncore
                       ? "bg-rose-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                   }`}
                 >
-                  <Sun className="w-3.5 h-3.5" />
+                  <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                   <span>樂齡版</span>
                 </button>
 
                 <button
                   onClick={() => setVersion("mission")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isMission
                       ? "bg-indigo-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
                   }`}
                 >
-                  <Compass className="w-3.5 h-3.5" />
+                  <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                   <span>宣教版</span>
                 </button>
               </div>

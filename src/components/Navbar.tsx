@@ -49,12 +49,12 @@ export function Navbar({
           </div>
         </Link>
 
-        {/* Center: Version Switcher Tabs (Desktop only; on mobile, page body provides version switcher) */}
+        {/* Center: Version Switcher Tabs (Large Desktop only; on mobile/tablet, page body provides version switcher) */}
         {onVersionChange && (
-          <div className="hidden md:flex items-center bg-stone-200/80 dark:bg-stone-900 p-1 rounded-full border border-stone-300/60 dark:border-stone-800 text-xs font-semibold shrink-0">
+          <div className="hidden lg:flex items-center bg-stone-200/80 dark:bg-stone-900 p-1 rounded-full border border-stone-300/60 dark:border-stone-800 text-xs font-semibold shrink-0">
             <button
               onClick={() => onVersionChange("youth")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "youth"
                   ? "bg-amber-500 text-white shadow-xs"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -66,7 +66,7 @@ export function Navbar({
 
             <button
               onClick={() => onVersionChange("family")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "family"
                   ? "bg-teal-700 text-white shadow-xs"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -78,7 +78,7 @@ export function Navbar({
 
             <button
               onClick={() => onVersionChange("encore")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "encore"
                   ? "bg-rose-700 text-white shadow-xs"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -90,7 +90,7 @@ export function Navbar({
 
             <button
               onClick={() => onVersionChange("mission")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "mission"
                   ? "bg-indigo-700 text-white shadow-xs"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -103,7 +103,7 @@ export function Navbar({
         )}
 
         {/* Right: Interactive Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Streak indicator badge */}
           <div
             title={`連續靈修打卡 ${streak} 天`}
@@ -117,10 +117,11 @@ export function Navbar({
           {onOpenVerseModal && (
             <button
               onClick={onOpenVerseModal}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-xs font-medium transition cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-xs font-medium transition cursor-pointer whitespace-nowrap"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span>金句卡片</span>
+              <span className="hidden xl:inline">金句卡片</span>
+              <span className="xl:hidden">金句</span>
             </button>
           )}
 
@@ -128,10 +129,11 @@ export function Navbar({
           {onOpenTimerModal && (
             <button
               onClick={onOpenTimerModal}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition cursor-pointer"
+              className="hidden md:flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition cursor-pointer whitespace-nowrap"
             >
               <Clock className="w-3.5 h-3.5 text-stone-500" />
-              <span>靜心默想</span>
+              <span className="hidden xl:inline">靜心默想</span>
+              <span className="xl:hidden">默想</span>
             </button>
           )}
 
