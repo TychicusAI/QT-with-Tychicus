@@ -521,7 +521,7 @@ export function ArchiveViewer() {
                 rel="noopener noreferrer"
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
-                Gemini Task
+                Gemini
               </a>{" "}
               製作
             </span>

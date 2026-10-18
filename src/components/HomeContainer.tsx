@@ -457,7 +457,7 @@ export function HomeContainer() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500 dark:text-stone-400">
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-stone-800 dark:text-stone-200">
-              靈修推基古 (QT with Tychicus)
+              靈修推基古
             </span>
             <span>•</span>
             <span>青年、家庭、樂齡與宣教每日研經靈修平台</span>
@@ -481,7 +481,7 @@ export function HomeContainer() {
                 rel="noopener noreferrer"
                 className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
               >
-                Gemini Task
+                Gemini
               </a>{" "}
               製作
             </span>

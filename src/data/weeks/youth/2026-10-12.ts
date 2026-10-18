@@ -248,5 +248,5 @@ export const youth_2026_10_12: DevotionalWeek = {
     }
   ],
   "publishedAt": "2026-10-12",
-  "isCurrentWeek": true
+  "isCurrentWeek": false
 };

@@ -20,6 +20,7 @@ import {
 import { marked } from "marked";
 import { DevotionalDay, DevotionalWeek, DevotionalVersion } from "@/types/devotional";
 import { getAdjacentDay } from "@/lib/devotional-service";
+import { setStoredVersion } from "@/lib/storage";
 import { ExtendedStudySection } from "@/components/ExtendedStudySection";
 import { JournalBox } from "@/components/JournalBox";
 import { PrayerAmenButton } from "@/components/PrayerAmenButton";
@@ -45,6 +46,12 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       }
     } catch {}
   }, []);
+
+  React.useEffect(() => {
+    if (week.version) {
+      setStoredVersion(week.version);
+    }
+  }, [week.version]);
 
   const handleSetFontSize = (size: "normal" | "large" | "xlarge") => {
     setFontSize(size);
