@@ -457,7 +457,7 @@ export function HomeContainer() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500 dark:text-stone-400">
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-stone-800 dark:text-stone-200">
-              靈修推基古
+              靈修推基古 (QT with Tychicus)
             </span>
             <span>•</span>
             <span>青年、家庭、樂齡與宣教每日研經靈修平台</span>
