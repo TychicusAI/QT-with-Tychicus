@@ -49,7 +49,7 @@ export const family_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "在你們家的日常相處中，有沒有哪一句感謝、哪一聲道歉或哪一段陪伴，是你一直放在心裡想著「以後找機會再說」的？如果今天就是天父為你們家預備「極蒙悅納的拯救之日」，今晚在睡前，你可以如何把皮夾裡那張「恩典禮品卡」拿出來，送給身邊的家人？",
       "audioUrl": "/audio/2026-10-19/family/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧你們家過去這幾年走過的日子，有沒有哪一次「共同面對的患難或困苦」，當下雖然很辛苦，回頭看卻讓全家人的心靠得更近、生命變得更堅韌？在目前的家庭生活中，我們可以如何用一個具體的溫柔行動，為正處於壓力中的家人拼出「以馬內利」？",
       "audioUrl": "/audio/2026-10-19/family/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "在最近與家人的互動中，當意見不合或情緒緊繃時，你比較常拿出「血氣的批評與冷漠」，還是哥林多後書 6 章 6 節的「恆忍、恩慈與無偽之愛」？對你們家而言，有哪一樣「用錢買不到、卻已經在基督裡賜給你們的珍寶」，是今晚值得全家人一起開口數算並感謝神的？",
       "audioUrl": "/audio/2026-10-19/family/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "如果今晚全家人放下手機，看著彼此的眼睛，父母與孩子各自最想對對方說的一句「敞開心門的話」是什麼？在我們家中，有沒有哪些「過度看重成績、工作忙碌或翻舊帳」的雜質，正在讓我們的「心腸變窄」，是我們今晚可以一起禱告清除的？",
       "audioUrl": "/audio/2026-10-19/family/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "如果檢視你們家平時在餐桌上最常談論的話題，以及全家人最看重的優先順序，你們覺得家裡目前比較像是在負「基督輕省平安的軛」，還是不小心套上了「世俗比較與焦慮的軛」？我們全家人可以從哪一個日常習慣（例如：謝飯禱告後不抱怨、說造就人的話）開始，讓家裡的樂音與基督更和諧？",
       "audioUrl": "/audio/2026-10-19/family/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "小女孩說：「我們一直都有一個家，只是暫時沒有房子把它裝進去。」對你們全家人來說，是什麼讓你們的住處成為一個真正的「家」（永生神的殿）？如果想像主耶穌今天就在你們家的客廳與餐桌旁「散步來往」，我們可以一起調整哪一個家庭空間或生活習慣，讓主在我們家住得更喜悅？",
       "audioUrl": "/audio/2026-10-19/family/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-10-19",

@@ -49,7 +49,7 @@ export const youth_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的生活，有哪些神的恩典（例如：一個饒恕人的機會、一項神託付的服事、或一個離棄壞習慣的感動）正被你像「蓋上屋頂的日晷」或「塞在皮夾深處的禮品卡」一樣束之高閣？如果「現在」就是神為你預備最蒙悅納的拯救時刻，你今天下班或放學前可以採取哪一個具體行動來支取這份恩典？",
       "audioUrl": "/audio/2026-10-19/youth/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "回想最近這段日子，有哪一個讓你感到壓力沉重、甚至逼入狹窄死角的處境（如工作挑戰、人際摩擦或服事疲乏），其實是神正在用來鍛造你裡面「應力木」的風？同時，在你的日常言行中，有沒有哪個習慣需要調整，免得成為身邊人認識基督的絆腳石？",
       "audioUrl": "/audio/2026-10-19/youth/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "當你在職場或人際關係中遭遇不公平的批評（惡名與羞辱）時，你習慣拿起什麼樣的「武器」來保護自己或反擊對方？如果今天主耶穌邀請你放下血氣的武器，改以右手握住「誠實真道」、左手舉起「恩慈與無偽之愛」，這會如何改變你正在面對的那場衝突？",
       "audioUrl": "/audio/2026-10-19/youth/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的人際與團契關係，有沒有哪一個人（可能是父母、同工或朋友）其實一直在向你釋出善意，但你卻因為過去的某個心結或自我保護，而在心腸裡對他「狹窄封閉」？今天主耶穌如何邀請你跨出一步，把你的心房向神、也向那個人稍微拓寬一點？",
       "audioUrl": "/audio/2026-10-19/youth/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "如果那個餐桌旁的小女孩今天問你：「從你週日在教會唱的詩歌，和你週一到週六在職場、感情與手機裡的實際生活來看，上帝到底應該相信哪一個你？」你會如何回答？你目前的生活中，有沒有哪一個正在把你拉離神的「異軛」，是主今天呼召你勇敢解開的？",
       "audioUrl": "/audio/2026-10-19/youth/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "當你確知自己的身體與心靈就是「永生神親自居住、在其中散步來往的至聖所」，更是「全能之主所寶貝的兒子／女兒」時，這份尊貴的身分認同，會如何幫助你在面對城市生活的孤單感、或面對某個不潔習慣的試探時，做出不一樣的選擇？",
       "audioUrl": "/audio/2026-10-19/youth/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-10-19",

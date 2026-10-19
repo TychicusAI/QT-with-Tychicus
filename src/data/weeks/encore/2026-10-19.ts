@@ -49,7 +49,7 @@ export const encore_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧你信主至今的歲月，神曾賜給你哪些寶貴的人生歷練、恩賜或體會，是你可以從「抽屜深處」拿出來祝福身邊的人的？在今天結束之前，有沒有哪一件「愛與和好」的小事，是你願意把握「現在正是悅納的時候」立刻去做的？",
       "audioUrl": "/audio/2026-10-19/encore/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "回首你前半生走過最艱難的一段「逆風歲月」（某次患難、困苦或無數徹夜不眠的夜晚），你看見神如何透過那段經歷，在你裡面鍛造出今天能夠穩定自己、也安慰別人的「應力木」韌性？面對目前的身體或生活限制，你依然可以用哪一種方式活出「神用人」的溫暖見證？",
       "audioUrl": "/audio/2026-10-19/encore/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "當你卸下過往的職場頭銜或家庭掌舵者的角色後，你覺得神在你生命中累積了哪些「用錢買不到、卻能叫身邊年輕世代或家人心靈富足」的無價資產？這週你可以如何把這份溫暖的資產（如一次傾聽、一句不帶批評的肯定、或一段生命故事）分享給一位晚輩？",
       "audioUrl": "/audio/2026-10-19/encore/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const encore_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "在你與老伴、手足或成年兒女的關係中，有沒有哪一個「看不慣的點」或「陳年的心結」，正像血管裡的斑塊一樣讓你的心腸變得狹窄？如果今天效法保羅「口是張開的、心是寬宏的」榜樣，你可以主動對哪一位家人說出一句不帶要求、純粹接納與肯定的話？",
       "audioUrl": "/audio/2026-10-19/encore/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const encore_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的日常口舌習慣裡，或是面對未信親友的民俗傳統與理財邀約時，有沒有哪一件事曾讓你感到「心裡不平安、像牛與驢同負一軛般拉扯」？在人生的下半場，你可以如何更單純地調準自己的生命音準，讓兒孫從你身上聽見與基督和諧共鳴的讚美樂章？",
       "audioUrl": "/audio/2026-10-19/encore/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const encore_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "當你想到那位掌管宇宙的「全能之主」（*kyrios pantokratōr*）此時此刻就住在你裡面，在你的日常生活中陪你散步同行，並且永遠把你當作祂懷裡心愛的「兒子／女兒」時，這份應許如何安慰你對未來、老去或孤單的隱憂？今天在散步或安靜時，你想對這位天父說什麼心裡話？",
       "audioUrl": "/audio/2026-10-19/encore/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-10-19",

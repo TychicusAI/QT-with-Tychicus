@@ -37,10 +37,10 @@ export function Navbar({
               </span>
             </div>
             <p
-              title="v. 2.4 循序讀經"
+              title="v. 3.0 循序讀經"
               className="text-[11px] sm:text-xs text-stone-500 dark:text-stone-400 truncate max-w-[195px] sm:max-w-none"
             >
-              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />2.4</span>{" "}
+              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />3.0</span>{" "}
               循序讀經
             </p>
           </div>

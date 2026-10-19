@@ -49,7 +49,7 @@ export const mission_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你或你所屬團契目前的信仰生活，我們是否不小心在福音的「日晷」上蓋了某種安舒或內聚的屋頂，以致神的恩典只停留在教會內部？如果確信「現在正是拯救的日子」，這週神正邀請你在哪一個跨文化代禱、支持前線工人或關懷身邊未信鄰舍的行動上，跨出「與祂同工」的一步？",
       "audioUrl": "/audio/2026-10-19/mission/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "獨腿宣教士喬治·史考特說：「因為我看見那些有兩條腿的人並沒有去。」在你的生命中，有哪些神已經賜給你的健康、資源、專業或自由（你的「兩條腿」），是目前還停留在舒適溫室裡、尚未為主邁開步伐的？這週你願意在代禱、奉獻或實際走向跨文化鄰舍的行動上，付出一點「勤勞與儆醒」的代價嗎？",
       "audioUrl": "/audio/2026-10-19/mission/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const mission_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "在向未信親友或異文化鄰舍分享信仰時，你覺得自己比較容易缺少右手的「真實之道」（不敢開口見證主），還是缺少左手的「恆忍、恩慈與無偽之愛」（缺乏耐心的傾聽與接納）？當你思想自己在基督裡已經「樣樣都有」，這週你可以如何用你手中的資源或時間，去「叫身邊某一個貧乏的靈魂成為富足」？",
       "audioUrl": "/audio/2026-10-19/mission/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const mission_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "當你檢視自己心房的「空間配置」時，裡面是否早已被自己的工作、家庭與同溫層塞滿，以致對身邊的跨文化鄰舍（如移工、新住民、非信徒同事）或遠方的宣教需要感到「心腸狹窄、擠不出空間」？這週你可以如何求主幫你「拓寬心房」，騰出一個具體的時間或餐桌空位給一位圈外人？",
       "audioUrl": "/audio/2026-10-19/mission/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const mission_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的職場環境、家族傳統或跨文化服事中，你覺得「溫柔融入人群」與「不與世俗黑暗同負一軛」之間最難拿捏的地方是什麼？當身邊的未信同事或異文化鄰舍觀察你的生活時，有沒有哪一個言行落差，是主今天提醒你校準音準、使你更能發出純淨共鳴的？",
       "audioUrl": "/audio/2026-10-19/mission/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const mission_2026_10_19: DevotionalWeek = {
       ],
       "meditationQuestion": "當你思想你們的教會、團契或家庭就是「永生神在城市與萬民中親自居住、散步來往的活聖殿」時，這份異象如何改變你對教會存在目的的看法？在你的代禱名單或日常生活圈裡，有哪一位「還在門外漂泊的兒子或女兒」，是你渴望透過活出天父的愛，帶領他經歷天父「收納」之恩的？",
       "audioUrl": "/audio/2026-10-19/mission/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-10-19",
