@@ -49,7 +49,7 @@ export const youth_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你最近在社交平台上的發文、或是與同儕相處時的言談舉止，你是否正在費力維持某種「精修的人設」？如果剝除這些外在的光環與包裝，你敢於讓基督與身邊的人看見你最真實、未經修飾的內心嗎？",
       "audioUrl": "/audio/2026-10-12/youth/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的日常時間安排、金錢使用與人際互動中，有哪些部分顯明你依然在牢牢地「為自己活」？若真切體會到基督為你死而復活的愛，你願意在生活的哪一個具體層面交出主權，讓基督的愛來框定並引導你？",
       "audioUrl": "/audio/2026-10-12/youth/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的自我認知中，是否有某些來自過去的失敗、過犯或原生家庭的負面標籤，至今依然在暗中控告你、阻礙你相信自己是「新造的人」？面對身邊那些你平時看不順眼或習慣輕視的人，若用「基督為他而死」的眼光重新打量，你看見的會有什麼不同？",
       "audioUrl": "/audio/2026-10-12/youth/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的生活圈中，是否有某個人是你至今依然「已讀不回、暗中記仇、不願饒恕」的？天父上帝在基督裡「不計算你一生無數罪愆」的浩瀚恩典，如何能激勵你今天主動邁出第一步，向那個人釋放和平與和好的善意？",
       "audioUrl": "/audio/2026-10-12/youth/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "當非基督徒的同事、朋友或家人看見你的日常生活方式、面對利益衝突的反應與言談舉止時，他們會對你身後所代表的「君王耶穌」產生什麼樣的印象？在你的社交圈中，是否有某個正處於心靈乾渴或信仰偏見中的朋友，是上帝今天呼召你帶著溫柔謙卑的姿態去代言關懷的？",
       "audioUrl": "/audio/2026-10-12/youth/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的內心深處，你是否依然覺得必須「表現得足夠好、產能足夠高」上帝才願意愛你？當你再次經歷軟弱跌倒、被罪咎感撕扯時，你如何能立刻回到哥林多後書 5 章 21 節的「奇妙大交換」中，重新披上基督的義袍？",
       "audioUrl": "/audio/2026-10-12/youth/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-12",

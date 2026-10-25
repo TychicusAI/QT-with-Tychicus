@@ -49,7 +49,7 @@ export const encore_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "當職稱、頭銜或年輕時的體力逐漸退去時，你最不習慣放下的「外在看板」或「長輩面子」是什麼？如果確定自己在上帝眼中已被全然看透且深深接納，在接下來的日子裡，你願意如何在家人或團契契友面前，活出更輕鬆、更真實不造作的自己？",
       "audioUrl": "/audio/2026-10-12/encore/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在目前的熟齡或退休生活中，你覺得自己比較容易滑向「過度操心、想替成年兒女做決定」，還是比較容易滑向「退縮自保、只關注自己的健康與安逸」？若讓基督十架的愛成為你生命的「花崗岩河道」，這週有哪一件具體的事，是你願意練習「退後一步放手交託」或「跨出一步為主服事」的？",
       "audioUrl": "/audio/2026-10-12/encore/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "回首前半生，有沒有哪一件「對家人的虧欠」或「對自己的遺憾」，是你在安靜獨處時仍常拿出來責備自己的？又或者，你目前是否仍用世俗的「產值與成敗」在衡量退休後的自己與成年兒女？今天你願意如何把這份舊事交在基督「都變成新的了」的十架恩典中？",
       "audioUrl": "/audio/2026-10-12/encore/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const encore_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的婚姻、手足長照分擔或與成年兒女的關係裡，有沒有哪一筆「陳年舊帳」或哪一個「拉不下臉的心結」，是你一直放在心底沒有真正放下的？思想天父主動走入戰壕、撕毀我們罪債帳冊的恩典，這週你願意向哪一位家人主動發出一句溫柔的問候，跨出和好的第一步？",
       "audioUrl": "/audio/2026-10-12/encore/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const encore_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "當你與成年兒女、晚輩或老伴說話時，你的語氣比較像「拿著權杖下達指導棋的長官」，還是「帶著溫柔眼淚與祝福守望的天國大使」？面對你心中最牽掛的一位家人，這週你願意如何「少說一句說教的話，多跪下來為他作一次迫切的代禱」？",
       "audioUrl": "/audio/2026-10-12/encore/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const encore_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "當你回望走過的大半生、或偶爾思想將來迎見主面的那一刻時，你心底是否還殘留著「怕自己做得不夠好、怕虧欠太多」的不安？若今天親眼看見主耶穌走下台階，親手將祂那件潔白無瑕的「王室義袍」披在你肩上，並替你在永恆的契約上簽了名，這會如何改變你看待自己晚年生命與面對家人的心情？",
       "audioUrl": "/audio/2026-10-12/encore/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-12",

@@ -49,7 +49,7 @@ export const mission_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的服事、職場見證或關心宣教的過程中，你是否曾因為「看不見立即的果效或數字」而感到焦慮，或想要戴上某種「剛強成功」的面具？如果確定主耶穌看重的是你內心的真實而非外貌的看板，這週你願意在代禱小組或日常與未信朋友的相處中，放下哪一個不必要的包裝？",
       "audioUrl": "/audio/2026-10-12/mission/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在過去這一個月裡，你的時間、金錢與心力分配，比較像「沒有堤防約束、只圍繞著自身需求打轉的漫溢河水」，還是「被基督十架之愛圈定、流向未得鄰舍與神國度的活水」？今天基督「替眾人死」的愛，正呼召你在哪一個具體的日常關係或宣教代禱上，跨出「不再只為自己活」的一小步？",
       "audioUrl": "/audio/2026-10-12/mission/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const mission_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的日常生活圈（如社區的外籍看護與移工、職場上價值觀迥異的同事，或某個特定的未得群體）中，你有沒有無意識地戴著哪一副「按著肉體認人」的刻板眼鏡？如果換上哥林多後書 5 章 17 節「在基督裡新創造」的眼光，這週你會如何用一個微笑、一句問候或一次具體的代禱重新走向他們？",
       "audioUrl": "/audio/2026-10-12/mission/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const mission_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在面對宣教事工、職場福音見證或跨文化服事時，你是否曾忘記「一切都是出於神」，而把成敗的重擔全扛在自己肩上？另外，在你與服事同工、教會肢體或身邊鄰舍的關係裡，有沒有哪一本「記算對方過犯與不體貼」的隱形帳本，是主今天邀請你放進十字架烈火中燒毀的？",
       "audioUrl": "/audio/2026-10-12/mission/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const mission_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "如果一位從未認識耶穌的非信徒同事、鄰居或外籍移工，單單透過觀察你平常對待他們的語氣、眼神與處事態度，來認識你所信的上帝，你覺得他們會看見一位怎樣的上帝？在這週的日常或跨文化接觸中，你願意放下哪一種「高高在上的指導姿態」，改以溫柔傾聽與服事來作基督的大使？",
       "audioUrl": "/audio/2026-10-12/mission/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const mission_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在參與服事、傳福音或跨文化關懷時，你是否曾不自覺地把「事工有沒有看得見的果效」當成衡量自己屬靈價值的標準？當你再次思想主耶穌在「甘甜的奇妙大交換」中已經白白將「神的義袍」披在你身上，這份篤定與安息，會如何重新點燃你為身邊未信親友或遠方未得之民守望的喜樂與耐心？",
       "audioUrl": "/audio/2026-10-12/mission/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-12",

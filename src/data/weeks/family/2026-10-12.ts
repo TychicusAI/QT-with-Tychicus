@@ -49,7 +49,7 @@ export const family_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在過去一週的家庭互動中，你是否曾在某個時刻為了維護自己的面子或自尊，而硬著頸項拒絕承認錯誤、甚至引發家庭冷戰？若思想上帝鑒察你全人的敬畏視界，你今天願意放下哪一個面具，主動向家人表達一份真誠的歉意或軟弱？",
       "audioUrl": "/audio/2026-10-12/family/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "回想最近一次在家中引發爭執的情境，捫心自問：在那一刻，你是否正在牢牢地「為自己活」、堅持自己的權益與面子？如果思想耶穌基督為你死在十字架上的捨己大愛，下一次當家人觸動你的敏感神經時，你願意做出什麼樣不同的溫和回應？",
       "audioUrl": "/audio/2026-10-12/family/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的內心深處，你是否給配偶、孩子或父母貼上了某些難以磨滅的「負面標籤」？在家庭爭吵時，你是否習慣翻出過去幾年甚至十幾年前的陳年舊帳來攻擊對方？若真切相信上帝已經宣告「舊事已過，都變成新的了」，你今天願意靠著聖靈撕毀哪一張標籤，給家人一個完全重新開始的擁抱？",
       "audioUrl": "/audio/2026-10-12/family/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你的心靈，你是否在心中為配偶、父母或兒女保留著一本「過犯記帳簿」，總是在下意識裡記錄著他們對你的虧欠與忽視？面對天父上帝在基督裡將你一生的罪債「完全清零、不再歸算」的震撼大愛，你今天是否願意靠著禱告，在主面前將這本家庭帳簿徹底燒毀？",
       "audioUrl": "/audio/2026-10-12/family/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "回想你在家庭中與配偶或孩子溝通時的語氣與姿態，你表現出來的更像是一位居高臨下的羅馬帝國長官，還是一位帶著溫柔眼淚懇求的天國大使？面對家人最近的某個軟弱或錯誤，你願意如何調整你的說話方式，用帶著恩氣的話語去挽回他的心？",
       "audioUrl": "/audio/2026-10-12/family/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_10_12: DevotionalWeek = {
       ],
       "meditationQuestion": "回想你的成長經歷或當前的家庭溝通，你是否曾在潛意識中向家人傳遞過「只有當你表現夠好、達到期望時，我才愛你」的條件式信號？面對基督在十字架上「替我們成為罪、使我們成為神的義」的無條件恩典，你今天願意給予家人一個怎樣毫無防衛、毫無條件的溫暖擁抱？",
       "audioUrl": "/audio/2026-10-12/family/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-12",
