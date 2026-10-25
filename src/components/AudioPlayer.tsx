@@ -57,10 +57,10 @@ export function AudioPlayer({
   const voiceName = isMission
     ? "宣教版伴讀（溫厚男聲）"
     : isEncore
-    ? "樂齡版伴讀（溫潤女聲）"
+    ? "樂齡版伴讀（溫厚男聲）"
     : isFamily
     ? "家庭版伴讀（溫和女聲）"
-    : "青年版伴讀（沉穩男聲）";
+    : "青年版伴讀（溫和女聲）";
   const versionTitle = isMission
     ? "宣教版靈修伴讀"
     : isEncore

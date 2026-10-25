@@ -763,7 +763,6 @@ def synthesize_single_job(
             "ffmpeg", "-y",
             "-i", tmp_wav_path,
             "-af", "lowpass=f=10500",
-            "-ac", "1",
             "-ar", str(args.target_sr),
             "-b:a", args.bitrate,
             output_mp3_path
@@ -795,7 +794,7 @@ def main():
     parser.add_argument("--steps", type=int, default=32, help="Diffusion inference steps (default: 32)")
     parser.add_argument("--cfg", type=float, default=1.2, help="Classifier-free guidance strength (default: 1.2)")
     parser.add_argument("--target-sr", type=int, default=44100, help="Target MP3 sample rate in Hz (default: 44100)")
-    parser.add_argument("--bitrate", default="128k", help="Target MP3 bitrate (default: 128k)")
+    parser.add_argument("--bitrate", default="192k", help="Target MP3 bitrate (default: 192k)")
     parser.add_argument("--max-len", type=int, default=48, help="Max chunk length in characters (default: 48)")
     parser.add_argument("--clause-pause", type=float, default=0.18, help="Pause between sub-clauses in seconds (default: 0.18)")
     parser.add_argument("--sentence-pause", type=float, default=0.30, help="Pause between sentences within paragraph in seconds (default: 0.30)")

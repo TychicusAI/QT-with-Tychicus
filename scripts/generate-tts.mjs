@@ -118,23 +118,11 @@ function parseMessagesFromMarkdown(content) {
  */
 function resolveVoicePaths(versionKey) {
   const voicesDir = path.join(process.cwd(), "data", "voices");
-  let voiceStem = versionKey === "youth" ? "youth_male" : "family_female";
-  if (versionKey === "encore") {
-    if (fs.existsSync(path.join(voicesDir, "encore_male.wav"))) {
-      voiceStem = "encore_male";
-    } else if (fs.existsSync(path.join(voicesDir, "encore_female.wav"))) {
-      voiceStem = "encore_female";
-    } else {
-      voiceStem = "family_female";
-    }
-  } else if (versionKey === "mission") {
-    if (fs.existsSync(path.join(voicesDir, "mission_male.wav"))) {
-      voiceStem = "mission_male";
-    } else if (fs.existsSync(path.join(voicesDir, "mission_female.wav"))) {
-      voiceStem = "mission_female";
-    } else {
-      voiceStem = "youth_male";
-    }
+  let voiceStem = "family_female";
+  if (versionKey === "youth" || versionKey === "family") {
+    voiceStem = "family_female";
+  } else if (versionKey === "encore" || versionKey === "mission") {
+    voiceStem = "mission_male";
   }
 
   const refAudio = path.join(voicesDir, `${voiceStem}.wav`);

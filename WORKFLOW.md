@@ -279,10 +279,8 @@ npm run tts -- --version mission      # 宣教版
 
 #### 5.2 客製化專屬音色庫（`data/voices/`）
 音色來源直接依賴 `data/voices/` 中的參考音訊與對應文字檔：
-* `youth_male.wav` + `youth_male.txt`（青年版參考聲音，約 5～10 秒）
-* `family_female.wav` + `family_female.txt`（家庭版參考聲音，約 5～10 秒）
-* `encore_male.wav` / `encore_female.wav`（樂齡版參考聲音，約 5～10 秒）
-* `mission_male.wav` / `mission_female.wav`（宣教版參考聲音，約 5～10 秒；若未單獨配置則自動回退至預設溫厚男／女聲）
+* `family_female.wav` + `family_female.txt`（青年版 `youth` 與家庭版 `family` 參考聲音，約 5～10 秒）
+* `mission_male.wav` + `mission_male.txt`（樂齡版 `encore` 與宣教版 `mission` 參考聲音，約 5～10 秒）
 
 **錄音原則**：
 1. 長度約 5～10 秒（約 15～25 個字）。
