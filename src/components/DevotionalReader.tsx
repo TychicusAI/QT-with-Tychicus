@@ -27,6 +27,7 @@ import { PrayerAmenButton } from "@/components/PrayerAmenButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BibliographyCard } from "@/components/BibliographyCard";
 import { AudioPlayer } from "@/components/AudioPlayer";
+import { TextSelectionToolbar } from "@/components/TextSelectionToolbar";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -474,6 +475,12 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       </footer>
 
       
+          {/* Floating Copy & Share Toolbar on Text Selection */}
+      <TextSelectionToolbar
+        versionLabel={versionLabel}
+        scriptureRef={day.scriptureRef}
+        dayTitle={day.title}
+      />
     </article>
   );
 }
