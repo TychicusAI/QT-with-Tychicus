@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Copy, Check, Share2, X } from "lucide-react";
+import { Copy, Check, Share2 } from "lucide-react";
 
 interface TextSelectionToolbarProps {
   versionLabel?: string;
@@ -221,55 +221,38 @@ export function TextSelectionToolbar({
         </button>
       </div>
 
-      {/* Share Submenu Card */}
+      {/* Share Submenu - only 3 icons, zero text */}
       {showShareMenu && (
-        <div className="mt-2 p-2 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md rounded-2xl border border-stone-700/80 shadow-2xl text-stone-200 flex flex-col gap-1 min-w-[170px] animate-in fade-in slide-in-from-top-2 duration-150">
-          <div className="flex items-center justify-between px-2 py-1 text-[11px] font-semibold text-stone-400 border-b border-stone-800 dark:border-stone-700/70 mb-1">
-            <span>分享這段文字至</span>
-            <button
-              onClick={() => setShowShareMenu(false)}
-              className="text-stone-400 hover:text-stone-200 p-0.5 rounded cursor-pointer"
-            >
-              <X className="w-3 h-3" />
-            </button>
-          </div>
-
+        <div className="mt-1.5 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md rounded-full border border-stone-700/80 shadow-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 duration-150">
           {/* Line */}
           <button
             onClick={handleShareLine}
-            className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-semibold hover:bg-emerald-500/20 hover:text-emerald-300 text-stone-200 transition text-left cursor-pointer"
+            className="w-7 h-7 rounded-full bg-[#00c300] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
+            title="分享至 Line"
+            aria-label="Line"
           >
-            <span className="w-4 h-4 rounded-full bg-[#00c300] text-white flex items-center justify-center text-[10px] font-black shrink-0">
-              L
-            </span>
-            <span>分享到 Line</span>
+            L
           </button>
 
           {/* Threads */}
           <button
             onClick={handleShareThreads}
-            className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-semibold hover:bg-purple-500/20 hover:text-purple-300 text-stone-200 transition text-left cursor-pointer"
+            className="w-7 h-7 rounded-full bg-stone-100 hover:scale-110 active:scale-95 text-stone-950 flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
+            title="分享至 Threads"
+            aria-label="Threads"
           >
-            <span className="w-4 h-4 rounded-full bg-stone-100 text-stone-950 flex items-center justify-center text-[10px] font-black shrink-0">
-              @
-            </span>
-            <span>分享到 Threads</span>
+            @
           </button>
 
           {/* Facebook */}
           <button
             onClick={handleShareFacebook}
-            className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-semibold hover:bg-blue-500/20 hover:text-blue-300 text-stone-200 transition text-left cursor-pointer"
+            className="w-7 h-7 rounded-full bg-[#1877f2] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
+            title="分享至 Facebook"
+            aria-label="Facebook"
           >
-            <span className="w-4 h-4 rounded-full bg-[#1877f2] text-white flex items-center justify-center text-[10px] font-black shrink-0">
-              f
-            </span>
-            <span>分享到 Facebook</span>
+            f
           </button>
-
-          <div className="px-2 pt-1 text-[10px] text-stone-400 text-center border-t border-stone-800 dark:border-stone-700/70 mt-1">
-            將自動附上原經卷連結
-          </div>
         </div>
       )}
 

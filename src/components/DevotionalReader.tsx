@@ -28,6 +28,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { BibliographyCard } from "@/components/BibliographyCard";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { TextSelectionToolbar } from "@/components/TextSelectionToolbar";
+import { TwoSorrowsDiscourseChart } from "@/components/charts/TwoSorrowsDiscourseChart";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -296,10 +297,25 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           dayLabel={day.dayLabel}
         />
 
-        <div
-          className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
-          dangerouslySetInnerHTML={{ __html: messageHtml }}
-        />
+        {messageHtml.includes("<!-- CHART:two-sorrows -->") ? (
+          messageHtml.split("<!-- CHART:two-sorrows -->").map((part, idx) => (
+            <React.Fragment key={idx}>
+              <div
+                className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
+                dangerouslySetInnerHTML={{ __html: part }}
+              />
+              {idx === 0 && <TwoSorrowsDiscourseChart />}
+            </React.Fragment>
+          ))
+        ) : (
+          <>
+            <div
+              className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
+              dangerouslySetInnerHTML={{ __html: messageHtml }}
+            />
+            {isExegesis && day.id === "thu" && <TwoSorrowsDiscourseChart />}
+          </>
+        )}
       </section>
 
       {/* 3. Meditation Question Card */}
