@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Clock, Sparkles, Calendar, BookMarked, Users, Sun, Compass } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Sparkles, Calendar, BookMarked, Users, Sun, Compass, ScrollText } from "lucide-react";
 import { DevotionalWeek } from "@/types/devotional";
 import { formatWeekDateRange } from "@/lib/devotional-service";
 import { useIsDayCompleted, toggleDayCompleted } from "@/lib/storage";
@@ -19,6 +19,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
   const isFamily = week.version === "family";
   const isEncore = week.version === "encore";
   const isMission = week.version === "mission";
+  const isExegesis = week.version === "exegesis";
   const currentDay = week.days.find((d) => d.id === selectedDayId) || week.days[0];
   const completed = useIsDayCompleted(week.version, week.id, currentDay.id);
 
@@ -38,7 +39,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
   return (
     <div
       className={`relative overflow-hidden rounded-3xl border p-4 sm:p-8 md:p-10 shadow-xl transition-all ${
-        isMission
+        isExegesis
+          ? "bg-gradient-to-br from-purple-500/15 via-violet-500/10 to-purple-100/30 dark:from-purple-950/40 dark:via-slate-900/60 dark:to-slate-950 border-purple-300/40 dark:border-purple-700/40 shadow-purple-500/5"
+          : isMission
           ? "bg-gradient-to-br from-indigo-500/15 via-violet-500/10 to-indigo-100/30 dark:from-indigo-950/40 dark:via-slate-900/60 dark:to-slate-950 border-indigo-300/40 dark:border-indigo-700/40 shadow-indigo-500/5"
           : isEncore
           ? "bg-gradient-to-br from-rose-500/15 via-pink-500/10 to-rose-100/30 dark:from-rose-950/40 dark:via-slate-900/60 dark:to-slate-950 border-rose-300/40 dark:border-rose-700/40 shadow-rose-500/5"
@@ -50,7 +53,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
       {/* Background ambient glowing orbs */}
       <div
         className={`absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl pointer-events-none ${
-          isMission
+          isExegesis
+            ? "bg-purple-400/20 dark:bg-purple-500/10"
+            : isMission
             ? "bg-indigo-400/20 dark:bg-indigo-500/10"
             : isEncore
             ? "bg-rose-400/20 dark:bg-rose-500/10"
@@ -61,7 +66,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
       />
       <div
         className={`absolute -bottom-24 -left-24 w-72 h-72 rounded-full blur-3xl pointer-events-none ${
-          isMission
+          isExegesis
+            ? "bg-indigo-400/20 dark:bg-indigo-500/10"
+            : isMission
             ? "bg-violet-400/20 dark:bg-violet-500/10"
             : isEncore
             ? "bg-pink-400/20 dark:bg-pink-500/10"
@@ -76,7 +83,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 min-w-0">
           <span
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow-sm shrink-0 ${
-              isMission
+              isExegesis
+                ? "bg-purple-700 shadow-purple-700/30"
+                : isMission
                 ? "bg-indigo-700 shadow-indigo-700/30"
                 : isEncore
                 ? "bg-rose-700 shadow-rose-700/30"
@@ -85,7 +94,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
                 : "bg-amber-600 shadow-amber-600/30"
             }`}
           >
-            {isMission ? (
+            {isExegesis ? (
+              <ScrollText className="w-3.5 h-3.5" />
+            ) : isMission ? (
               <Compass className="w-3.5 h-3.5" />
             ) : isEncore ? (
               <Sun className="w-3.5 h-3.5" />
@@ -95,7 +106,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
               <Sparkles className="w-3.5 h-3.5" />
             )}
             <span>
-              {isMission
+              {isExegesis
+                ? "釋經版・今日特推"
+                : isMission
                 ? "宣教版・今日特推"
                 : isEncore
                 ? "樂齡版・今日特推"
@@ -120,7 +133,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
                 onClick={() => setSelectedDayId(d.id)}
                 className={`px-2.5 py-1 rounded-full transition font-medium cursor-pointer ${
                   isSelected
-                    ? isMission
+                    ? isExegesis
+                      ? "bg-purple-700 text-white shadow-xs"
+                      : isMission
                       ? "bg-indigo-700 text-white shadow-xs"
                       : isEncore
                       ? "bg-rose-700 text-white shadow-xs"
@@ -142,7 +157,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
         <div className="md:col-span-8 space-y-3">
           <div
             className={`inline-block text-xs font-semibold tracking-wider px-2.5 py-0.5 rounded-md border ${
-              isMission
+              isExegesis
+                ? "text-purple-800 dark:text-purple-300 bg-purple-100/80 dark:bg-purple-950/60 border-purple-200 dark:border-purple-800/80"
+                : isMission
                 ? "text-indigo-800 dark:text-indigo-300 bg-indigo-100/80 dark:bg-indigo-950/60 border-indigo-200 dark:border-indigo-800/80"
                 : isEncore
                 ? "text-rose-800 dark:text-rose-300 bg-rose-100/80 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800/80"
@@ -164,7 +181,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
           {/* Scripture preview quote */}
           <blockquote
             className={`my-3 pl-4 border-l-2 text-stone-700 dark:text-stone-300 text-sm italic line-clamp-2 py-1.5 pr-2 rounded-r-lg ${
-              isMission
+              isExegesis
+                ? "border-purple-600/60 bg-purple-50/40 dark:bg-stone-900/40"
+                : isMission
                 ? "border-indigo-600/60 bg-indigo-50/40 dark:bg-stone-900/40"
                 : isEncore
                 ? "border-rose-600/60 bg-rose-50/40 dark:bg-stone-900/40"
@@ -184,7 +203,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             <span className="flex items-center gap-1 font-medium">
               <BookMarked
                 className={`w-3.5 h-3.5 ${
-                  isMission
+                  isExegesis
+                    ? "text-purple-600 dark:text-purple-400"
+                    : isMission
                     ? "text-indigo-600 dark:text-indigo-400"
                     : isEncore
                     ? "text-rose-600 dark:text-rose-400"
@@ -193,7 +214,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
                     : "text-amber-600 dark:text-amber-400"
                 }`}
               />
-              包含希臘原文解析與禱告導引
+              {isExegesis ? "包含原文句法、動詞體貌與神學命題收斂" : "包含希臘原文解析與禱告導引"}
             </span>
           </div>
         </div>
@@ -203,7 +224,9 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
           <Link
             href={`/devotional/${week.version}/${week.id}/${currentDay.id}`}
             className={`flex items-center justify-center gap-2 px-6 py-4 rounded-2xl active:scale-[0.98] text-white font-bold text-base shadow-lg transition group ${
-              isMission
+              isExegesis
+                ? "bg-purple-700 hover:bg-purple-600 shadow-purple-700/30 hover:shadow-purple-600/40"
+                : isMission
                 ? "bg-indigo-700 hover:bg-indigo-600 shadow-indigo-700/30 hover:shadow-indigo-600/40"
                 : isEncore
                 ? "bg-rose-700 hover:bg-rose-600 shadow-rose-700/30 hover:shadow-rose-600/40"

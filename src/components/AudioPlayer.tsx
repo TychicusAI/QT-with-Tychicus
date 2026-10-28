@@ -42,6 +42,7 @@ export function AudioPlayer({
   const isFamily = version === "family";
   const isEncore = version === "encore";
   const isMission = version === "mission";
+  const isExegesis = version === "exegesis";
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const headerContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -54,14 +55,18 @@ export function AudioPlayer({
   const [isStickyVisible, setIsStickyVisible] = useState(false);
   const [isAvailable, setIsAvailable] = useState(hasAudio);
 
-  const voiceName = isMission
+  const voiceName = isExegesis
+    ? "釋經版伴讀（深沉學術聲）"
+    : isMission
     ? "宣教版伴讀（溫厚男聲）"
     : isEncore
     ? "樂齡版伴讀（溫厚男聲）"
     : isFamily
     ? "家庭版伴讀（溫和女聲）"
     : "青年版伴讀（溫和女聲）";
-  const versionTitle = isMission
+  const versionTitle = isExegesis
+    ? "釋經版靈修深研伴讀"
+    : isMission
     ? "宣教版靈修伴讀"
     : isEncore
     ? "樂齡版靈修伴讀"
@@ -178,7 +183,9 @@ export function AudioPlayer({
       <div className="flex items-center gap-2">
         <Quote
           className={`w-5 h-5 rotate-180 shrink-0 ${
-            isMission
+            isExegesis
+              ? "text-purple-600 dark:text-purple-400"
+              : isMission
               ? "text-indigo-600 dark:text-indigo-400"
               : isEncore
               ? "text-rose-600 dark:text-rose-400"
@@ -193,7 +200,19 @@ export function AudioPlayer({
   }
 
   // Accent styles according to version
-  const theme = isMission
+  const theme = isExegesis
+    ? {
+        badgeBg: "bg-purple-500/10 text-purple-800 dark:text-purple-200 border-purple-300/40 dark:border-purple-700/40",
+        pillActive: "bg-purple-700 text-white shadow-sm dark:bg-purple-600",
+        pillIdle: "bg-purple-500/10 text-purple-800 dark:text-purple-200 hover:bg-purple-500/20 border border-purple-300/50 dark:border-purple-700/50",
+        cardBg: "bg-purple-500/5 dark:bg-purple-950/20 border-purple-300/50 dark:border-purple-700/40",
+        accentColor: "accent-purple-700 dark:accent-purple-400",
+        progressColor: "bg-purple-700 dark:bg-purple-400",
+        buttonHover: "hover:bg-purple-500/10 text-purple-700 dark:text-purple-300",
+        speedActive: "bg-purple-700 text-white dark:bg-purple-600",
+        playBtn: "bg-purple-700 hover:bg-purple-800 text-white dark:bg-purple-600 dark:hover:bg-purple-700 shadow-md",
+      }
+    : isMission
     ? {
         badgeBg: "bg-indigo-500/10 text-indigo-800 dark:text-indigo-200 border-indigo-300/40 dark:border-indigo-700/40",
         pillActive: "bg-indigo-700 text-white shadow-sm dark:bg-indigo-600",
@@ -426,7 +445,9 @@ export function AudioPlayer({
               type="button"
               onClick={togglePlay}
               className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                isMission
+                isExegesis
+                  ? "bg-purple-500 text-stone-950"
+                  : isMission
                   ? "bg-indigo-500 text-stone-950"
                   : isEncore
                   ? "bg-rose-500 text-stone-950"

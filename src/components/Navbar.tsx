@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { BookOpen, Flame, Sparkles, Clock, Users, Sparkle, Library, Calendar, Sun, Compass } from "lucide-react";
+import { BookOpen, Flame, Sparkles, Users, Sparkle, Library, Calendar, Sun, Compass, ScrollText } from "lucide-react";
 import { DevotionalVersion } from "@/types/devotional";
 import { useStreak } from "@/lib/storage";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -10,15 +10,11 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 interface NavbarProps {
   currentVersion?: DevotionalVersion;
   onVersionChange?: (version: DevotionalVersion) => void;
-  onOpenVerseModal?: () => void;
-  onOpenTimerModal?: () => void;
 }
 
 export function Navbar({
   currentVersion = "youth",
   onVersionChange,
-  onOpenVerseModal,
-  onOpenTimerModal,
 }: NavbarProps) {
   const streak = useStreak();
 
@@ -96,6 +92,18 @@ export function Navbar({
               <Compass className="w-3.5 h-3.5" />
               <span>宣教版</span>
             </button>
+
+            <button
+              onClick={() => onVersionChange("exegesis")}
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
+                currentVersion === "exegesis"
+                  ? "bg-purple-700 text-white shadow-xs"
+                  : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
+              }`}
+            >
+              <ScrollText className="w-3.5 h-3.5" />
+              <span>釋經版</span>
+            </button>
           </div>
         )}
 
@@ -110,37 +118,23 @@ export function Navbar({
             <span>{streak} 天</span>
           </div>
 
-          {/* Verse Card Share Button */}
-          {onOpenVerseModal && (
-            <button
-              onClick={onOpenVerseModal}
-              className="hidden sm:flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-xs font-medium transition cursor-pointer whitespace-nowrap"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span className="hidden xl:inline">金句卡片</span>
-              <span className="xl:hidden">金句</span>
-            </button>
-          )}
-
-          {/* Meditation Timer Button */}
-          {onOpenTimerModal && (
-            <button
-              onClick={onOpenTimerModal}
-              className="hidden md:flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition cursor-pointer whitespace-nowrap"
-            >
-              <Clock className="w-3.5 h-3.5 text-stone-500" />
-              <span className="hidden xl:inline">靜心默想</span>
-              <span className="xl:hidden">默想</span>
-            </button>
-          )}
+          {/* About / Introduction Page Link */}
+          <Link
+            href="/about"
+            className="flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full bg-purple-50 dark:bg-purple-950/50 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-purple-700 dark:text-purple-300 border border-purple-200/70 dark:border-purple-800/60 text-xs font-semibold transition cursor-pointer"
+            title="查閱「靈修推基古」平台架構、特色優勢與三方比較"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 shrink-0" />
+            <span className="hidden sm:inline">平台簡介</span>
+          </Link>
 
           {/* Devotional Archive Link */}
           <Link
             href="/archive"
             className="flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition cursor-pointer"
-            title="查閱青年版、家庭版、樂齡版與宣教版歷週靈修進度存檔庫"
+            title="查閱各版本歷週靈修進度存檔庫"
           >
-            <Calendar className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <Calendar className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             <span className="hidden sm:inline">歷週存檔</span>
           </Link>
 
@@ -150,7 +144,7 @@ export function Navbar({
             className="flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-xs font-medium transition cursor-pointer"
             title="查閱當前經卷之釋經參考書目與權威評介"
           >
-            <Library className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <Library className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
             <span className="hidden sm:inline">釋經書目</span>
           </Link>
 

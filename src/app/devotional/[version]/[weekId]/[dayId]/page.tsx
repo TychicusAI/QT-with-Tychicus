@@ -12,6 +12,7 @@ function normalizeVersion(rawVersion: string): DevotionalVersion {
   if (rawVersion === "family") return "family";
   if (rawVersion === "encore") return "encore";
   if (rawVersion === "mission") return "mission";
+  if (rawVersion === "exegesis") return "exegesis";
   return "youth";
 }
 
@@ -30,7 +31,9 @@ export async function generateMetadata({
   }
 
   const vLabel =
-    version === "mission"
+    version === "exegesis"
+      ? "釋經版"
+      : version === "mission"
       ? "宣教版"
       : version === "encore"
       ? "樂齡版"

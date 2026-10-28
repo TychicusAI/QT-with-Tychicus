@@ -24,15 +24,19 @@ import { mission_2026_10_12 } from "@/data/weeks/mission/2026-10-12";
 import { mission_2026_10_19 } from "@/data/weeks/mission/2026-10-19";
 import { mission_2026_10_26 } from "@/data/weeks/mission/2026-10-26";
 
+import { exegesis_2026_10_26 } from "@/data/weeks/exegesis/2026-10-26";
+
 export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21, youth_2026_09_28, youth_2026_10_05, youth_2026_10_12, youth_2026_10_19, youth_2026_10_26];
 export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28, family_2026_10_05, family_2026_10_12, family_2026_10_19, family_2026_10_26];
 export const allEncoreWeeks: DevotionalWeek[] = [encore_2026_10_12, encore_2026_10_19, encore_2026_10_26];
 export const allMissionWeeks: DevotionalWeek[] = [mission_2026_10_12, mission_2026_10_19, mission_2026_10_26];
+export const allExegesisWeeks: DevotionalWeek[] = [exegesis_2026_10_26];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
   if (version === "family") return allFamilyWeeks;
   if (version === "encore") return allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks;
   if (version === "mission") return allMissionWeeks.length > 0 ? allMissionWeeks : allYouthWeeks;
+  if (version === "exegesis") return allExegesisWeeks.length > 0 ? allExegesisWeeks : allYouthWeeks;
   return allYouthWeeks;
 }
 
@@ -56,6 +60,9 @@ export function getWeekById(version: DevotionalVersion, weekId: string): Devotio
   }
   if (version === "mission") {
     return allYouthWeeks.find((w) => w.id === weekId) || allFamilyWeeks.find((w) => w.id === weekId);
+  }
+  if (version === "exegesis") {
+    return allExegesisWeeks.find((w) => w.id === weekId) || allYouthWeeks.find((w) => w.id === weekId);
   }
   return undefined;
 }
@@ -189,6 +196,20 @@ export function getAllParams(): { version: DevotionalVersion; weekId: string; da
     if (!missionWeekIds.has(week.id)) {
       for (const day of week.days) {
         params.push({ version: "mission", weekId: week.id, dayId: day.id });
+      }
+    }
+  }
+  const exegesisWeekIds = new Set<string>();
+  for (const week of allExegesisWeeks) {
+    exegesisWeekIds.add(week.id);
+    for (const day of week.days) {
+      params.push({ version: "exegesis", weekId: week.id, dayId: day.id });
+    }
+  }
+  for (const week of allYouthWeeks) {
+    if (!exegesisWeekIds.has(week.id)) {
+      for (const day of week.days) {
+        params.push({ version: "exegesis", weekId: week.id, dayId: day.id });
       }
     }
   }

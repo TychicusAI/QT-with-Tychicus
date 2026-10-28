@@ -113,7 +113,9 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
 
   if (!title) {
     title =
-      version === "mission"
+      version === "exegesis"
+        ? "聖約應許的成聖動力與依神憂愁的復和神學"
+        : version === "mission"
         ? "在跨越邊界的差遣裡，參與神更新萬有的宣教"
         : version === "encore"
         ? "在歲月淬煉的安可樂章裡，活出日新又新的榮耀盼望"
@@ -332,11 +334,13 @@ const youthOutputDir = path.join(targetBaseDir, "youth");
 const familyOutputDir = path.join(targetBaseDir, "family");
 const encoreOutputDir = path.join(targetBaseDir, "encore");
 const missionOutputDir = path.join(targetBaseDir, "mission");
+const exegesisOutputDir = path.join(targetBaseDir, "exegesis");
 
 fs.mkdirSync(youthOutputDir, { recursive: true });
 fs.mkdirSync(familyOutputDir, { recursive: true });
 fs.mkdirSync(encoreOutputDir, { recursive: true });
 fs.mkdirSync(missionOutputDir, { recursive: true });
+fs.mkdirSync(exegesisOutputDir, { recursive: true });
 
 const items = fs.readdirSync(dataDir).sort();
 const weekDirs = items.filter((item) => {
@@ -353,6 +357,7 @@ const youthWeeks = [];
 const familyWeeks = [];
 const encoreWeeks = [];
 const missionWeeks = [];
+const exegesisWeeks = [];
 
 for (const item of items) {
   const fullItemPath = path.join(dataDir, item);
@@ -442,6 +447,26 @@ for (const item of items) {
       console.log(`✓ [Mission] Generated ${outTs} (${weekObj.title}, ${weekObj.days.length} days, isCurrent: ${isCurrent})`);
       missionWeeks.push({ weekId, varName });
     }
+
+    // 5. Exegesis
+    const exegesisPath = path.join(fullItemPath, "qt_for_exegesis.md");
+    if (fs.existsSync(exegesisPath)) {
+      const content = fs.readFileSync(exegesisPath, "utf-8");
+      const weekObj = parseMarkdown(content, weekId, "exegesis", isCurrent);
+      const outTs = path.join(exegesisOutputDir, `${weekId}.ts`);
+      const varName = `exegesis_${weekId.replace(/-/g, "_")}`;
+      fs.writeFileSync(
+        outTs,
+        `import { DevotionalWeek } from "@/types/devotional";\n\nexport const ${varName}: DevotionalWeek = ${JSON.stringify(
+          weekObj,
+          null,
+          2
+        )};\n`,
+        "utf-8"
+      );
+      console.log(`✓ [Exegesis] Generated ${outTs} (${weekObj.title}, ${weekObj.days.length} days, isCurrent: ${isCurrent})`);
+      exegesisWeeks.push({ weekId, varName });
+    }
   }
 
   // Direct file mode e.g. data/2026-09-07.md
@@ -500,21 +525,27 @@ const missionImports = missionWeeks
   .map((w) => `import { ${w.varName} } from "@/data/weeks/mission/${w.weekId}";`)
   .join("\n");
 
+const exegesisImports = exegesisWeeks
+  .map((w) => `import { ${w.varName} } from "@/data/weeks/exegesis/${w.weekId}";`)
+  .join("\n");
+
 const serviceCode = `import { DevotionalDay, DevotionalWeek, DevotionalVersion } from "@/types/devotional";
 
 ${youthImports}
 
 ${familyImports}
-${encoreImports ? `\n${encoreImports}\n` : ""}${missionImports ? `\n${missionImports}\n` : ""}
+${encoreImports ? `\n${encoreImports}\n` : ""}${missionImports ? `\n${missionImports}\n` : ""}${exegesisImports ? `\n${exegesisImports}\n` : ""}
 export const allYouthWeeks: DevotionalWeek[] = [${youthWeeks.map((w) => w.varName).join(", ")}];
 export const allFamilyWeeks: DevotionalWeek[] = [${familyWeeks.map((w) => w.varName).join(", ")}];
 export const allEncoreWeeks: DevotionalWeek[] = [${encoreWeeks.map((w) => w.varName).join(", ")}];
 export const allMissionWeeks: DevotionalWeek[] = [${missionWeeks.map((w) => w.varName).join(", ")}];
+export const allExegesisWeeks: DevotionalWeek[] = [${exegesisWeeks.map((w) => w.varName).join(", ")}];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
   if (version === "family") return allFamilyWeeks;
   if (version === "encore") return allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks;
   if (version === "mission") return allMissionWeeks.length > 0 ? allMissionWeeks : allYouthWeeks;
+  if (version === "exegesis") return allExegesisWeeks.length > 0 ? allExegesisWeeks : allYouthWeeks;
   return allYouthWeeks;
 }
 
@@ -538,6 +569,9 @@ export function getWeekById(version: DevotionalVersion, weekId: string): Devotio
   }
   if (version === "mission") {
     return allYouthWeeks.find((w) => w.id === weekId) || allFamilyWeeks.find((w) => w.id === weekId);
+  }
+  if (version === "exegesis") {
+    return allExegesisWeeks.find((w) => w.id === weekId) || allYouthWeeks.find((w) => w.id === weekId);
   }
   return undefined;
 }
@@ -674,6 +708,20 @@ export function getAllParams(): { version: DevotionalVersion; weekId: string; da
       }
     }
   }
+  const exegesisWeekIds = new Set<string>();
+  for (const week of allExegesisWeeks) {
+    exegesisWeekIds.add(week.id);
+    for (const day of week.days) {
+      params.push({ version: "exegesis", weekId: week.id, dayId: day.id });
+    }
+  }
+  for (const week of allYouthWeeks) {
+    if (!exegesisWeekIds.has(week.id)) {
+      for (const day of week.days) {
+        params.push({ version: "exegesis", weekId: week.id, dayId: day.id });
+      }
+    }
+  }
   return params;
 }
 
@@ -729,7 +777,7 @@ export function getRecommendedDayIdForToday(): string {
 `;
 
 fs.writeFileSync(servicePath, serviceCode, "utf-8");
-console.log(`✓ Updated devotional-service.ts with ${youthWeeks.length} Youth week(s), ${familyWeeks.length} Family week(s), ${encoreWeeks.length} Encore week(s) & ${missionWeeks.length} Mission week(s)`);
+console.log(`✓ Updated devotional-service.ts with ${youthWeeks.length} Youth week(s), ${familyWeeks.length} Family week(s), ${encoreWeeks.length} Encore week(s), ${missionWeeks.length} Mission week(s) & ${exegesisWeeks.length} Exegesis week(s)`);
 
 // ==========================================
 // Books / Bibliographies Scanning Routine

@@ -19,6 +19,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
   const isFamily = week.version === "family";
   const isEncore = week.version === "encore";
   const isMission = week.version === "mission";
+  const isExegesis = week.version === "exegesis";
 
   const handleToggle = (e: React.MouseEvent, dayId: string) => {
     e.preventDefault();
@@ -45,7 +46,11 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
         <div>
           <div
             className={`text-xs font-bold tracking-wider uppercase mb-1 ${
-              isMission
+              isExegesis
+                ? "text-purple-700 dark:text-purple-400"
+                : isExegesis
+                ? "text-purple-700 dark:text-purple-400"
+                : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
                 : isEncore
                 ? "text-rose-700 dark:text-rose-400"
@@ -56,7 +61,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
           >
             <span>
               {week.book}・
-              {isMission
+              {isExegesis
+                ? "釋經版主題"
+                : isMission
                 ? "宣教版主題"
                 : isEncore
                 ? "樂齡版主題"
@@ -78,7 +85,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
           >
             <Info
               className={`w-3.5 h-3.5 ${
-                isMission
+                isExegesis
+                  ? "text-purple-600"
+                  : isMission
                   ? "text-indigo-600"
                   : isEncore
                   ? "text-rose-600"
@@ -97,7 +106,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
             <div className="w-16 h-2 rounded-full bg-stone-200 dark:bg-stone-700 overflow-hidden">
               <div
                 className={`h-full rounded-full transition-all duration-300 ${
-                  isMission
+                  isExegesis
+                    ? "bg-purple-600"
+                    : isMission
                     ? "bg-indigo-600"
                     : isEncore
                     ? "bg-rose-600"
@@ -116,7 +127,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
       {showForeword && (
         <div
           className={`p-5 rounded-2xl border text-stone-700 dark:text-stone-300 text-sm leading-relaxed space-y-2 ${
-            isMission
+            isExegesis
+              ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-300/30 dark:border-purple-700/30"
+              : isMission
               ? "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-300/30 dark:border-indigo-700/30"
               : isEncore
               ? "bg-rose-500/5 dark:bg-rose-950/20 border-rose-300/30 dark:border-rose-700/30"
@@ -127,7 +140,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
         >
           <div
             className={`font-bold flex items-center gap-2 ${
-              isMission
+              isExegesis
+                ? "text-purple-800 dark:text-purple-300"
+                : isMission
                 ? "text-indigo-800 dark:text-indigo-300"
                 : isEncore
                 ? "text-rose-800 dark:text-rose-300"
@@ -149,7 +164,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
       <div className="flex items-center gap-3 p-4 rounded-2xl bg-stone-100/80 dark:bg-stone-900/60 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 text-sm">
         <Quote
           className={`w-5 h-5 shrink-0 rotate-180 ${
-            isMission
+            isExegesis
+              ? "text-purple-600 dark:text-purple-400"
+              : isMission
               ? "text-indigo-600 dark:text-indigo-400"
               : isEncore
               ? "text-rose-600 dark:text-rose-400"
@@ -165,7 +182,11 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
           <span className="italic">「{week.goldenVerse.text}」</span>
           <span
             className={`ml-2 text-xs font-medium ${
-              isMission
+              isExegesis
+                ? "text-purple-700 dark:text-purple-400"
+                : isExegesis
+                ? "text-purple-700 dark:text-purple-400"
+                : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
                 : isEncore
                 ? "text-rose-700 dark:text-rose-400"
@@ -192,7 +213,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
               key={day.id}
               className={`group relative flex flex-col justify-between rounded-2xl p-5 border transition-all duration-200 ${
                 isToday
-                  ? isMission
+                  ? isExegesis
+                    ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-500/70 dark:border-purple-600/70 shadow-md shadow-purple-500/5"
+                    : isMission
                     ? "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-500/70 dark:border-indigo-600/70 shadow-md shadow-indigo-500/5"
                     : isEncore
                     ? "bg-rose-500/5 dark:bg-rose-950/20 border-rose-500/70 dark:border-rose-600/70 shadow-md shadow-rose-500/5"
@@ -209,7 +232,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                     <span
                       className={`px-2.5 py-1 rounded-lg text-xs font-bold ${
                         isToday
-                          ? isMission
+                          ? isExegesis
+                            ? "bg-purple-700 text-white"
+                            : isMission
                             ? "bg-indigo-700 text-white"
                             : isEncore
                             ? "bg-rose-700 text-white"
@@ -224,7 +249,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                     {isToday && (
                       <span
                         className={`text-[11px] font-bold ${
-                          isMission
+                          isExegesis
+                            ? "text-purple-700 dark:text-purple-400"
+                            : isMission
                             ? "text-indigo-700 dark:text-indigo-400"
                             : isEncore
                             ? "text-rose-700 dark:text-rose-400"
@@ -256,7 +283,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 {/* Scripture ref */}
                 <div
                   className={`text-xs font-semibold mb-1 ${
-                    isMission
+                    isExegesis
+                      ? "text-purple-700 dark:text-purple-400"
+                      : isMission
                       ? "text-indigo-700 dark:text-indigo-400"
                       : isEncore
                       ? "text-rose-700 dark:text-rose-400"
@@ -271,7 +300,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 {/* Day Title */}
                 <h3
                   className={`font-bold text-base text-stone-900 dark:text-stone-100 transition-colors line-clamp-1 ${
-                    isMission
+                    isExegesis
+                      ? "group-hover:text-purple-700 dark:group-hover:text-purple-400"
+                      : isMission
                       ? "group-hover:text-indigo-700 dark:group-hover:text-indigo-400"
                       : isEncore
                       ? "group-hover:text-rose-700 dark:group-hover:text-rose-400"
@@ -299,7 +330,9 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 <Link
                   href={`/devotional/${week.version}/${week.id}/${day.id}`}
                   className={`inline-flex items-center gap-1 font-semibold group-hover:translate-x-1 transition-transform ${
-                    isMission
+                    isExegesis
+                      ? "text-purple-700 dark:text-purple-400"
+                      : isMission
                       ? "text-indigo-700 dark:text-indigo-400"
                       : isEncore
                       ? "text-rose-700 dark:text-rose-400"

@@ -1,4 +1,4 @@
-export type DevotionalVersion = "youth" | "family" | "encore" | "mission";
+export type DevotionalVersion = "youth" | "family" | "encore" | "mission" | "exegesis";
 
 export interface ExtendedStudyItem {
   title: string;

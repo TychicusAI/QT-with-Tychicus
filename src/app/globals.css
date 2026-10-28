@@ -126,6 +126,19 @@ html {
   color: #818cf8; /* indigo-400 */
 }
 
+/* Exegesis version theme adaptation */
+.exegesis-reader .markdown-content em,
+.exegesis-reader.markdown-content em,
+.exegesis-reader em {
+  color: #7c3aed; /* violet-600 / purple-700 */
+}
+
+.dark .exegesis-reader .markdown-content em,
+.dark .exegesis-reader.markdown-content em,
+.dark .exegesis-reader em {
+  color: #a78bfa; /* violet-400 */
+}
+
 .markdown-content blockquote {
   border-left: 3px solid #d97706;
   padding-left: 1rem;
@@ -150,6 +163,12 @@ html {
 .mission-reader.markdown-content blockquote,
 .mission-reader blockquote {
   border-left-color: #4338ca;
+}
+
+.exegesis-reader .markdown-content blockquote,
+.exegesis-reader.markdown-content blockquote,
+.exegesis-reader blockquote {
+  border-left-color: #7c3aed;
 }
 
 .markdown-content ul {
