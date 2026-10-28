@@ -302,7 +302,7 @@ export function AboutViewer() {
               <div className="space-y-1.5 max-w-2xl">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-purple-700 text-white">
-                    旗艦釋經版 Exegesis
+                    釋經版 Exegesis
                   </span>
                   <span className="text-xs text-purple-800 dark:text-purple-300 font-semibold">
                     純粹文本解構・無比喻純文字思辨論述
@@ -531,7 +531,7 @@ export function AboutViewer() {
               className="px-5 py-2.5 rounded-xl bg-violet-100 hover:bg-violet-200 dark:bg-violet-950 dark:hover:bg-violet-900 text-violet-800 dark:text-violet-300 font-bold text-xs sm:text-sm transition flex items-center gap-1.5"
             >
               <ScrollText className="w-4 h-4" />
-              <span>探索旗艦釋經版</span>
+              <span>探索釋經版</span>
             </Link>
 
             <Link

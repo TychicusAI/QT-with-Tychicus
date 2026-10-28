@@ -321,7 +321,7 @@ export function HomeContainer() {
                   <ScrollText className="w-4 h-4" />
                 </div>
                 <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
-                  旗艦釋經深研專區
+                  釋經深研專區
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   專為講道者與研經者打造，純文字思辨論述、無比喻插圖的 5,000 字級文本微觀解經深度篇章。
