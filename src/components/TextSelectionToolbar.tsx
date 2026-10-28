@@ -18,6 +18,7 @@ export function TextSelectionToolbar({
   const [toolbarPosition, setToolbarPosition] = useState<{ x: number; y: number } | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const [showShareMenu, setShowShareMenu] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
 
   // Format shareable quote text with source attribution and current page URL
@@ -45,7 +46,7 @@ export function TextSelectionToolbar({
 
     const selection = window.getSelection();
     if (!selection || selection.isCollapsed) {
-      if (!showShareMenu) {
+      if (!showShareMenu && !toastMessage) {
         setToolbarPosition(null);
         setSelectedText("");
       }
@@ -55,7 +56,7 @@ export function TextSelectionToolbar({
     const text = selection.toString().trim();
     // Only trigger for selections of 3 or more characters
     if (text.length < 3) {
-      if (!showShareMenu) {
+      if (!showShareMenu && !toastMessage) {
         setToolbarPosition(null);
         setSelectedText("");
       }
@@ -75,18 +76,17 @@ export function TextSelectionToolbar({
 
       setSelectedText(text);
       setToolbarPosition({
-        x: Math.max(120, Math.min(window.innerWidth - 120, x)),
+        x: Math.max(140, Math.min(window.innerWidth - 140, x)),
         y: Math.max(60, y),
       });
       setCopied(false);
     } catch {
       // ignore
     }
-  }, [showShareMenu]);
+  }, [showShareMenu, toastMessage]);
 
   useEffect(() => {
     const handleMouseUp = () => {
-      // Delay slightly so selection is fully registered
       setTimeout(handleSelectionChange, 10);
     };
 
@@ -95,6 +95,7 @@ export function TextSelectionToolbar({
         setToolbarPosition(null);
         setSelectedText("");
         setShowShareMenu(false);
+        setToastMessage(null);
         return;
       }
       setTimeout(handleSelectionChange, 10);
@@ -124,6 +125,7 @@ export function TextSelectionToolbar({
           setToolbarPosition(null);
           setSelectedText("");
           setShowShareMenu(false);
+          setToastMessage(null);
         }
       }
     };
@@ -140,7 +142,6 @@ export function TextSelectionToolbar({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
       const textarea = document.createElement("textarea");
       textarea.value = formatShareContent(selectedText, true);
       document.body.appendChild(textarea);
@@ -152,26 +153,43 @@ export function TextSelectionToolbar({
     }
   };
 
-  const handleShareLine = () => {
-    const shareText = formatShareContent(selectedText, true);
-    const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(shareText)}`;
-    window.open(lineUrl, "_blank", "noopener,noreferrer");
-    setShowShareMenu(false);
-  };
-
-  const handleShareThreads = () => {
-    const shareText = formatShareContent(selectedText, true);
-    const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareText)}`;
-    window.open(threadsUrl, "_blank", "noopener,noreferrer");
-    setShowShareMenu(false);
-  };
-
-  const handleShareFacebook = () => {
+  // Line official web share allows desktop users to pick specific friends or groups
+  const handleShareLine = async () => {
     const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-    const fbQuote = formatShareContent(selectedText, false);
-    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(fbQuote)}`;
-    window.open(fbUrl, "_blank", "noopener,noreferrer,width=600,height=500");
+    const shareText = formatShareContent(selectedText, false);
+    try {
+      await navigator.clipboard.writeText(formatShareContent(selectedText, true));
+    } catch {}
+
+    const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+    window.open(lineUrl, "_blank", "noopener,noreferrer,width=600,height=580");
     setShowShareMenu(false);
+  };
+
+  const handleShareThreads = async () => {
+    const shareText = formatShareContent(selectedText, true);
+    try {
+      await navigator.clipboard.writeText(shareText);
+    } catch {}
+    const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareText)}`;
+    window.open(threadsUrl, "_blank", "noopener,noreferrer,width=600,height=550");
+    setShowShareMenu(false);
+  };
+
+  // Meta deprecated quote pre-fill in sharer.php. We auto-copy text and notify user to paste.
+  const handleShareFacebook = async () => {
+    const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+    const fullShareText = formatShareContent(selectedText, true);
+    try {
+      await navigator.clipboard.writeText(fullShareText);
+    } catch {}
+
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+    window.open(fbUrl, "_blank", "noopener,noreferrer,width=600,height=550");
+    setShowShareMenu(false);
+
+    setToastMessage("已複製引言！請在 Facebook 貼文框按貼上（Cmd+V）");
+    setTimeout(() => setToastMessage(null), 4000);
   };
 
   if (!toolbarPosition || !selectedText) return null;
@@ -186,6 +204,15 @@ export function TextSelectionToolbar({
       }}
       className="fixed z-50 flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-150"
     >
+      {/* Toast Notice (e.g. for Facebook auto-copy instruction) */}
+      {toastMessage && (
+        <div className="mb-1.5 px-3 py-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-[11px] font-medium flex items-center gap-1.5 animate-in fade-in slide-in-from-bottom-1 whitespace-nowrap">
+          <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
+      {/* Main Bar */}
       <div className="flex items-center gap-1 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-xs font-medium">
         {/* Copy Button */}
         <button
@@ -220,7 +247,7 @@ export function TextSelectionToolbar({
               ? "bg-amber-500 text-stone-950 font-bold"
               : "hover:bg-stone-800 dark:hover:bg-stone-700 text-stone-200"
           }`}
-          title="分享至 Facebook、Threads、Line"
+          title="分享至 Line、Threads、Facebook"
         >
           <Share2 className="w-3.5 h-3.5" />
           <span>分享</span>
@@ -230,11 +257,11 @@ export function TextSelectionToolbar({
       {/* Share Submenu - only 3 icons, zero text */}
       {showShareMenu && (
         <div className="mt-1.5 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md rounded-full border border-stone-700/80 shadow-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 duration-150">
-          {/* Line */}
+          {/* Line (Official Social Plugin opens picker for friends / groups on desktop) */}
           <button
             onClick={handleShareLine}
             className="w-7 h-7 rounded-full bg-[#00c300] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
-            title="分享至 Line"
+            title="分享至 Line（可選擇好友或群組）"
             aria-label="Line"
           >
             L
@@ -254,7 +281,7 @@ export function TextSelectionToolbar({
           <button
             onClick={handleShareFacebook}
             className="w-7 h-7 rounded-full bg-[#1877f2] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
-            title="分享至 Facebook"
+            title="分享至 Facebook（自動複製引言，貼文處按 Cmd+V 貼上）"
             aria-label="Facebook"
           >
             f
