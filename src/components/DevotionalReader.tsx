@@ -28,7 +28,12 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { BibliographyCard } from "@/components/BibliographyCard";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { TextSelectionToolbar } from "@/components/TextSelectionToolbar";
+import { SanctificationArchitectureChart } from "@/components/charts/SanctificationArchitectureChart";
+import { CovenantChiasmChart } from "@/components/charts/CovenantChiasmChart";
+import { ComfortRelayChart } from "@/components/charts/ComfortRelayChart";
 import { TwoSorrowsDiscourseChart } from "@/components/charts/TwoSorrowsDiscourseChart";
+import { RepentanceCascadeChart } from "@/components/charts/RepentanceCascadeChart";
+import { CovenantReconciliationChart } from "@/components/charts/CovenantReconciliationChart";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -64,6 +69,24 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   const isEncore = week.version === "encore";
   const isMission = week.version === "mission";
   const isExegesis = week.version === "exegesis";
+
+  const chartMap: Record<string, React.ReactNode> = {
+    "sanctification-architecture": <SanctificationArchitectureChart />,
+    "covenant-chiasm": <CovenantChiasmChart />,
+    "comfort-relay": <ComfortRelayChart />,
+    "two-sorrows": <TwoSorrowsDiscourseChart />,
+    "repentance-cascade": <RepentanceCascadeChart />,
+    "covenant-reconciliation": <CovenantReconciliationChart />,
+  };
+
+  const exegesisDayChartFallback: Record<string, React.ReactNode> = {
+    mon: <SanctificationArchitectureChart />,
+    tue: <CovenantChiasmChart />,
+    wed: <ComfortRelayChart />,
+    thu: <TwoSorrowsDiscourseChart />,
+    fri: <RepentanceCascadeChart />,
+    sat: <CovenantReconciliationChart />,
+  };
   const versionLabel = isExegesis ? "釋經版" : isMission ? "宣教版" : isEncore ? "樂齡版" : isFamily ? "家庭版" : "青年版";
   const readerThemeClass = isExegesis
     ? "exegesis-reader"
@@ -297,23 +320,29 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           dayLabel={day.dayLabel}
         />
 
-        {messageHtml.includes("<!-- CHART:two-sorrows -->") ? (
-          messageHtml.split("<!-- CHART:two-sorrows -->").map((part, idx) => (
-            <React.Fragment key={idx}>
+        {messageHtml.includes("<!-- CHART:") ? (
+          messageHtml.split(/(<!--\s*CHART:[a-z0-9-]+\s*-->)/g).map((part, idx) => {
+            const match = part.match(/<!--\s*CHART:([a-z0-9-]+)\s*-->/);
+            if (match) {
+              const chartId = match[1];
+              return <React.Fragment key={idx}>{chartMap[chartId] || null}</React.Fragment>;
+            }
+            if (!part.trim()) return null;
+            return (
               <div
+                key={idx}
                 className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
                 dangerouslySetInnerHTML={{ __html: part }}
               />
-              {idx === 0 && <TwoSorrowsDiscourseChart />}
-            </React.Fragment>
-          ))
+            );
+          })
         ) : (
           <>
             <div
               className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
               dangerouslySetInnerHTML={{ __html: messageHtml }}
             />
-            {isExegesis && day.id === "thu" && <TwoSorrowsDiscourseChart />}
+            {isExegesis && exegesisDayChartFallback[day.id]}
           </>
         )}
       </section>
