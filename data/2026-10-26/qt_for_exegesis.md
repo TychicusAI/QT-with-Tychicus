@@ -150,6 +150,175 @@
 
 與這條救恩之路形成致命對決的，則是 7 章 10 節下半那句僅由六個希臘文字組成的冰冷判詞：「但屬乎這世界的憂愁，則是徹底製造出死亡」（*hē de tou kosmou lypē thanaton katergazetai*）！保羅在此將動詞從單純的「生出／運作」（*ergazetai*）升級為帶有完成強化前綴 *kata-* 的複合動詞「徹底做成、推向終極結局」（*katergazetai*，參羅馬書 7 章 13 節罪藉著善叫我死）。什麼是「屬乎世界的憂愁」（*hē tou kosmou lypē*，主體兼來源屬格）？早期教父金口若望（John Chrysostom）在《哥林多後書講道集》中給出了千古不易的精闢界定：屬乎世界的憂愁，就是一個人因失去金錢、名聲、社會地位、自身利益或人際面子而產生的痛苦與懊惱。當一個未重生或活在肉體中的人犯罪跌倒、或是被真理指正時，他也可能會痛哭流涕、徹夜難眠；但他的眼目從頭到尾都死死盯著「我自己」（Self）與「這世界的評價」（World）——他悲傷是因為東窗事發名譽掃地，他憤怒是因為自己的自尊心受損，他自責是因為自己不夠完美、輸給了別人。這種完全將上帝排除在視野之外的「世俗之憂」，其內在動力是驕傲與偶像崇拜；因此，它只會把人推進自我防衛、推卸責任、憤世嫉俗、苦毒報復或猶大式的自憐絕望之中，在靈魂深處一步步「徹底製造出屬靈與永恆的死亡」（*thanaton*）！相反地，什麼是「依著上帝的意思憂愁」（*hē kata theon lypē*）？它正是詩篇 51 篇 4 節大衛在被先知拿單指正後向神發出的痛哭：「我向祢犯罪，惟獨得罪了祢，在祢眼前行了這惡！」當聖靈藉著使徒的話語光照人心時，依神憂愁的人不再忙著保護自己的面子，而是抬起頭來，在十字架的強光中看見自己的罪如何傷透了那位聖潔慈愛之天父的心！正因為這份悲傷是「朝向上帝」（*kata theon*）的，他在看見自己罪惡深重的同時，也看見了上帝在基督裡為罪人預備的赦罪洪恩；於是這份神聖的刺痛非但不會將他壓碎，反而化為一股將他從自我中心連根拔起、推入救主懷抱的悔改巨浪，直通往永不後悔的終末救恩！
 
+<div class="my-8 rounded-3xl border border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-stone-900/50 p-4 sm:p-6 shadow-xs select-none">
+  <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-stone-200 dark:border-stone-800 text-xs">
+    <div class="flex items-center gap-2 font-bold text-purple-700 dark:text-purple-300">
+      <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
+      <span>釋經結構圖解｜兩種憂愁的神學分流與終極結局（林後 7:8–10）</span>
+    </div>
+    <span class="text-[11px] font-mono text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 px-2 py-0.5 rounded">
+      Discourse Topology
+    </span>
+  </div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 450" class="w-full h-auto overflow-visible" role="img" aria-label="兩種憂愁與無悔救恩的神學分流圖">
+    <defs>
+      <!-- Arrow Markers -->
+      <marker id="arrow-grace" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#8b5cf6" />
+      </marker>
+      <marker id="arrow-flesh" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+      </marker>
+
+      <linearGradient id="grad-grace-line" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#94a3b8" />
+        <stop offset="30%" stop-color="#8b5cf6" />
+        <stop offset="100%" stop-color="#7c3aed" />
+      </linearGradient>
+
+      <linearGradient id="grad-flesh-line" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#94a3b8" />
+        <stop offset="30%" stop-color="#f43f5e" />
+        <stop offset="100%" stop-color="#be123c" />
+      </linearGradient>
+    </defs>
+
+    <style>
+      .node-card { rx: 16px; ry: 16px; stroke-width: 1.5; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.03)); }
+      .start-box { fill: #f8fafc; stroke: #cbd5e1; }
+      .grace-box { fill: #f5f3ff; stroke: #c4b5fd; }
+      .grace-end-box { fill: #fdf4ff; stroke: #d8b4fe; stroke-width: 2; }
+      .flesh-box { fill: #fff1f2; stroke: #fecdd3; }
+      .flesh-end-box { fill: #fff1f2; stroke: #fda4af; stroke-width: 2; }
+
+      .txt-title { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 700; fill: #0f172a; }
+      .txt-greek { font-family: ui-serif, Georgia, Cambria, serif; font-style: italic; font-size: 12px; font-weight: 600; fill: #6d28d9; }
+      .txt-greek-warn { font-family: ui-serif, Georgia, Cambria, serif; font-style: italic; font-size: 12px; font-weight: 600; fill: #be123c; }
+      .txt-body { font-family: system-ui, -apple-system, sans-serif; font-size: 11.5px; fill: #334155; line-height: 1.5; }
+      .txt-pill { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 600; fill: #475569; }
+
+      .badge-bg-grace { fill: #ede9fe; stroke: #c4b5fd; stroke-width: 1; rx: 10px; }
+      .badge-bg-flesh { fill: #ffe4e6; stroke: #fecdd3; stroke-width: 1; rx: 10px; }
+      .badge-txt-grace { font-family: system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 700; fill: #6d28d9; }
+      .badge-txt-flesh { font-family: system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 700; fill: #be123c; }
+
+      :root.dark .start-box, .dark .start-box { fill: #1e293b; stroke: #475569; }
+      :root.dark .grace-box, .dark .grace-box { fill: #2e1065; stroke: #7c3aed; }
+      :root.dark .grace-end-box, .dark .grace-end-box { fill: #3b0764; stroke: #a855f7; }
+      :root.dark .flesh-box, .dark .flesh-box { fill: #4c0519; stroke: #e11d48; }
+      :root.dark .flesh-end-box, .dark .flesh-end-box { fill: #500724; stroke: #f43f5e; }
+
+      :root.dark .txt-title, .dark .txt-title { fill: #f8fafc; }
+      :root.dark .txt-greek, .dark .txt-greek { fill: #c084fc; }
+      :root.dark .txt-greek-warn, .dark .txt-greek-warn { fill: #fb7185; }
+      :root.dark .txt-body, .dark .txt-body { fill: #cbd5e1; }
+      :root.dark .txt-pill, .dark .txt-pill { fill: #94a3b8; }
+
+      :root.dark .badge-bg-grace, .dark .badge-bg-grace { fill: #3b0764; stroke: #7c3aed; }
+      :root.dark .badge-bg-flesh, .dark .badge-bg-flesh { fill: #4c0519; stroke: #e11d48; }
+      :root.dark .badge-txt-grace, .dark .badge-txt-grace { fill: #d8b4fe; }
+      :root.dark .badge-txt-flesh, .dark .badge-txt-flesh { fill: #fecdd3; }
+    </style>
+
+    <!-- Branch Paths -->
+    <!-- Upward Grace Branch -->
+    <path d="M 235 225 C 285 225, 295 115, 345 115" stroke="url(#grad-grace-line)" stroke-width="2.5" fill="none" marker-end="url(#arrow-grace)" />
+    <!-- Downward Flesh Branch -->
+    <path d="M 235 225 C 285 225, 295 335, 345 335" stroke="url(#grad-flesh-line)" stroke-width="2.5" fill="none" marker-end="url(#arrow-flesh)" />
+
+    <!-- Step 1 to Step 2 connect: Grace -->
+    <path d="M 605 115 L 640 115" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow-grace)" />
+    <!-- Step 1 to Step 2 connect: Flesh -->
+    <path d="M 605 335 L 640 335" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow-flesh)" />
+
+    <!-- 1. Origin Node (Left Center) -->
+    <g transform="translate(20, 155)">
+      <rect width="215" height="140" class="node-card start-box" />
+      <rect x="14" y="14" width="76" height="20" rx="10" fill="#e2e8f0" class="dark:fill-slate-700" />
+      <text x="52" y="28" text-anchor="middle" class="txt-pill">起點・刺痛</text>
+
+      <text x="16" y="58" class="txt-title">神聖真理的刺痛</text>
+      <text x="16" y="78" class="txt-greek">lypē pros hōran</text>
+      <text x="16" y="98" class="txt-body">・流淚之信的嚴正管教（7:8）</text>
+      <text x="16" y="116" class="txt-body">・受神主權限制的短暫陣痛</text>
+      <text x="16" y="134" class="txt-body">・使徒短暫心疼後悔 (metemelomēn)</text>
+    </g>
+
+    <!-- Branch Labels near bifurcation -->
+    <g transform="translate(255, 140)">
+      <rect width="70" height="22" class="badge-bg-grace" />
+      <text x="35" y="15" text-anchor="middle" class="badge-txt-grace">朝向上帝</text>
+    </g>
+    <g transform="translate(255, 285)">
+      <rect width="70" height="22" class="badge-bg-flesh" />
+      <text x="35" y="15" text-anchor="middle" class="badge-txt-flesh">朝向自我</text>
+    </g>
+
+    <!-- 2A. Grace Branch Node 1 (Middle Top) -->
+    <g transform="translate(355, 45)">
+      <rect width="250" height="140" class="node-card grace-box" />
+      <rect x="14" y="14" width="76" height="20" class="badge-bg-grace" />
+      <text x="52" y="28" text-anchor="middle" class="badge-txt-grace">依神憂愁</text>
+
+      <text x="16" y="58" class="txt-title">依著神的意思憂愁</text>
+      <text x="16" y="78" class="txt-greek">hē kata theon lypē</text>
+      <text x="16" y="98" class="txt-body">・眼目朝向上帝，看見得罪至聖天父</text>
+      <text x="16" y="116" class="txt-body">・大衛痛悔（詩 51「惟獨得罪了祢」）</text>
+      <text x="16" y="134" class="txt-body">・神掌管手術刀，對靈魂零虧損</text>
+    </g>
+
+    <!-- 2B. Flesh Branch Node 1 (Middle Bottom) -->
+    <g transform="translate(355, 265)">
+      <rect width="250" height="140" class="node-card flesh-box" />
+      <rect x="14" y="14" width="76" height="20" class="badge-bg-flesh" />
+      <text x="52" y="28" text-anchor="middle" class="badge-txt-flesh">世俗憂愁</text>
+
+      <text x="16" y="58" class="txt-title">屬乎這世界的憂愁</text>
+      <text x="16" y="78" class="txt-greek-warn">hē tou kosmou lypē</text>
+      <text x="16" y="98" class="txt-body">・眼目死盯自我、面子、利益與名聲</text>
+      <text x="16" y="116" class="txt-body">・驕傲與自憐：害怕東窗事發</text>
+      <text x="16" y="134" class="txt-body">・金口若望：將神完全排除在視野外</text>
+    </g>
+
+    <!-- 3A. Grace End Node (Right Top) -->
+    <g transform="translate(650, 45)">
+      <rect width="270" height="140" class="node-card grace-end-box" />
+      <rect x="14" y="14" width="80" height="20" class="badge-bg-grace" />
+      <text x="54" y="28" text-anchor="middle" class="badge-txt-grace">終極救恩</text>
+
+      <text x="16" y="58" class="txt-title">生出真悔改・以致得救</text>
+      <text x="16" y="78" class="txt-greek">metanoian eis sōtērian</text>
+      <text x="16" y="98" class="txt-body">・metanoia：全人意志向神 180° 轉向</text>
+      <text x="16" y="116" class="txt-body">・生出七級悔改行動瀑布（7:11）</text>
+      <text x="16" y="134" class="txt-body">・無可後悔 (ametamelētos) 的終末榮耀</text>
+    </g>
+
+    <!-- 3B. Flesh End Node (Right Bottom) -->
+    <g transform="translate(650, 265)">
+      <rect width="270" height="140" class="node-card flesh-end-box" />
+      <rect x="14" y="14" width="80" height="20" class="badge-bg-flesh" />
+      <text x="54" y="28" text-anchor="middle" class="badge-txt-flesh">徹底滅亡</text>
+
+      <text x="16" y="58" class="txt-title">停留在懊惱・製造死亡</text>
+      <text x="16" y="78" class="txt-greek-warn">thanaton katergazetai</text>
+      <text x="16" y="98" class="txt-body">・metamelomai：純情緒遺憾，無歸向</text>
+      <text x="16" y="116" class="txt-body">・猶大賣主後悔卻上吊（太 27:3）</text>
+      <text x="16" y="134" class="txt-body">・推向自我控告、苦毒與靈性永死</text>
+    </g>
+  </svg>
+
+  <div class="mt-3.5 pt-2.5 border-t border-stone-200/80 dark:border-stone-800/80 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-600 dark:text-stone-300">
+    <div class="flex items-center gap-1.5">
+      <span class="font-semibold text-purple-700 dark:text-purple-400">關鍵字義鑑別：</span>
+      <span>懊惱情緒 (<em>Metamelomai</em>) ≠ 生命真悔改 (<em>Metanoia</em>)</span>
+    </div>
+    <div class="text-stone-600 dark:text-stone-300">
+      依神憂愁生出無悔救恩（<em>ametamelēton</em>）｜世俗憂愁做成死亡
+    </div>
+  </div>
+</div>
+
 * **文本解經命題（Exegetical Idea）**：保羅在 7 章 4 至 16 節交叉結構的核心樞紐中，闡明自己雖曾因慈父心腸為「流淚之信」帶來的短暫刺痛而感到心疼懊惱（*metemelomēn*），如今卻因哥林多人經歷「依著上帝的意思憂愁」而生出真悔改（*metanoia*）大感歡喜，並確立了「依神之憂生出無悔得救之悔改、世俗之憂製造死亡」的救恩論鐵律。
 * **正典救贖神學樞紐（Redemptive Anchor）**：墮落罪人在面對罪惡敗露與律法指正時，憑藉肉體本性只能產生以自我面子與今世利益為中心的「世俗之憂（*hē tou kosmou lypē*）」，在猶大式的羞恥、防衛、自憐與苦毒中徹底製造出死亡（*thanaton katergazetai*）；唯有藉著為我們釘十字架、擔當罪孽與死亡的耶穌基督，並透過聖靈將神聖潔與慈愛之光投射於人心，才能在罪人裡面創造出如大衛在詩篇 51 篇般朝向上帝的「依神之憂（*hē kata theon lypē*）」，催生出全人轉離罪惡、歸向基督的真悔改（*metanoia*），領受永無後悔的終末救恩（*sōtēria ametamelētos*）。
 * **講道/教學命題（Homiletical Idea）**：當神的話語刺痛我們的良心時，我們當棄絕只顧面子與自憐、終必叫人死的「世俗憂愁」，也不可用廉價的情緒懊惱取代生命轉向，而當在十字架的恩典光中領受「依著神的意思憂愁」，讓聖靈在我們裡面生出徹底掉頭歸向神、通往無悔救恩的真悔改。
