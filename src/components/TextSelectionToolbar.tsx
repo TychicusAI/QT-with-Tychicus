@@ -25,10 +25,15 @@ export function TextSelectionToolbar({
     (text: string, includeUrl: boolean = true) => {
       const cleanText = text.trim();
       const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-      const sourceLine = [versionLabel, scriptureRef, dayTitle].filter(Boolean).join("・");
+      const appName = "靈修推基古";
+      const parts = [appName];
+      if (versionLabel && versionLabel !== appName) parts.push(versionLabel);
+      if (scriptureRef) parts.push(scriptureRef);
+      if (dayTitle) parts.push(dayTitle);
+      const sourceLine = parts.join("・");
 
       if (includeUrl && currentUrl) {
-        return `「${cleanText}」\n\n—— ${sourceLine}\n閱讀全文：${currentUrl}`;
+        return `「${cleanText}」\n\n—— ${sourceLine}\n${currentUrl}`;
       }
       return `「${cleanText}」\n\n—— ${sourceLine}`;
     },
@@ -163,7 +168,8 @@ export function TextSelectionToolbar({
 
   const handleShareFacebook = () => {
     const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(`「${selectedText.trim()}」`)}`;
+    const fbQuote = formatShareContent(selectedText, false);
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(fbQuote)}`;
     window.open(fbUrl, "_blank", "noopener,noreferrer,width=600,height=500");
     setShowShareMenu(false);
   };
