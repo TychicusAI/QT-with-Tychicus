@@ -111,7 +111,7 @@ export function AboutViewer() {
                 01
               </div>
               <h3 className="text-base font-bold text-stone-900 dark:text-stone-100">
-                單一真實來源 (SSOT 原則)
+                單一真實來源
               </h3>
               <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
                 全站所有規範受限於專案核心工作流程規格。無論是文風字數、解經架構或註釋規範，皆有不可逾越的標準，杜絕隨機漂移與風格混亂。
@@ -124,7 +124,7 @@ export function AboutViewer() {
                 02
               </div>
               <h3 className="text-base font-bold text-stone-900 dark:text-stone-100">
-                雙基石研經工程 (Dual Foundations)
+                雙基石研經工程
               </h3>
               <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
                 每週先產出萬字級<strong>學術微觀釋經筆記 (study.md)</strong> 與<strong>真實具名當代見證庫 (illustrations.md)</strong>。在學術地基與真實生活未奠定前，絕不盲目產出每日靈修。
@@ -137,7 +137,7 @@ export function AboutViewer() {
                 03
               </div>
               <h3 className="text-base font-bold text-stone-900 dark:text-stone-100">
-                文本微觀解經工具箱 (6 大工具)
+                文本微觀解經工具箱
               </h3>
               <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
                 貫徹文體結構、關鍵字彙場、舊約回響、文法修辭張力、歷史文化論辯背景、神學綜合與福音指向等 6 大微觀解經維度，層層剖析經文肌理。
@@ -150,7 +150,7 @@ export function AboutViewer() {
                 04
               </div>
               <h3 className="text-base font-bold text-stone-900 dark:text-stone-100">
-                逐日深耕模式 (Day-by-Day Journey)
+                逐日深耕模式
               </h3>
               <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
                 拒絕粗糙的大綱式一次性生成。Day 1 到 Day 6 每日獨立深入打磨，維持嚴密的起承轉合，讓屬靈痛覺與神學張力在篇章間深刻共鳴。
@@ -163,7 +163,7 @@ export function AboutViewer() {
                 05
               </div>
               <h3 className="text-base font-bold text-stone-900 dark:text-stone-100">
-                五軌分流牧養矩陣 (5-Track Matrix)
+                五軌分流牧養矩陣
               </h3>
               <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
                 同一段經文，藉由靈活的神學轉譯，精準分流為青年、家庭、樂齡、宣教與釋經五大軌道，對焦特定群體的心靈掙扎與生命處境。
@@ -339,10 +339,10 @@ export function AboutViewer() {
             <div className="p-6 rounded-2xl bg-white dark:bg-stone-900/70 border border-stone-200 dark:border-stone-800 space-y-3">
               <div className="flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-bold text-base">
                 <Library className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                <span>15 部權威頂尖註釋書學術底層</span>
+                <span>權威頂尖註釋書學術底層</span>
               </div>
               <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-                絕非憑空杜撰或網路拼湊。全面吸納包括 <em>Baker Exegetical (BECNT)</em>、<em>New International Greek Testament (NIGTC)</em>、<em>NICNT</em>、<em>NIVAC</em> 等 15 部當代頂尖學術巨著的考證成果，對文法結構與歷史論辯有極高還原度。
+                絕非憑空杜撰或網路拼湊。全面吸納包括 <em>Baker Exegetical (BECNT)</em>、<em>New International Greek Testament (NIGTC)</em>、<em>NICNT</em>、<em>NIVAC</em> 等當代頂尖學術巨著的考證成果，對文法結構與歷史論辯有極高還原度。
               </p>
             </div>
 
@@ -369,7 +369,7 @@ export function AboutViewer() {
             <div className="p-6 rounded-2xl bg-white dark:bg-stone-900/70 border border-stone-200 dark:border-stone-800 space-y-3">
               <div className="flex items-center gap-2.5 text-stone-900 dark:text-stone-100 font-bold text-base">
                 <Headphones className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                <span>F5-TTS MLX 原生語音聆聽系統</span>
+                <span>原生語音聆聽系統</span>
               </div>
               <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
                 針對各版本群體特質，整合前沿自然語音合成技術，提供溫暖、沉穩、清晰的真人級語音導讀。即便在晨間通勤、散步或睡前默想，神的話語皆能伴隨身旁。
@@ -423,7 +423,7 @@ export function AboutViewer() {
                     泛泛空談，充斥表面詞意解釋，缺乏註釋書學術考據。
                   </td>
                   <td className="py-3.5 px-4 bg-purple-50/40 dark:bg-purple-950/20 font-semibold text-purple-900 dark:text-purple-200">
-                    奠基 15 部權威註釋書與 6 大微觀解經工具，深度解析歷史反諷與救贖脈絡。
+                    奠基權威註釋書與 6 大微觀解經工具，深度解析歷史反諷與救贖脈絡。
                   </td>
                 </tr>
 
@@ -539,7 +539,7 @@ export function AboutViewer() {
               className="px-5 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 dark:bg-amber-950 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 font-bold text-xs sm:text-sm transition flex items-center gap-1.5"
             >
               <Library className="w-4 h-4" />
-              <span>15 部註釋書評介</span>
+              <span>權威註釋書評介</span>
             </Link>
 
             <Link

@@ -154,7 +154,7 @@ export function HomeContainer() {
 
           <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mx-auto">
             {isExegesis
-              ? "嚴格遵循「文本微觀解經工具箱」，奠基 15 部權威註釋書與新約希臘文脈絡，深探經文文體架構、交錯平行與神學張力。"
+              ? "嚴格遵循「文本微觀解經工具箱」，奠基權威註釋書與新約希臘文脈絡，深探經文文體架構、交錯平行與神學張力。"
               : isMission
               ? "每天 10~15 分鐘，連結跨文化前線的瓦器眼淚與本地日常的鄰舍見證，從自我中心轉向萬國萬民的永恆敬拜。"
               : isEncore
@@ -370,12 +370,12 @@ export function HomeContainer() {
                   釋經參考書目庫
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
-                  奠基之 15 部權威註釋書（BECNT、NIGTC、NICNT、NTL、NIVAC 等）評介與導讀。
+                  奠基之權威註釋書（BECNT、NIGTC、NICNT、NTL、NIVAC 等）評介與導讀。
                 </p>
               </div>
 
               <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-amber-700 dark:text-amber-400 flex items-center justify-between">
-                <span>查閱 15 部書目評介</span>
+                <span>查閱權威書目評介</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </Link>
