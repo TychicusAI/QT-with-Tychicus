@@ -35,8 +35,13 @@
 
 5. **釋經版向量圖解規範（Exegetical Discourse SVG Charts Policy）**：
    * **視覺拓撲錨點**：當經文具備顯著篇章結構（交叉對稱樞紐 Chiasmus / Pivot Center、二元神學對決與語意分流如「依神憂愁 vs 世俗憂愁」、複雜文法論證鏈 Syntactic Flow 或宣教行旅時間軸）時，於該日釋經專文中配置專屬向量結構圖解。
-   * **佔位符架構（Markdown Placeholder Architecture，嚴禁內嵌原始多行 SVG）**：在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG XML**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），建議置於第一樂章【篇章座標與結構拓撲】之後，作為開篇即見的視覺導航錨點。
-   * **純 React 向量元件實作**：圖表一律於 `src/components/charts/<ChartName>.tsx` 實作為純 React JSX 向量元件，配備自適應視區（`aspectRatio` 與 `viewBox`）、外層橫向捲動保護容器（`min-w-[720px] overflow-x-auto`，確保手機端不壓扁變形、桌機端滿版舒展）及深色模式（Dark Mode）自適應色彩，並於 `DevotionalReader.tsx` 透過 `messageHtml.split("<!-- CHART:<chart-id> -->")` 自動精準掛載。
+   * **佔位符架構（Markdown Placeholder Architecture，嚴禁內嵌原始多行 SVG）**：
+     1. 在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG XML**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），建議置於第一樂章【篇章座標與結構拓撲】之後，作為開篇即見的視覺導航錨點。
+     2. **單一佔位符防重鐵律**：每篇專文**嚴格僅能包含 1 個圖解佔位符**，嚴禁重複連續插入，避免前台重複渲染雙重圖表。
+   * **純 React 向量元件實作三大鐵律**：圖表一律於 `src/components/charts/<ChartName>.tsx` 實作為純 React JSX 向量元件，配備：
+     1. **SVG `<text>` 純文字節點鐵律（嚴禁星號）**：SVG `<text>` 節點不解析 Markdown 標籤語法，**絕對禁止出現 Markdown 星號 `*`**（如必須寫作 `(stenochōreisthe)`，嚴禁寫成 `(*stenochōreisthe*)`），原文斜體一律由 CSS 樣式（如 `className="txt-greek"` 或 `fontStyle: "italic"`）統一掌控。
+     2. **圖塊空間分流與防溢出規範（Zoning & Anti-Overflow）**：所有 SVG 圖塊與浮動標籤（如氛圍標籤、過渡標籤）必須擁有**互不干擾的獨立垂直/水平空間帶（Zoning）**，嚴禁跨區遮擋相鄰卡片文本；中央推論樞紐方塊與長標題方塊必須預留足夠寬度（寬度建議至少 550px 以上），確保文字完全容納、絕不溢出邊框。
+     3. **響應式與主題自適應**：配備 `viewBox` 與 `style={{ width: "100%", height: "auto", aspectRatio: "..." }}` 自適應視區、外層橫向捲動保護容器（`min-w-[720px] overflow-x-auto`，確保手機端不壓扁變形、桌機端滿版舒展）及深色模式（Dark Mode）自適應色彩，並於 `DevotionalReader.tsx` 透過 `messageHtml.split(/(<!--\s*CHART:[a-z0-9-]+\s*-->)/g)` 與去重集合 `renderedChartIds` 自動精準掛載。
 
 ---
 

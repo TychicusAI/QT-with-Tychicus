@@ -144,7 +144,7 @@ export function ComfortRelayChart() {
               <text x="14" y="46" className="txt-h">提多心靈得著安慰</text>
               <text x="14" y="64" className="txt-g">pareklēthē eph' hymin</text>
               <text x="14" y="82" className="txt-b">・從焦慮特使化為平安器皿</text>
-              <text x="14" y="98" className="txt-b">・親身同在 (*parousia*) 帶來第一道光</text>
+              <text x="14" y="98" className="txt-b">・親身同在 (parousia) 帶來第一道光</text>
               <text x="14" y="114" className="txt-b">・向保羅帶回教會復和好消息</text>
             </g>
 

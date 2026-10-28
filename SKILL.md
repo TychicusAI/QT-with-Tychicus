@@ -123,4 +123,7 @@ For each target deliverable (Youth / Family / Encore / Mission):
   - In-line Scripture Formats: Always write "4 章 16 至 18 節", never "4:16" or "四章十六節" in message body.
   - No Literal Backslash-N: Never insert literal `\\n` characters in markdown or JSON files.
   - Bible Cache Required: Every extended study reference must exist in `data/bible-cache.json` or `npm run sync` will abort with exit code 1.
-  - Exegetical Discourse Charts: Never inline raw multi-line SVG in markdown. Use `<!-- CHART:<chart-id> -->` placeholder and build a native React SVG component in `src/components/charts/<ChartName>.tsx` with `min-w-[720px] overflow-x-auto` for mobile protection.
+  - Exegetical Discourse Charts (3 Golden Rules):
+      1. Single Placeholder: Exactly one `<!-- CHART:<chart-id> -->` per day, never duplicate.
+      2. No Markdown Asterisks in SVG: SVG `<text>` must be clean plain text without `*`, use CSS for italics.
+      3. Spatial Zoning & Width: Independent vertical/horizontal bands for badges/blocks (no overlapping), hinge box width >= 550px to prevent text overflow.

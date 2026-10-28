@@ -320,11 +320,26 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           dayLabel={day.dayLabel}
         />
 
-        {messageHtml.includes("<!-- CHART:") ? (
-          messageHtml.split(/(<!--\s*CHART:[a-z0-9-]+\s*-->)/g).map((part, idx) => {
+        {(() => {
+          if (!messageHtml.includes("<!-- CHART:")) {
+            return (
+              <>
+                <div
+                  className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
+                  dangerouslySetInnerHTML={{ __html: messageHtml }}
+                />
+                {isExegesis && exegesisDayChartFallback[day.id]}
+              </>
+            );
+          }
+
+          const renderedChartIds = new Set<string>();
+          return messageHtml.split(/(<!--\s*CHART:[a-z0-9-]+\s*-->)/g).map((part, idx) => {
             const match = part.match(/<!--\s*CHART:([a-z0-9-]+)\s*-->/);
             if (match) {
               const chartId = match[1];
+              if (renderedChartIds.has(chartId)) return null;
+              renderedChartIds.add(chartId);
               return <React.Fragment key={idx}>{chartMap[chartId] || null}</React.Fragment>;
             }
             if (!part.trim()) return null;
@@ -335,16 +350,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
                 dangerouslySetInnerHTML={{ __html: part }}
               />
             );
-          })
-        ) : (
-          <>
-            <div
-              className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
-              dangerouslySetInnerHTML={{ __html: messageHtml }}
-            />
-            {isExegesis && exegesisDayChartFallback[day.id]}
-          </>
-        )}
+          });
+        })()}
       </section>
 
       {/* 3. Meditation Question Card */}

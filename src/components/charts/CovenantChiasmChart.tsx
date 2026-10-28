@@ -64,7 +64,7 @@ export function CovenantChiasmChart() {
               <rect x="12" y="14" width="28" height="22" rx="11" fill="#2563eb" />
               <text x="26" y="29" textAnchor="middle" className="badge-text">B</text>
               <text x="50" y="32" className="txt-label">6:11b–12「我們的心是寬宏的；你們狹窄，原不在乎我們」</text>
-              <text x="510" y="32" className="txt-desc">指出信徒心腸狹窄 (*stenochōreisthe*) 的病根</text>
+              <text x="510" y="32" className="txt-desc">指出信徒心腸狹窄 (stenochōreisthe) 的病根</text>
             </g>
 
             {/* C Layer (Inner Ring - Heart Appeal) */}
@@ -93,7 +93,7 @@ export function CovenantChiasmChart() {
               <rect x="12" y="14" width="28" height="22" rx="11" fill="#0f766e" />
               <text x="26" y="29" textAnchor="middle" className="badge-text">C'</text>
               <text x="50" y="32" className="txt-label">7:2a「你們要心地寬大收納我們！」(Chōrēsate hēmas)</text>
-              <text x="510" y="32" className="txt-desc">果斷騰出心靈空間 (*chōra*)，回應 6:13 寬宏呼籲</text>
+              <text x="510" y="32" className="txt-desc">果斷騰出心靈空間 (chōra)，回應 6:13 寬宏呼籲</text>
             </g>
 
             {/* B' Layer (Mirroring B - Dying & Living Together) */}
@@ -103,7 +103,7 @@ export function CovenantChiasmChart() {
               <text x="26" y="29" textAnchor="middle" className="badge-text">B'</text>
               <text x="50" y="32" className="txt-label">7:2b–3「未曾虧負誰……不是要定罪，情願同死同活！」</text>
               <text x="510" y="32" className="txt-desc">
-                三連無連詞清白抗辯 ➔ 顛倒古典詞序為「先同死後同活」(*synapothanein kai syzēn*)
+                三連無連詞清白抗辯 ➔ 顛倒古典詞序為「先同死後同活」(synapothanein kai syzēn)
               </text>
             </g>
 
@@ -114,7 +114,7 @@ export function CovenantChiasmChart() {
               <text x="26" y="29" textAnchor="middle" className="badge-text">A'</text>
               <text x="50" y="32" className="txt-label">7:4「我大大的放膽直言，在患難中喜樂格外充盈！」</text>
               <text x="510" y="32" className="txt-desc">
-                超凡複合詞 *hyperperisseuomai*：喜樂如大水漫過一切患難堤防，呼應 6:11 張開的口
+                超凡複合詞 hyperperisseuomai：喜樂如大水漫過一切患難堤防，呼應 6:11 張開的口
               </text>
             </g>
           </svg>

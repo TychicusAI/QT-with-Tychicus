@@ -40,20 +40,37 @@ export function SanctificationArchitectureChart() {
               >
                 <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
               </marker>
-
-              <linearGradient id="grad-indicative" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#8b5cf6" />
-                <stop offset="100%" stopColor="#6d28d9" />
-              </linearGradient>
+              <marker
+                id="arrow-blue"
+                viewBox="0 0 10 10"
+                refX="6"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+              </marker>
+              <marker
+                id="arrow-green"
+                viewBox="0 0 10 10"
+                refX="6"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+              </marker>
             </defs>
 
             <style>{`
               .node-card { rx: 16px; ry: 16px; stroke-width: 1.5; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.03)); }
               .base-box { fill: #f3e8ff; stroke: #c084fc; stroke-width: 2; }
-              .hinge-box { fill: #f8fafc; stroke: #94a3b8; }
+              .hinge-box { fill: #f8fafc; stroke: #8b5cf6; stroke-width: 2; rx: 14px; ry: 14px; }
               .action-a-box { fill: #eff6ff; stroke: #93c5fd; }
               .action-b-box { fill: #f0fdf4; stroke: #86efac; }
-              .summit-box { fill: #faf5ff; stroke: #a855f7; stroke-width: 2; }
+              .atm-badge { fill: #faf5ff; stroke: #c084fc; stroke-width: 1.5; rx: 16px; ry: 16px; }
 
               .txt-title { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 700; fill: #0f172a; }
               .txt-greek { font-family: ui-serif, Georgia, Cambria, serif; font-style: italic; font-size: 12px; font-weight: 600; fill: #6d28d9; }
@@ -61,73 +78,73 @@ export function SanctificationArchitectureChart() {
               .txt-pill { font-family: system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 700; }
 
               :root.dark .base-box, .dark .base-box { fill: #3b0764; stroke: #9333ea; }
-              :root.dark .hinge-box, .dark .hinge-box { fill: #1e293b; stroke: #475569; }
+              :root.dark .hinge-box, .dark .hinge-box { fill: #1e1b4b; stroke: #7c3aed; }
               :root.dark .action-a-box, .dark .action-a-box { fill: #172554; stroke: #3b82f6; }
               :root.dark .action-b-box, .dark .action-b-box { fill: #052e16; stroke: #22c55e; }
-              :root.dark .summit-box, .dark .summit-box { fill: #2e1065; stroke: #a855f7; }
+              :root.dark .atm-badge, .dark .atm-badge { fill: #2e1065; stroke: #a855f7; }
 
               :root.dark .txt-title, .dark .txt-title { fill: #f8fafc; }
               :root.dark .txt-greek, .dark .txt-greek { fill: #c084fc; }
               :root.dark .txt-body, .dark .txt-body { fill: #cbd5e1; }
             `}</style>
 
-            {/* Level 1: Covenant Indicative Foundation (Bottom) */}
-            <g transform="translate(40, 310)">
-              <rect width="860" height="110" className="node-card base-box" />
-              <rect x="20" y="14" width="130" height="22" rx="11" fill="#7c3aed" />
-              <text x="85" y="29" textAnchor="middle" fill="#ffffff" className="txt-pill">指示語氣・聖約基石</text>
+            {/* Row 1: Dual Aspects of Sanctification (Top) */}
+            {/* 1A: Decisive Cleansing (Negative) */}
+            <g transform="translate(40, 20)">
+              <rect width="415" height="125" className="node-card action-a-box" />
+              <rect x="16" y="12" width="120" height="20" rx="10" fill="#3b82f6" />
+              <text x="76" y="26" textAnchor="middle" fill="#ffffff" className="txt-pill">果斷決裂・消極除污</text>
+
+              <text x="16" y="54" className="txt-title">就當潔淨自己 (katharisōmen heautous)</text>
+              <text x="16" y="72" className="txt-greek">不定過去主動假設語氣（外在整體體貌 Perfective）</text>
+              <text x="16" y="92" className="txt-body">・新約孤立詞「污穢」(molysmos)：偶像玷污深層染色</text>
+              <text x="16" y="110" className="txt-body">・人類學總括法 (merism)：「肉體與心靈一切污穢」</text>
+            </g>
+
+            {/* 1B: Continuous Maturation (Positive) */}
+            <g transform="translate(485, 20)">
+              <rect width="415" height="125" className="node-card action-b-box" />
+              <rect x="16" y="12" width="120" height="20" rx="10" fill="#16a34a" />
+              <text x="76" y="26" textAnchor="middle" fill="#ffffff" className="txt-pill">持續進程・積極成聖</text>
+
+              <text x="16" y="54" className="txt-title">持續使聖潔完全 (epitelountes hagiosynēn)</text>
+              <text x="16" y="72" className="txt-greek">現在主動分詞（內在持續體貌 Imperfective）</text>
+              <text x="16" y="92" className="txt-body">・專有名詞 hagiosynē：一生之久培育完全聖潔生命品質</text>
+              <text x="16" y="110" className="txt-body">・正典結 36:25–27：神灑清水洗淨與賜新靈之聖約應驗</text>
+            </g>
+
+            {/* Row 2: Atmosphere Badge - Completely separated, non-overlapping */}
+            <g transform="translate(300, 160)">
+              <rect width="340" height="34" className="atm-badge" />
+              <text x="170" y="22" textAnchor="middle" className="txt-greek" style={{ fontSize: "12.5px" }}>
+                盟約氛圍：存著敬畏神的心 (en phobō theou)
+              </text>
+            </g>
+
+            {/* Connecting Arrows between Action Boxes and Hinge */}
+            <path d="M 245 205 L 245 155" stroke="#3b82f6" strokeWidth="2.5" fill="none" markerEnd="url(#arrow-blue)" />
+            <path d="M 695 205 L 695 155" stroke="#16a34a" strokeWidth="2.5" fill="none" markerEnd="url(#arrow-green)" />
+
+            {/* Row 3: The Inferential Hinge - Generous width (600px), zero text overflow */}
+            <g transform="translate(170, 210)">
+              <rect width="600" height="52" className="hinge-box" />
+              <text x="300" y="32" textAnchor="middle" className="txt-title" style={{ fontSize: "14px", fill: "#7c3aed" }}>
+                推論門軸：既然持續擁有應許 (echontes) ➔ 所以 (oun) 就當自潔！
+              </text>
+            </g>
+
+            {/* Arrow from Base to Hinge */}
+            <path d="M 470 300 L 470 270" stroke="#7c3aed" strokeWidth="2.5" fill="none" markerEnd="url(#arrow-purple)" />
+
+            {/* Row 4: Covenant Indicative Foundation (Bottom) */}
+            <g transform="translate(40, 305)">
+              <rect width="860" height="115" className="node-card base-box" />
+              <rect x="20" y="14" width="135" height="22" rx="11" fill="#7c3aed" />
+              <text x="87" y="29" textAnchor="middle" fill="#ffffff" className="txt-pill">指示語氣・聖約基石</text>
 
               <text x="20" y="60" className="txt-title">「這等應許」前置超越修辭 (Tautas ... tas epangelias)</text>
               <text x="20" y="80" className="txt-greek">林後 6:16–18 七重聖約珠串（利 26:12；結 37:27；賽 52:11；撒下 7:14）</text>
               <text x="20" y="100" className="txt-body">「我要在他們中間居住來往；我要作他們的神，他們要作我的子民……我要作你們的父，你們要作我的兒女。」</text>
-            </g>
-
-            {/* Vertical Arrow from Base to Center */}
-            <path d="M 470 310 L 470 260" stroke="#7c3aed" strokeWidth="2.5" fill="none" markerEnd="url(#arrow-purple)" />
-
-            {/* Level 2: The Inferential Hinge */}
-            <g transform="translate(320, 205)">
-              <rect width="300" height="46" className="node-card hinge-box" />
-              <text x="150" y="28" textAnchor="middle" className="txt-title">
-                推論樞紐：既然持續擁有 (echontes) ➔ 所以 (oun)！
-              </text>
-            </g>
-
-            {/* Branching Arrows from Hinge to Dual Sanctification Tracks */}
-            <path d="M 410 205 C 380 180, 280 180, 240 165" stroke="#3b82f6" strokeWidth="2" fill="none" markerEnd="url(#arrow-purple)" />
-            <path d="M 530 205 C 560 180, 660 180, 700 165" stroke="#22c55e" strokeWidth="2" fill="none" markerEnd="url(#arrow-purple)" />
-
-            {/* Level 3: Dual Aspects of Sanctification */}
-            {/* 3A: Decisive Cleansing (Negative / Crisis) */}
-            <g transform="translate(40, 30)">
-              <rect width="400" height="135" className="node-card action-a-box" />
-              <rect x="16" y="14" width="115" height="20" rx="10" fill="#3b82f6" />
-              <text x="73" y="28" textAnchor="middle" fill="#ffffff" className="txt-pill">果斷決裂・消極除污</text>
-
-              <text x="16" y="58" className="txt-title">就當潔淨自己 (katharisōmen heautous)</text>
-              <text x="16" y="76" className="txt-greek">不定過去主動假設語氣（外在整體體貌 Perfective）</text>
-              <text x="16" y="96" className="txt-body">・新約孤立詞「污穢」(*molysmos*)：偶像罪污深層染色</text>
-              <text x="16" y="114" className="txt-body">・人類學總括對偶法 (*merism*)：「肉體與心靈一切污穢」</text>
-            </g>
-
-            {/* 3B: Continuous Maturation (Positive / Process) */}
-            <g transform="translate(500, 30)">
-              <rect width="400" height="135" className="node-card action-b-box" />
-              <rect x="16" y="14" width="115" height="20" rx="10" fill="#22c55e" />
-              <text x="73" y="28" textAnchor="middle" fill="#ffffff" className="txt-pill">持續進程・積極成聖</text>
-
-              <text x="16" y="58" className="txt-title">持續使聖潔完全 (epitelountes hagiosynēn)</text>
-              <text x="16" y="76" className="txt-greek">現在主動分詞（內在持續體貌 Imperfective）</text>
-              <text x="16" y="96" className="txt-body">・專有名詞 *hagiosynē*：一生之久培育完全聖潔生命品質</text>
-              <text x="16" y="114" className="txt-body">・正典呼應結 36:25–27：神灑清水與賜新靈之聖約實踐</text>
-            </g>
-
-            {/* Central Atmosphere Badge */}
-            <g transform="translate(370, 95)">
-              <rect width="200" height="30" rx="15" fill="#7c3aed" />
-              <text x="100" y="20" textAnchor="middle" fill="#ffffff" className="txt-pill">
-                氛圍：在敬畏神之中 (en phobō theou)
-              </text>
             </g>
           </svg>
         </div>
