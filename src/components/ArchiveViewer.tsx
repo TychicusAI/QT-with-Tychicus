@@ -138,7 +138,7 @@ export function ArchiveViewer() {
               <div className="grid grid-cols-5 sm:inline-flex items-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs w-full sm:w-auto">
                 <button
                   onClick={() => setVersion("youth")}
-                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     version === "youth"
                       ? "bg-amber-500 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -150,7 +150,7 @@ export function ArchiveViewer() {
 
                 <button
                   onClick={() => setVersion("family")}
-                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isFamily
                       ? "bg-teal-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -162,7 +162,7 @@ export function ArchiveViewer() {
 
                 <button
                   onClick={() => setVersion("encore")}
-                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isEncore
                       ? "bg-rose-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -174,7 +174,7 @@ export function ArchiveViewer() {
 
                 <button
                   onClick={() => setVersion("mission")}
-                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isMission
                       ? "bg-indigo-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -186,7 +186,7 @@ export function ArchiveViewer() {
 
                 <button
                   onClick={() => setVersion("exegesis")}
-                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                     isExegesis
                       ? "bg-purple-700 text-white shadow-xs"
                       : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"

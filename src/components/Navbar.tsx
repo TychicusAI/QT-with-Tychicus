@@ -20,7 +20,7 @@ export function Navbar({
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-stone-50/85 dark:bg-slate-950/85 border-b border-stone-200/60 dark:border-slate-800 transition-colors duration-200">
-      <div className="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
         {/* Left: Brand / Logo */}
         <Link href="/" className="flex items-center gap-2 sm:gap-3 group shrink min-w-0">
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-orange-400 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform shrink-0">
@@ -33,10 +33,10 @@ export function Navbar({
               </span>
             </div>
             <p
-              title="v. 3.0 循序讀經"
+              title="v. 4.0 循序讀經"
               className="text-[11px] sm:text-xs text-stone-500 dark:text-stone-400 truncate max-w-[195px] sm:max-w-none"
             >
-              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />3.0</span>{" "}
+              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />4.0</span>{" "}
               循序讀經
             </p>
           </div>
