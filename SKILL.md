@@ -1,6 +1,6 @@
 ---
 name: tychicus-qt-generator
-description: Generate complete weekly devotional materials for the QT-with-Tychicus project strictly following WORKFLOW.md. Use when the user requests generating weekly devotionals, academic study notes (study.md), illustration collections (illustrations.md), topic plans (topics_*.md), or youth/family/encore/mission devotionals (qt_for_youth.md, qt_for_family.md, qt_for_encore.md, qt_for_mission.md) in the QT-with-Tychicus repository.
+description: Generate complete weekly devotional materials for the QT-with-Tychicus project strictly following WORKFLOW.md. Use when the user requests generating weekly devotionals, academic study notes (study.md), illustration collections (illustrations.md), topic plans (topics_*.md), or youth/family/encore/mission/exegesis devotionals (qt_for_youth.md, qt_for_family.md, qt_for_encore.md, qt_for_mission.md, qt_for_exegesis.md) in the QT-with-Tychicus repository.
 allowed-tools: client default_api notebooklm
 ---
 # Tychicus QT Generator
@@ -27,7 +27,7 @@ The skill expects or extracts three key parameters from the user request:
 
 1.  Target Date: `[YYYY-MM-DD]` (e.g. 2026-09-28)
 2.  Scripture Range: `[Book Chapter:Verse-Chapter:Verse]` (e.g. 哥林多後書 4:1-4:15)
-3.  Target Deliverables: Youth version (`qt_for_youth.md`), Family version (`qt_for_family.md`), Encore 50+ version (`qt_for_encore.md`), Mission version (`qt_for_mission.md`), or any combination.
+3.  Target Deliverables: Youth version (`qt_for_youth.md`), Family version (`qt_for_family.md`), Encore 50+ version (`qt_for_encore.md`), Mission version (`qt_for_mission.md`), Exegesis version (`qt_for_exegesis.md`), or any combination.
 
 If any parameter is missing, extract it from existing files under `data/` or ask the user.
 
@@ -76,6 +76,11 @@ For each target deliverable (Youth / Family / Encore / Mission):
               3. Surrendering cultural superiority & incarnational translation (dying to ethnocentrism and savior complexes, learning Paul's humility of becoming all things to all people).
               4. The weight of "staying with the baggage" (intercession, sacrificial kingdom stewardship, and genuine pastoral holding for frontline workers without performative pity).
               5. Reconciling personal brokenness with *Missio Dei* (moving from ego-centric self-actualization or ministry burnout to participating in God's cosmic reconciliation and eschatological worship).
+          - **Exegesis (`exegesis`, 釋經版純文字微觀釋經深研)**: 100% grounded in `study.md` (zero illustrations, zero modern anecdotes). High-density continuous prose across four organic movements (Discourse Context & Structural Topology, Grammatical & Syntactical Dissection, Rhetorical Force & Deictic Shift, Canonical Echoes & Redemptive Summit) followed by 3-level big idea convergence (Exegetical Idea, Redemptive Anchor, Homiletical Idea).
+          - **Exegetical Discourse SVG Charts Specification (釋經向量圖解規範)**:
+              - When pericope features significant structural topology (e.g. Chiastic pivot center, dual theological contrasts & semantic bifurcation, complex syntactic flow, or epistolary route), plan an accompanying discourse vector diagram.
+              - **Markdown Placeholder Architecture (Strictly Forbid Inline Multi-Line Raw SVG)**: In markdown (`qt_for_exegesis.md`), strictly forbid pasting raw multi-line SVG XML (prevents markdown parser `marked` from misinterpreting indented tags as `<pre><code>` code blocks). Always use a clean HTML comment placeholder: `<!-- CHART:<chart-id> -->` (e.g. `<!-- CHART:two-sorrows -->`), placed right after movement 1 or after the central conceptual contrast.
+              - **Native React Component**: Implement the chart under `src/components/charts/<ChartName>.tsx` as a pure React SVG component equipped with responsive `viewBox` and `aspectRatio`, mobile horizontal scroll protection container (`min-w-[720px] overflow-x-auto`), and automatic Dark Mode styling.
       - **Opening Diversity & Anti-Formula Policy (開篇多樣性與反模式化規範)**:
           - Strictly forbid beginning every devotional with formulaic societal/stage/mission generalizations (e.g., "在當代/現代社會中，青年/家庭往往面臨...", "步入人生下半場/隨著年歲漸長，我們往往面臨...", "在當今全球化/大使命的時代，我們往往面臨...", "還有數以十億的未得之民...").
           - Strictly forbid transitional cliches (e.g., "正是在這種...中，使徒保羅在...為我們帶來了...") and overused clichés (e.g., 演算法/內耗 for youth; 餐桌沉默/刺蝟心態 for family; 夕陽無限好/白髮蒼蒼/含飴弄孫/老驥伏櫪/風燭殘年 for encore; 認領群體/突破營壘/福音收割/宣教動員/大使命口號 for mission).
@@ -118,3 +123,4 @@ For each target deliverable (Youth / Family / Encore / Mission):
   - In-line Scripture Formats: Always write "4 章 16 至 18 節", never "4:16" or "四章十六節" in message body.
   - No Literal Backslash-N: Never insert literal `\\n` characters in markdown or JSON files.
   - Bible Cache Required: Every extended study reference must exist in `data/bible-cache.json` or `npm run sync` will abort with exit code 1.
+  - Exegetical Discourse Charts: Never inline raw multi-line SVG in markdown. Use `<!-- CHART:<chart-id> -->` placeholder and build a native React SVG component in `src/components/charts/<ChartName>.tsx` with `min-w-[720px] overflow-x-auto` for mobile protection.

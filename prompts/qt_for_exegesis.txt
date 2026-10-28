@@ -34,6 +34,17 @@
     3. **第三樂章【修辭風暴、人稱變焦與心理防線拆解（Rhetorical Force & Deictic Shift）】**：展示作者如何運用修辭技巧（如無連詞排比、連詞疊加階梯、預期反駁、修辭反諷、語音雙關、閃族相對否定）與指示語變焦（人稱代名詞「我們／你們／我／他」的切換、空間「外與內／在神面前」與時間「暫時／如今／永恆」的縮放），一步步瓦解受眾與歷代罪人的防衛、猜忌、靈肉二分或世俗自憐。
     4. **第四樂章【正典互文迴響與基督十架救贖高峰（Canonical Echoes & Redemptive Summit）】**：追索本段詞彙與意象在舊約正典（特別是七十士譯本 LXX 的律法、詩篇與先知末世預言）中的深層根源，闡明這些舊約盟約應許如何在耶穌基督的十字架代贖、復活與新約聖靈職事中獲得終極成全。
 
+* **釋經結構圖解與論證拓撲圖規範（Exegetical Discourse SVG Charts Specification，極重要）**：
+  * **規劃觸發條件**：當經文具備顯著的篇章結構特徵時（如：同心圓包夾或交叉對稱樞紐 Chiasmus / Pivot Center、二元神學對抗與語意分流如「依神憂愁 vs 世俗憂愁」、複雜文法論證鏈 Syntactic Flow、或宣教行旅時間軸），應於該日信息中規劃對應的向量結構圖解。
+  * **Markdown 標註格式（佔位符鐵律，嚴禁內嵌原始多行 SVG）**：在 Markdown 正文中，**絕對禁止直接貼入多行原始 SVG 代碼**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用乾淨的 HTML 註解佔位符：
+    `<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`）。
+  * **位置設定**：建議緊接在第一樂章【篇章座標與結構拓撲】之後，或放置於核心對比論述段落正下方，作為讀者開篇即見的清晰視覺導航錨點（Visual Anchor）。
+  * **前端實作規格**：於 `src/components/charts/<ChartName>.tsx` 建立專屬純 React 向量元件，配備：
+    1. `viewBox` 與 `style={{ width: "100%", height: "auto", aspectRatio: "..." }}` 自適應視區。
+    2. 外層包裹橫向捲動保護容器（`min-w-[720px] overflow-x-auto`），確保行動裝置（iPhone 窄螢幕）不壓扁變形、桌機端滿版展開。
+    3. 內嵌或原生 CSS 自適應淺色與深色模式（Dark Mode）。
+    4. 於 `DevotionalReader.tsx` 透過 `messageHtml.split("<!-- CHART:<chart-id> -->")` 自動掛載。
+
 * **文末三層核心命題收斂（3-Level Big Idea Convergence，極重要）**：
   * 在【信息】散文最後一段結束後，請空一行，固定以星號項目符號（`* **...**：`）精準列出以下**三層核心命題收斂**，作為講道者與研經者備課的黃金結晶：
     * `* **文本解經命題（Exegetical Idea）**：<1 句結構完整、嚴格鎖定於第一世紀歷史與篇章脈絡的解經總結命題>`

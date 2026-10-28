@@ -33,6 +33,11 @@
    * **硬性中斷保護**：在執行 `npm run sync` 時，系統會自動嚴格校驗全站所有延伸研讀經文的快取覆蓋率；若檢測到任何未收錄之經文，同步腳本將**強制拋錯並中斷退出（Exit Code 1）**，徹底阻斷缺失經文發布到前台，嚴防此項疏漏。
    * **排版格式防呆（No Literal \n Rule）**：經文文字與 Markdown 文件中所有換行必須為標準真實換行字元（`\n`），嚴禁帶有字面雙反斜線轉義字元（`\\n`），杜絕前台展開卡片或研經文件渲染出 raw `\n` 字樣。同步腳本與前台閱讀器已全面配置自動清洗過濾層。
 
+5. **釋經版向量圖解規範（Exegetical Discourse SVG Charts Policy）**：
+   * **視覺拓撲錨點**：當經文具備顯著篇章結構（交叉對稱樞紐 Chiasmus / Pivot Center、二元神學對決與語意分流如「依神憂愁 vs 世俗憂愁」、複雜文法論證鏈 Syntactic Flow 或宣教行旅時間軸）時，於該日釋經專文中配置專屬向量結構圖解。
+   * **佔位符架構（Markdown Placeholder Architecture，嚴禁內嵌原始多行 SVG）**：在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG XML**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），建議置於第一樂章【篇章座標與結構拓撲】之後，作為開篇即見的視覺導航錨點。
+   * **純 React 向量元件實作**：圖表一律於 `src/components/charts/<ChartName>.tsx` 實作為純 React JSX 向量元件，配備自適應視區（`aspectRatio` 與 `viewBox`）、外層橫向捲動保護容器（`min-w-[720px] overflow-x-auto`，確保手機端不壓扁變形、桌機端滿版舒展）及深色模式（Dark Mode）自適應色彩，並於 `DevotionalReader.tsx` 透過 `messageHtml.split("<!-- CHART:<chart-id> -->")` 自動精準掛載。
+
 ---
 
 ## 2. Spark 環境配置與前置準備（Setup in Spark）
@@ -167,7 +172,7 @@
 
 ### 第 3 階段：逐日深耕材料生成（Day-by-Day Deep-Dive Generation）
 1. **資料源規範**：
-   * **釋經版（`qt_for_exegesis.md`）**：100% 唯一取材自 `study.md`，徹底去案例化（嚴禁任何外部生活故事或通俗比喻），純散文體推進四大樂章，並於每日【信息】文末附上三層核心命題收斂（文本解經命題、正典救贖神學樞紐、講道／教學命題）。
+   * **釋經版（`qt_for_exegesis.md`）**：100% 唯一取材自 `study.md`，徹底去案例化（嚴禁任何外部生活故事或通俗比喻），純散文體推進四大樂章，並於每日【信息】文末附上三層核心命題收斂（文本解經命題、正典救贖神學樞紐、講道／教學命題）。若遇顯著篇章結構或二元神學對決，於第一樂章後插入 `<!-- CHART:<chart-id> -->` 佔位符，並於 `src/components/charts/` 實作對應之純 React SVG 向量圖解元件。
    * **牧養四軌（`qt_for_youth.md`, `qt_for_family.md`, `qt_for_encore.md`, `qt_for_mission.md`）**：釋經骨架 100% 取材自 `study.md`，敘事例證 100% 取材自 `illustrations.md`。
 2. **檔案初始化與標頭結構**：
    * 先行在 `qt_*.md` 頂部寫入週次元資料（供前台同步腳本自動解析）：
