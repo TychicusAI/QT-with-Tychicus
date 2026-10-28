@@ -2,6 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
+import { setStoredVersion } from "@/lib/storage";
 import { BookOpen, Flame, Sparkles, Users, Sparkle, Library, Calendar, Sun, Compass, ScrollText } from "lucide-react";
 import { DevotionalVersion } from "@/types/devotional";
 import { useStreak } from "@/lib/storage";
@@ -16,7 +18,19 @@ export function Navbar({
   currentVersion = "youth",
   onVersionChange,
 }: NavbarProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const streak = useStreak();
+
+  const handleVersionClick = (targetVersion: DevotionalVersion) => {
+    setStoredVersion(targetVersion);
+    if (onVersionChange) {
+      onVersionChange(targetVersion);
+    }
+    if (pathname !== "/" && pathname !== "/archive") {
+      router.push("/");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-stone-50/85 dark:bg-slate-950/85 border-b border-stone-200/60 dark:border-slate-800 transition-colors duration-200">
@@ -46,7 +60,7 @@ export function Navbar({
         {onVersionChange && (
           <div className="hidden lg:flex items-center bg-stone-200/80 dark:bg-stone-900 p-1 rounded-full border border-stone-300/60 dark:border-stone-800 text-xs font-semibold shrink-0">
             <button
-              onClick={() => onVersionChange("youth")}
+              onClick={() => handleVersionClick("youth")}
               className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "youth"
                   ? "bg-amber-500 text-white shadow-xs"
@@ -58,7 +72,7 @@ export function Navbar({
             </button>
 
             <button
-              onClick={() => onVersionChange("family")}
+              onClick={() => handleVersionClick("family")}
               className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "family"
                   ? "bg-teal-700 text-white shadow-xs"
@@ -70,7 +84,7 @@ export function Navbar({
             </button>
 
             <button
-              onClick={() => onVersionChange("encore")}
+              onClick={() => handleVersionClick("encore")}
               className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "encore"
                   ? "bg-rose-700 text-white shadow-xs"
@@ -82,7 +96,7 @@ export function Navbar({
             </button>
 
             <button
-              onClick={() => onVersionChange("mission")}
+              onClick={() => handleVersionClick("mission")}
               className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "mission"
                   ? "bg-indigo-700 text-white shadow-xs"
@@ -94,7 +108,7 @@ export function Navbar({
             </button>
 
             <button
-              onClick={() => onVersionChange("exegesis")}
+              onClick={() => handleVersionClick("exegesis")}
               className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
                 currentVersion === "exegesis"
                   ? "bg-purple-700 text-white shadow-xs"
