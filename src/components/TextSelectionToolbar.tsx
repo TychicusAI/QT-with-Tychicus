@@ -21,6 +21,29 @@ export function TextSelectionToolbar({
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
 
+  // Helper to detect mobile devices (including iPadOS)
+  const isMobileDevice = useCallback(() => {
+    if (typeof window === "undefined" || typeof navigator === "undefined") return false;
+    return (
+      /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent))
+    );
+  }, []);
+
+  // Safe action trigger for mobile touch + desktop click without double-firing or iOS hover delay
+  const lastActionTimeRef = useRef<number>(0);
+  const handleAction = useCallback(
+    (action: () => void) => (e: React.MouseEvent | React.TouchEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const now = Date.now();
+      if (now - lastActionTimeRef.current < 250) return;
+      lastActionTimeRef.current = now;
+      action();
+    },
+    []
+  );
+
   // Format shareable quote text with source attribution and current page URL
   const formatShareContent = useCallback(
     (text: string, includeUrl: boolean = true) => {
@@ -134,69 +157,109 @@ export function TextSelectionToolbar({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleCopy = async () => {
-    if (!selectedText) return;
+  const fallbackCopy = (text: string) => {
     try {
-      const contentToCopy = formatShareContent(selectedText, true);
-      await navigator.clipboard.writeText(contentToCopy);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
       const textarea = document.createElement("textarea");
-      textarea.value = formatShareContent(selectedText, true);
+      textarea.value = text;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
       document.body.removeChild(textarea);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  };
+
+  const handleCopy = useCallback(() => {
+    if (!selectedText) return;
+    const contentToCopy = formatShareContent(selectedText, true);
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard
+        .writeText(contentToCopy)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        })
+        .catch(() => {
+          fallbackCopy(contentToCopy);
+        });
+    } else {
+      fallbackCopy(contentToCopy);
     }
-  };
+  }, [selectedText, formatShareContent]);
 
-  // Line official web share allows desktop users to pick specific friends or groups
-  const handleShareLine = async () => {
-    const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-    const shareText = formatShareContent(selectedText, false);
-    try {
-      await navigator.clipboard.writeText(formatShareContent(selectedText, true));
-    } catch {}
-
-    const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
-    window.open(lineUrl, "_blank", "noopener,noreferrer,width=600,height=580");
-    setShowShareMenu(false);
-  };
-
-  const handleShareThreads = async () => {
-    const shareText = formatShareContent(selectedText, true);
-    try {
-      await navigator.clipboard.writeText(shareText);
-    } catch {}
-    const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareText)}`;
-    window.open(threadsUrl, "_blank", "noopener,noreferrer,width=600,height=550");
-    setShowShareMenu(false);
-  };
-
-  // Meta deprecated quote pre-fill in sharer.php. We auto-copy text and notify user to paste.
-  const handleShareFacebook = async () => {
+  // Line sharing: on mobile, uses official Universal Link to directly invoke the LINE App.
+  // On desktop, uses official social-plugin popup to pick friends/groups.
+  // Never await clipboard before navigation/window.open to prevent Safari popup blocker.
+  const handleShareLine = useCallback(() => {
     const currentUrl = typeof window !== "undefined" ? window.location.href : "";
     const fullShareText = formatShareContent(selectedText, true);
-    try {
-      await navigator.clipboard.writeText(fullShareText);
-    } catch {}
+
+    // Fire-and-forget clipboard write (no await!)
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(fullShareText).catch(() => {});
+    }
+
+    if (isMobileDevice()) {
+      // Mobile: LINE Universal Link opens LINE app directly to select chat/friends
+      const lineUrl = `https://line.me/R/share?text=${encodeURIComponent(fullShareText)}`;
+      window.location.href = lineUrl;
+    } else {
+      // Desktop: Official web plugin popup allows selecting friends/groups
+      const shareText = formatShareContent(selectedText, false);
+      const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+      window.open(lineUrl, "_blank", "noopener,noreferrer,width=600,height=580");
+    }
+    setShowShareMenu(false);
+  }, [selectedText, formatShareContent, isMobileDevice]);
+
+  const handleShareThreads = useCallback(() => {
+    const shareText = formatShareContent(selectedText, true);
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(shareText).catch(() => {});
+    }
+    const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareText)}`;
+    if (isMobileDevice()) {
+      window.location.href = threadsUrl;
+    } else {
+      window.open(threadsUrl, "_blank", "noopener,noreferrer,width=600,height=550");
+    }
+    setShowShareMenu(false);
+  }, [selectedText, formatShareContent, isMobileDevice]);
+
+  // Meta deprecated quote pre-fill in sharer.php. We auto-copy text and notify user to paste.
+  const handleShareFacebook = useCallback(() => {
+    const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+    const fullShareText = formatShareContent(selectedText, true);
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(fullShareText).catch(() => {});
+    }
 
     const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
     window.open(fbUrl, "_blank", "noopener,noreferrer,width=600,height=550");
     setShowShareMenu(false);
 
-    setToastMessage("已複製引言！請在 Facebook 貼文框按貼上（Cmd+V）");
+    setToastMessage("已複製引言！請在 Facebook 貼文框按貼上");
     setTimeout(() => setToastMessage(null), 4000);
-  };
+  }, [selectedText, formatShareContent]);
+
+  const toggleShareMenu = useCallback(() => {
+    setShowShareMenu((prev) => !prev);
+  }, []);
 
   if (!toolbarPosition || !selectedText) return null;
 
   return (
     <div
       ref={toolbarRef}
+      onMouseDown={(e) => {
+        // Prevent clicking inside toolbar from clearing the text selection
+        e.preventDefault();
+      }}
+      onTouchStart={(e) => {
+        // Prevent touch from bubbling to document touchend handler
+        e.stopPropagation();
+      }}
       style={{
         top: `${toolbarPosition.y}px`,
         left: `${toolbarPosition.x}px`,
@@ -216,7 +279,8 @@ export function TextSelectionToolbar({
       <div className="flex items-center gap-1 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-xs font-medium">
         {/* Copy Button */}
         <button
-          onClick={handleCopy}
+          onClick={handleAction(handleCopy)}
+          onTouchEnd={handleAction(handleCopy)}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
             copied
               ? "bg-emerald-600 text-white font-semibold"
@@ -241,7 +305,8 @@ export function TextSelectionToolbar({
 
         {/* Share Button / Dropdown Trigger */}
         <button
-          onClick={() => setShowShareMenu((prev) => !prev)}
+          onClick={handleAction(toggleShareMenu)}
+          onTouchEnd={handleAction(toggleShareMenu)}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
             showShareMenu
               ? "bg-amber-500 text-stone-950 font-bold"
@@ -257,11 +322,12 @@ export function TextSelectionToolbar({
       {/* Share Submenu - only 3 icons, zero text */}
       {showShareMenu && (
         <div className="mt-1.5 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md rounded-full border border-stone-700/80 shadow-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 duration-150">
-          {/* Line (Official Social Plugin opens picker for friends / groups on desktop) */}
+          {/* Line */}
           <button
-            onClick={handleShareLine}
+            onClick={handleAction(handleShareLine)}
+            onTouchEnd={handleAction(handleShareLine)}
             className="w-7 h-7 rounded-full bg-[#00c300] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
-            title="分享至 Line（可選擇好友或群組）"
+            title="分享至 Line（手機直接喚起 App / 電腦開啟選單）"
             aria-label="Line"
           >
             L
@@ -269,7 +335,8 @@ export function TextSelectionToolbar({
 
           {/* Threads */}
           <button
-            onClick={handleShareThreads}
+            onClick={handleAction(handleShareThreads)}
+            onTouchEnd={handleAction(handleShareThreads)}
             className="w-7 h-7 rounded-full bg-stone-100 hover:scale-110 active:scale-95 text-stone-950 flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
             title="分享至 Threads"
             aria-label="Threads"
@@ -279,7 +346,8 @@ export function TextSelectionToolbar({
 
           {/* Facebook */}
           <button
-            onClick={handleShareFacebook}
+            onClick={handleAction(handleShareFacebook)}
+            onTouchEnd={handleAction(handleShareFacebook)}
             className="w-7 h-7 rounded-full bg-[#1877f2] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
             title="分享至 Facebook（自動複製引言，貼文處按 Cmd+V 貼上）"
             aria-label="Facebook"
