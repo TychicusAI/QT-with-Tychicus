@@ -17,12 +17,14 @@ import {
 } from "lucide-react";
 import { marked } from "marked";
 import { BookBibliography, BookCategory } from "@/types/book";
+import { getAllBookBibliographies } from "@/lib/books-service";
 
 interface BibliographyViewerProps {
   bibliography: BookBibliography;
 }
 
 export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
+  const allBibliographies = useMemo(() => getAllBookBibliographies(), []);
   const [selectedCategory, setSelectedCategory] = useState<"all" | BookCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedBooks, setExpandedBooks] = useState<Set<number>>(
@@ -194,6 +196,31 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
             包含 BECNT、NIGTC、NICNT、NIVAC、PNTC、WSCNT、BST 等權威書系
           </span>
         </div>
+
+        {/* Book Switcher Pills */}
+        {allBibliographies.length > 1 && (
+          <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-stone-200/70 dark:border-stone-800/70 text-xs sm:text-sm">
+            <span className="text-stone-500 dark:text-stone-400 font-medium">切換經卷書目：</span>
+            <div className="inline-flex items-center gap-1.5 p-1 rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 font-semibold">
+              {allBibliographies.map((b) => {
+                const active = b.slug === bibliography.slug;
+                return (
+                  <Link
+                    key={b.slug}
+                    href={`/books/${b.slug}`}
+                    className={`px-3 py-1 rounded-xl transition ${
+                      active
+                        ? "bg-white dark:bg-stone-800 text-amber-700 dark:text-amber-400 shadow-xs font-bold"
+                        : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
+                    }`}
+                  >
+                    《{b.bookName}》（{b.totalBooks} 部）
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Filter and Search Bar */}

@@ -901,6 +901,12 @@ export function getBookBibliography(slug: string): BookBibliography | undefined 
 export function getAllBookBibliographies(): BookBibliography[] {
   return allBibliographies;
 }
+
+export function getBibliographyByScripture(scripture?: string): BookBibliography {
+  if (!scripture) return allBibliographies[0];
+  const matched = allBibliographies.find((b) => scripture.includes(b.bookName));
+  return matched || allBibliographies[0];
+}
 `;
 
 fs.writeFileSync(booksServicePath, booksServiceCode, "utf-8");

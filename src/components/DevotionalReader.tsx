@@ -26,6 +26,7 @@ import { JournalBox } from "@/components/JournalBox";
 import { PrayerAmenButton } from "@/components/PrayerAmenButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BibliographyCard } from "@/components/BibliographyCard";
+import { getBibliographyByScripture } from "@/lib/books-service";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { TextSelectionToolbar } from "@/components/TextSelectionToolbar";
 import { SanctificationArchitectureChart } from "@/components/charts/SanctificationArchitectureChart";
@@ -34,6 +35,12 @@ import { ComfortRelayChart } from "@/components/charts/ComfortRelayChart";
 import { TwoSorrowsDiscourseChart } from "@/components/charts/TwoSorrowsDiscourseChart";
 import { RepentanceCascadeChart } from "@/components/charts/RepentanceCascadeChart";
 import { CovenantReconciliationChart } from "@/components/charts/CovenantReconciliationChart";
+import { DiatribeBoomerangChart } from "@/components/charts/DiatribeBoomerangChart";
+import { KindnessVsWrathTreasuryChart } from "@/components/charts/KindnessVsWrathTreasuryChart";
+import { TwoPathwaysRetributionChart } from "@/components/charts/TwoPathwaysRetributionChart";
+import { ImpartialityChiasmChart } from "@/components/charts/ImpartialityChiasmChart";
+import { LawHearingDoingChart } from "@/components/charts/LawHearingDoingChart";
+import { InnerCourtroomGospelChart } from "@/components/charts/InnerCourtroomGospelChart";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -77,6 +84,12 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     "two-sorrows": <TwoSorrowsDiscourseChart />,
     "repentance-cascade": <RepentanceCascadeChart />,
     "covenant-reconciliation": <CovenantReconciliationChart />,
+    "diatribe-boomerang": <DiatribeBoomerangChart />,
+    "kindness-vs-wrath-treasury": <KindnessVsWrathTreasuryChart />,
+    "two-pathways-retribution": <TwoPathwaysRetributionChart />,
+    "impartiality-chiasm": <ImpartialityChiasmChart />,
+    "law-hearing-doing": <LawHearingDoingChart />,
+    "inner-courtroom-gospel": <InnerCourtroomGospelChart />,
   };
 
   const exegesisDayChartFallback: Record<string, React.ReactNode> = {
@@ -109,6 +122,10 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   const messageHtml = React.useMemo(() => {
     return marked.parse(day.message, { breaks: true }) as string;
   }, [day.message]);
+
+  const currentBiblio = React.useMemo(() => {
+    return getBibliographyByScripture(day.scriptureRef || week.book);
+  }, [day.scriptureRef, week.book]);
 
   // Find previous and next days (including cross-week navigation)
   const { prev: adjacentPrev, next: adjacentNext } = React.useMemo(() => {
@@ -451,8 +468,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       {/* 7. Scholarly Foundations & Bibliography Link */}
       <BibliographyCard
         version={week.version}
-        bookSlug="2-corinthians"
-        bookName="哥林多後書"
+        bookSlug={currentBiblio.slug}
+        bookName={currentBiblio.bookName}
       />
 
       {/* Bottom Navigation: Prev / Next Day (supports cross-week navigation) */}
