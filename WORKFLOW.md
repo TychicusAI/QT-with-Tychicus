@@ -15,8 +15,8 @@
 
 2. **核心解經與素材基石：預設「研經與素材先行」（Study & Illustrations First Policy）**：
    * 在進行任何群體主題規劃或每日寫作之前，**必須優先執行 `prompts/study.txt` 生成 `study.md`**；若目標包含牧養四軌（青年、家庭、樂齡、宣教），則同步執行 `prompts/illustrations.txt` 生成 `illustrations.md`（若僅單獨生成「釋經版 `qt_for_exegesis.md`」，則無需生成或讀取 `illustrations.md`）。
-   * `study.md` 採用權威的**「文本微觀解經工具箱（Textual Micro-Exegesis Toolkit）」五大模組架構**（模組零：經文邊界論證；模組一：六大微觀工具實戰剖析；模組二：文體動態對焦；模組三：1,800–2,000 字純散文體微觀解經綜合重構；模組四：雙層核心主旨與救贖神學階梯；模組五：逐節深度釋經、難解經文剖析、學者爭鳴與文獻駁斥），嚴格僅依賴 NotebookLM 註釋書文獻。
-   * `illustrations.md` 是從 NotebookLM 來源中全面萃取之專屬喻道故事、現代生活類比、歷史軼事、宣教與教會歷史事件、文豪名言與教父隱喻的素材庫（同時提供青年、家庭、樂齡、宣教四種轉譯視角切入建議）。
+   * `study.md` 採用權威的**「文本微觀解經工具箱（Textual Micro-Exegesis Toolkit）」五大模組架構**（模組零：經文邊界論證；模組一：六大微觀工具實戰剖析；模組二：文體動態對焦；模組三：1,800–2,000 字純散文體微觀解經綜合重構；模組四：雙層核心主旨與救贖神學階梯；模組五：逐節深度釋經、難解經文剖析、學者爭鳴與文獻駁斥），嚴格僅依賴「**研經推基古：[書卷]**」（及必要時協同「**神學推基古**」）之註釋書文獻。
+   * `illustrations.md` 是優先從獨立的「**喻道推基古**」筆記本（並以「**研經推基古：[書卷]**」註釋書內嵌比喻為備援）全面萃取之專屬喻道故事、現代生活類比、歷史軼事、宣教與教會歷史事件、文豪名言與教父隱喻的素材庫（同時提供青年、家庭、樂齡、宣教四種轉譯視角切入建議）。
    * **完整性保障與中斷續寫機制（Continuation & Append Protocol）**：
      * 由於學術研經追求高規格的深度與逐節詳解，若單次輸出達到長度上限而中斷，模型會在最後一句提示「內容未完，可輸入『繼續』以產出剩餘部分」。
      * 使用者輸入「繼續」後，工作流將接續未完段落並以**追加寫入（Append）**更新至 `data/<YYYY-MM-DD>/study.md`，直至所有模組完全收尾，確保最終的 `study.md` 是一份結構完整、無缺漏的學術研經文獻。
@@ -53,9 +53,11 @@
    * 請確認 Spark 的 Connected Folders 已加入本專案根目錄：`/Users/winston/Repo/QT-with-Tychicus`。
    * 這允許 Spark 直接讀取 `prompts/` 中的指令模板，並自動將產出檔案寫入 `data/`。
 
-2. **掛載 NotebookLM 筆記本（NotebookLM Integration）**：
-   * 在 Spark 輸入框旁點選附件「+」（或資料來源整合），選擇對應的 **NotebookLM 筆記本**（例如「研經推基古：哥林多後書」）。
-   * 掛載後，Spark 即具備該經卷完整的高階釋經資料庫（含上下文歷史、希臘原文分析、教義神學等），生成時會優先汲取其中的解經亮光。
+2. **掛載與檢索 NotebookLM 筆記本（NotebookLM Modular Architecture）**：
+   * 專案採用**「研經與喻道分離」**的模組化知識庫架構：
+     * **書卷專屬研經庫**：「**研經推基古：[書卷]**」（如「研經推基古：羅馬書」`notebooks/79e21a83-9b85-4237-b472-7fcc22a0e01c`、「研經推基古：哥林多後書」`notebooks/ca9c010e-9c96-410c-bfbe-95762c047dce` 等），收錄純粹的高階學術註釋書，供生成 `study.md` 使用（亦可協同檢索「**神學推基古**」`notebooks/9f0f227e-e040-4fa9-b7b2-6b873b167972`）。
+     * **跨卷通用喻道庫**：「**喻道推基古**」（`notebooks/69625716-c3ce-455a-8054-208fd88db91e`），收錄全聖經通用的講道例證、宣教歷史與基督徒傳記文獻，供生成 `illustrations.md` 第一優先檢索（並以當卷「研經推基古：[書卷]」內嵌例證為備援）。
+   * 在 Spark 輸入框旁點選附件「+」掛載對應筆記本，或由 Agent 直接透過 `notebooklm` 工具依階段定向檢索對應筆記本。
 
 ---
 
@@ -66,8 +68,8 @@
 雖然在同一個對話中可以繼續進行下一週，但採用**「一週一工作」**是最佳實踐，原因如下：
 1. **防止上下文過度膨脹（Context Window Bloat）**：
    * 每一週工作流包含學術研經筆記、喻道素材庫、主題進程及逐日深耕生成的完整專文，總字數達 2 萬至 6 萬字以上。若數週疊加在同一個對話中，龐大的歷史紀錄會消耗大量上下文，可能導致生成速度變慢或格式精確度下降。
-2. **乾淨的解經資料庫對應**：
-   * 若進度切換至不同書卷（例如從《哥林多後書》換到《加拉太書》或《以弗所書》），在新工作中直接掛載對應卷別的 NotebookLM 筆記本，能確保資料來源純淨，不被前卷書的文獻干擾。
+2. **乾淨的解經與喻道資料庫分離對應**：
+   * 藉由將通用例證獨立至「喻道推基古」，各卷「研經推基古：[書卷]」保持 100% 純粹的學術註釋文獻。當進度切換至不同書卷（如從《哥林多後書》換到《羅馬書》），在新工作中直接對應當卷「研經推基古」與通用的「喻道推基古」，能確保學術釋經不被通俗故事稀釋，且無需跨卷重複上傳喻道文獻。
 3. **專案管理清晰**：
    * 每個工作專注於單一週次的產出與檢驗，若需要針對該週細節微調（如重新潤飾某天的禱告或信息），紀錄單純且易於追溯。
 
@@ -79,8 +81,8 @@
 
 | 階段 | 族群版本 | Prompt 來源模板（SSOT） | 輸出目標檔案 | 產出說明 |
 | :--- | :--- | :--- | :--- | :--- |
-| **第 1 階段：學術研經** | 全體共用 | `prompts/study.txt` | `data/<YYYY-MM-DD>/study.md` | 採用「文本微觀解經工具箱」五大模組之深度學術研經筆記（邊界論證、六大微觀工具、文體對焦、2,000字綜合重構、救贖階梯與逐節釋經爭鳴） |
-| **第 1 階段：喻道素材** | 牧養四軌共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 從 NotebookLM 萃取之專屬喻道故事、現代生活類比、歷史軼事、宣教與教會歷史、文豪名言與教父隱喻（若僅生成釋經版則跳過此項） |
+| **第 1 階段：學術研經** | 全體共用 | `prompts/study.txt` | `data/<YYYY-MM-DD>/study.md` | 檢索「研經推基古：[書卷]」，採用「文本微觀解經工具箱」五大模組產出之深度學術研經筆記（邊界論證、六大微觀工具、文體對焦、2,000字綜合重構、救贖階梯與逐節釋經爭鳴） |
+| **第 1 階段：喻道素材** | 牧養四軌共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 優先從「喻道推基古」（及備援自「研經推基古：[書卷]」）萃取之專屬喻道故事、現代生活類比、歷史軼事、宣教與教會歷史、文豪名言與教父隱喻（若僅生成釋經版則跳過此項） |
 | **第 2 階段：主題規劃** | 釋經版 (`exegesis`) | `prompts/topics_for_exegesis.txt` | `data/<YYYY-MM-DD>/topics_for_exegesis.md` | 嚴格參考 `study.md`（去案例化），擬定微觀釋經深研總主題、導讀與週一至週六釋經命題規劃 |
 | **第 2 階段：主題規劃** | 青年篇 (`youth`) | `prompts/topics_for_youth.txt` | `data/<YYYY-MM-DD>/topics_for_youth.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定青年總主題、導讀與週一至週六進程規劃 |
 | **第 2 階段：主題規劃** | 家庭篇 (`family`) | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、導讀與週一至週六進程規劃 |
@@ -116,13 +118,13 @@
 ```
 步驟 1：建立新工作 (New Task in Spark)
    │
-步驟 2：確認 Connected Folders 包含 QT-with-Tychicus，並掛載對應 NotebookLM
+步驟 2：確認 Connected Folders 包含 QT-with-Tychicus，並確認對應 NotebookLM（「研經推基古：[書卷]」與「喻道推基古」）
    │
 步驟 3【第 1 階段：研經與素材基石】：發送指令生成學術研經筆記 study.md（與喻道素材庫 illustrations.md）
-   │   ├─ 3a. Spark 讀取 prompts/study.txt，依「文本微觀解經工具箱」五大模組在 data/<YYYY-MM-DD>/ 寫入 study.md
+   │   ├─ 3a. Spark 讀取 prompts/study.txt，檢索「研經推基古：[書卷]」依五大模組在 data/<YYYY-MM-DD>/ 寫入 study.md
    │   │     └─ [若遇長度上限中斷]：末句提示「內容未完，可輸入『繼續』以產出剩餘部分」
    │   │           └─ 使用者輸入「繼續」 ──> Spark 續寫並無縫追加（Append）寫入 study.md，直至五大模組完整收尾
-   │   └─ 3b. [若目標包含青年／家庭／樂齡／宣教] Spark 讀取 prompts/illustrations.txt，萃取筆記本喻道素材寫入 data/<YYYY-MM-DD>/illustrations.md
+   │   └─ 3b. [若目標包含青年／家庭／樂齡／宣教] Spark 讀取 prompts/illustrations.txt，優先檢索「喻道推基古」（並以「研經推基古：[書卷]」為備援）萃取喻道素材寫入 data/<YYYY-MM-DD>/illustrations.md
    │
 步驟 4【第 2 階段：主題骨架】：發送指令生成「主題進程規劃」
    │   └─ Spark 讀取 prompts/topics_*.txt 並嚴格參考完整之 study.md (+ illustrations.md)，在 data/<YYYY-MM-DD>/ 覆蓋寫入 topics_for_exegesis.md、topics_for_youth.md、topics_for_family.md、topics_for_encore.md 或 topics_for_mission.md
@@ -156,7 +158,7 @@
    * 依據輸入日期確認或建立目錄：`data/<YYYY-MM-DD>/`。預設採覆蓋寫入（`Overwrite: true`）。
 2. **1a. 學術研經筆記（Academic Micro-Exegesis Study Notes）**：
    * Spark 讀取 `prompts/study.txt` 生成 `data/<YYYY-MM-DD>/study.md`。
-   * 嚴格且完全僅依賴掛載之 NotebookLM 筆記本中的註釋書文獻，中文經文參考「新標點和合本」（CUV）並於表格對照 RCUV、NCV、ESV/NASB。
+   * 嚴格且完全僅依賴「**研經推基古：[書卷]**」（及必要時協同「**神學推基古**」）筆記本中的註釋書文獻，中文經文參考「新標點和合本」（CUV）並於表格對照 RCUV、NCV、ESV/NASB。
    * 完整呈現「文本微觀解經工具箱」五大核心模組：
      * **模組零：經文邊界論證（Pericope Delimitation）**：前向邊界、內在遠距鉤連復歸、後向邊界與大段落收結。
      * **模組一：六大微觀工具實戰剖析（The 6 Micro-Exegesis Tools）**：（1）字詞、詞族與語意域分析（嚴格執行語意安全防線）及多譯本對照表；（2）句法骨架、動詞體貌（Verbal Aspect）與邏輯連接詞鏈；（3）文學結構與論證拓撲圖（標定結構核心 Pivot）；（4）修辭論辯、語用情境與張力；（5）指示語與人稱／視角變焦；（6）正典迴響、盟約意象與互文驗證。
@@ -165,7 +167,7 @@
      * **模組四：雙層核心主旨與救贖神學階梯（Dual-Level Big Ideas & Redemptive Ladder）**：文本解經命題、正典救贖神學樞紐、講道／教學命題。
      * **模組五：逐節深度釋經、難解經文剖析、學者爭鳴與文獻駁斥（Verse-by-Verse Commentary Synthesis, Crux Interpretum & Scholarly Debates）**。
 3. **1b. 喻道素材庫（Illustrations Knowledge Base）**：
-   * 若目標包含青年、家庭、樂齡或宣教篇，Spark 讀取 `prompts/illustrations.txt` 生成 `data/<YYYY-MM-DD>/illustrations.md`（若僅生成釋經版 `qt_for_exegesis.md` 則跳過此步驟）。
+   * 若目標包含青年、家庭、樂齡或宣教篇，Spark 讀取 `prompts/illustrations.txt`，優先檢索獨立的「**喻道推基古**」筆記本（`notebooks/69625716-c3ce-455a-8054-208fd88db91e`），並以「**研經推基古：[書卷]**」中註釋書內嵌之歷史軼事、教父比喻或文學引述作為備援，生成 `data/<YYYY-MM-DD>/illustrations.md`（若僅生成釋經版 `qt_for_exegesis.md` 則跳過此步驟）。
 
 ### 第 2 階段：生成每週主題規劃（Topics Planning）
 1. Spark 直接讀取對應模板執行生成：

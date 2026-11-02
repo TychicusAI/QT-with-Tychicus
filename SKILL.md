@@ -38,15 +38,15 @@ If any parameter is missing, extract it from existing files under `data/` or ask
 Never skip Phase 1. Groundwork must be established before planning topics or writing devotionals.
 
 1.  Ensure target directory `data/<YYYY-MM-DD>/` exists.
-2.  Read `prompts/study.txt` and consult the mounted NotebookLM notebook (or retrieve notebook chunks via `notebooklm:retrieve_relevant_chunks`).
-3.  Generate academic exegesis notes covering all five core sections:
-      - Macro discourse analysis and historical context
-      - Micro-exegesis and semantic field analysis (Greek terms italicized with Chinese definitions)
-      - Crux interpretum (difficult text analysis)
-      - Scholarly consensus and debates (with original English scholar names)
-      - Refutations and opposing views
-4.  Write to `data/<YYYY-MM-DD>/study.md`. If generation hits token limits, append continuously until all five sections are fully completed.
-5.  Read `prompts/illustrations.txt` and extract illustrations, metaphors, historical anecdotes, missionary/church history accounts, and life analogies from NotebookLM (including youth, family, encore, and mission application angles). Write to `data/<YYYY-MM-DD>/illustrations.md`.
+2.  Read `prompts/study.txt` and query the corresponding book-specific exegesis NotebookLM notebook **「研經推基古：[書卷]」** (e.g., `研經推基古：羅馬書` `notebooks/79e21a83-9b85-4237-b472-7fcc22a0e01c`, `研經推基古：哥林多後書` `notebooks/ca9c010e-9c96-410c-bfbe-95762c047dce`, etc.; optionally co-query `神學推基古` `notebooks/9f0f227e-e040-4fa9-b7b2-6b873b167972` via `notebooklm:retrieve_relevant_chunks`).
+3.  Generate academic exegesis notes covering all five core modules of the Textual Micro-Exegesis Toolkit:
+      - Module 0: Pericope delimitation and boundary markers
+      - Module 1: The 6 Micro-Exegesis Tools (lexical/semantic domains & multi-version table, syntactical/verbal aspect & connectives, literary topology/chiasmus, rhetorical pragmatics, deictic/pronominal shifts, canonical echoes)
+      - Module 2: Genre-specific dynamic adaptation
+      - Module 3: 1,800–2,000 word continuous theological prose synthesis
+      - Module 4 & 5: Dual-level big ideas / redemptive ladder, verse-by-verse commentary synthesis, crux interpretum, scholarly debates (with English scholar names), and refutations
+4.  Write to `data/<YYYY-MM-DD>/study.md`. If generation hits token limits, append continuously until all modules are fully completed.
+5.  If target deliverables include Youth, Family, Encore, or Mission tracks, read `prompts/illustrations.txt` and extract illustrations, metaphors, historical anecdotes, missionary/church history accounts, and life analogies by querying the dedicated **「喻道推基古」** notebook (`notebooks/69625716-c3ce-455a-8054-208fd88db91e`) as primary source and the book's **「研經推基古：[書卷]」** commentary illustrations as fallback (including youth, family, encore, and mission application angles). Write to `data/<YYYY-MM-DD>/illustrations.md` (skip if only generating `qt_for_exegesis.md`).
 
 ### Phase 2: Topics Planning
 
