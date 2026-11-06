@@ -3,7 +3,7 @@
 本專案旨在將每週教會經課與 NotebookLM 研經資料庫，高品質轉化為針對五個不同生命階段、使命視角與解經深度的族群軌道——**「青年版 Youth」**、**「家庭版 Family（父母與青少年）」**、**「樂齡版 Encore（50 歲以上熟齡與樂齡）」**、**「宣教版 Mission（雙軌整合使命人生篇）」**與**「釋經版 Exegesis（純文字微觀釋經深研）」**——的六日（週一至週六）靈修與釋經材料。
 
 > **核心準則：以 `prompts/` 為唯一真理來源（SSOT），以 `study.md` 與 `illustrations.md` 為雙基石**  
-> 所有提示詞設計、內容細節、字數規範、釋經架構與排版要求，皆由 `prompts/` 目錄下的模板檔案直接定義與主導。本工作流文件專注於定義執行架構、環境配置、目錄映射、五軌版本牧養與釋經定位及階段任務推進流程。**工作流強制實施「微觀研經與素材先行」與「逐日深耕」**：在規劃主題與撰寫每日專文前，必須先以 `prompts/study.txt` 產生基於「文本微觀解經工具箱」的深度學術研經筆記 `study.md`（若目標包含青年／家庭／樂齡／宣教四軌，並以 `prompts/illustrations.txt` 產生專屬喻道素材庫 `illustrations.md`）；而在撰寫每日信息時，**一律採行「一天一指令、逐日深耕打磨」**，徹底杜絕批量產出造成的細節稀釋與品質退化。
+> 所有提示詞設計、內容細節、字數規範、釋經架構與排版要求，皆由 `prompts/` 目錄下的模板檔案直接定義與主導。本工作流文件專注於定義執行架構、環境配置、目錄映射、五軌版本牧養與釋經定位及階段任務推進流程。**工作流強制實施「微觀研經與素材先行」與「逐日深耕」**：在規劃主題與撰寫每日專文前，必須先以 `prompts/study.txt` 產生基於「文本微觀解經工具箱」的深度學術研經筆記 `study.md`（若目標包含青年／家庭／樂齡／宣教四軌，並以 `prompts/illustrations.txt` 產生「雙軌分流喻道素材庫」`illustrations.md`）；而在撰寫每日信息時，**一律採行「一天一指令、逐日深耕打磨」**，徹底杜絕批量產出造成的細節稀釋與品質退化。
 
 ---
 
@@ -16,7 +16,9 @@
 2. **核心解經與素材基石：預設「研經與素材先行」（Study & Illustrations First Policy）**：
    * 在進行任何群體主題規劃或每日寫作之前，**必須優先執行 `prompts/study.txt` 生成 `study.md`**；若目標包含牧養四軌（青年、家庭、樂齡、宣教），則同步執行 `prompts/illustrations.txt` 生成 `illustrations.md`（若僅單獨生成「釋經版 `qt_for_exegesis.md`」，則無需生成或讀取 `illustrations.md`）。
    * `study.md` 採用權威的**「文本微觀解經工具箱（Textual Micro-Exegesis Toolkit）」五大模組架構**（模組零：經文邊界論證；模組一：六大微觀工具實戰剖析；模組二：文體動態對焦；模組三：1,800–2,000 字純散文體微觀解經綜合重構；模組四：雙層核心主旨與救贖神學階梯；模組五：逐節深度釋經、難解經文剖析、學者爭鳴與文獻駁斥），嚴格僅依賴「**研經推基古：[書卷]**」（及必要時協同「**神學推基古**」）之註釋書文獻。
-   * `illustrations.md` 是優先從獨立的「**喻道推基古**」筆記本（並以「**研經推基古：[書卷]**」註釋書內嵌比喻為備援）全面萃取之專屬喻道故事、現代生活類比、歷史軼事、宣教與教會歷史事件、文豪名言與教父隱喻的素材庫（同時提供青年、家庭、樂齡、宣教四種轉譯視角切入建議）。
+   * `illustrations.md` 採用**「雙軌分流喻道架構（Dual-Track Illustration Architecture）」**，優先從獨立的「**喻道推基古**」筆記本（並以「**研經推基古：[書卷]**」註釋書內嵌比喻為備援），按每日經文小段同步萃取兩類素材：
+     - **例證 A（通用生活／歷史／人文）**：不必然與宣教相關，聚焦現代生活類比、世界文學名著、一般歷史人物軼事、教會牧養故事與教父隱喻，附青年、家庭、樂齡三種轉譯切入點，專供「青年篇 (`youth`)」、「家庭篇 (`family`)」與「樂齡篇 (`encore`)」主力調用。
+     - **例證 B（宣教／跨文化歷史與國度見證）**：聚焦跨文化宣教實錄、宣教先驅傳記、異文化救贖類比與廣義「神的宣教」（*Missio Dei*）歷史見證，附前線跨文化工人、日常使命門徒與跨軌共鳴切入點，專供「宣教篇 (`mission`)」主力調用（其餘三軌若遇高度契合之主題亦可跨軌靈活借用）。
    * **完整性保障與中斷續寫機制（Continuation & Append Protocol）**：
      * 由於學術研經追求高規格的深度與逐節詳解，若單次輸出達到長度上限而中斷，模型會在最後一句提示「內容未完，可輸入『繼續』以產出剩餘部分」。
      * 使用者輸入「繼續」後，工作流將接續未完段落並以**追加寫入（Append）**更新至 `data/<YYYY-MM-DD>/study.md`，直至所有模組完全收尾，確保最終的 `study.md` 是一份結構完整、無缺漏的學術研經文獻。
@@ -33,10 +35,13 @@
    * **硬性中斷保護**：在執行 `npm run sync` 時，系統會自動嚴格校驗全站所有延伸研讀經文的快取覆蓋率；若檢測到任何未收錄之經文，同步腳本將**強制拋錯並中斷退出（Exit Code 1）**，徹底阻斷缺失經文發布到前台，嚴防此項疏漏。
    * **排版格式防呆（No Literal \n Rule）**：經文文字與 Markdown 文件中所有換行必須為標準真實換行字元（`\n`），嚴禁帶有字面雙反斜線轉義字元（`\\n`），杜絕前台展開卡片或研經文件渲染出 raw `\n` 字樣。同步腳本與前台閱讀器已全面配置自動清洗過濾層。
 
-5. **釋經版向量圖解規範（Exegetical Discourse SVG Charts Policy）**：
+5. **釋經版向量圖解與高可讀性排版規範（Exegetical Discourse SVG Charts & Readability Policy）**：
+   * **四大樂章小標題導航與短句呼吸（Four Movements & Readable Cadence）**：
+     * 釋經版每篇信息採用**四個 `####` 樂章小標題**（如 `#### 一、...` 至 `#### 四、...`）引導結構推進，全文切分為 **12～15 個精煉自然段**（每段 120～180 字，單句黃金長度 20～38 字），徹底消除 500 字巨型段落與長難句。
+     * **括號瘦身與張力先行**：括號內嚴禁塞入超過 3 個單詞的希臘文長句或長篇背景解釋（長解釋一律化為獨立正文短句）；行文採「經文懸念與神學張力先行 ➔ 原文語法作破案證據」節奏，每次僅聚焦 1～2 位最具代表性之學者洞見，並在第四樂章末段自然完成「文本原意 ➔ 十架救贖樞紐 ➔ 當代門徒呼召」的收束（不再於文末重複列出三點命題清單）。
    * **視覺拓撲錨點**：當經文具備顯著篇章結構（交叉對稱樞紐 Chiasmus / Pivot Center、二元神學對決與語意分流如「依神憂愁 vs 世俗憂愁」、複雜文法論證鏈 Syntactic Flow 或宣教行旅時間軸）時，於該日釋經專文中配置專屬向量結構圖解。
    * **佔位符架構（Markdown Placeholder Architecture，嚴禁內嵌原始多行 SVG）**：
-     1. 在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG XML**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），建議置於第一樂章【篇章座標與結構拓撲】之後，作為開篇即見的視覺導航錨點。
+     1. 在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG XML**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），統一置於**第一樂章結束後、第二樂章 `#### 二、...` 標題之前**，作為開篇即見的視覺導航錨點。
      2. **單一佔位符防重鐵律**：每篇專文**嚴格僅能包含 1 個圖解佔位符**，嚴禁重複連續插入，避免前台重複渲染雙重圖表。
    * **純 React 向量元件實作三大鐵律**：圖表一律於 `src/components/charts/<ChartName>.tsx` 實作為純 React JSX 向量元件，配備：
      1. **SVG `<text>` 純文字節點鐵律（嚴禁星號）**：SVG `<text>` 節點不解析 Markdown 標籤語法，**絕對禁止出現 Markdown 星號 `*`**（如必須寫作 `(stenochōreisthe)`，嚴禁寫成 `(*stenochōreisthe*)`），原文斜體一律由 CSS 樣式（如 `className="txt-greek"` 或 `fontStyle: "italic"`）統一掌控。
@@ -82,17 +87,17 @@
 | 階段 | 族群版本 | Prompt 來源模板（SSOT） | 輸出目標檔案 | 產出說明 |
 | :--- | :--- | :--- | :--- | :--- |
 | **第 1 階段：學術研經** | 全體共用 | `prompts/study.txt` | `data/<YYYY-MM-DD>/study.md` | 檢索「研經推基古：[書卷]」，採用「文本微觀解經工具箱」五大模組產出之深度學術研經筆記（邊界論證、六大微觀工具、文體對焦、2,000字綜合重構、救贖階梯與逐節釋經爭鳴） |
-| **第 1 階段：喻道素材** | 牧養四軌共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 優先從「喻道推基古」（及備援自「研經推基古：[書卷]」）萃取之專屬喻道故事、現代生活類比、歷史軼事、宣教與教會歷史、文豪名言與教父隱喻（若僅生成釋經版則跳過此項） |
+| **第 1 階段：喻道素材** | 牧養四軌共用 | `prompts/illustrations.txt` | `data/<YYYY-MM-DD>/illustrations.md` | 優先從「喻道推基古」（及備援自「研經推基古：[書卷]」）依**雙軌分流架構**萃取每日「例證 A（通用生活／歷史／人文）」與「例證 B（宣教／跨文化歷史與國度見證）」（若僅生成釋經版則跳過此項） |
 | **第 2 階段：主題規劃** | 釋經版 (`exegesis`) | `prompts/topics_for_exegesis.txt` | `data/<YYYY-MM-DD>/topics_for_exegesis.md` | 嚴格參考 `study.md`（去案例化），擬定微觀釋經深研總主題、導讀與週一至週六釋經命題規劃 |
-| **第 2 階段：主題規劃** | 青年篇 (`youth`) | `prompts/topics_for_youth.txt` | `data/<YYYY-MM-DD>/topics_for_youth.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定青年總主題、導讀與週一至週六進程規劃 |
-| **第 2 階段：主題規劃** | 家庭篇 (`family`) | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定家庭總主題、導讀與週一至週六進程規劃 |
-| **第 2 階段：主題規劃** | 樂齡篇 (`encore`) | `prompts/topics_for_encore.txt` | `data/<YYYY-MM-DD>/topics_for_encore.md` | 嚴格參考 `study.md` 與 `illustrations.md`，擬定樂齡總主題、導讀與週一至週六進程規劃 |
-| **第 2 階段：主題規劃** | 宣教篇 (`mission`) | `prompts/topics_for_mission.txt` | `data/<YYYY-MM-DD>/topics_for_mission.md` | 嚴格參考 `study.md` 與 `illustrations.md`，依雙軌整合節奏擬定宣教總主題、導讀與週一至週六進程規劃 |
-| **第 3 階段：逐日深耕** | 釋經版 (`exegesis`) | `prompts/qt_for_exegesis.txt` | `data/<YYYY-MM-DD>/qt_for_exegesis.md` | 唯一依據 `study.md`（嚴禁外部例證），**逐日下達指令無縫追加寫入**週一至週六純散文體微觀釋經深研與文末三層命題 |
-| **第 3 階段：逐日深耕** | 青年篇 (`youth`) | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
-| **第 3 階段：逐日深耕** | 家庭篇 (`family`) | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
-| **第 3 階段：逐日深耕** | 樂齡篇 (`encore`) | `prompts/qt_for_encore.txt` | `data/<YYYY-MM-DD>/qt_for_encore.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
-| **第 3 階段：逐日深耕** | 宣教篇 (`mission`) | `prompts/qt_for_mission.txt` | `data/<YYYY-MM-DD>/qt_for_mission.md` | 依據 `study.md`（釋經）與 `illustrations.md`（例證），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 2 階段：主題規劃** | 青年篇 (`youth`) | `prompts/topics_for_youth.txt` | `data/<YYYY-MM-DD>/topics_for_youth.md` | 嚴格參考 `study.md` 與 `illustrations.md`（主力對應例證 A），擬定青年總主題、導讀與週一至週六進程規劃 |
+| **第 2 階段：主題規劃** | 家庭篇 (`family`) | `prompts/topics_for_family.txt` | `data/<YYYY-MM-DD>/topics_for_family.md` | 嚴格參考 `study.md` 與 `illustrations.md`（主力對應例證 A），擬定家庭總主題、導讀與週一至週六進程規劃 |
+| **第 2 階段：主題規劃** | 樂齡篇 (`encore`) | `prompts/topics_for_encore.txt` | `data/<YYYY-MM-DD>/topics_for_encore.md` | 嚴格參考 `study.md` 與 `illustrations.md`（主力對應例證 A），擬定樂齡總主題、導讀與週一至週六進程規劃 |
+| **第 2 階段：主題規劃** | 宣教篇 (`mission`) | `prompts/topics_for_mission.txt` | `data/<YYYY-MM-DD>/topics_for_mission.md` | 嚴格參考 `study.md` 與 `illustrations.md`（主力對應例證 B），依雙軌整合節奏擬定宣教總主題、導讀與週一至週六進程規劃 |
+| **第 3 階段：逐日深耕** | 釋經版 (`exegesis`) | `prompts/qt_for_exegesis.txt` | `data/<YYYY-MM-DD>/qt_for_exegesis.md` | 唯一依據 `study.md`（嚴禁外部例證），**逐日下達指令無縫追加寫入**週一至週六四大樂章（含 `####` 小標題導航、12–15 短段與短句節奏）微觀釋經深研 |
+| **第 3 階段：逐日深耕** | 青年篇 (`youth`) | `prompts/qt_for_youth.txt` | `data/<YYYY-MM-DD>/qt_for_youth.md` | 依據 `study.md`（釋經）與 `illustrations.md`（優先調用例證 A，可跨軌借用例證 B），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：逐日深耕** | 家庭篇 (`family`) | `prompts/qt_for_family.txt` | `data/<YYYY-MM-DD>/qt_for_family.md` | 依據 `study.md`（釋經）與 `illustrations.md`（優先調用例證 A，可跨軌借用例證 B），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：逐日深耕** | 樂齡篇 (`encore`) | `prompts/qt_for_encore.txt` | `data/<YYYY-MM-DD>/qt_for_encore.md` | 依據 `study.md`（釋經）與 `illustrations.md`（優先調用例證 A，可跨軌借用例證 B），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
+| **第 3 階段：逐日深耕** | 宣教篇 (`mission`) | `prompts/qt_for_mission.txt` | `data/<YYYY-MM-DD>/qt_for_mission.md` | 依據 `study.md`（釋經）與 `illustrations.md`（優先調用例證 B，可自然揉合例證 A），**逐日下達指令無縫追加寫入**週一至週六完整信息 |
 | **第 3 階段：經文快取** | 全體共用 | 每日專文之【延伸研讀】經文引用 | `data/bible-cache.json` | 延伸研讀經文之完整和合本內文快取，確保前台點擊展開能即時檢視經文 |
 
 ### 4.1 五軌版本牧養與釋經定位總覽（Five-Track Persona & Style Matrix）
@@ -103,8 +108,8 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **目標受眾** | 升學、初入職場、面臨生涯未知與信仰拉扯的當代青年 | 面對家庭教養、溝通張力與同行成長的父母與青少年 | 步入 50 歲以上人生下半場（含 50–65 歲熟齡轉折與 65+ 退休樂齡）的基督徒 | 雙軌整合「使命人生」讀者群（跨文化前線工人／差傳同工，與本地日常職場鄰舍中的使命門徒） | 牧者、傳道人、神學生、查經帶領者與渴慕深研聖經原文肌理的成熟門徒 |
 | **Markdown 標頭** | `# 每日靈修：青年篇（YYYY-MM-DD）` | `# 每日靈修：家庭篇（YYYY-MM-DD）` | `# 每日靈修：樂齡篇（YYYY-MM-DD）` | `# 每日靈修：宣教篇（YYYY-MM-DD）` | `# 每日釋經深研（YYYY-MM-DD）` |
-| **作者人設與語氣** | 敏銳、熱血、直球破除虛假人設的屬靈導師 | 溫柔、同理兩代張力、引導換位思考的家庭牧者 | 溫厚、沉靜、同走過半生風雨的屬靈同行摯友（嚴禁哄長輩或晚輩說教口吻） | 兼具田野滄桑、救贖歷史厚度與溫柔同理的國度同行旅伴（嚴禁道德綁架與空泛凱旋口號） | 融合德英美嚴謹文法歷史解經傳統與宗教改革聖約神學火焰的解經學者與導師 |
-| **文風與節奏氣質** | 如擊石出火，節奏明快、穿透力強 | 如餐桌夜談，溫暖平實、具對話感 | 如陳年醇酒與晨間微光，洗鍊從容、飽含歲月餘韻與安慰力道 | 如使徒行旅書簡，深邃洗鍊、兼具救贖歷史縱深與異鄉人間煙火氣 | 如精密手術刀與交響樂章，純散文體高密度論述（去案例化、零外部故事），文末附三層核心命題 |
+| **作者人設與語氣** | 敏銳、熱血、直球破除虛假人設的屬靈導師 | 溫柔、同理兩代張力、引導換位思考的家庭牧者 | 溫厚、沉靜、同走過半生風雨的屬靈同行摯友（嚴禁哄長輩或晚輩說教口吻） | 兼具田野滄桑、救贖歷史厚度與溫柔同理的國度同行旅伴（嚴禁道德綁架與空泛凱旋口號） | 融合德英美嚴謹文法歷史解經傳統與斯托得／卡森般清晰穿透力的解經學者與導師 |
+| **文風與節奏氣質** | 如擊石出火，節奏明快、穿透力強 | 如餐桌夜談，溫暖平實、具對話感 | 如陳年醇酒與晨間微光，洗鍊從容、飽含歲月餘韻與安慰力道 | 如使徒行旅書簡，深邃洗鍊、兼具救贖歷史縱深與異鄉人間煙火氣 | 如偵探破案與交響樂章，四樂章 `####` 小標題導航 × 12–15 短段 × 短句穿透（去案例化、括號極簡、張力先行） |
 | **核心焦點／五大痛點** | 1. 社群人設防衛與冒牌者症候群<br>2. 計畫變折的猜忌與生涯焦慮<br>3. 職場權力壓迫與績效偶像<br>4. 群體冷暴力與取消文化<br>5. 盲目追求產能效率而失去安息 | 1. 餐桌防衛與兩代沉默<br>2. 承諾落空的信任裂痕<br>3. 以愛為名的掌控與轄管界線<br>4. 犯錯後的冷戰與翻舊帳<br>5. 追求外在成敗而忽略家人呼求 | 1. 外體漸衰與面對有限的從容<br>2. 空巢期的放手與成年親子界線<br>3. 職場交棒與自我價值重尋（從 Do 轉向 Be）<br>4. 照顧年邁雙親負荷與面對生離死別<br>5. 半生回顧和解與安可使命（Encore） | 1. 前線跨文化瓦器軟弱與孤寂<br>2. 日常安舒區慣性與對跨文化鄰舍冷漠<br>3. 放下文化優越感與道成肉身轉譯<br>4. 後方「看守器具者」代禱與管家職分<br>5. 個人破碎與 Missio Dei 及萬族敬拜連結 | 1. 篇章座標與同心圓／交叉拓撲結構<br>2. 詞族語意域、多譯本張力與語意安全防線<br>3. 句法骨架、動詞體貌與標記性詞序前置<br>4. 修辭風暴、人稱變焦與自義防線拆解<br>5. 正典互文迴響與十架救贖神學高峰 |
 | **建議禱告** | 「主啊，我……」聚焦突破懼怕與委身呼召 | 「天父，我們……」聚焦全家關係修復與彼此饒恕 | 「主啊，走過這許多年日，我……」聚焦數算恩典、交託兒女雙親與迎向永恆 | 「萬國的主，我……」聚焦拆毀文化優越感、托住前線工人、與神同工 | 「全能的父神／至聖的主，我們……」聚焦緊扣當日經文神學核心之認罪、敬拜與降服 |
 | **默想問題（1題）** | 檢視自我動機、恐懼與偶像 | 適合父母與孩子餐桌敞開對話 | 適合個人晨間靜思、與老伴散步對談或熟齡團契分享 | 適合宣教代禱小組或跨文化團契分享，檢視跨越邊界行動 | 錨定微觀文本線索 ➔ 推敲神學意圖 ➔ 省察講台教學或個人事奉盲點 |
@@ -120,11 +125,11 @@
    │
 步驟 2：確認 Connected Folders 包含 QT-with-Tychicus，並確認對應 NotebookLM（「研經推基古：[書卷]」與「喻道推基古」）
    │
-步驟 3【第 1 階段：研經與素材基石】：發送指令生成學術研經筆記 study.md（與喻道素材庫 illustrations.md）
+步驟 3【第 1 階段：研經與素材基石】：發送指令生成學術研經筆記 study.md（與雙軌喻道素材庫 illustrations.md）
    │   ├─ 3a. Spark 讀取 prompts/study.txt，檢索「研經推基古：[書卷]」依五大模組在 data/<YYYY-MM-DD>/ 寫入 study.md
    │   │     └─ [若遇長度上限中斷]：末句提示「內容未完，可輸入『繼續』以產出剩餘部分」
    │   │           └─ 使用者輸入「繼續」 ──> Spark 續寫並無縫追加（Append）寫入 study.md，直至五大模組完整收尾
-   │   └─ 3b. [若目標包含青年／家庭／樂齡／宣教] Spark 讀取 prompts/illustrations.txt，優先檢索「喻道推基古」（並以「研經推基古：[書卷]」為備援）萃取喻道素材寫入 data/<YYYY-MM-DD>/illustrations.md
+   │   └─ 3b. [若目標包含青年／家庭／樂齡／宣教] Spark 讀取 prompts/illustrations.txt，優先檢索「喻道推基古」（並以「研經推基古：[書卷]」為備援）萃取雙軌喻道素材（例證 A 通用 + 例證 B 宣教）寫入 data/<YYYY-MM-DD>/illustrations.md
    │
 步驟 4【第 2 階段：主題骨架】：發送指令生成「主題進程規劃」
    │   └─ Spark 讀取 prompts/topics_*.txt 並嚴格參考完整之 study.md (+ illustrations.md)，在 data/<YYYY-MM-DD>/ 覆蓋寫入 topics_for_exegesis.md、topics_for_youth.md、topics_for_family.md、topics_for_encore.md 或 topics_for_mission.md
@@ -153,7 +158,7 @@
 
 ## 6. 工作流內部執行流水線（Pipeline Details）
 
-### 第 1 階段：生成學術研經筆記與喻道素材庫（Foundational Knowledge Base）
+### 第 1 階段：生成學術研經筆記與雙軌喻道素材庫（Foundational Knowledge Base）
 1. **目錄初始化**：
    * 依據輸入日期確認或建立目錄：`data/<YYYY-MM-DD>/`。預設採覆蓋寫入（`Overwrite: true`）。
 2. **1a. 學術研經筆記（Academic Micro-Exegesis Study Notes）**：
@@ -166,8 +171,8 @@
      * **模組三：微觀解經綜合重構（Textual Synthesis & Discourse Flow）**：1,800–2,000 字一氣呵成的純散文體高密度神學論述（嚴禁條列式清單）。
      * **模組四：雙層核心主旨與救贖神學階梯（Dual-Level Big Ideas & Redemptive Ladder）**：文本解經命題、正典救贖神學樞紐、講道／教學命題。
      * **模組五：逐節深度釋經、難解經文剖析、學者爭鳴與文獻駁斥（Verse-by-Verse Commentary Synthesis, Crux Interpretum & Scholarly Debates）**。
-3. **1b. 喻道素材庫（Illustrations Knowledge Base）**：
-   * 若目標包含青年、家庭、樂齡或宣教篇，Spark 讀取 `prompts/illustrations.txt`，優先檢索獨立的「**喻道推基古**」筆記本（`notebooks/69625716-c3ce-455a-8054-208fd88db91e`），並以「**研經推基古：[書卷]**」中註釋書內嵌之歷史軼事、教父比喻或文學引述作為備援，生成 `data/<YYYY-MM-DD>/illustrations.md`（若僅生成釋經版 `qt_for_exegesis.md` 則跳過此步驟）。
+3. **1b. 雙軌分流喻道素材庫（Dual-Track Illustrations Knowledge Base）**：
+   * 若目標包含青年、家庭、樂齡或宣教篇，Spark 讀取 `prompts/illustrations.txt`，優先檢索獨立的「**喻道推基古**」筆記本（`notebooks/69625716-c3ce-455a-8054-208fd88db91e`），並以「**研經推基古：[書卷]**」中註釋書內嵌之歷史軼事、教父比喻或文學引述作為備援，按每日經文小段同步產出**「例證 A（通用生活／歷史／人文）」**與**「例證 B（宣教／跨文化歷史與國度見證）」**兩類素材，生成 `data/<YYYY-MM-DD>/illustrations.md`（若僅生成釋經版 `qt_for_exegesis.md` 則跳過此步驟）。
 
 ### 第 2 階段：生成每週主題規劃（Topics Planning）
 1. Spark 直接讀取對應模板執行生成：
@@ -179,8 +184,8 @@
 
 ### 第 3 階段：逐日深耕材料生成（Day-by-Day Deep-Dive Generation）
 1. **資料源規範**：
-   * **釋經版（`qt_for_exegesis.md`）**：100% 唯一取材自 `study.md`，徹底去案例化（嚴禁任何外部生活故事或通俗比喻），純散文體推進四大樂章，並於每日【信息】文末附上三層核心命題收斂（文本解經命題、正典救贖神學樞紐、講道／教學命題）。若遇顯著篇章結構或二元神學對決，於第一樂章後插入 `<!-- CHART:<chart-id> -->` 佔位符，並於 `src/components/charts/` 實作對應之純 React SVG 向量圖解元件。
-   * **牧養四軌（`qt_for_youth.md`, `qt_for_family.md`, `qt_for_encore.md`, `qt_for_mission.md`）**：釋經骨架 100% 取材自 `study.md`，敘事例證 100% 取材自 `illustrations.md`。
+   * **釋經版（`qt_for_exegesis.md`）**：100% 唯一取材自 `study.md`，徹底去案例化（嚴禁任何外部生活故事或通俗比喻），以**四個 `####` 樂章小標題**推進 12–15 個精煉短段（每段 120–180 字、短句穿透、括號極簡化、張力先行），並在第四樂章末段自然完成「文本原意 ➔ 十架救贖樞紐 ➔ 當代門徒呼召」的收束（不再於文末附三點條列）。若遇顯著篇章結構或二元神學對決，於第一樂章結束後、第二樂章標題前插入 `<!-- CHART:<chart-id> -->` 佔位符，並於 `src/components/charts/` 實作對應之純 React SVG 向量圖解元件。
+   * **牧養四軌（`qt_for_youth.md`, `qt_for_family.md`, `qt_for_encore.md`, `qt_for_mission.md`）**：釋經骨架 100% 取材自 `study.md`，敘事例證 100% 取材自 `illustrations.md`——其中**青年、家庭、樂齡三軌優先調用「例證 A（通用生活／歷史／人文）」**（契合時亦可跨軌借用例證 B），**宣教軌優先調用「例證 B（宣教／跨文化歷史與國度見證）」**（亦可自然揉合例證 A 之生活與文學意象）。
 2. **檔案初始化與標頭結構**：
    * 先行在 `qt_*.md` 頂部寫入週次元資料（供前台同步腳本自動解析）：
      * 青年篇：`# 每日靈修：青年篇（YYYY-MM-DD）`
@@ -210,6 +215,9 @@
 ### 第 5 階段：TTS 語音生成（Text-to-Speech Generation）
 
 專案預設採用 **F5-TTS MLX 原生架構**（具備 58.4 萬詞繁體原生大辭典、繁體多音字專用詞庫校正與精準 G2P 控制，發音零差錯率，音質清澈穩定），亦整合支援 **CosyVoice 3.0 (`Fun-CosyVoice3-0.5B-2512` MLX 8-bit)** 作為實驗性語音引擎。全管線運用 Apple Silicon GPU 統一記憶體進行零樣本語音克隆，並自動執行文本清洗（小括號過濾、阿拉伯數字轉中文數字、未帶引號冒號轉逗號）：
+
+> **重要原則：釋經版（Exegesis）暫不生成語音**  
+> 釋經版定位為高密度、學術微觀解經與原文句法深度研讀材料，不適合語音聆聽，因此在預設全週生成語音時**不包含釋經版**（`npm run tts` 預設僅處理 `youth`, `family`, `encore`, `mission` 四軌）。未來若有特殊需求，方可透過 `--version exegesis` 單獨指定生成。
 
 #### 5.1 一鍵全自動語音克隆指令
 ```bash

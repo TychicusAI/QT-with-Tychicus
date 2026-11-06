@@ -46,12 +46,15 @@ Never skip Phase 1. Groundwork must be established before planning topics or wri
       - Module 3: 1,800–2,000 word continuous theological prose synthesis
       - Module 4 & 5: Dual-level big ideas / redemptive ladder, verse-by-verse commentary synthesis, crux interpretum, scholarly debates (with English scholar names), and refutations
 4.  Write to `data/<YYYY-MM-DD>/study.md`. If generation hits token limits, append continuously until all modules are fully completed.
-5.  If target deliverables include Youth, Family, Encore, or Mission tracks, read `prompts/illustrations.txt` and extract illustrations, metaphors, historical anecdotes, missionary/church history accounts, and life analogies by querying the dedicated **「喻道推基古」** notebook (`notebooks/69625716-c3ce-455a-8054-208fd88db91e`) as primary source and the book's **「研經推基古：[書卷]」** commentary illustrations as fallback (including youth, family, encore, and mission application angles). Write to `data/<YYYY-MM-DD>/illustrations.md` (skip if only generating `qt_for_exegesis.md`).
+5.  If target deliverables include Youth, Family, Encore, or Mission tracks, read `prompts/illustrations.txt` and extract a **Dual-Track Illustration Collection** for each daily pericope segment by querying the dedicated **「喻道推基古」** notebook (`notebooks/69625716-c3ce-455a-8054-208fd88db91e`) as primary source and the book's **「研經推基古：[書卷]」** commentary illustrations as fallback:
+      - **Track A (`例證 A：通用生活／歷史／人文`)**: General life analogies, world literature, historical/biographical anecdotes, and pastoral metaphors (not necessarily mission-related), with Youth, Family, and Encore application angles.
+      - **Track B (`例證 B：宣教／跨文化歷史與國度見證`)**: Cross-cultural missionary accounts, church history & martyrdoms, redemptive analogies, and broader *Missio Dei* / cross-boundary witness stories, with Frontline Worker, Everyday Missional Disciple, and optional cross-track angles.
+    Write to `data/<YYYY-MM-DD>/illustrations.md` (skip if only generating `qt_for_exegesis.md`).
 
 ### Phase 2: Topics Planning
 
 1.  Read `prompts/topics_for_youth.txt`, `prompts/topics_for_family.txt`, `prompts/topics_for_encore.txt`, and/or `prompts/topics_for_mission.txt`.
-2.  Strictly base topic design on `study.md` and `illustrations.md`.
+2.  Strictly base topic design on `study.md` and `illustrations.md` (Youth/Family/Encore primarily aligned with Track A `例證 A`; Mission primarily aligned with Track B `例證 B`).
 3.  Plan the overall weekly theme, introductory guidance, and Monday-to-Saturday daily breakdown (scripture division, daily theme, and core thesis).
       - For **Mission (`topics_for_mission.md`)**, weave the **Dual-Track Missional Progression** across Monday to Saturday (interleaving frontline cross-cultural realities with everyday missional discipleship: Mon calibrating to *Missio Dei*, Tue crossing everyday local/cross-cultural borders, Wed frontline "jars of clay" vulnerability, Thu guarding the baggage via intercession & support, Fri incarnational translation & dying to cultural superiority, Sat eschatological hope & global worship).
 4.  Write to `data/<YYYY-MM-DD>/topics_for_youth.md`, `data/<YYYY-MM-DD>/topics_for_family.md`, `data/<YYYY-MM-DD>/topics_for_encore.md`, and/or `data/<YYYY-MM-DD>/topics_for_mission.md`.
@@ -60,26 +63,21 @@ Never skip Phase 1. Groundwork must be established before planning topics or wri
 
 Never batch all six days together in a single prompt or step. Write day by day (Monday to Saturday) to maintain maximum literary depth, theological rigor, and psychological insight.
 
-For each target deliverable (Youth / Family / Encore / Mission):
+For each target deliverable (Youth / Family / Encore / Mission / Exegesis):
 
-1.  Initialize file header in `data/<YYYY-MM-DD>/qt_*.md` with scripture range, overall theme, and introductory guide (`# 每日靈修：青年篇` / `# 每日靈修：家庭篇` / `# 每日靈修：樂齡篇` / `# 每日靈修：宣教篇`).
-2.  For each day from Monday to Saturday, write the daily devotional adhering strictly to `prompts/qt_for_youth.txt`, `prompts/qt_for_family.txt`, `prompts/qt_for_encore.txt`, and `prompts/qt_for_mission.txt`:
+1.  Initialize file header in `data/<YYYY-MM-DD>/qt_*.md` with scripture range, overall theme, and introductory guide (`# 每日靈修：青年篇` / `# 每日靈修：家庭篇` / `# 每日靈修：樂齡篇` / `# 每日靈修：宣教篇` / `# 每日釋經深研`).
+2.  For each day from Monday to Saturday, write the daily devotional adhering strictly to `prompts/qt_for_youth.txt`, `prompts/qt_for_family.txt`, `prompts/qt_for_encore.txt`, `prompts/qt_for_mission.txt`, and `prompts/qt_for_exegesis.txt`:
       - **Scripture**: Chinese Union Version (CUV) text.
       - **Theme**: Derived from `topics_*.md`.
-      - **Four-Track Persona & Pastoral Pain Points**:
+      - **Five-Track Persona & Pastoral/Exegetical Focus**:
           - **Youth (`youth`)**: Sensitive, incisive mentor addressing social persona anxiety, career competition, authority pressure, cancel culture, and productivity idolatry.
           - **Family (`family`)**: Warm, empathetic family pastor addressing dinner-table silence, broken promises, control vs. grace boundaries, cold wars, and cross-generational reconciliation.
           - **Encore (`encore`, 50+)**: Warm, seasoned spiritual companion (never patronizing or preachy) addressing physical decline ("jars of clay"), empty-nest letting go (from helm-holder to prayer watchman), career handoff (from Do to Be), caregiving for aging parents & bereavement, and reconciling past regrets into a glorious second-half Encore.
-          - **Mission (`mission`, 雙軌整合「使命人生篇」)**: Seasoned, empathetic kingdom fellow traveler with field depth and historical vision (like Tychicus, Luke, or Barnabas—never using guilt-driven mobilization or triumphalist slogans). Integrates frontline cross-cultural workers and everyday missional believers across 5 core pain points:
-              1. Frontline vulnerability & "jars of clay" exhaustion (language barriers, cultural shock, unseen fruit, isolation from sending churches, family/children adaptation guilt).
-              2. Everyday comfort-zone inertia & kingdom numbness (spiritual apathy in consumerist routines, invisible indifference toward cross-cultural neighbors such as migrant workers, new immigrants, international students, or workplace outsiders).
-              3. Surrendering cultural superiority & incarnational translation (dying to ethnocentrism and savior complexes, learning Paul's humility of becoming all things to all people).
-              4. The weight of "staying with the baggage" (intercession, sacrificial kingdom stewardship, and genuine pastoral holding for frontline workers without performative pity).
-              5. Reconciling personal brokenness with *Missio Dei* (moving from ego-centric self-actualization or ministry burnout to participating in God's cosmic reconciliation and eschatological worship).
-          - **Exegesis (`exegesis`, 釋經版純文字微觀釋經深研)**: 100% grounded in `study.md` (zero illustrations, zero modern anecdotes). High-density continuous prose across four organic movements (Discourse Context & Structural Topology, Grammatical & Syntactical Dissection, Rhetorical Force & Deictic Shift, Canonical Echoes & Redemptive Summit) followed by 3-level big idea convergence (Exegetical Idea, Redemptive Anchor, Homiletical Idea).
+          - **Mission (`mission`, 雙軌整合「使命人生篇」)**: Seasoned, empathetic kingdom fellow traveler with field depth and historical vision (like Tychicus, Luke, or Barnabas—never using guilt-driven mobilization or triumphalist slogans). Integrates frontline cross-cultural workers and everyday missional believers across 5 core pain points.
+          - **Exegesis (`exegesis`, 釋經版高可讀性微觀釋經深研)**: 100% grounded in `study.md` (zero illustrations, zero modern anecdotes). Structured into **4 organic movements headed by `#### 一、...` to `#### 四、...` subheadings** across **12–15 concise paragraphs** (120–180 chars per paragraph, 20–38 chars per sentence). Strictly enforce **Insight/Tension First, Grammar as Evidence** (forbid formulaic meta-openings), **Parenthetical Discipline** (max 15 chars in parentheses; only 1–3 word Greek terms, English scholar names, or brief verse refs; move all longer explanations into standalone Chinese sentences), **Focused Scholarly Attribution** (cite at most 1–2 representative scholars per point, never 3–4 name-lists), and **Natural Convergence in Movement 4** (no redundant trailing 3-bullet summary at the end of the message).
           - **Exegetical Discourse SVG Charts Specification (釋經向量圖解規範)**:
               - When pericope features significant structural topology (e.g. Chiastic pivot center, dual theological contrasts & semantic bifurcation, complex syntactic flow, or epistolary route), plan an accompanying discourse vector diagram.
-              - **Markdown Placeholder Architecture (Strictly Forbid Inline Multi-Line Raw SVG)**: In markdown (`qt_for_exegesis.md`), strictly forbid pasting raw multi-line SVG XML (prevents markdown parser `marked` from misinterpreting indented tags as `<pre><code>` code blocks). Always use a clean HTML comment placeholder: `<!-- CHART:<chart-id> -->` (e.g. `<!-- CHART:two-sorrows -->`), placed right after movement 1 or after the central conceptual contrast.
+              - **Markdown Placeholder Architecture (Strictly Forbid Inline Multi-Line Raw SVG)**: In markdown (`qt_for_exegesis.md`), strictly forbid pasting raw multi-line SVG XML (prevents markdown parser `marked` from misinterpreting indented tags as `<pre><code>` code blocks). Always use a clean HTML comment placeholder: `<!-- CHART:<chart-id> -->` (e.g. `<!-- CHART:two-sorrows -->`), placed right after Movement 1 and before the `#### 二、...` subheading.
               - **Native React Component**: Implement the chart under `src/components/charts/<ChartName>.tsx` as a pure React SVG component equipped with responsive `viewBox` and `aspectRatio`, mobile horizontal scroll protection container (`min-w-[720px] overflow-x-auto`), and automatic Dark Mode styling.
       - **Opening Diversity & Anti-Formula Policy (開篇多樣性與反模式化規範)**:
           - Strictly forbid beginning every devotional with formulaic societal/stage/mission generalizations (e.g., "在當代/現代社會中，青年/家庭往往面臨...", "步入人生下半場/隨著年歲漸長，我們往往面臨...", "在當今全球化/大使命的時代，我們往往面臨...", "還有數以十億的未得之民...").
@@ -91,16 +89,16 @@ For each target deliverable (Youth / Family / Encore / Mission):
               - Paradigm D [Historical Immersion / 歷史現場還原]: Anchor opening in 1st-century Roman/Greek historical settings, paved imperial roads, ports, workshops, sounds, scents, or physical environments.
               - Paradigm E [Direct Provocation / 直球反思提問]: Launch with a penetrating, honest question that cuts through defenses, comfort-zone attachments, or hidden cultural superiority.
       - **Message & Sentence Rhythm (文風與句式節奏規範：意斷氣連，短句穿透，篇幅錨定)**:
-          - 2,000 to 2,200 words of pure literary narrative prose. No numbered lists (1. 2. 3.), no bullet points, no excessive subheadings.
-          - Single sentence golden length: 20–35 characters. Strictly avoid convoluted compound sentences over 45 characters.
+          - 1,800 to 2,200 words of pure literary/exegetical prose. No numbered lists (1. 2. 3.), no bullet points.
+          - Single sentence golden length: 20–35 characters (20–38 for Exegesis). Strictly avoid convoluted compound sentences over 45–48 characters.
           - Punctuation temperance: Max 1–2 commas per sentence. Decisively end thoughts and transitions with periods ("。"), refusing cascading commas.
           - Transform long compound clauses into crisp, declarative short sentences.
           - Coherence without dilution ("意斷氣連"): Maintain tight inner theological logic, redemptive-historical development, and dialectical tension between sentences; never degrade into disjointed slogans.
-          - Paragraph breathing & count anchor: Keep natural paragraphs to 120–180 characters (approx. 4–6 concise sentences). Strictly enforce 13–15 natural paragraphs per message to fulfill the ~2,000-word depth requirement. Never compress devotionals into 7–9 paragraphs.
-      - **Exegesis**: 100% grounded in `study.md`. Adhere strictly to the "Chinese first, Greek in parentheses" policy. Always cite the CUV term first in quotation marks followed by the transliterated Greek term in parentheses (e.g. 「良心」（*syneidēsis*）). Greek terms must NEVER serve as the grammatical subject or object of a Chinese sentence. Strip all parentheses and the prose must remain 100% fluent. Limit to 2–4 key Greek terms per day. First mention of modern scholars includes English name in parentheses.
+          - Paragraph breathing & count anchor: Keep natural paragraphs to 120–180 characters (approx. 4–6 concise sentences). Strictly enforce 12–15 natural paragraphs per message to fulfill the ~2,000-word depth requirement. Never compress devotionals into 4–8 giant paragraphs.
+      - **Exegesis**: 100% grounded in `study.md`. Adhere strictly to the "Chinese first, Greek in parentheses" policy. Always cite the CUV term first in quotation marks followed by the transliterated Greek term in parentheses (e.g. 「良心」（*syneidēsis*）). Greek terms must NEVER serve as the grammatical subject or object of a Chinese sentence. Strip all parentheses and the prose must remain 100% fluent. First mention of modern scholars includes English name in parentheses.
       - **Scripture Citation in Narrative**: In narrative text, strictly write out full scripture references with Chinese measure words and Arabic numerals (e.g., "哥林多後書 4 章 17 節", "4 章 1 節", "第 16 節"). For continuous verses, strictly use "至" (e.g., "4 章 16 至 18 節"). Strictly forbid colon notations (like "4:16") or Chinese numerals (like "四章十七節") in narrative prose. Parenthetical citations at sentence end may keep concise abbreviations (e.g., "(徒 18:3)").
-      - **Illustrations**: 100% grounded in `illustrations.md`. Integrated deeply into real-life pain points.
-      - **Suggested Prayer**: 250 to 300 words in first person (Youth: "主耶穌，我..."; Family: "天父上帝/親愛的主耶穌，我們全家..."; Encore: "主啊/親愛的天父，走過這許多年日，我..."; Mission: "萬國的主/差遣我們的天父，我...").
+      - **Illustrations (Dual-Track Routing)**: 100% grounded in `illustrations.md`. For **Youth, Family, and Encore**, primarily draw from **Track A (`例證 A：通用生活／歷史／人文`)** (with flexible cross-track borrowing from Track B when fitting). For **Mission**, primarily draw from **Track B (`例證 B：宣教／跨文化歷史與國度見證`)** as the narrative backbone (while organically weaving in Track A metaphors when helpful).
+      - **Suggested Prayer**: 250 to 300 words in first person (Youth: "主耶穌，我..."; Family: "天父上帝/親愛的主耶穌，我們全家..."; Encore: "主啊/親愛的天父，走過這許多年日，我..."; Mission: "萬國的主/差遣我們的天父，我..."; Exegesis: "全能的父神/至聖的主，我們...").
       - **Extended Study**: Exactly 3 cross-testament scriptures formatted as `* **書卷 章:節**｜說明...` with 4-5 sentences explaining the redemptive theological connection (for Mission, highlight Old Testament covenant promises to the nations, prophetic vision, and Acts/Epistles cross-cultural breakthroughs).
       - **Reflection Question**: 1 probing, non-judgmental open question tailored to the target group (for Mission, suitable for personal quiet time, mission prayer groups, or cross-cultural fellowship reflection).
 3.  Append each completed day cleanly to `data/<YYYY-MM-DD>/qt_*.md`.
@@ -108,7 +106,7 @@ For each target deliverable (Youth / Family / Encore / Mission):
 
 ### Phase 4: Database Sync and Verification
 
-1.  Verify word counts for all daily messages (must reach 2,000+ words across 13–15 paragraphs).
+1.  Verify word counts for all daily messages (must reach 1,800–2,200 words across 12–15 paragraphs).
 2.  Execute sync script in project root: Run command: `npm run sync` Confirm that all extended study scriptures exist in `data/bible-cache.json` (100% coverage required by sync script) and TypeScript database files under `src/data/weeks/` are successfully regenerated.
 3.  Execute type check: Run command: `npx tsc --noEmit` Verify 0 type compilation errors.
 4.  Report completion to user with daily word count stats and clickable markdown links to created files.
@@ -119,7 +117,7 @@ For each target deliverable (Youth / Family / Encore / Mission):
   - Dual Foundation First: `study.md` and `illustrations.md` must be completed before writing devotionals.
   - No Batch Compression: Strictly generate devotionals day by day.
   - Opening Diversity: Ensure all 6 days exhibit diverse, non-repetitive literary openings.
-  - Sentence Rhythm & Paragraph Count Anchor: Strictly maintain 20–35 chars per sentence (max 45 chars), 1–2 commas max, and 120–180 chars per paragraph across 13–15 paragraphs per day (~2,000 words). Forbid convoluted Western translationese and cascading commas; write with crisp, piercing declarative cadence while preserving rigorous theological depth and life applications.
+  - Sentence Rhythm & Paragraph Count Anchor: Strictly maintain 20–38 chars per sentence (max 48 chars), 1–2 commas max, and 120–180 chars per paragraph across 12–15 paragraphs per day (~2,000 words). Forbid convoluted Western translationese and cascading commas; write with crisp, piercing declarative cadence while preserving rigorous theological depth and life applications.
   - In-line Scripture Formats: Always write "4 章 16 至 18 節", never "4:16" or "四章十六節" in message body.
   - No Literal Backslash-N: Never insert literal `\\n` characters in markdown or JSON files.
   - Bible Cache Required: Every extended study reference must exist in `data/bible-cache.json` or `npm run sync` will abort with exit code 1.

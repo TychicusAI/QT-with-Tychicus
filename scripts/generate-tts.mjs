@@ -97,7 +97,7 @@ function parseMessagesFromMarkdown(content) {
     const dayBody = dayBodyMatch ? dayBodyMatch[1] : "";
 
     // 提取今日信息
-    const messageMatch = dayBody.match(/###\s*【信息】\s*\n+([\s\S]*?)(?=###\s*【建議禱告】|###|$)/);
+    const messageMatch = dayBody.match(/###\s*【信息】\s*\n+([\s\S]*?)(?=###\s*【建議禱告】|\n###(?!#)|$)/);
     if (messageMatch) {
       const rawMsg = messageMatch[1].trim();
       const cleanMsg = cleanMessageForTTS(rawMsg);
@@ -121,7 +121,7 @@ function resolveVoicePaths(versionKey) {
   let voiceStem = "family_female";
   if (versionKey === "youth" || versionKey === "family") {
     voiceStem = "family_female";
-  } else if (versionKey === "encore" || versionKey === "mission") {
+  } else if (versionKey === "encore" || versionKey === "mission" || versionKey === "exegesis") {
     voiceStem = "mission_male";
   }
 

@@ -49,7 +49,7 @@ export const encore_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在最近的生活裡，有沒有哪一件關於晚輩、教會同工或老伴的事，是你心裡一直看不順眼、常想開口批評指正的？如果今天主耶穌邀請你從「二樓審判看台」走下來，把那句批評換成一句為他求恩典的祝福禱告，你的心境會有什麼改變？",
       "audioUrl": "/audio/2026-11-02/encore/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧你走過的大半生，哪一段經歷最讓你深刻體會到天父對你「豐富的恩慈、寬容與忍耐」？今天在你心底，還有沒有哪一件對人的陳年舊怨、或是某個「我都幾十歲了不想改」的固執角落，你願意在天父溫暖的恩慈裡鬆開手、向祂回轉？",
       "audioUrl": "/audio/2026-11-02/encore/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們的外在體力與世俗舞台不再像年輕時那樣寬廣時，在現階段的生活裡，天父把哪一畝「恆心行善」的田地（例如：為某個年輕世代或宣教士恆切代禱、關懷某位獨居長者、或以溫柔陪伴家人）交在你手中？想到天父正為你預備「不能朽壞的永生冠冕」，這如何帶給你繼續前行的力量？",
       "audioUrl": "/audio/2026-11-02/encore/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -173,7 +173,7 @@ export const encore_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/encore/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -219,7 +219,7 @@ export const encore_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/encore/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -265,7 +265,7 @@ export const encore_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/encore/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-02",

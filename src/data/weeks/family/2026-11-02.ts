@@ -49,7 +49,7 @@ export const family_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在過去這一週裡，你對家裡的哪一位成員（配偶、孩子或父母）最常發出挑剔或抱怨？如果今天你在天父面前誠實自省，你批評他的那個缺點（例如：沒耐心、固執、愛滑手機、講話傷人），是不是其實也常出現在你自己身上？今晚你可以如何向他說一句溫柔肯定或道歉的話？",
       "audioUrl": "/audio/2026-11-02/family/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家裡，當有人做錯事或忘記約定時，我們通常是用「鐵鎚般的怒氣」回應，還是用「領人悔改的恩慈」來引導？此刻你的心底有沒有哪一筆對家人的委屈或怒氣正在悄悄「積蓄」？今晚在日落入睡前，我們可以如何一起在主前把這筆帳結清？",
       "audioUrl": "/audio/2026-11-02/family/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家裡，哪一位成員最像那位每天默默清理、撐起全家的「隱形清潔工」？今天我們每個人可以具體對他說哪一句感謝的話，或者主動分擔他手上的哪一件家事，讓他在這個家裡不再感到孤單委屈？",
       "audioUrl": "/audio/2026-11-02/family/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家裡，有沒有哪一位成員曾經因為「被拿來跟別人（或手足）比較」而感到難過或壓力很大？今天在「神不偏待人、看重每個人內心良善」的眼光中，我們全家人可以如何輪流對彼此說出一項「我最欣賞你（與成績或工作無關）的品格特質」？",
       "audioUrl": "/audio/2026-11-02/family/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "對於做父母的：你最希望孩子從你的日常生活背影（而不是你的說教）中，看見耶穌的哪一個品格？對於做兒女的：在父母平時對你的提醒中，有哪一件其實是為了你好，而你今天願意不再只是「左耳進右耳出」，而是主動把它做出來的？",
       "audioUrl": "/audio/2026-11-02/family/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家裡，當有人做錯事或不小心說了謊時，我們家的氣氛會讓他覺得「承認錯誤很安全、會被原諒」，還是會讓他害怕挨罵而不敢說實話？在聽完「替母親受二十鞭的君王耶穌」的故事後，我們全家人可以如何約定：以後當有人主動順從良心、誠實認錯時，我們要如何用溫柔的饒恕與擁抱來回應他？",
       "audioUrl": "/audio/2026-11-02/family/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-02",

@@ -49,7 +49,7 @@ export const youth_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "最近在你的職場、校園、網路社群或人際圈裡，有沒有哪一個人是你最常在心裡（或私下與朋友聊天時）論斷、嫌棄或看不起的？如果今天主耶穌把鏡頭轉向你，讓你看見你批評他的那個點，其實正以另一種形式存在於你自己身上，你會在主面前如何重新面對自己的心？",
       "audioUrl": "/audio/2026-11-02/youth/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的生活裡，有沒有哪一件明明知道不討神喜悅的事，只因為「目前看起來還沒出什麼大問題」，你就一直心存僥倖地拖延著不肯處理？當你看見那其實是天父正在用「寬容的停火期」溫柔等待你時，你今天願意向祂作出什麼具體的悔改回應？",
       "audioUrl": "/audio/2026-11-02/youth/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在過去這一個月裡，有沒有哪一項正確卻不起眼的善事、工作責任或服事，是因為「沒有人看見、沒有即時掌聲」而讓你開始想要敷衍或放棄的？面對羅馬書 2 章 7 至 8 節「自私雇工心態」與「恆心行善尋求神榮耀」的對比，今天聖靈如何重新調整你的眼光？",
       "audioUrl": "/audio/2026-11-02/youth/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的生活圈或教會團契裡，你是否也曾不自覺地用「外在標籤」（如學歷、收入、外貌、或是信主年資與服事表現）來決定你對一個人的尊重程度？當你面對「多給誰、就向誰多取，因為神不偏待人」這句話時，你覺得天父今天託付給你最重要的責任是什麼？",
       "audioUrl": "/audio/2026-11-02/youth/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你最近聽過的一篇講道、讀過的一本屬靈書籍或靈修筆記，有沒有哪一個聖靈早就感動你去做的調整，你卻像「把鬧鐘調快半小時後繼續睡」一樣，一直停留在「知道」而沒有「行動」？今天在踏出家門或關上手機前，你願意跨出哪一個具體的「行道」小步？",
       "audioUrl": "/audio/2026-11-02/youth/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "如果今天你走過上帝的「良心安檢門」，你心底的口袋裡有沒有哪一件「外人看不見、但每次想到時良心都會隱隱作痛」的隱秘事（*ta krypta*）正在發出警報？當你知道那位末日審判隱秘事的法官，正是已經替你背負二十記重鞭的主耶穌時，你願意在今天的禱告中如何向祂坦白並領受釋放？",
       "audioUrl": "/audio/2026-11-02/youth/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-02",

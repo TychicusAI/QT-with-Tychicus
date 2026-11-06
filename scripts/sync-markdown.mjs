@@ -176,14 +176,14 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
 
     // Message
     let message = "";
-    const messageMatch = dayBody.match(/###\s*【信息】\s*\n+([\s\S]*?)(?=###\s*【建議禱告】|###|$)/);
+    const messageMatch = dayBody.match(/###\s*【信息】\s*\n+([\s\S]*?)(?=###\s*【建議禱告】|\n###(?!#)|$)/);
     if (messageMatch) {
       message = messageMatch[1].trim();
     }
 
     // Suggested Prayer
     let suggestedPrayer = "";
-    const prayerMatch = dayBody.match(/###\s*【建議禱告】\s*\n+([\s\S]*?)(?=###\s*【延伸研讀】|###|$)/);
+    const prayerMatch = dayBody.match(/###\s*【建議禱告】\s*\n+([\s\S]*?)(?=###\s*【延伸研讀】|\n###(?!#)|$)/);
     if (prayerMatch) {
       suggestedPrayer = prayerMatch[1].trim().replace(/^[「"“]|["”」]$/g, "");
     }
