@@ -49,7 +49,7 @@ export const mission_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們檢視自己參與服事或面對身邊未信者、跨文化鄰舍（如移工、新住民或異質同儕）的內心態度時，我們「心靈牆縫」裡是否藏著某些隐密的污穢（例如：優越感、冷漠、或把人當作事工業績的心態）？今天我們可以如何將自己重新放在主的祭壇上，求神潔淨我們成為透光的聖殿之窗？",
       "audioUrl": "/audio/2026-10-26/mission/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在你每天固定經過的生活圈（職場、社區、校園或教會周邊）中，有沒有哪一個群體或哪一個人，是你過去習慣「視而不見」或帶著刻板印象防備的？今天主耶穌如何邀請你先在心裡為他騰出空間（*chōrēsate*），用一個不佔便宜、不定罪的溫暖行動向他敞開？",
       "audioUrl": "/audio/2026-10-26/mission/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const mission_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們思想今天正在跨文化前線服事的宣教士，或是在我們教會、職場中默默承擔重任的開拓者時，他們可能正承受著哪些「外有爭戰、內有懼怕」的孤單？這個禮拜，你或你的小組可以如何具體扮演「提多」的角色，將「我們的想念、體恤與熱心」真實傳遞給他們？",
       "audioUrl": "/audio/2026-10-26/mission/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const mission_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視我們目前的信仰生活與使命服事，我們是否在不自覺中服用了「逃避刺痛的止痛藥」，對自己裡面的安逸或身邊失喪靈魂的痛苦變得麻木？今天聖靈正在哪一件事上溫柔地刺痛你的良心，邀請你經歷那場「生出無悔救恩與更新行動」的依神憂愁？",
       "audioUrl": "/audio/2026-10-26/mission/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const mission_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們在「上帝面前」（*enōpion tou theou*）誠實省察自己對跨文化宣教士或教會開拓事工的態度時，我們比較像是「月台上冷漠的旁觀者」，還是「與他們同受患難、殷勤看守器具的同行者」？這個月你可以採取哪一項具體的「殷勤」（*spoudē*）行動，把心底對他們的顧念顯明出來？",
       "audioUrl": "/audio/2026-10-26/mission/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const mission_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們從哥林多後書 7 章 13 至 16 節看見，一間悔改順服的教會不僅預演了末世萬民敬畏歸主的異象，更能讓前線工人如提多般「心靈得著暢快、心腸越發火熱」時——今天你或你的團契可以為哪一位正在宣教前線或教會服事的工人寫一封信、或做一件具體的事，讓他整天走在被支持與被暢快的陽光裡？",
       "audioUrl": "/audio/2026-10-26/mission/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-26",

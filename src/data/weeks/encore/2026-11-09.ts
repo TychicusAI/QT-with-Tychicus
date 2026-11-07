@@ -49,7 +49,7 @@ export const encore_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧你從年輕到如今的生命歷程，隨著生活環境與財務狀況的改變，你對金錢與安全感的態度有了哪些變化？今天你要在哪些具體的事上「先把自己獻給主」，好讓你在人生下半場重新找回那顆自由、喜樂且甘心給予的赤子之心？",
       "audioUrl": "/audio/2026-11-09/encore/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "如果今天有一位「屬靈資產估價官」走進你的家，請你仿照那位老牧師，列出你在基督裡擁有的五到八項「無法被歲月奪走、也無法被課稅」的無價資產；當你重新看見這座地底油田時，這會如何改變你今天面對老後生活與幫助他人的心情？",
       "audioUrl": "/audio/2026-11-09/encore/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的心底，有沒有哪一件「從去年（或幾年前）起就有了願作的心」，卻因為種種原因擱置至今、還沒彈下最後完成音符的美好心願？按著天父「照你所有的，不是照你所無的」這份溫柔應許，這週你可以跨出哪一個小小的、能力所及的行動去完成它？",
       "audioUrl": "/audio/2026-11-09/encore/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const encore_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的居家空間、財務帳戶與生命經驗，有哪些「富餘的嗎哪」正被你鎖在櫃子裡，可以在「現今的關鍵時刻」拿出來補足某位年輕人或軟弱肢體的不足？另一方面，在面對老後體力衰退時，你是否也願意練習放下好強，溫柔地接受晚輩與弟兄姊妹對你的關懷與照顧？",
       "audioUrl": "/audio/2026-11-09/encore/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const encore_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的教會服事、社區參與，或是個人的家庭財務與未來遺產規劃中，有哪些事是你過去習慣「自己心裡清楚就好」，現在卻可以效法保羅「不但在主面前，也在人面前」的原則，主動建立透明清楚的記錄與溝通，好為晚輩和教會留下毫無紛爭的清白榜樣？",
       "audioUrl": "/audio/2026-11-09/encore/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const encore_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "回首你過去幾十年的信仰與人生路，有哪些「在許多事上屢次被試驗」的經歷，塑造了你今天堅韌的品格？當你如今在家庭或教會漸漸退居幕後時，你希望如何用「因為深信你們，就更加熱心」的信任與祝福，去成全並激勵正站在台前打拚的年輕世代？",
       "audioUrl": "/audio/2026-11-09/encore/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-09",

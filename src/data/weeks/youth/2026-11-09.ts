@@ -49,7 +49,7 @@ export const youth_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的財務與時間分配，你覺得自己比較像緊抓資源的「燧石／海綿」，還是自然流淌的「蜂房」？如果要效法馬其頓人「先把自己獻給主」，這週你可以在哪一件一直捨不得放手的事情上，向神做出具體的主權移交？",
       "audioUrl": "/audio/2026-11-09/youth/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在「信心、口才、聖經知識」與「實際掏出資源幫助有需要的人」這兩者之間，哪一個對你來說比較容易？重新思想主耶穌「為你成為貧窮」的十字架標價，這如何改變你對目前手頭存款與資源的看法？",
       "audioUrl": "/audio/2026-11-09/youth/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在你心裡有沒有哪一個「從去年起（或好幾個月前）」就曾被神感動要去做的慷慨行動、關懷或委身，至今還懸在半空中沒有按下最後一個音符？今天你可以照著你目前「所有的」，跨出哪一個具體的小行動把它完成？",
       "audioUrl": "/audio/2026-11-09/youth/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的生活，在「現今這個關鍵時刻」（*en tō nyn kairō*），神在哪一方面（財務、物品、專業能力或時間精力）賜給了你「富餘」？身邊有哪一位正處於「不足」的人，是你可以主動把這份富餘流過去、達成神國「均平」的對象？",
       "audioUrl": "/audio/2026-11-09/youth/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "當「沒有人在旁邊盯著你看」的時候（例如：報銷發票、使用公司或團契公物、填寫工時或處理金錢），你最容易在哪個環節出現妥協的試探？你可以為自己設立什麼樣「公開透明、在人面前也行得正」的防弊界線？",
       "audioUrl": "/audio/2026-11-09/youth/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "如果在一個團隊或服事裡，你的付出沒有被公開點名表揚，你內心通常會有什麼反應？哥林多後書 8 章這兩位「不留名卻被稱為基督的榮耀（*doxa Christou*）」的弟兄，如何重新定義你對「成功與價值」的追求？",
       "audioUrl": "/audio/2026-11-09/youth/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-09",

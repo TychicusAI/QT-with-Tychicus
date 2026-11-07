@@ -49,7 +49,7 @@ export const mission_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的時間分配與財務規劃，有什麼對「未來安全感」的恐懼正在阻礙你回應神的國度需要？今天在走進職場或工場之前，你可以採取哪一個具體的行動，實踐馬其頓信徒「先把自己獻給主，再委身於宣教群體」的次序？",
       "audioUrl": "/audio/2026-11-09/mission/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的教會服事、短宣參與，或是日常對待身邊的外籍移工、弱勢鄰舍時，是否曾不自覺流露出「高高在上的施捨者姿態」或「緊護口袋的防備心」？思想基督為你成為貧窮的恩典，這週你可以如何在某個具體關係中放下身段、實踐道成肉身的同在？",
       "audioUrl": "/audio/2026-11-09/mission/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const mission_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "回想過去一年，神是否曾在某場聚會、某本書或某次禱告中，把一個關乎宣教、代禱、奉獻或職場見證的「熱切心願」放在你心裡，但至今仍未完成？今天你可以如何用「手裡現有的資源」，邁出把它徹底辦成的第一步？",
       "audioUrl": "/audio/2026-11-09/mission/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const mission_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在神國度的宣教藍圖裡，你目前的角色比較偏向「外出划槳的前線開荒者」，還是「留守種田、看守器具的後方供應者」？檢視你手中所擁有的「富餘」（無論是財務、專業技能、靈修深度或代禱時間），在這現今的關鍵時刻，神正邀請你去補足哪一個宣教工場或肢體的「不足」？",
       "audioUrl": "/audio/2026-11-09/mission/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const mission_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "當別人在教會服事、事工核銷或職場業務上要求檢視你的帳目與工作進度時，你第一時間的反應是覺得「不被信任而受冒犯」，還是樂意藉此「在人前顯明光明美善的見證」？在你目前參與的教會、團契或公司中，有哪些財務或決策流程可以因為你主動引入透明問責機制而更能榮耀主名？",
       "audioUrl": "/audio/2026-11-09/mission/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const mission_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "如果一生服事與擺上的結果，是在地上的歷史與教會紀念冊裡成為一個「沒有被寫出名字的無名弟兄」，但在天父眼中卻被稱為「基督的榮耀」，你願意嗎？這週你的團契或代禱小組可以採取哪一個具體的行動，向你們所支持的宣教士或弱勢群體顯明一份「摸得著的愛心憑據」？",
       "audioUrl": "/audio/2026-11-09/mission/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-09",

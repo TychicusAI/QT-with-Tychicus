@@ -49,7 +49,7 @@ export const family_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "這禮拜在我們家裡，有哪些家事分擔或日常關心，讓你覺得自己像「被敲打的燧石」或「被擠壓的海綿」？如果我們今晚先把自己的時間與主權獻給主，明天早上你可以主動為家人做哪一件不求回報的「流蜜」小事？",
       "audioUrl": "/audio/2026-11-09/family/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家最近的溝通裡，有哪些時候我們像那尊「高聳入雲的巨像」或「冰冷的暖氣片」，只顧著講道理卻忘了給出溫暖？今天我們可以做哪一個具體的動作，向家人展現「蹲下來平視」的體貼？",
       "audioUrl": "/audio/2026-11-09/family/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "回想過去這半年，我們對彼此有沒有哪一個「開了頭卻還沒兌現」的承諾（像是答應一起去某個地方、或答應改掉某個習慣）？如果不用等完美的時機，這禮拜我們可以怎麼「照現有的條件」先把這件事完成？",
       "audioUrl": "/audio/2026-11-09/family/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "這禮拜在我們家裡，誰看起來最疲累、正處於體力或心情的「不足」中？其他人可以用自己哪一方面的「富餘」（例如多洗一次碗、幫忙按摩十分鐘、或安靜聽對方說話）來幫他把擔子分擔過來，讓家裡達到溫暖的「均平」？",
       "audioUrl": "/audio/2026-11-09/family/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家的日常溝通與金錢使用上，有什麼事情是我們因為怕被唸、怕麻煩而習慣「先斬後奏」或藏起來不說的？我們可以怎麼調整彼此的回應方式，讓大家在家裡說真話、攤開帳本時，感到安全與被接納？",
       "audioUrl": "/audio/2026-11-09/family/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_11_09: DevotionalWeek = {
       ],
       "meditationQuestion": "如果今天我們把家裡「挑剔的逆光燈」關掉，換上「恩典的聚光燈」，請輪流看著坐在你旁邊的每一位家人，具體說出一件他過去這禮拜為家裡做的事（不論像大鐵鎚一樣明顯、還是像小手鑽一樣安靜），並告訴他：「謝謝你，我在這件事上看見了你身上基督的榮耀！",
       "audioUrl": "/audio/2026-11-09/family/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-09",

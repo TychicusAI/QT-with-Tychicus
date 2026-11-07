@@ -49,7 +49,7 @@ export const family_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家的日常互動中，有哪些像「躲在牆壁夾層裡」的內心態度（例如：說話帶刺的習慣、心裡拿家人跟別人比較、或受委屈後悶在心裡的冷漠），是我們平常看不見卻需要求主潔淨的？今晚我們可以如何一起把這些重擔放在天父的祭壇上？",
       "audioUrl": "/audio/2026-10-26/family/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "當家人在溝通中因為鬧情緒或防衛而「把嘴巴與心門閉得死緊」時，我們過去習慣用什麼方式回應？今晚我們可以如何像保羅一樣，用一句「我不是要責怪你，我只是很在乎你」的具體行動，先向家人張開溫暖接納的懷抱？",
       "audioUrl": "/audio/2026-10-26/family/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "最近這一個禮拜，你覺得家裡的哪一位成員（爸爸、媽媽、配偶或孩子）看起來最像保羅在馬其頓那樣「身體不得安寧，外有爭戰，內有懼怕」？今晚你可以用哪一個具體的溫暖舉動（一句話、一個擁抱或一件貼心的小事），把「安慰的接力棒」交到他手裡？",
       "audioUrl": "/audio/2026-10-26/family/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家過去的互動中，當有人做錯事被提醒時，我們比較常出現哪一種反應（敷衍說對不起、生氣賭氣冷戰、還是真誠認錯改變）？作父母的如何能像保羅一樣，讓孩子在被管教時依然深深確信「我是被爸媽和天父深愛的兒女」？",
       "audioUrl": "/audio/2026-10-26/family/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家最近的摩擦或冷淡中，如果我們不再爭論「誰對誰錯、誰虧負誰」，而是像耶穌問彼得那樣，在神面前看清自己心底的真心——你最想對身邊的家人（父母、配偶或孩子）說出哪一句藏在心底的「在乎與想念」？",
       "audioUrl": "/audio/2026-10-26/family/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "今晚在家庭時光中，讓我們練習做兩件使彼此心靈暢快的事：第一，作孩子（或配偶）的，請具體說出一件你感謝父母（或另一半）為這個家付出的事；第二，作父母的，請看著孩子的眼睛，具體肯定他最近的一個成長，並對他說：「爸媽為你歡喜，我們對你很放心！",
       "audioUrl": "/audio/2026-10-26/family/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-26",

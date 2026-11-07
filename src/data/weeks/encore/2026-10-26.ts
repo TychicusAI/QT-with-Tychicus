@@ -49,7 +49,7 @@ export const encore_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧走過的數十年歲月，在你的心靈深處（例如：對某個人的心結、對某件往事的懊悔、或對晚輩某種固執的要求），有沒有哪一塊「陳年積塵」是你今天願意交在天父的祭壇上，讓聖靈的活水為你徹底洗淨，好讓你下半場的心房更加明亮輕省的？",
       "audioUrl": "/audio/2026-10-26/encore/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在你走過的人生旅途中，有沒有哪一段因為昔日的誤會或面子而疏遠的關係（無論是手足、老同工或晚輩），是主今天邀請你放下「誰對誰錯」的計較，像艾文一樣主動踏出和好步伐，在心裡重新為對方騰出空間的？",
       "audioUrl": "/audio/2026-10-26/encore/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在目前的人生階段裡，有哪些「內有懼怕」或「心裡喪氣」的時刻是你平常只敢藏在心底、不好意思對人說的？今天你願意如何把這份重擔卸給「安慰喪氣之人的神」？同時，你身邊有沒有哪一位老友或晚輩，正需要你像提多一樣去給他一個溫暖的問候與支持？",
       "audioUrl": "/audio/2026-10-26/encore/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const encore_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "當你回顧前半生時，有沒有哪一件往事或哪一段關係的遺憾，常讓你在夜裡陷入「早知道……」的自責與嘆息裡？今天當你聽見天父對你說「有一個悲傷的深處，只有我能觸摸；你是我的兒女」，你願意如何把這件往事交在主手中，從自責走向無悔的平安？",
       "audioUrl": "/audio/2026-10-26/encore/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const encore_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在你目前的家族關係或教會生活裡，有沒有哪一件讓你覺得「自己受了委屈或被人虧負」的事，是你今天願意靠著主的恩典放下計較，轉而去尋求「如何在神面前喚醒彼此相愛的初心」的？",
       "audioUrl": "/audio/2026-10-26/encore/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const encore_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "面對你的成年兒女或教會裡的年輕一輩同工，你心裡目前最「放不下心」的是哪一件事？如果今天你相信「那在他們心裡動了善工的上帝必親自成全」，你願意如何寫一封信或說一句話，使他們的心靈得著暢快，並向他們表達「我為你歡喜，我對你放心」的祝福？",
       "audioUrl": "/audio/2026-10-26/encore/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-26",

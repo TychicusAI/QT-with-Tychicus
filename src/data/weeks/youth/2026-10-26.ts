@@ -49,7 +49,7 @@ export const youth_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在你目前的生活中，有沒有哪一些「躲在心靈牆縫深處」（外人看不見，卻不斷吸乾你屬靈生命力）的隱密污穢或偶像，是你過去一直逃避面對的？當你知道天父已經無條件接納你作祂的兒女時，你今天願意如何把這塊角落交給聖靈來進行深層潔淨？",
       "audioUrl": "/audio/2026-10-26/youth/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的心房空間，是不是正被某些對人的猜忌、委屈或世俗的焦慮塞滿了，以致容不下真誠愛你的屬靈夥伴？在「先同死、後同活」的十架原則下，今天有哪些屬於你的面子或防衛需要先向主「死去」，好讓喜樂與和好的生命重新活過來？",
       "audioUrl": "/audio/2026-10-26/youth/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "最近這段時間，在你心裡最深的那個「內有懼怕」（*esōthen phoboi*）是什麼？當你誠實把這份恐懼交給「那安慰喪氣之人的神」之後，今天你可以如何成為某位牧長、輔導或團契朋友的「提多」，把溫暖的「安慰接力棒」傳遞到他手中？",
       "audioUrl": "/audio/2026-10-26/youth/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "回想你最近一次因為犯錯、失言或失敗而感到難過的經歷，當時你心裡的難過比較偏向「世俗的憂愁」（怕丟臉、自憐、想找藉口），還是「依著神的意思憂愁」（在神愛裡誠實認罪並渴望改變）？如果今天主耶穌對你說「有一個悲傷的深處，只有我能觸摸」，你會把哪一件虧欠帶到祂面前？",
       "audioUrl": "/audio/2026-10-26/youth/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "如果今天你安靜站在「上帝面前」（*enōpion tou theou*），卸下平常嘴硬或冷漠的保護色，你會發現自己心底深處其實最在乎、最放不下的是哪一段關係或哪一項呼召？在哥林多後書 7 章 11 節的「七重果實」中，你今天最需要拿出哪一項具體行動？",
       "audioUrl": "/audio/2026-10-26/youth/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_10_26: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的生命中，有沒有哪一位曾經為你流淚守望、栽培鼓勵你的牧長、輔導、老師或長輩？今天你可以採取什麼具體行動（例如：寫一封真摯的感謝訊息，或在某件託付你的事上展現忠心順服），讓他的心靈因你「得著暢快」，像整天走在溫暖的陽光裡一樣？",
       "audioUrl": "/audio/2026-10-26/youth/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-10-26",
