@@ -8,6 +8,7 @@ import { youth_2026_10_12 } from "@/data/weeks/youth/2026-10-12";
 import { youth_2026_10_19 } from "@/data/weeks/youth/2026-10-19";
 import { youth_2026_10_26 } from "@/data/weeks/youth/2026-10-26";
 import { youth_2026_11_02 } from "@/data/weeks/youth/2026-11-02";
+import { youth_2026_11_09 } from "@/data/weeks/youth/2026-11-09";
 
 import { family_2026_09_14 } from "@/data/weeks/family/2026-09-14";
 import { family_2026_09_21 } from "@/data/weeks/family/2026-09-21";
@@ -17,25 +18,29 @@ import { family_2026_10_12 } from "@/data/weeks/family/2026-10-12";
 import { family_2026_10_19 } from "@/data/weeks/family/2026-10-19";
 import { family_2026_10_26 } from "@/data/weeks/family/2026-10-26";
 import { family_2026_11_02 } from "@/data/weeks/family/2026-11-02";
+import { family_2026_11_09 } from "@/data/weeks/family/2026-11-09";
 
 import { encore_2026_10_12 } from "@/data/weeks/encore/2026-10-12";
 import { encore_2026_10_19 } from "@/data/weeks/encore/2026-10-19";
 import { encore_2026_10_26 } from "@/data/weeks/encore/2026-10-26";
 import { encore_2026_11_02 } from "@/data/weeks/encore/2026-11-02";
+import { encore_2026_11_09 } from "@/data/weeks/encore/2026-11-09";
 
 import { mission_2026_10_12 } from "@/data/weeks/mission/2026-10-12";
 import { mission_2026_10_19 } from "@/data/weeks/mission/2026-10-19";
 import { mission_2026_10_26 } from "@/data/weeks/mission/2026-10-26";
 import { mission_2026_11_02 } from "@/data/weeks/mission/2026-11-02";
+import { mission_2026_11_09 } from "@/data/weeks/mission/2026-11-09";
 
 import { exegesis_2026_10_26 } from "@/data/weeks/exegesis/2026-10-26";
 import { exegesis_2026_11_02 } from "@/data/weeks/exegesis/2026-11-02";
+import { exegesis_2026_11_09 } from "@/data/weeks/exegesis/2026-11-09";
 
-export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21, youth_2026_09_28, youth_2026_10_05, youth_2026_10_12, youth_2026_10_19, youth_2026_10_26, youth_2026_11_02];
-export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28, family_2026_10_05, family_2026_10_12, family_2026_10_19, family_2026_10_26, family_2026_11_02];
-export const allEncoreWeeks: DevotionalWeek[] = [encore_2026_10_12, encore_2026_10_19, encore_2026_10_26, encore_2026_11_02];
-export const allMissionWeeks: DevotionalWeek[] = [mission_2026_10_12, mission_2026_10_19, mission_2026_10_26, mission_2026_11_02];
-export const allExegesisWeeks: DevotionalWeek[] = [exegesis_2026_10_26, exegesis_2026_11_02];
+export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_21, youth_2026_09_28, youth_2026_10_05, youth_2026_10_12, youth_2026_10_19, youth_2026_10_26, youth_2026_11_02, youth_2026_11_09];
+export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28, family_2026_10_05, family_2026_10_12, family_2026_10_19, family_2026_10_26, family_2026_11_02, family_2026_11_09];
+export const allEncoreWeeks: DevotionalWeek[] = [encore_2026_10_12, encore_2026_10_19, encore_2026_10_26, encore_2026_11_02, encore_2026_11_09];
+export const allMissionWeeks: DevotionalWeek[] = [mission_2026_10_12, mission_2026_10_19, mission_2026_10_26, mission_2026_11_02, mission_2026_11_09];
+export const allExegesisWeeks: DevotionalWeek[] = [exegesis_2026_10_26, exegesis_2026_11_02, exegesis_2026_11_09];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
   if (version === "family") return allFamilyWeeks;

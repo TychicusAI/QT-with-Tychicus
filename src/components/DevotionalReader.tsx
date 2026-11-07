@@ -41,6 +41,12 @@ import { TwoPathwaysRetributionChart } from "@/components/charts/TwoPathwaysRetr
 import { ImpartialityChiasmChart } from "@/components/charts/ImpartialityChiasmChart";
 import { LawHearingDoingChart } from "@/components/charts/LawHearingDoingChart";
 import { InnerCourtroomGospelChart } from "@/components/charts/InnerCourtroomGospelChart";
+import { MacedonianGraceParadoxChart } from "@/components/charts/MacedonianGraceParadoxChart";
+import { ChristologicalExchangePivotChart } from "@/components/charts/ChristologicalExchangePivotChart";
+import { WillingnessCompletionBalanceChart } from "@/components/charts/WillingnessCompletionBalanceChart";
+import { MannaEqualityCirculationChart } from "@/components/charts/MannaEqualityCirculationChart";
+import { DualIntegrityStewardshipChart } from "@/components/charts/DualIntegrityStewardshipChart";
+import { ApostlesGloryChristChart } from "@/components/charts/ApostlesGloryChristChart";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -90,6 +96,12 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     "impartiality-chiasm": <ImpartialityChiasmChart />,
     "law-hearing-doing": <LawHearingDoingChart />,
     "inner-courtroom-gospel": <InnerCourtroomGospelChart />,
+    "macedonian-grace-paradox": <MacedonianGraceParadoxChart />,
+    "christological-exchange-pivot": <ChristologicalExchangePivotChart />,
+    "willingness-completion-balance": <WillingnessCompletionBalanceChart />,
+    "manna-equality-circulation": <MannaEqualityCirculationChart />,
+    "dual-integrity-stewardship": <DualIntegrityStewardshipChart />,
+    "apostles-glory-christ": <ApostlesGloryChristChart />,
   };
 
   const exegesisDayChartFallback: Record<string, React.ReactNode> = {

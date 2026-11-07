@@ -248,5 +248,5 @@ export const family_2026_11_02: DevotionalWeek = {
     }
   ],
   "publishedAt": "2026-11-02",
-  "isCurrentWeek": true
+  "isCurrentWeek": false
 };
