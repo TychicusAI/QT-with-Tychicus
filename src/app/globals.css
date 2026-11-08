@@ -216,3 +216,21 @@ html {
 .markdown-content li:last-child {
   margin-bottom: 0;
 }
+
+/* Exegesis SVG Chart Mobile Optimization */
+figure:has(svg) {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  /* 手機版讓圖表自適應螢幕寬度，解除 min-w 720px 對父容器排版的撐破 */
+  figure:has(svg) .min-w-\[720px\] {
+    min-width: 100% !important;
+  }
+
+  figure:has(svg) svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}

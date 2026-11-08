@@ -47,6 +47,7 @@ import { WillingnessCompletionBalanceChart } from "@/components/charts/Willingne
 import { MannaEqualityCirculationChart } from "@/components/charts/MannaEqualityCirculationChart";
 import { DualIntegrityStewardshipChart } from "@/components/charts/DualIntegrityStewardshipChart";
 import { ApostlesGloryChristChart } from "@/components/charts/ApostlesGloryChristChart";
+import { ResponsiveChartWrapper } from "@/components/ResponsiveChartWrapper";
 
 interface DevotionalReaderProps {
   week: DevotionalWeek;
@@ -357,7 +358,11 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
                   className={`max-w-none text-stone-900 dark:text-stone-100 markdown-content ${readerThemeClass} ${fontClasses}`}
                   dangerouslySetInnerHTML={{ __html: messageHtml }}
                 />
-                {isExegesis && exegesisDayChartFallback[day.id]}
+                {isExegesis && exegesisDayChartFallback[day.id] && (
+                  <ResponsiveChartWrapper title={day.title}>
+                    {exegesisDayChartFallback[day.id]}
+                  </ResponsiveChartWrapper>
+                )}
               </>
             );
           }
@@ -369,7 +374,13 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               const chartId = match[1];
               if (renderedChartIds.has(chartId)) return null;
               renderedChartIds.add(chartId);
-              return <React.Fragment key={idx}>{chartMap[chartId] || null}</React.Fragment>;
+              const chartNode = chartMap[chartId];
+              if (!chartNode) return null;
+              return (
+                <ResponsiveChartWrapper key={idx} title={day.title}>
+                  {chartNode}
+                </ResponsiveChartWrapper>
+              );
             }
             if (!part.trim()) return null;
             return (
