@@ -53,6 +53,8 @@ html {
 /* Markdown Content Styling for Devotional Reader */
 .markdown-content {
   color: var(--foreground);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .markdown-content p {
@@ -217,20 +219,22 @@ html {
   margin-bottom: 0;
 }
 
-/* Exegesis SVG Chart Mobile Optimization */
+/* Exegesis SVG Chart Responsive Containment */
 figure:has(svg) {
   max-width: 100%;
+  min-width: 0;
   overflow: hidden;
 }
 
-@media (max-width: 640px) {
-  /* 手機版讓圖表自適應螢幕寬度，解除 min-w 720px 對父容器排版的撐破 */
-  figure:has(svg) .min-w-\[720px\] {
-    min-width: 100% !important;
-  }
+.chart-wrapper figure:has(svg) {
+  margin-top: 0;
+}
 
-  figure:has(svg) svg {
-    max-width: 100% !important;
-    height: auto !important;
-  }
+[data-chart-modal] figure:has(svg) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+[data-chart-modal] figure:has(svg) .min-w-\[720px\] {
+  min-width: 780px;
 }

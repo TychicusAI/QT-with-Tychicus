@@ -11,7 +11,7 @@ export function LawHearingDoingChart() {
           <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
           <span>釋經結構圖解｜有無律法的雙軌定罪與「聽行律法」的反義格言（羅 2:11–13）</span>
         </div>
-        <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
+        <span className="text-xs font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
           Gar-Chain &amp; Parallelism
         </span>
       </div>
@@ -115,7 +115,7 @@ export function LawHearingDoingChart() {
         </div>
       </div>
 
-      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-600 dark:text-stone-300">
+      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-600 dark:text-stone-300">
         <div className="flex items-center gap-1.5">
           <span className="font-semibold text-purple-800 dark:text-purple-300">聽覺押韻對偶：</span>
           <span>聽律法者（<em>hoi akroatai nomou</em>）vs. 行律法者（<em>hoi poiētai nomou</em>）</span>

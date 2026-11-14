@@ -84,16 +84,16 @@ export function ExtendedStudySection({
   }[fontSize];
 
   const titleClasses = {
-    normal: "text-xs sm:text-sm",
-    large: "text-sm sm:text-base",
-    xlarge: "text-base sm:text-lg",
+    normal: "text-sm sm:text-base",
+    large: "text-base sm:text-lg",
+    xlarge: "text-lg sm:text-xl",
   }[fontSize];
 
   return (
     <section
       className={`p-5 sm:p-6 rounded-3xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-4 ${readerThemeClass}`}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 flex items-center gap-2">
           <BookOpen
             className={`w-5 h-5 shrink-0 ${
@@ -108,7 +108,7 @@ export function ExtendedStudySection({
           />
           <span>延伸研讀</span>
         </h4>
-        <span className="text-[11px] text-stone-500 dark:text-stone-400">
+        <span className="text-xs text-stone-500 dark:text-stone-400">
           共 {items.length} 處對照・點擊卡片展開經文
         </span>
       </div>
@@ -167,9 +167,9 @@ export function ExtendedStudySection({
                   }}
                 />
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium transition ${
+                    className={`inline-flex items-center gap-1 px-2.5 py-1.5 min-h-[34px] rounded-lg text-xs font-medium transition ${
                       isExpanded
                         ? isMission
                           ? "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-200"
@@ -201,7 +201,7 @@ export function ExtendedStudySection({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium text-stone-400 hover:text-stone-800 dark:text-stone-500 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 min-h-[34px] rounded-lg text-xs font-medium text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition"
                       title="在 Biblia 深入查閱前後文"
                     >
                       <span>Biblia 查經</span>
@@ -225,7 +225,7 @@ export function ExtendedStudySection({
                   className="pt-3 mt-3 border-t border-stone-200/80 dark:border-stone-800/80 animate-in fade-in slide-in-from-top-2 duration-200 select-text"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between text-[11px] font-medium mb-2 text-stone-600 dark:text-stone-400">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-medium mb-2 text-stone-600 dark:text-stone-400">
                     <span className="flex items-center gap-1.5">
                       <BookOpen
                         className={`w-3.5 h-3.5 ${
@@ -240,7 +240,7 @@ export function ExtendedStudySection({
                       />
                       <span className="font-semibold text-stone-800 dark:text-stone-200">【經文內容】</span>
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400">
+                    <span className="text-xs px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">
                       新標點和合本
                     </span>
                   </div>

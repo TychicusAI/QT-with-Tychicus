@@ -54,7 +54,7 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
           : "bg-amber-500/5 dark:bg-stone-900/60 border-amber-300/40 dark:border-stone-800"
       }`}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <PenLine
             className={`w-5 h-5 shrink-0 ${
@@ -72,7 +72,7 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
           </h4>
         </div>
 
-        <span className="text-[11px] text-stone-500 dark:text-stone-400 flex items-center gap-1">
+        <span className="text-xs text-stone-500 dark:text-stone-400 flex items-center gap-1">
           {savedStatus ? (
             <span className="text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
               <Check className="w-3.5 h-3.5" /> 已自動存檔

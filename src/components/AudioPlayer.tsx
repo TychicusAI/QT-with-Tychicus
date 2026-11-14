@@ -278,7 +278,9 @@ export function AudioPlayer({
         <div className="flex items-center gap-2">
           <Quote
             className={`w-5 h-5 rotate-180 shrink-0 ${
-              isMission
+              isExegesis
+                ? "text-purple-600 dark:text-purple-400"
+                : isMission
                 ? "text-indigo-600 dark:text-indigo-400"
                 : isEncore
                 ? "text-rose-600 dark:text-rose-400"
@@ -301,7 +303,7 @@ export function AudioPlayer({
               setIsExpanded(false);
             }
           }}
-          className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
+          className={`inline-flex items-center gap-2 px-3.5 py-2 min-h-[38px] rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
             isPlaying ? theme.pillActive : theme.pillIdle
           }`}
           title={isExpanded ? "收合播放器" : "展開語音伴讀"}
@@ -342,7 +344,7 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={() => setIsExpanded(false)}
-              className="p-1 rounded-md text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-colors"
+              className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-md text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-colors"
               title="收合播放器"
             >
               <X className="w-4 h-4" />
@@ -353,7 +355,7 @@ export function AudioPlayer({
           <div className="space-y-3">
             {/* Scrubber Progress Bar */}
             <div className="space-y-1">
-              <div className="relative flex items-center">
+              <div className="relative flex items-center py-1">
                 <input
                   type="range"
                   min={0}
@@ -364,7 +366,7 @@ export function AudioPlayer({
                   className={`w-full h-1.5 bg-stone-200 dark:bg-stone-700 rounded-lg appearance-none cursor-pointer ${theme.accentColor}`}
                 />
               </div>
-              <div className="flex justify-between text-[11px] font-mono text-stone-500 dark:text-stone-400 px-0.5">
+              <div className="flex justify-between text-xs font-mono text-stone-500 dark:text-stone-400 px-0.5">
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(duration)}</span>
               </div>
@@ -374,7 +376,7 @@ export function AudioPlayer({
             <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 pt-1">
               {/* Left Speed Selector */}
               <div className="flex items-center gap-1">
-                <span className="text-[11px] text-stone-500 dark:text-stone-400 mr-1 hidden sm:inline">
+                <span className="text-xs text-stone-500 dark:text-stone-400 mr-1 hidden sm:inline">
                   倍速:
                 </span>
                 {SPEED_OPTIONS.map((rate) => (
@@ -382,7 +384,7 @@ export function AudioPlayer({
                     key={rate}
                     type="button"
                     onClick={() => handleRateChange(rate)}
-                    className={`px-2 py-0.5 rounded text-xs font-mono transition-colors ${
+                    className={`px-2.5 py-1.5 min-h-[36px] rounded text-xs font-mono transition-colors ${
                       playbackRate === rate
                         ? theme.speedActive
                         : "text-stone-600 dark:text-stone-300 hover:bg-stone-200/60 dark:hover:bg-stone-800/60"
@@ -398,7 +400,7 @@ export function AudioPlayer({
                 <button
                   type="button"
                   onClick={() => handleSkip(-10)}
-                  className={`p-2 rounded-full transition-colors ${theme.buttonHover}`}
+                  className={`p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors ${theme.buttonHover}`}
                   title="後退 10 秒"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -420,7 +422,7 @@ export function AudioPlayer({
                 <button
                   type="button"
                   onClick={() => handleSkip(10)}
-                  className={`p-2 rounded-full transition-colors ${theme.buttonHover}`}
+                  className={`p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors ${theme.buttonHover}`}
                   title="快進 10 秒"
                 >
                   <RotateCw className="w-4 h-4" />
@@ -444,7 +446,7 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={togglePlay}
-              className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
+              className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                 isExegesis
                   ? "bg-purple-500 text-stone-950"
                   : isMission
@@ -461,10 +463,10 @@ export function AudioPlayer({
 
             {/* Info */}
             <div className="min-w-0 flex-1 cursor-pointer" onClick={() => setIsExpanded(true)}>
-              <div className="text-xs font-semibold truncate">
+              <div className="text-xs sm:text-sm font-semibold truncate">
                 {dayLabel} {dayTitle}
               </div>
-              <div className="text-[10px] text-stone-400 font-mono flex items-center gap-1.5">
+              <div className="text-xs text-stone-300 font-mono flex items-center gap-1.5">
                 <span>{formatTime(currentTime)}</span>
                 <span>/</span>
                 <span>{formatTime(duration)}</span>
@@ -477,7 +479,7 @@ export function AudioPlayer({
             <button
               type="button"
               onClick={() => handleSkip(10)}
-              className="p-1.5 text-stone-300 hover:text-white transition-colors"
+              className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center text-stone-300 hover:text-white transition-colors"
               title="快進 10 秒"
             >
               <RotateCw className="w-4 h-4" />
@@ -490,7 +492,7 @@ export function AudioPlayer({
                 headerContainerRef.current?.scrollIntoView({ behavior: "smooth" });
                 setIsExpanded(true);
               }}
-              className="p-1.5 text-stone-400 hover:text-stone-200 text-xs px-2 rounded-md hover:bg-stone-800 transition-colors"
+              className="px-2.5 py-1.5 min-h-[36px] text-stone-300 hover:text-white text-xs font-medium rounded-md hover:bg-stone-800 transition-colors"
               title="展開詳細控制"
             >
               展開

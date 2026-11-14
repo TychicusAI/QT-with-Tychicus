@@ -78,10 +78,10 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
         </div>
 
         {/* Progress Bar & Foreword Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <button
             onClick={() => setShowForeword(!showForeword)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 transition cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 min-h-[38px] rounded-full text-xs sm:text-sm font-medium bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 transition cursor-pointer"
           >
             <Info
               className={`w-3.5 h-3.5 ${
@@ -99,8 +99,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
             <span>前言簡述</span>
           </button>
 
-          <div className="flex items-center gap-3 bg-stone-100 dark:bg-stone-800/60 px-3.5 py-1.5 rounded-full border border-stone-200 dark:border-stone-800">
-            <span className="text-xs text-stone-600 dark:text-stone-400 font-medium">
+          <div className="flex items-center gap-3 bg-stone-100 dark:bg-stone-800/60 px-3.5 py-2 min-h-[38px] rounded-full border border-stone-200 dark:border-stone-800">
+            <span className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 font-medium">
               完成進度: {completedCount}/{week.days.length} 天
             </span>
             <div className="w-16 h-2 rounded-full bg-stone-200 dark:bg-stone-700 overflow-hidden">
@@ -126,7 +126,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
       {/* Expandable Foreword Box */}
       {showForeword && (
         <div
-          className={`p-5 rounded-2xl border text-stone-700 dark:text-stone-300 text-sm leading-relaxed space-y-2 ${
+          className={`p-5 rounded-2xl border text-stone-700 dark:text-stone-300 text-sm sm:text-base leading-relaxed space-y-2 ${
             isExegesis
               ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-300/30 dark:border-purple-700/30"
               : isMission
@@ -161,7 +161,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
       )}
 
       {/* Golden Verse of the Week Callout */}
-      <div className="flex items-center gap-3 p-4 rounded-2xl bg-stone-100/80 dark:bg-stone-900/60 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 text-sm">
+      <div className="flex items-center gap-3 p-4 rounded-2xl bg-stone-100/80 dark:bg-stone-900/60 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 text-sm sm:text-base">
         <Quote
           className={`w-5 h-5 shrink-0 rotate-180 ${
             isExegesis
@@ -181,10 +181,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
           </span>
           <span className="italic">「{week.goldenVerse.text}」</span>
           <span
-            className={`ml-2 text-xs font-medium ${
+            className={`ml-2 text-xs sm:text-sm font-medium ${
               isExegesis
-                ? "text-purple-700 dark:text-purple-400"
-                : isExegesis
                 ? "text-purple-700 dark:text-purple-400"
                 : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
@@ -230,7 +228,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <div className="flex items-center gap-2">
                     <span
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold ${
+                      className={`px-2.5 py-1 rounded-lg text-xs sm:text-sm font-bold ${
                         isToday
                           ? isExegesis
                             ? "bg-purple-700 text-white"
@@ -248,7 +246,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                     </span>
                     {isToday && (
                       <span
-                        className={`text-[11px] font-bold ${
+                        className={`text-xs font-bold ${
                           isExegesis
                             ? "text-purple-700 dark:text-purple-400"
                             : isMission
@@ -268,7 +266,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                   <button
                     onClick={(e) => handleToggle(e, day.id)}
                     title={isCompleted ? "點擊標記為未完成" : "點擊完成打卡"}
-                    className="p-1 text-stone-400 hover:text-amber-600 transition cursor-pointer"
+                    className="p-2 -m-1 min-w-[40px] min-h-[40px] flex items-center justify-center text-stone-400 hover:text-amber-600 transition cursor-pointer"
                   >
                     <CheckCircle2
                       className={`w-5 h-5 transition-colors ${
@@ -282,7 +280,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
 
                 {/* Scripture ref */}
                 <div
-                  className={`text-xs font-semibold mb-1 ${
+                  className={`text-xs sm:text-sm font-semibold mb-1 ${
                     isExegesis
                       ? "text-purple-700 dark:text-purple-400"
                       : isMission
@@ -299,7 +297,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
 
                 {/* Day Title */}
                 <h3
-                  className={`font-bold text-base text-stone-900 dark:text-stone-100 transition-colors line-clamp-1 ${
+                  className={`font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 transition-colors line-clamp-2 ${
                     isExegesis
                       ? "group-hover:text-purple-700 dark:group-hover:text-purple-400"
                       : isMission
@@ -315,13 +313,13 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 </h3>
 
                 {/* Scripture short quote */}
-                <p className="mt-2 text-xs text-stone-600 dark:text-stone-400 line-clamp-2 italic leading-relaxed">
+                <p className="mt-2 text-sm text-stone-600 dark:text-stone-400 line-clamp-2 italic leading-relaxed">
                   「{day.goldenVerse}」
                 </p>
               </div>
 
               {/* Footer row */}
-              <div className="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs text-stone-500 dark:text-stone-400">
+              <div className="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs sm:text-sm text-stone-500 dark:text-stone-400">
                 <span className="flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5 text-stone-400" />
                   {day.readTimeMinutes} 分鐘
@@ -329,7 +327,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
 
                 <Link
                   href={`/devotional/${week.version}/${week.id}/${day.id}`}
-                  className={`inline-flex items-center gap-1 font-semibold group-hover:translate-x-1 transition-transform ${
+                  className={`inline-flex items-center gap-1 py-1 font-semibold group-hover:translate-x-1 transition-transform ${
                     isExegesis
                       ? "text-purple-700 dark:text-purple-400"
                       : isMission

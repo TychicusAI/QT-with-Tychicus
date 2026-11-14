@@ -11,7 +11,7 @@ export function DualIntegrityStewardshipChart() {
           <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
           <span>釋經結構圖解｜跨教會護款代表團與「主前人前雙重光明」防弊架構（林後 8:16–21）</span>
         </div>
-        <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
+        <span className="text-xs font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
           Ecclesial Accountability &amp; Prov 3:4 LXX
         </span>
       </div>
@@ -114,7 +114,7 @@ export function DualIntegrityStewardshipChart() {
         </div>
       </div>
 
-      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-600 dark:text-stone-300">
+      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-600 dark:text-stone-300">
         <div className="flex items-center gap-1.5">
           <span className="font-semibold text-purple-800 dark:text-purple-300">雙重空間指示語：</span>
           <span>在主面前（<em>enōpion kyriou</em>）＋ 在人面前（<em>enōpion anthrōpōn</em>）</span>

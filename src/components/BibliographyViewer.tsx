@@ -133,7 +133,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
           <div className="flex items-center bg-stone-100 dark:bg-stone-800/80 rounded-lg p-0.5 border border-stone-200 dark:border-stone-700">
             <button
               onClick={() => handleSetFontSize("normal")}
-              className={`px-2.5 py-1 rounded text-xs font-semibold cursor-pointer transition ${
+              className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs sm:text-sm font-semibold cursor-pointer transition ${
                 fontSize === "normal"
                   ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
                   : "text-stone-500 hover:text-stone-800 dark:hover:text-stone-200"
@@ -143,7 +143,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
             </button>
             <button
               onClick={() => handleSetFontSize("large")}
-              className={`px-2.5 py-1 rounded text-xs font-semibold cursor-pointer transition ${
+              className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs sm:text-sm font-semibold cursor-pointer transition ${
                 fontSize === "large"
                   ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
                   : "text-stone-500 hover:text-stone-800 dark:hover:text-stone-200"
@@ -153,7 +153,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
             </button>
             <button
               onClick={() => handleSetFontSize("xlarge")}
-              className={`px-2.5 py-1 rounded text-xs font-semibold cursor-pointer transition ${
+              className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs sm:text-sm font-semibold cursor-pointer transition ${
                 fontSize === "xlarge"
                   ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
                   : "text-stone-500 hover:text-stone-800 dark:hover:text-stone-200"
@@ -165,7 +165,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
 
           <Link
             href="/devotional/youth/2026-09-14/mon"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 transition"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[38px] sm:min-h-[34px] rounded-lg text-xs sm:text-sm font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>返回當週靈修</span>
@@ -201,14 +201,14 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
         {allBibliographies.length > 1 && (
           <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-stone-200/70 dark:border-stone-800/70 text-xs sm:text-sm">
             <span className="text-stone-500 dark:text-stone-400 font-medium">切換經卷書目：</span>
-            <div className="inline-flex items-center gap-1.5 p-1 rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 font-semibold">
+            <div className="inline-flex flex-wrap items-center gap-1.5 p-1 max-w-full rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 font-semibold">
               {allBibliographies.map((b) => {
                 const active = b.slug === bibliography.slug;
                 return (
                   <Link
                     key={b.slug}
                     href={`/books/${b.slug}`}
-                    className={`px-3 py-1 rounded-xl transition ${
+                    className={`px-3 py-1.5 min-h-[36px] inline-flex items-center rounded-xl transition ${
                       active
                         ? "bg-white dark:bg-stone-800 text-amber-700 dark:text-amber-400 shadow-xs font-bold"
                         : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -227,10 +227,10 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
       <div className="space-y-4 pt-2">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
           {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-x-auto text-xs sm:text-sm font-semibold">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-xs sm:text-sm font-semibold">
             <button
               onClick={() => setSelectedCategory("all")}
-              className={`px-3.5 py-2 rounded-xl transition cursor-pointer whitespace-nowrap ${
+              className={`px-3.5 py-2 min-h-[38px] rounded-xl transition cursor-pointer whitespace-nowrap ${
                 selectedCategory === "all"
                   ? "bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-xs"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -241,7 +241,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
 
             <button
               onClick={() => setSelectedCategory("accessible")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition cursor-pointer whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3.5 py-2 min-h-[38px] rounded-xl transition cursor-pointer whitespace-nowrap ${
                 selectedCategory === "accessible"
                   ? "bg-white dark:bg-stone-800 text-amber-700 dark:text-amber-300 shadow-xs font-bold"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -253,7 +253,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
 
             <button
               onClick={() => setSelectedCategory("pastoral")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition cursor-pointer whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3.5 py-2 min-h-[38px] rounded-xl transition cursor-pointer whitespace-nowrap ${
                 selectedCategory === "pastoral"
                   ? "bg-white dark:bg-stone-800 text-teal-700 dark:text-teal-300 shadow-xs font-bold"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -265,7 +265,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
 
             <button
               onClick={() => setSelectedCategory("academic")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition cursor-pointer whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3.5 py-2 min-h-[38px] rounded-xl transition cursor-pointer whitespace-nowrap ${
                 selectedCategory === "academic"
                   ? "bg-white dark:bg-stone-800 text-indigo-700 dark:text-indigo-300 shadow-xs font-bold"
                   : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
@@ -280,14 +280,14 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
           <div className="flex items-center gap-2 self-end md:self-auto text-xs sm:text-sm text-stone-500 dark:text-stone-400">
             <button
               onClick={expandAll}
-              className="hover:text-stone-800 dark:hover:text-stone-200 transition cursor-pointer underline"
+              className="min-h-[36px] px-1 hover:text-stone-800 dark:hover:text-stone-200 transition cursor-pointer underline"
             >
               全部展開
             </button>
             <span>・</span>
             <button
               onClick={collapseAll}
-              className="hover:text-stone-800 dark:hover:text-stone-200 transition cursor-pointer underline"
+              className="min-h-[36px] px-1 hover:text-stone-800 dark:hover:text-stone-200 transition cursor-pointer underline"
             >
               全部收合
             </button>
@@ -391,7 +391,7 @@ export function BibliographyViewer({ bibliography }: BibliographyViewerProps) {
 
                   <button
                     onClick={() => toggleExpand(item.id)}
-                    className="self-end sm:self-center inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition cursor-pointer"
+                    className="self-end sm:self-center inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-xl text-xs sm:text-sm font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition cursor-pointer"
                   >
                     <span>{isExpanded ? "收合評介" : "展開評介"}</span>
                     <ChevronDown

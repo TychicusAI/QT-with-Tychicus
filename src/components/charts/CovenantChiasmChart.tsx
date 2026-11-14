@@ -12,7 +12,7 @@ export function CovenantChiasmChart() {
           <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
           <span>釋經結構圖解｜使徒敞開的心與同心圓交叉包夾結構（林後 6:11–7:4）</span>
         </div>
-        <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
+        <span className="text-xs font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
           Chiastic Inclusio
         </span>
       </div>
@@ -122,7 +122,7 @@ export function CovenantChiasmChart() {
       </div>
 
       {/* Footer */}
-      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-600 dark:text-stone-300">
+      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-600 dark:text-stone-300">
         <div className="flex items-center gap-1.5">
           <span className="font-semibold text-purple-800 dark:text-purple-300">篇章拓撲：</span>
           <span>A-B-C-D-C'-B'-A' 工整鏡像，徹底粉碎近代分割學者將 6:14–7:1 視為插段的假說</span>

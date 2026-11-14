@@ -11,7 +11,7 @@ export function MannaEqualityCirculationChart() {
           <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
           <span>釋經結構圖解｜基督身體的「均平」循環與出埃及記曠野嗎哪互文（林後 8:13–15）</span>
         </div>
-        <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
+        <span className="text-xs font-mono text-purple-700 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-900/60 px-2 py-0.5 rounded-full font-semibold">
           Ecclesial Isotēs &amp; Exodus Manna
         </span>
       </div>
@@ -122,7 +122,7 @@ export function MannaEqualityCirculationChart() {
         </div>
       </div>
 
-      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-600 dark:text-stone-300">
+      <div className="mt-3.5 pt-2.5 border-t border-purple-200/60 dark:border-purple-800/40 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-600 dark:text-stone-300">
         <div className="flex items-center gap-1.5">
           <span className="font-semibold text-purple-800 dark:text-purple-300">首尾包夾關鍵詞：</span>
           <span>乃要出於均平（<em>ex isotētos</em>, 8:13）➔ 好叫均平得以成就（<em>hopōs genētai isotēs</em>, 8:14）</span>

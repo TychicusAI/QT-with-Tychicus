@@ -14,7 +14,8 @@ interface TodayHeroCardProps {
 }
 
 export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
-  const [selectedDayId, setSelectedDayId] = useState<string>(recommendedDayId);
+  const [userSelectedDayId, setUserSelectedDayId] = useState<string | null>(null);
+  const selectedDayId = userSelectedDayId ?? recommendedDayId;
 
   const isFamily = week.version === "family";
   const isEncore = week.version === "encore";
@@ -124,14 +125,14 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
         </div>
 
         {/* 6-Day quick switcher pill bar */}
-        <div className="flex items-center gap-1 bg-white/70 dark:bg-stone-900/70 p-1 rounded-full border border-stone-200/80 dark:border-stone-800 backdrop-blur-sm text-xs max-w-full min-w-0 overflow-x-auto whitespace-nowrap">
+        <div className="flex flex-wrap items-center gap-1 bg-white/85 dark:bg-stone-900/85 p-1 rounded-2xl sm:rounded-full border border-stone-200/80 dark:border-stone-800 text-xs sm:text-sm max-w-full min-w-0">
           {week.days.map((d) => {
             const isSelected = d.id === selectedDayId;
             return (
               <button
                 key={d.id}
-                onClick={() => setSelectedDayId(d.id)}
-                className={`px-2.5 py-1 rounded-full transition font-medium cursor-pointer ${
+                onClick={() => setUserSelectedDayId(d.id)}
+                className={`px-3 py-1.5 min-h-[36px] rounded-full transition font-medium cursor-pointer ${
                   isSelected
                     ? isExegesis
                       ? "bg-purple-700 text-white shadow-xs"
@@ -156,7 +157,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
       <div className="relative z-10 grid md:grid-cols-12 gap-6 items-center">
         <div className="md:col-span-8 space-y-3">
           <div
-            className={`inline-block text-xs font-semibold tracking-wider px-2.5 py-0.5 rounded-md border ${
+            className={`inline-block text-xs sm:text-sm font-semibold tracking-wider px-2.5 py-0.5 rounded-md border ${
               isExegesis
                 ? "text-purple-800 dark:text-purple-300 bg-purple-100/80 dark:bg-purple-950/60 border-purple-200 dark:border-purple-800/80"
                 : isMission
@@ -180,7 +181,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
 
           {/* Scripture preview quote */}
           <blockquote
-            className={`my-3 pl-4 border-l-2 text-stone-700 dark:text-stone-300 text-sm italic line-clamp-2 py-1.5 pr-2 rounded-r-lg ${
+            className={`my-3 pl-4 border-l-2 text-stone-700 dark:text-stone-300 text-sm sm:text-base italic line-clamp-2 py-1.5 pr-2 rounded-r-lg ${
               isExegesis
                 ? "border-purple-600/60 bg-purple-50/40 dark:bg-stone-900/40"
                 : isMission
@@ -195,7 +196,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             {currentDay.goldenVerse}
           </blockquote>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs text-stone-600 dark:text-stone-400 pt-1">
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-stone-600 dark:text-stone-400 pt-1">
             <span className="flex items-center gap-1 font-medium">
               <Clock className="w-3.5 h-3.5 text-stone-400" />
               閱讀時間約 {currentDay.readTimeMinutes} 分鐘

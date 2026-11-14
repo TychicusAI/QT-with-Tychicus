@@ -269,19 +269,19 @@ export function TextSelectionToolbar({
     >
       {/* Toast Notice (e.g. for Facebook auto-copy instruction) */}
       {toastMessage && (
-        <div className="mb-1.5 px-3 py-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-[11px] font-medium flex items-center gap-1.5 animate-in fade-in slide-in-from-bottom-1 whitespace-nowrap">
+        <div className="mb-1.5 px-3 py-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-xs font-medium flex items-center gap-1.5 animate-in fade-in slide-in-from-bottom-1 whitespace-nowrap">
           <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Main Bar */}
-      <div className="flex items-center gap-1 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-xs font-medium">
+      <div className="flex items-center gap-1 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md text-stone-100 rounded-full border border-stone-700/80 shadow-2xl text-xs sm:text-sm font-medium">
         {/* Copy Button */}
         <button
           onClick={handleAction(handleCopy)}
           onTouchEnd={handleAction(handleCopy)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full transition cursor-pointer ${
             copied
               ? "bg-emerald-600 text-white font-semibold"
               : "hover:bg-stone-800 dark:hover:bg-stone-700 text-stone-200"
@@ -307,7 +307,7 @@ export function TextSelectionToolbar({
         <button
           onClick={handleAction(toggleShareMenu)}
           onTouchEnd={handleAction(toggleShareMenu)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full transition cursor-pointer ${
             showShareMenu
               ? "bg-amber-500 text-stone-950 font-bold"
               : "hover:bg-stone-800 dark:hover:bg-stone-700 text-stone-200"
@@ -321,12 +321,12 @@ export function TextSelectionToolbar({
 
       {/* Share Submenu - only 3 icons, zero text */}
       {showShareMenu && (
-        <div className="mt-1.5 p-1 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md rounded-full border border-stone-700/80 shadow-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 duration-150">
+        <div className="mt-1.5 p-1.5 bg-stone-900/95 dark:bg-stone-800/95 backdrop-blur-md rounded-full border border-stone-700/80 shadow-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 duration-150">
           {/* Line */}
           <button
             onClick={handleAction(handleShareLine)}
             onTouchEnd={handleAction(handleShareLine)}
-            className="w-7 h-7 rounded-full bg-[#00c300] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
+            className="w-8 h-8 rounded-full bg-[#00c300] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
             title="分享至 Line（手機直接喚起 App / 電腦開啟選單）"
             aria-label="Line"
           >
@@ -337,7 +337,7 @@ export function TextSelectionToolbar({
           <button
             onClick={handleAction(handleShareThreads)}
             onTouchEnd={handleAction(handleShareThreads)}
-            className="w-7 h-7 rounded-full bg-stone-100 hover:scale-110 active:scale-95 text-stone-950 flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
+            className="w-8 h-8 rounded-full bg-stone-100 hover:scale-110 active:scale-95 text-stone-950 flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
             title="分享至 Threads"
             aria-label="Threads"
           >
@@ -348,7 +348,7 @@ export function TextSelectionToolbar({
           <button
             onClick={handleAction(handleShareFacebook)}
             onTouchEnd={handleAction(handleShareFacebook)}
-            className="w-7 h-7 rounded-full bg-[#1877f2] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
+            className="w-8 h-8 rounded-full bg-[#1877f2] hover:scale-110 active:scale-95 text-white flex items-center justify-center text-xs font-black transition cursor-pointer shadow-xs"
             title="分享至 Facebook（自動複製引言，貼文處按 Cmd+V 貼上）"
             aria-label="Facebook"
           >

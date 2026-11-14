@@ -55,16 +55,20 @@ interface DevotionalReaderProps {
 }
 
 export function DevotionalReader({ week, day }: DevotionalReaderProps) {
-  const [fontSize, setFontSize] = useState<"normal" | "large" | "xlarge">("large");
+  const [fontSize, setFontSize] = useState<"normal" | "large" | "xlarge">(
+    week.version === "encore" ? "xlarge" : "large"
+  );
 
   React.useEffect(() => {
     try {
       const saved = localStorage.getItem("qt_font_size");
       if (saved === "normal" || saved === "large" || saved === "xlarge") {
         setFontSize(saved);
+      } else {
+        setFontSize(week.version === "encore" ? "xlarge" : "large");
       }
     } catch {}
-  }, []);
+  }, [week.version]);
 
   React.useEffect(() => {
     if (week.version) {
@@ -124,12 +128,17 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     ? "family-reader"
     : "youth-reader";
 
-  const versionOptions: { id: DevotionalVersion; label: string; icon: React.ReactNode }[] = [
-    { id: "youth", label: "青年版", icon: <Sparkle className="w-3 h-3 text-amber-500" /> },
-    { id: "family", label: "家庭版", icon: <Users className="w-3 h-3 text-teal-600" /> },
-    { id: "encore", label: "樂齡版", icon: <Sun className="w-3 h-3 text-rose-600" /> },
-    { id: "mission", label: "宣教版", icon: <Compass className="w-3 h-3 text-indigo-600" /> },
-    { id: "exegesis", label: "釋經版", icon: <ScrollText className="w-3 h-3 text-purple-600" /> },
+  const versionOptions: {
+    id: DevotionalVersion;
+    label: string;
+    Icon: React.ComponentType<{ className?: string }>;
+    iconColor: string;
+  }[] = [
+    { id: "youth", label: "青年版", Icon: Sparkle, iconColor: "text-amber-500" },
+    { id: "family", label: "家庭版", Icon: Users, iconColor: "text-teal-600" },
+    { id: "encore", label: "樂齡版", Icon: Sun, iconColor: "text-rose-600" },
+    { id: "mission", label: "宣教版", Icon: Compass, iconColor: "text-indigo-600" },
+    { id: "exegesis", label: "釋經版", Icon: ScrollText, iconColor: "text-purple-600" },
   ];
 
   const messageHtml = React.useMemo(() => {
@@ -165,9 +174,9 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   }[fontSize];
 
   return (
-    <article className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+    <article className="w-full min-w-0 max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 overflow-x-clip">
       {/* Top Breadcrumb & Controls Row */}
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500 dark:text-stone-400 pb-3 border-b border-stone-200 dark:border-stone-800">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-stone-500 dark:text-stone-400 pb-3 border-b border-stone-200 dark:border-stone-800">
         <nav className="flex items-center gap-2 flex-wrap">
           <Link href="/" className="hover:text-stone-900 dark:hover:text-stone-100 flex items-center gap-1 font-medium">
             <Home className="w-3.5 h-3.5" />
@@ -193,7 +202,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
                 <Link
                   key={opt.id}
                   href={`/devotional/${opt.id}/${week.id}/${day.id}`}
-                  className={`flex items-center justify-center gap-1 px-2 sm:px-2.5 py-1.5 sm:py-1 rounded-full text-xs font-semibold transition whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 px-1 sm:px-3 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-semibold transition whitespace-nowrap ${
                     active
                       ? opt.id === "exegesis"
                         ? "bg-purple-700 text-white shadow-xs"
@@ -208,7 +217,9 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
                   }`}
                   title={`查看${opt.label}的靈修信息`}
                 >
-                  <span className="hidden sm:inline-flex">{opt.icon}</span>
+                  <span className="hidden sm:inline-flex">
+                    <opt.Icon className={`w-3.5 h-3.5 ${active ? "text-white" : opt.iconColor}`} />
+                  </span>
                   <span>{opt.label}</span>
                 </Link>
               );
@@ -220,7 +231,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             <div className="flex items-center bg-stone-100 dark:bg-stone-800/80 rounded-lg p-0.5 border border-stone-200 dark:border-stone-700">
               <button
                 onClick={() => handleSetFontSize("normal")}
-                className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
+                className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs sm:text-sm font-semibold cursor-pointer ${
                   fontSize === "normal"
                     ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
                     : "text-stone-500"
@@ -230,7 +241,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               </button>
               <button
                 onClick={() => handleSetFontSize("large")}
-                className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
+                className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs sm:text-sm font-semibold cursor-pointer ${
                   fontSize === "large"
                     ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
                     : "text-stone-500"
@@ -240,7 +251,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               </button>
               <button
                 onClick={() => handleSetFontSize("xlarge")}
-                className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
+                className={`px-3 py-1.5 min-h-[38px] sm:min-h-[32px] rounded text-xs sm:text-sm font-semibold cursor-pointer ${
                   fontSize === "xlarge"
                     ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-xs"
                     : "text-stone-500"
@@ -500,7 +511,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         {adjacentPrev ? (
           <Link
             href={`/devotional/${adjacentPrev.version}/${adjacentPrev.weekId}/${adjacentPrev.dayId}`}
-            className="order-1 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-900 transition text-xs font-semibold group"
+            className="order-1 flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-3 min-h-[44px] rounded-xl border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-900 transition text-xs sm:text-sm font-semibold group"
             title={adjacentPrev.isCrossWeek ? `跨週前往：${adjacentPrev.title}` : adjacentPrev.title}
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform shrink-0" />
@@ -510,10 +521,10 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           <div className="order-1" />
         )}
 
-        <div className="order-3 sm:order-2 w-full sm:w-auto flex items-center justify-center gap-3 pt-1 sm:pt-0 text-xs font-semibold">
+        <div className="order-3 sm:order-2 w-full sm:w-auto flex items-center justify-center gap-3 pt-1 sm:pt-0 text-xs sm:text-sm font-semibold">
           <Link
             href="/"
-            className={`hover:underline shrink-0 text-center ${
+            className={`inline-flex items-center min-h-[40px] px-2 hover:underline shrink-0 text-center ${
               isExegesis
                 ? "text-purple-700 dark:text-purple-400"
                 : isMission
@@ -530,7 +541,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           <span className="text-stone-300 dark:text-stone-700">|</span>
           <Link
             href="/archive"
-            className="text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 hover:underline shrink-0 text-center"
+            className="inline-flex items-center min-h-[40px] px-2 text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 hover:underline shrink-0 text-center"
           >
             歷週存檔庫
           </Link>
@@ -539,7 +550,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         {adjacentNext ? (
           <Link
             href={`/devotional/${adjacentNext.version}/${adjacentNext.weekId}/${adjacentNext.dayId}`}
-            className={`order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl text-white transition text-xs font-semibold group shadow-md ${
+            className={`order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-3 min-h-[44px] rounded-xl text-white transition text-xs sm:text-sm font-semibold group shadow-md ${
               isExegesis
                 ? "bg-purple-700 hover:bg-purple-600 shadow-purple-700/20"
                 : isMission
@@ -558,7 +569,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         ) : (
           <Link
             href="/archive"
-            className="order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition text-xs font-semibold"
+            className="order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-3 min-h-[44px] rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition text-xs sm:text-sm font-semibold"
           >
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>前往歷週存檔庫</span>

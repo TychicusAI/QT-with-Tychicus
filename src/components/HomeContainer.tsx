@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { TodayHeroCard } from "@/components/TodayHeroCard";
 import { WeeklyTimeline } from "@/components/WeeklyTimeline";
@@ -10,7 +10,11 @@ import Link from "next/link";
 import { Sparkles, Heart, Layers, Users, Sparkle, Library, Calendar, ChevronRight, History, Sun, Compass, ScrollText } from "lucide-react";
 
 export function HomeContainer() {
-  const [recommendedDayId] = useState(() => getRecommendedDayIdForToday());
+  const [recommendedDayId, setRecommendedDayId] = useState("mon");
+
+  useEffect(() => {
+    setRecommendedDayId(getRecommendedDayIdForToday());
+  }, []);
   const [version, setVersion] = usePreferredVersion();
 
   const isFamily = version === "family";
@@ -43,7 +47,7 @@ export function HomeContainer() {
             <div className="grid grid-cols-5 sm:inline-flex items-center justify-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs w-full max-w-xl sm:w-auto sm:max-w-full">
               <button
                 onClick={() => setVersion("youth")}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   version === "youth"
                     ? "bg-amber-500 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -56,7 +60,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("family")}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isFamily
                     ? "bg-teal-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -69,7 +73,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("encore")}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isEncore
                     ? "bg-rose-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -82,7 +86,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("mission")}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isMission
                     ? "bg-indigo-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -95,7 +99,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("exegesis")}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isExegesis
                     ? "bg-purple-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -184,7 +188,7 @@ export function HomeContainer() {
                   <button
                     key={w.id}
                     onClick={() => setSelectedWeekId(w.id)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+                    className={`flex items-center gap-1.5 px-3 py-2 min-h-[38px] rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
                       isSelected
                         ? isExegesis
                           ? "bg-purple-700 text-white shadow-xs"
@@ -201,7 +205,7 @@ export function HomeContainer() {
                     <span>{rangeText}</span>
                     {w.isCurrentWeek && (
                       <span
-                        className={`text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
+                        className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
                           isSelected
                             ? "bg-white/20 text-white"
                             : isExegesis
@@ -225,7 +229,7 @@ export function HomeContainer() {
 
             <Link
               href="/archive"
-              className={`flex items-center gap-1 text-xs font-bold hover:underline transition ${
+              className={`inline-flex items-center gap-1 min-h-[36px] py-1 text-xs sm:text-sm font-bold hover:underline transition ${
                 isExegesis
                   ? "text-purple-700 dark:text-purple-400"
                   : isMission
@@ -244,7 +248,7 @@ export function HomeContainer() {
 
           {/* Past week indicator banner if activeWeek is not currentWeek */}
           {!activeWeek.isCurrentWeek && (
-            <div className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-300/60 dark:border-amber-700/60 text-xs text-amber-900 dark:text-amber-200">
+            <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-300/60 dark:border-amber-700/60 text-xs sm:text-sm text-amber-900 dark:text-amber-200">
               <span className="flex items-center gap-1.5">
                 <History className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <span>
@@ -253,7 +257,7 @@ export function HomeContainer() {
               </span>
               <button
                 onClick={() => setSelectedWeekId(currentWeek.id)}
-                className="font-bold underline hover:text-amber-700 dark:hover:text-amber-100 cursor-pointer shrink-0"
+                className="font-bold underline hover:text-amber-700 dark:hover:text-amber-100 cursor-pointer shrink-0 min-h-[36px] py-1"
               >
                 回到最新當週
               </button>
@@ -297,15 +301,15 @@ export function HomeContainer() {
                 <div className="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center shadow-md shadow-purple-600/20 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
+                <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
                   平台架構與特色導覽
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   深入了解「靈修推基古」的 SSOT 架構、六大微觀解經工具、五軌牧養矩陣與三方橫向對比。
                 </p>
               </div>
 
-              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-purple-700 dark:text-purple-400 flex items-center justify-between">
+              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-400 flex items-center justify-between">
                 <span>了解核心架構與優勢</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
@@ -320,15 +324,15 @@ export function HomeContainer() {
                 <div className="w-9 h-9 rounded-xl bg-violet-700 text-white flex items-center justify-center shadow-md shadow-violet-700/20 group-hover:scale-110 transition-transform">
                   <ScrollText className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
+                <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
                   釋經深研專區
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   專為講道者與研經者打造，純文字思辨論述、無比喻插圖的 5,000 字級文本微觀解經深度篇章。
                 </p>
               </div>
 
-              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-violet-700 dark:text-violet-400 flex items-center justify-between">
+              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs sm:text-sm font-semibold text-violet-700 dark:text-violet-400 flex items-center justify-between">
                 <span>進入本週釋經深研</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
@@ -343,15 +347,15 @@ export function HomeContainer() {
                 <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-600/20 group-hover:scale-110 transition-transform">
                   <Calendar className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
+                <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
                   歷週靈修存檔庫
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   完整查閱青年、家庭、樂齡、宣教與釋經版歷週經課系列，溫習過往信息、筆記心得與打卡進度。
                 </p>
               </div>
 
-              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-blue-700 dark:text-blue-400 flex items-center justify-between">
+              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs sm:text-sm font-semibold text-blue-700 dark:text-blue-400 flex items-center justify-between">
                 <span>瀏覽歷週存檔</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
@@ -366,15 +370,15 @@ export function HomeContainer() {
                 <div className="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center shadow-md shadow-amber-600/20 group-hover:scale-110 transition-transform">
                   <Library className="w-4 h-4" />
                 </div>
-                <h3 className="font-bold text-sm sm:text-base text-stone-900 dark:text-stone-100">
+                <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
                   釋經參考書目庫
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   奠基之權威註釋書（BECNT、NIGTC、NICNT、NTL、NIVAC 等）評介與導讀。
                 </p>
               </div>
 
-              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs font-semibold text-amber-700 dark:text-amber-400 flex items-center justify-between">
+              <div className="mt-4 pt-2.5 border-t border-stone-200/50 dark:border-stone-800 text-xs sm:text-sm font-semibold text-amber-700 dark:text-amber-400 flex items-center justify-between">
                 <span>查閱權威書目評介</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
@@ -447,7 +451,7 @@ export function HomeContainer() {
                 ? "「各人不要單顧自己的事，也要顧別人的事。你們當以基督耶穌的心為心。」"
                 : "「你們以祈禱幫助我們，好叫許多人為我們得恩的緣故格外謝恩。」"}
             </h3>
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
               {isExegesis
                 ? "研讀聖經不該停留於碎片化的心靈慰藉。唯有沉浸在文法結構、修辭反諷、舊約救贖歷史的回響與當代論辯背景中，神話語的真實力量才能如兩刃的利劍，刺入剖開靈與魂。"
                 : isMission
@@ -464,8 +468,8 @@ export function HomeContainer() {
 
       {/* Footer */}
       <footer className="mt-16 border-t border-stone-200 dark:border-stone-800 bg-white/50 dark:bg-stone-950/50 py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500 dark:text-stone-400">
-          <div className="flex items-center gap-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-stone-500 dark:text-stone-400">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-center sm:text-left">
             <span className="font-extrabold text-stone-800 dark:text-stone-200">
               靈修推基古 (QT with Tychicus)
             </span>
