@@ -248,5 +248,5 @@ export const mission_2026_11_09: DevotionalWeek = {
     }
   ],
   "publishedAt": "2026-11-09",
-  "isCurrentWeek": true
+  "isCurrentWeek": false
 };

@@ -47,6 +47,12 @@ import { WillingnessCompletionBalanceChart } from "@/components/charts/Willingne
 import { MannaEqualityCirculationChart } from "@/components/charts/MannaEqualityCirculationChart";
 import { DualIntegrityStewardshipChart } from "@/components/charts/DualIntegrityStewardshipChart";
 import { ApostlesGloryChristChart } from "@/components/charts/ApostlesGloryChristChart";
+import { ParaleipsisZealIgnitionChart } from "@/components/charts/ParaleipsisZealIgnitionChart";
+import { BlessingVsAvaricePrepChart } from "@/components/charts/BlessingVsAvaricePrepChart";
+import { SowingChiasmCheerfulGiverChart } from "@/components/charts/SowingChiasmCheerfulGiverChart";
+import { AllGraceAutarkeiaPsalmChart } from "@/components/charts/AllGraceAutarkeiaPsalmChart";
+import { SeedBreadIsaiahHarvestChart } from "@/components/charts/SeedBreadIsaiahHarvestChart";
+import { PriestlyLeitourgiaDoxologyChart } from "@/components/charts/PriestlyLeitourgiaDoxologyChart";
 import { ResponsiveChartWrapper } from "@/components/ResponsiveChartWrapper";
 
 interface DevotionalReaderProps {
@@ -107,6 +113,12 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     "manna-equality-circulation": <MannaEqualityCirculationChart />,
     "dual-integrity-stewardship": <DualIntegrityStewardshipChart />,
     "apostles-glory-christ": <ApostlesGloryChristChart />,
+    "paraleipsis-zeal-ignition": <ParaleipsisZealIgnitionChart />,
+    "blessing-vs-avarice-prep": <BlessingVsAvaricePrepChart />,
+    "sowing-chiasm-cheerful-giver": <SowingChiasmCheerfulGiverChart />,
+    "all-grace-autarkeia-psalm": <AllGraceAutarkeiaPsalmChart />,
+    "seed-bread-isaiah-harvest": <SeedBreadIsaiahHarvestChart />,
+    "priestly-leitourgia-doxology": <PriestlyLeitourgiaDoxologyChart />,
   };
 
   const exegesisDayChartFallback: Record<string, React.ReactNode> = {
