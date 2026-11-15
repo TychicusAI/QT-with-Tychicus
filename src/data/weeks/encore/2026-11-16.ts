@@ -49,7 +49,7 @@ export const encore_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧你走過的信主年日，在哪一個時期你對主的「熱心」（*zēlos*）最為滾燙沸騰？如今步入人生下半場，有什麼具體的小行動（例如：為一位年輕人代禱、主動關懷一位鄰舍、或完成一項許久未兌現的心願），能幫助你今天重新為心中的祭壇添上一把新柴？",
       "audioUrl": "/audio/2026-11-16/encore/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "在你心裡，有沒有哪一個曾經向神許下的心願、想支持的事工、或是想留給配偶與兒女的祝福與交代，是你一直想著「以後再處理」卻還沒動手的？本週你可以跨出哪一個具體步驟，開始把它「預先整理完備」（*prokatartisōsin*）？",
       "audioUrl": "/audio/2026-11-16/encore/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "在過去為家庭（兒女、伴侶）或教會付出的經驗裡，你有沒有哪一件事曾讓你覺得「很委屈、很勉強」？今天如果把眼光轉向那位對你微笑的天父，學習對自己說「這枚戒指我是送給上帝的」，這會如何釋放你的心情？",
       "audioUrl": "/audio/2026-11-16/encore/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const encore_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "如果有一天後人看著我們生命中的那條「破折號（Dash）」，你最希望他們記得你是一個「很會幫自己存錢自保的人」，還是一個「因為深信神的大鏟子，而總是慷慨溫暖別人的人」？今天有哪一件善事是神賜給你充足能力去做的？",
       "audioUrl": "/audio/2026-11-16/encore/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const encore_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "回想你人生走過的沙漠，曾經有哪一位前輩或長者為你留下了「古井旁的一壺水」，幫助你度過難關？如今在你的生命中，有哪些「種子（金錢、經驗、陪伴、代禱）」是你可以裝滿留在井邊，傳遞給下一代或身邊缺乏者的？",
       "audioUrl": "/audio/2026-11-16/encore/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const encore_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "這禮拜你身邊有沒有哪一位正在經歷喪偶、病痛或孤單的老朋友或晚輩，很需要像那位老教授一樣，收到一封能讓他「整天走在溫暖亮光裡」的電話、卡片或關懷？今天你要不要就拿起電話或筆，成為神傳遞那束亮光的祭司？",
       "audioUrl": "/audio/2026-11-16/encore/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-16",

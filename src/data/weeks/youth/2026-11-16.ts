@@ -49,7 +49,7 @@ export const youth_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "回想過去這一年，你身邊有沒有哪一位弟兄姊妹「沸騰的熱心」（*zēlos*）曾經深深激勵過你？反過來看，你心裡有沒有哪一個曾經向神許下、甚至向人分享過的熱血心願，現在需要「把腳下當作羅德島」，立刻跨出具體的行動？",
       "audioUrl": "/audio/2026-11-16/youth/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前的財務習慣與服事模式，你是習慣在「月初／收到薪水時」就預先把奉獻與給人的祝福分別出來（*eulogia*），還是常拖到「月底花剩了／最後死線到了」才勉強擠出一點來交差？這週你可以如何調整這個次序？",
       "audioUrl": "/audio/2026-11-16/youth/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你每個月的金錢分配與每週的時間安排，你獻給神與分給別人的，比較像「精挑細選的上好大馬鈴薯」，還是「吃剩用剩的發芽小馬鈴薯」？有什麼事是你今天可以帶著「陽光般的歡欣笑臉（*hilaron*）」主動撒出去的種子？",
       "audioUrl": "/audio/2026-11-16/youth/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "當你的生活預算吃緊或時間壓力變大時，你通常會先砍掉「給自己的冰淇淋那一塊錢」，還是先砍掉「給上帝和別人的那一塊錢」？相信「上帝的鏟子比我的大得多」，會如何改變你面對未來財務與職涯的不安？",
       "audioUrl": "/audio/2026-11-16/youth/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前手頭擁有的資源（薪水、存款、專業技能、空暇時間），有沒有哪一部分其實是上帝賜給你用來祝福別人的「種子（*sporon*）」或「引水」，卻一直被你當成自己的「麵包（*arton*）」攥在手裡？這週你可以怎樣把這壺引水倒出去？",
       "audioUrl": "/audio/2026-11-16/youth/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "如果把「星期天在教堂唱詩歌」跟「平日拿自己的錢和時間去幫助一個有需要的人」放在一起，過去你覺得哪一個才算「敬拜神」？明白保羅將實際幫補稱為「祭司的禮拜服事（*leitourgia*）」後，這週你想為誰點亮一封「溫暖亮光的信」？",
       "audioUrl": "/audio/2026-11-16/youth/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-16",

@@ -49,7 +49,7 @@ export const family_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "最近這一個月裡，你的家人（配偶、父母或孩子）有沒有展現出哪一個小小的「樂意之心」或善意舉動，是你還沒好好向他道謝並誇獎他的？今天在餐桌上或睡前，你可以怎樣把這句肯定親口告訴他？",
       "audioUrl": "/audio/2026-11-16/family/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家裡，有沒有哪一件曾經答應過彼此（父母答應孩子、孩子答應父母、或夫妻答應對方）卻一直拖著還沒實現的承諾？我們這週可以怎樣一起「預先整理妥當」（*prokatartisōsin*），定下具體完成的時間，讓它成為全家人的喜樂福分？",
       "audioUrl": "/audio/2026-11-16/family/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "老實說，我們在家裡為彼此做家事、付出時間或金錢時，臉上比較常出現「歡欣樂意的笑容（*hilaron*）」，還是「委屈作難的苦瓜臉」？從今天開始，我們可以怎樣幫彼此減輕負擔，讓家裡的付出重新變得快樂起來？",
       "audioUrl": "/audio/2026-11-16/family/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們家遇到突發開銷或手頭比較緊的時候，我們通常會怎麼處理奉獻與助人的預算？今天聽完「小女孩掉進水溝的一塊錢」和「農夫爸爸與上帝的大鏟子」這兩個故事，我們全家人覺得哪一個故事更像我們想要活出的家庭榜樣？",
       "audioUrl": "/audio/2026-11-16/family/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "今天晚餐謝飯禱告前，全家人要不要一起玩個「食物溯源接龍」，看看桌上的飯菜一路往回推，最後是誰賜給我們的？如果把我們家每個月的收入與孩子的零用錢分成「自己吃的麵包」和「撒出去的種子」，我們家目前的「種子袋」裝了些什麼呢？",
       "audioUrl": "/audio/2026-11-16/family/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "在那個「誰讓風箏飛起來（竹籤骨架、彩色紙面、風箏細線、春風）」的故事裡，你覺得我們家每個人分別像哪一個角色？今天週末，我們全家人要不要一起寫一張關懷卡片或準備一份小禮物送給一位孤單的長輩或朋友，讓他也能「走在一整天的溫暖亮光裡」？",
       "audioUrl": "/audio/2026-11-16/family/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-16",

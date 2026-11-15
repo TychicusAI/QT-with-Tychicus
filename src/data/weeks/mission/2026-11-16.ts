@@ -49,7 +49,7 @@ export const mission_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前對跨文化宣教、受苦教會或身邊未信鄰舍的負擔，你心裡的火苗現在是處於「滾燙沸騰（*zēlos*）」的狀態，還是有點像快要熄滅的餘燼？今天你可以透過哪一個具體行動（例如：重讀一封宣教士代禱信、為一個國家禱告、或落實一項擱置的承諾），為心中的宣教祭壇添上一把新柴？",
       "audioUrl": "/audio/2026-11-16/mission/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "在你對跨文化宣教士的支持（代禱、財務奉獻、述職關懷）或對身邊異文化鄰舍的接觸上，有沒有哪一件事是你心裡早就「起過心意」，卻因為忙碌而一直拖延未做的？這週你可以如何像奔跑的亞伯拉罕一樣，提前把它「預先整理完備」（*prokatartisōsin*）？",
       "audioUrl": "/audio/2026-11-16/mission/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const mission_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "誠實檢視你目前在宣教工場、差傳事工或日常服事中的心境，你覺得自己比較接近「因責任壓力而咬牙硬撐（*ex anankēs*）」，還是像艾美·卡邁克爾那樣「充滿喜樂的犧牲（*hilaron*）」？你需要向主交託什麼樣的重擔或委屈，才能重新找回在恩典中歡欣撒種的笑容？",
       "audioUrl": "/audio/2026-11-16/mission/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const mission_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "當你想到把更多金錢、時間或兒女的生命投入「跨文化宣教與幫助窮乏人」時，你心底最害怕失去或不夠用的是什麼？今天天父放在你手心裡那片「五個全字（各樣恩惠、凡事、常常、一切充足、各樣善事）」的保證麵包，如何安慰並釋放你的恐懼？",
       "audioUrl": "/audio/2026-11-16/mission/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const mission_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "當你讀到二十歲的泰瑞·貝爾在餐廳玻璃窗前看見三個飢餓男孩盯著他的漢堡時，你覺得今天在我們的城市或世界哪個角落，也有那樣一雙「貼在玻璃窗外的眼睛」正等待著我們手中的種子？我們該如何從自己的收入與時間中分別出那份「種子（*sporon*）」？",
       "audioUrl": "/audio/2026-11-16/mission/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const mission_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "唐·理查森在薩維族看見「按手在和平之子頭上使世仇化為親人」，而保羅在哥林多後書 9 章 12 至 15 節看見外邦與猶太教會因著基督「說不盡的恩賜」與實際的愛心供給而彼此切切代禱；今天你可以為哪一個正在跨文化前線服事的宣教士或受苦群體獻上實際的奉獻與切切的代禱，與他們一同按手在基督這位和平之子的恩典裡？",
       "audioUrl": "/audio/2026-11-16/mission/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-16",

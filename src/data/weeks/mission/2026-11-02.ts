@@ -49,7 +49,7 @@ export const mission_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/mission/mon.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/mission/tue.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "wed",
@@ -134,7 +134,7 @@ export const mission_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/mission/wed.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "thu",
@@ -180,7 +180,7 @@ export const mission_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/mission/thu.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "fri",
@@ -226,7 +226,7 @@ export const mission_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/mission/fri.mp3",
-      "hasAudio": true
+      "hasAudio": false
     },
     {
       "id": "sat",
@@ -272,7 +272,7 @@ export const mission_2026_11_02: DevotionalWeek = {
       ],
       "meditationQuestion": "",
       "audioUrl": "/audio/2026-11-02/mission/sat.mp3",
-      "hasAudio": true
+      "hasAudio": false
     }
   ],
   "publishedAt": "2026-11-02",
