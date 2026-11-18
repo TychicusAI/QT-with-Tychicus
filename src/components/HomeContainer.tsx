@@ -55,7 +55,6 @@ export function HomeContainer() {
               >
                 <Sparkle className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>青年版</span>
-                <span className="hidden md:inline">Youth</span>
               </button>
 
               <button
@@ -68,7 +67,6 @@ export function HomeContainer() {
               >
                 <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>家庭版</span>
-                <span className="hidden md:inline">Family</span>
               </button>
 
               <button
@@ -81,7 +79,6 @@ export function HomeContainer() {
               >
                 <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>樂齡版</span>
-                <span className="hidden md:inline">Encore</span>
               </button>
 
               <button
@@ -94,7 +91,6 @@ export function HomeContainer() {
               >
                 <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>宣教版</span>
-                <span className="hidden md:inline">Mission</span>
               </button>
 
               <button
@@ -107,7 +103,6 @@ export function HomeContainer() {
               >
                 <ScrollText className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                 <span>釋經版</span>
-                <span className="hidden md:inline">Exegesis</span>
               </button>
             </div>
           </div>
@@ -158,7 +153,7 @@ export function HomeContainer() {
 
           <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mx-auto">
             {isExegesis
-              ? "嚴格遵循「文本微觀解經工具箱」，奠基權威註釋書與新約希臘文脈絡，深探經文文體架構、交錯平行與神學張力。"
+              ? "嚴格遵循文本微觀解經原則，奠基權威註釋書與新約希臘文脈絡，深探經文文體架構、交錯平行與神學張力。"
               : isMission
               ? "每天 10~15 分鐘，連結跨文化前線的瓦器眼淚與本地日常的鄰舍見證，從自我中心轉向萬國萬民的永恆敬拜。"
               : isEncore
