@@ -500,7 +500,16 @@ export function HomeContainer() {
               製作
             </span>
             <span className="mx-2">•</span>
-            <span>每週定時更新當週教材</span>
+            <span>
+              有任何問題請
+              <a
+                href="mailto:hungshinlee@gmail.com"
+                className="font-medium text-stone-700 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2 transition"
+              >
+                來信
+              </a>
+              指教
+            </span>
           </div>
         </div>
       </footer>
