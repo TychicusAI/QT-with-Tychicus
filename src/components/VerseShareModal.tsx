@@ -53,7 +53,11 @@ export function VerseShareModal({ isOpen, onClose, week }: VerseShareModalProps)
   if (!isOpen) return null;
 
   const versionLabel =
-    week.version === "mission"
+    week.version === "exegesis"
+      ? "釋經版"
+      : week.version === "solace"
+      ? "微光版"
+      : week.version === "mission"
       ? "宣教版"
       : week.version === "encore"
       ? "樂齡版"

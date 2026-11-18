@@ -1,4 +1,4 @@
-export type DevotionalVersion = "youth" | "family" | "encore" | "mission" | "exegesis";
+export type DevotionalVersion = "youth" | "family" | "encore" | "mission" | "solace" | "exegesis";
 
 export interface ExtendedStudyItem {
   title: string;
@@ -29,7 +29,7 @@ export interface DevotionalDay {
 
 export interface DevotionalWeek {
   id: string; // e.g. '2026-09-14'
-  version: DevotionalVersion; // 'youth' | 'family' | 'encore' | 'mission'
+  version: DevotionalVersion; // 'youth' | 'family' | 'encore' | 'mission' | 'solace' | 'exegesis'
   startDate?: string;
   title: string; // General theme title
   book: string; // Scripture range e.g. '哥林多後書 1:12-2:13'

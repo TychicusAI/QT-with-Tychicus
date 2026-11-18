@@ -119,7 +119,7 @@ function parseMessagesFromMarkdown(content) {
 function resolveVoicePaths(versionKey) {
   const voicesDir = path.join(process.cwd(), "data", "voices");
   let voiceStem = "family_female";
-  if (versionKey === "youth" || versionKey === "family") {
+  if (versionKey === "youth" || versionKey === "family" || versionKey === "solace") {
     voiceStem = "family_female";
   } else if (versionKey === "encore" || versionKey === "mission" || versionKey === "exegesis") {
     voiceStem = "mission_male";
@@ -275,6 +275,7 @@ async function main() {
       { key: "family", file: "qt_for_family.md", name: "家庭版" },
       { key: "encore", file: "qt_for_encore.md", name: "樂齡版" },
       { key: "mission", file: "qt_for_mission.md", name: "宣教版" },
+      { key: "solace", file: "qt_for_solace.md", name: "微光版" },
     ];
     if (specifiedVersion) {
       versions = versions.filter((v) => v.key === specifiedVersion);

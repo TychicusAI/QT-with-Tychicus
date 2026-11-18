@@ -36,6 +36,8 @@ import { mission_2026_11_02 } from "@/data/weeks/mission/2026-11-02";
 import { mission_2026_11_09 } from "@/data/weeks/mission/2026-11-09";
 import { mission_2026_11_16 } from "@/data/weeks/mission/2026-11-16";
 
+import { solace_2026_11_16 } from "@/data/weeks/solace/2026-11-16";
+
 import { exegesis_2026_10_26 } from "@/data/weeks/exegesis/2026-10-26";
 import { exegesis_2026_11_02 } from "@/data/weeks/exegesis/2026-11-02";
 import { exegesis_2026_11_09 } from "@/data/weeks/exegesis/2026-11-09";
@@ -45,12 +47,14 @@ export const allYouthWeeks: DevotionalWeek[] = [youth_2026_09_14, youth_2026_09_
 export const allFamilyWeeks: DevotionalWeek[] = [family_2026_09_14, family_2026_09_21, family_2026_09_28, family_2026_10_05, family_2026_10_12, family_2026_10_19, family_2026_10_26, family_2026_11_02, family_2026_11_09, family_2026_11_16];
 export const allEncoreWeeks: DevotionalWeek[] = [encore_2026_10_12, encore_2026_10_19, encore_2026_10_26, encore_2026_11_02, encore_2026_11_09, encore_2026_11_16];
 export const allMissionWeeks: DevotionalWeek[] = [mission_2026_10_12, mission_2026_10_19, mission_2026_10_26, mission_2026_11_02, mission_2026_11_09, mission_2026_11_16];
+export const allSolaceWeeks: DevotionalWeek[] = [solace_2026_11_16];
 export const allExegesisWeeks: DevotionalWeek[] = [exegesis_2026_10_26, exegesis_2026_11_02, exegesis_2026_11_09, exegesis_2026_11_16];
 
 export function getWeeksByVersion(version: DevotionalVersion): DevotionalWeek[] {
   if (version === "family") return allFamilyWeeks;
   if (version === "encore") return allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks;
   if (version === "mission") return allMissionWeeks.length > 0 ? allMissionWeeks : allYouthWeeks;
+  if (version === "solace") return allSolaceWeeks.length > 0 ? allSolaceWeeks : allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks;
   if (version === "exegesis") return allExegesisWeeks.length > 0 ? allExegesisWeeks : allYouthWeeks;
   return allYouthWeeks;
 }
@@ -75,6 +79,9 @@ export function getWeekById(version: DevotionalVersion, weekId: string): Devotio
   }
   if (version === "mission") {
     return allYouthWeeks.find((w) => w.id === weekId) || allFamilyWeeks.find((w) => w.id === weekId);
+  }
+  if (version === "solace") {
+    return allEncoreWeeks.find((w) => w.id === weekId) || allFamilyWeeks.find((w) => w.id === weekId) || allYouthWeeks.find((w) => w.id === weekId);
   }
   if (version === "exegesis") {
     return allExegesisWeeks.find((w) => w.id === weekId) || allYouthWeeks.find((w) => w.id === weekId);
@@ -211,6 +218,20 @@ export function getAllParams(): { version: DevotionalVersion; weekId: string; da
     if (!missionWeekIds.has(week.id)) {
       for (const day of week.days) {
         params.push({ version: "mission", weekId: week.id, dayId: day.id });
+      }
+    }
+  }
+  const solaceWeekIds = new Set<string>();
+  for (const week of allSolaceWeeks) {
+    solaceWeekIds.add(week.id);
+    for (const day of week.days) {
+      params.push({ version: "solace", weekId: week.id, dayId: day.id });
+    }
+  }
+  for (const week of allEncoreWeeks.length > 0 ? allEncoreWeeks : allFamilyWeeks) {
+    if (!solaceWeekIds.has(week.id)) {
+      for (const day of week.days) {
+        params.push({ version: "solace", weekId: week.id, dayId: day.id });
       }
     }
   }

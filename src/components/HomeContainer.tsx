@@ -7,7 +7,7 @@ import { WeeklyTimeline } from "@/components/WeeklyTimeline";
 import { getCurrentWeek, getAllWeeksSorted, formatWeekDateRange, getRecommendedDayIdForToday } from "@/lib/devotional-service";
 import { usePreferredVersion } from "@/lib/storage";
 import Link from "next/link";
-import { Sparkles, Heart, Layers, Users, Sparkle, Library, Calendar, ChevronRight, History, Sun, Compass, ScrollText } from "lucide-react";
+import { Sparkles, Heart, Layers, Users, Sparkle, Library, Calendar, ChevronRight, History, Sun, Compass, HeartHandshake, ScrollText } from "lucide-react";
 
 export function HomeContainer() {
   const [recommendedDayId, setRecommendedDayId] = useState("mon");
@@ -20,6 +20,7 @@ export function HomeContainer() {
   const isFamily = version === "family";
   const isEncore = version === "encore";
   const isMission = version === "mission";
+  const isSolace = version === "solace";
   const isExegesis = version === "exegesis";
   const allWeeks = React.useMemo(() => getAllWeeksSorted(version), [version]);
   const currentWeek = getCurrentWeek(version);
@@ -44,10 +45,10 @@ export function HomeContainer() {
         <section className="text-center max-w-2xl mx-auto space-y-4 pt-2 sm:pt-4">
           <div className="flex items-center justify-center w-full">
             {/* Version Switcher Buttons */}
-            <div className="grid grid-cols-5 sm:inline-flex items-center justify-center p-1 rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs w-full max-w-xl sm:w-auto sm:max-w-full">
+            <div className="grid grid-cols-3 sm:inline-flex items-center justify-center p-1 rounded-2xl sm:rounded-full bg-stone-200/80 dark:bg-stone-900 border border-stone-300/60 dark:border-stone-800 shadow-xs w-full max-w-xl sm:w-auto sm:max-w-full gap-1 sm:gap-0">
               <button
                 onClick={() => setVersion("youth")}
-                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   version === "youth"
                     ? "bg-amber-500 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -59,7 +60,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("family")}
-                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isFamily
                     ? "bg-teal-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -71,7 +72,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("encore")}
-                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isEncore
                     ? "bg-rose-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -83,7 +84,7 @@ export function HomeContainer() {
 
               <button
                 onClick={() => setVersion("mission")}
-                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isMission
                     ? "bg-indigo-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -94,8 +95,20 @@ export function HomeContainer() {
               </button>
 
               <button
+                onClick={() => setVersion("solace")}
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
+                  isSolace
+                    ? "bg-sky-700 text-white shadow-xs"
+                    : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                }`}
+              >
+                <HeartHandshake className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+                <span>微光版</span>
+              </button>
+
+              <button
                 onClick={() => setVersion("exegesis")}
-                className={`flex items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-bold transition cursor-pointer whitespace-nowrap ${
                   isExegesis
                     ? "bg-purple-700 text-white shadow-xs"
                     : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
@@ -114,6 +127,14 @@ export function HomeContainer() {
                 <br />
                 <span className="bg-gradient-to-r from-purple-700 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
                   深研神話語的微觀肌理
+                </span>
+              </>
+            ) : isSolace ? (
+              <>
+                在瓦器裂痕與死蔭暗夜裡，
+                <br />
+                <span className="bg-gradient-to-r from-sky-700 via-cyan-600 to-sky-500 bg-clip-text text-transparent">
+                  仰望主釘痕手的恩典微光
                 </span>
               </>
             ) : isMission ? (
@@ -154,6 +175,8 @@ export function HomeContainer() {
           <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mx-auto">
             {isExegesis
               ? "嚴格遵循文本微觀解經原則，奠基權威註釋書與新約希臘文脈絡，深探經文文體架構、交錯平行與神學張力。"
+              : isSolace
+              ? "每天 10~15 分鐘（可搭配語音伴讀閉眼聆聽），為身處病痛、醫療煎熬、情緒暗夜與照護疲乏中的肢體，帶來不催促、不定罪的十架陪伴與哀歌安慰。"
               : isMission
               ? "每天 10~15 分鐘，連結跨文化前線的瓦器眼淚與本地日常的鄰舍見證，從自我中心轉向萬國萬民的永恆敬拜。"
               : isEncore
@@ -187,6 +210,8 @@ export function HomeContainer() {
                       isSelected
                         ? isExegesis
                           ? "bg-purple-700 text-white shadow-xs"
+                          : isSolace
+                          ? "bg-sky-700 text-white shadow-xs"
                           : isMission
                           ? "bg-indigo-700 text-white shadow-xs"
                           : isEncore
@@ -205,6 +230,8 @@ export function HomeContainer() {
                             ? "bg-white/20 text-white"
                             : isExegesis
                             ? "bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300"
+                            : isSolace
+                            ? "bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300"
                             : isMission
                             ? "bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300"
                             : isEncore
@@ -227,6 +254,8 @@ export function HomeContainer() {
               className={`inline-flex items-center gap-1 min-h-[36px] py-1 text-xs sm:text-sm font-bold hover:underline transition ${
                 isExegesis
                   ? "text-purple-700 dark:text-purple-400"
+                  : isSolace
+                  ? "text-sky-700 dark:text-sky-400"
                   : isMission
                   ? "text-indigo-700 dark:text-indigo-400"
                   : isEncore
@@ -273,6 +302,8 @@ export function HomeContainer() {
             className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider ${
               isExegesis
                 ? "text-purple-700 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-700 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
                 : isEncore
@@ -300,7 +331,7 @@ export function HomeContainer() {
                   平台架構與特色導覽
                 </h3>
                 <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
-                  深入了解「靈修推基古」的 SSOT 架構、六大微觀解經工具、五軌牧養矩陣與三方橫向對比。
+                  深入了解「靈修推基古」的 SSOT 架構、六大微觀解經工具、六軌牧養矩陣與三方橫向對比。
                 </p>
               </div>
 
@@ -346,7 +377,7 @@ export function HomeContainer() {
                   歷週靈修存檔庫
                 </h3>
                 <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
-                  完整查閱青年、家庭、樂齡、宣教與釋經版歷週經課系列，溫習過往信息、筆記心得與打卡進度。
+                  完整查閱青年、家庭、樂齡、宣教、微光與釋經版歷週經課系列，溫習過往信息、筆記心得與打卡進度。
                 </p>
               </div>
 
@@ -387,6 +418,8 @@ export function HomeContainer() {
             className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none ${
               isExegesis
                 ? "bg-purple-500/15"
+                : isSolace
+                ? "bg-sky-500/15"
                 : isMission
                 ? "bg-indigo-500/15"
                 : isEncore
@@ -401,6 +434,8 @@ export function HomeContainer() {
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${
                 isExegesis
                   ? "bg-purple-500/20 text-purple-300 border-purple-500/30"
+                  : isSolace
+                  ? "bg-sky-500/20 text-sky-300 border-sky-500/30"
                   : isMission
                   ? "bg-indigo-500/20 text-indigo-300 border-indigo-500/30"
                   : isEncore
@@ -414,6 +449,8 @@ export function HomeContainer() {
                 className={`w-3.5 h-3.5 ${
                   isExegesis
                     ? "text-purple-400"
+                    : isSolace
+                    ? "text-sky-400"
                     : isMission
                     ? "text-indigo-400"
                     : isEncore
@@ -426,6 +463,8 @@ export function HomeContainer() {
               <span>
                 {isExegesis
                   ? "還原現場・深耕神話語微觀肌理"
+                  : isSolace
+                  ? "瓦器裂痕中的寶貝・主釘痕手親自同在"
                   : isMission
                   ? "基督之愛激勵・作神和好的特使"
                   : isEncore
@@ -438,6 +477,8 @@ export function HomeContainer() {
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
               {isExegesis
                 ? "「深哉，神豐富的智慧和知識！他的判斷何其難測！他的蹤跡何其難尋！」"
+                : isSolace
+                ? "「我們有這寶貝放在瓦器裡，要顯明這莫大的能力是出於神，不是出於我們。」"
                 : isMission
                 ? "「這一切都是出於神；他藉著基督使我們與他和好，又將勸人與他和好的職分賜給我們。」"
                 : isEncore
@@ -449,6 +490,8 @@ export function HomeContainer() {
             <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
               {isExegesis
                 ? "研讀聖經不該停留於碎片化的心靈慰藉。唯有沉浸在文法結構、修辭反諷、舊約救贖歷史的回響與當代論辯背景中，神話語的真實力量才能如兩刃的利劍，刺入剖開靈與魂。"
+                : isSolace
+                ? "在病榻與苦難的漫長幽谷裡，你不需要勉強擠出笑容或證明自己的剛強。那位曾在客西馬尼園流淚、在十字架上經歷被棄絕之痛的救主，正以帶傷的雙手緊握著你，接納你每一滴真實的眼淚。"
                 : isMission
                 ? "宣教從來不是少數英雄的遠征，而是每一位門徒在救贖歷史中的生命座標。無論是在異鄉前線面對語言與孤寂的瓦器，還是在本地日常中看守器具、接待鄰舍的守望者，我們都同在基督的差遣裡。"
                 : isEncore
@@ -469,7 +512,7 @@ export function HomeContainer() {
               靈修推基古 (QT with Tychicus)
             </span>
             <span>•</span>
-            <span>青年、家庭、樂齡、宣教與釋經每日研經靈修平台</span>
+            <span>青年、家庭、樂齡、宣教、微光與釋經每日研經靈修平台</span>
           </div>
 
           <div className="text-center sm:text-right">

@@ -48,7 +48,7 @@ export function AboutViewer() {
           <div className="space-y-3 pb-6 border-b border-stone-200 dark:border-stone-800">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 border border-purple-300/60 dark:border-purple-700/50">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>以嚴謹釋經為根基・五軌分流深度牧養</span>
+              <span>以嚴謹釋經為根基・六軌分流深度牧養</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-50">
@@ -127,7 +127,7 @@ export function AboutViewer() {
                 雙基石研經工程
               </h3>
               <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-                每週先產出萬字級<strong>學術微觀釋經筆記 (study.md)</strong> 與<strong>真實具名當代見證庫 (illustrations.md)</strong>。在學術地基與真實生活未奠定前，絕不盲目產出每日靈修。
+                每週先產出萬字級<strong>學術微觀釋經筆記 (study.md)</strong> 與<strong>三軌真實具名見證庫 (illustrations.md)</strong>。在學術地基與真實生活未奠定前，絕不盲目產出每日靈修。
               </p>
             </div>
 
@@ -163,10 +163,10 @@ export function AboutViewer() {
                 05
               </div>
               <h3 className="text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100">
-                五軌分流牧養矩陣
+                六軌分流牧養矩陣
               </h3>
               <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-                同一段經文，藉由靈活的神學轉譯，精準分流為青年、家庭、樂齡、宣教與釋經五大軌道，對焦特定群體的心靈掙扎與生命處境。
+                同一段經文，藉由靈活的神學轉譯，精準分流為青年、家庭、樂齡、宣教、微光與釋經六大軌道，對焦特定群體的心靈掙扎與生命處境。
               </p>
             </div>
 
@@ -185,7 +185,7 @@ export function AboutViewer() {
           </div>
         </section>
 
-        {/* 3. Five Dedicated Tracks */}
+        {/* 3. Six Dedicated Tracks */}
         <section className="space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-400">
@@ -193,7 +193,7 @@ export function AboutViewer() {
               <span>精準牧養視角</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100">
-              五大版本定位矩陣
+              六大版本定位矩陣
             </h2>
             <p className="text-sm text-stone-600 dark:text-stone-400 max-w-2xl">
               同一聖經文本，因著生命階段與呼召維度的不同，能在真理光照下綻放出多元而深刻的牧養對話。
@@ -293,6 +293,30 @@ export function AboutViewer() {
                 className="shrink-0 text-xs sm:text-sm font-bold px-4 py-2.5 min-h-[42px] rounded-xl bg-indigo-700 text-white hover:bg-indigo-800 transition shadow-xs flex items-center gap-1"
               >
                 <span>閱讀宣教版</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            {/* Solace Track */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-sky-50/50 dark:bg-stone-900/60 border border-sky-200/80 dark:border-sky-900/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="space-y-1.5 max-w-2xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-sky-700 text-white">
+                    微光版 Solace
+                  </span>
+                  <span className="text-xs sm:text-sm text-sky-800 dark:text-sky-300 font-semibold">
+                    病榻暗夜恩典微光・十架哀歌與安息交託
+                  </span>
+                </div>
+                <p className="text-sm sm:text-base text-stone-700 dark:text-stone-300 leading-relaxed">
+                  專為身處肉體病痛、醫療煎熬、情緒暗夜與長期照護疲乏中的弟兄姊妹設計。拒絕廉價報應論與強顏歡笑，以十架神學、聖經哀歌與零壓力的「安息交託引導」溫柔陪伴（支援閉眼語音伴讀）。
+                </p>
+              </div>
+              <Link
+                href="/devotional/solace/2026-10-26/mon"
+                className="shrink-0 text-xs sm:text-sm font-bold px-4 py-2.5 min-h-[42px] rounded-xl bg-sky-700 text-white hover:bg-sky-800 transition shadow-xs flex items-center gap-1"
+              >
+                <span>閱讀微光版</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -436,13 +460,13 @@ export function AboutViewer() {
                     牧養分流精準度
                   </td>
                   <td className="py-3.5 px-4 text-stone-600 dark:text-stone-400">
-                    單一受眾定位，無法同時滿足青少年、家庭父母、長者或講道者的痛點。
+                    單一受眾定位，無法同時滿足青少年、家庭父母、長者、病中肢體或講道者的痛點。
                   </td>
                   <td className="py-3.5 px-4 text-stone-600 dark:text-stone-400">
                     需要使用者自行編寫複雜提示詞，若無專業神學背景往往得到模板化回答。
                   </td>
                   <td className="py-3.5 px-4 bg-purple-50/40 dark:bg-purple-950/20 font-semibold text-purple-900 dark:text-purple-200">
-                    一源五軌原生矩陣（青年、家庭、樂齡、宣教、釋經），一鍵切換精準對話。
+                    一源六軌原生矩陣（青年、家庭、樂齡、宣教、微光、釋經），一鍵切換精準對話。
                   </td>
                 </tr>
 

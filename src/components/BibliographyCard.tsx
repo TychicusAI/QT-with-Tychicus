@@ -20,6 +20,7 @@ export function BibliographyCard({
   const isFamily = version === "family";
   const isEncore = version === "encore";
   const isMission = version === "mission";
+  const isSolace = version === "solace";
   const isExegesis = version === "exegesis";
   const totalBooks = getBookBibliography(bookSlug)?.totalBooks ?? 15;
 
@@ -28,6 +29,8 @@ export function BibliographyCard({
       className={`rounded-2xl p-5 sm:p-6 border transition-all duration-200 shadow-2xs ${
         isExegesis
           ? "bg-gradient-to-r from-purple-500/5 via-purple-500/10 to-indigo-500/5 border-purple-300/50 dark:border-purple-800/40"
+          : isSolace
+          ? "bg-gradient-to-r from-sky-500/5 via-sky-500/10 to-cyan-500/5 border-sky-300/50 dark:border-sky-800/40"
           : isMission
           ? "bg-gradient-to-r from-indigo-500/5 via-indigo-500/10 to-violet-500/5 border-indigo-300/50 dark:border-indigo-800/40"
           : isEncore
@@ -43,6 +46,8 @@ export function BibliographyCard({
             className={`p-2.5 rounded-xl shrink-0 ${
               isExegesis
                 ? "bg-purple-600/10 text-purple-700 dark:text-purple-300"
+                : isSolace
+                ? "bg-sky-600/10 text-sky-700 dark:text-sky-300"
                 : isMission
                 ? "bg-indigo-600/10 text-indigo-700 dark:text-indigo-300"
                 : isEncore
@@ -64,6 +69,8 @@ export function BibliographyCard({
                 className={`inline-flex items-center gap-1 text-xs sm:text-sm font-semibold px-2.5 py-0.5 rounded-full ${
                   isExegesis
                     ? "bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-200"
+                    : isSolace
+                    ? "bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-200"
                     : isMission
                     ? "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-200"
                     : isEncore
@@ -88,6 +95,8 @@ export function BibliographyCard({
           className={`shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition shadow-xs group ${
             isExegesis
               ? "bg-purple-700 hover:bg-purple-600 text-white shadow-purple-700/20"
+              : isSolace
+              ? "bg-sky-700 hover:bg-sky-600 text-white shadow-sky-700/20"
               : isMission
               ? "bg-indigo-700 hover:bg-indigo-600 text-white shadow-indigo-700/20"
               : isEncore

@@ -29,6 +29,8 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
   const isFamily = version === "family";
   const isEncore = version === "encore";
   const isMission = version === "mission";
+  const isSolace = version === "solace";
+  const isExegesis = version === "exegesis";
 
   const promptClasses = {
     normal: "text-xs sm:text-sm leading-relaxed",
@@ -45,7 +47,11 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
   return (
     <div
       className={`rounded-2xl p-5 sm:p-6 border space-y-3 ${
-        isMission
+        isExegesis
+          ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-300/40 dark:border-purple-900/40"
+          : isSolace
+          ? "bg-sky-500/5 dark:bg-sky-950/20 border-sky-300/40 dark:border-sky-900/40"
+          : isMission
           ? "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-300/40 dark:border-indigo-900/40"
           : isEncore
           ? "bg-rose-500/5 dark:bg-rose-950/20 border-rose-300/40 dark:border-rose-900/40"
@@ -58,7 +64,11 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
         <div className="flex items-center gap-2">
           <PenLine
             className={`w-5 h-5 shrink-0 ${
-              isMission
+              isExegesis
+                ? "text-purple-600 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-600 dark:text-sky-400"
+                : isMission
                 ? "text-indigo-600 dark:text-indigo-400"
                 : isEncore
                 ? "text-rose-600 dark:text-rose-400"
@@ -68,7 +78,7 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
             }`}
           />
           <h4 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
-            隨堂筆記
+            {isSolace ? "病榻與心靈輕筆記（選填）" : "隨堂筆記"}
           </h4>
         </div>
 
@@ -84,7 +94,9 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
       </div>
 
       <p className={`${promptClasses} text-stone-600 dark:text-stone-300`}>
-        {isMission
+        {isSolace
+          ? "若今天體力許可，你可以記下一句撫慰你的經文或向主傾吐的嘆息；若感到疲累，直接閉眼安息也是蒙神喜悅的交託。"
+          : isMission
           ? "無論身處異鄉前線或本地日常，今天神透過這段經文如何調整你的國度視野，帶領你跨越邊界或為遠方守望？"
           : isEncore
           ? "回顧走過的半生歲月與當前的放手課題，今天神透過這段經文賜給你什麼樣的安慰、釋放或下半場亮光？"
@@ -97,7 +109,9 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
         value={note}
         onChange={handleChange}
         placeholder={
-          isMission
+          isSolace
+            ? "在此輕輕寫下今日的嘆息、感謝或一個需要主托住的名字（不寫也完全沒有負擔）..."
+            : isMission
             ? "在此寫下對未得群體與前線工人的代禱、跨越日常同溫層的領受，或與萬國之主同行的手記..."
             : isEncore
             ? "在此寫下今天數算的恩典、為成年兒女或年邁雙親交託的代禱、或與主同行的心靈手記..."
@@ -107,7 +121,11 @@ export function JournalBox({ version, weekId, dayId, fontSize = "large" }: Journ
         }
         rows={4}
         className={`w-full p-3.5 rounded-xl ${textareaClasses} bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:outline-none focus:ring-2 resize-y ${
-          isMission
+          isExegesis
+            ? "focus:ring-purple-600"
+            : isSolace
+            ? "focus:ring-sky-600"
+            : isMission
             ? "focus:ring-indigo-600"
             : isEncore
             ? "focus:ring-rose-600"

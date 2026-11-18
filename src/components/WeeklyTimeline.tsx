@@ -19,6 +19,7 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
   const isFamily = week.version === "family";
   const isEncore = week.version === "encore";
   const isMission = week.version === "mission";
+  const isSolace = week.version === "solace";
   const isExegesis = week.version === "exegesis";
 
   const handleToggle = (e: React.MouseEvent, dayId: string) => {
@@ -48,8 +49,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
             className={`text-xs font-bold tracking-wider uppercase mb-1 ${
               isExegesis
                 ? "text-purple-700 dark:text-purple-400"
-                : isExegesis
-                ? "text-purple-700 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-700 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
                 : isEncore
@@ -63,6 +64,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
               {week.book}・
               {isExegesis
                 ? "釋經版主題"
+                : isSolace
+                ? "微光版主題"
                 : isMission
                 ? "宣教版主題"
                 : isEncore
@@ -87,6 +90,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
               className={`w-3.5 h-3.5 ${
                 isExegesis
                   ? "text-purple-600"
+                  : isSolace
+                  ? "text-sky-600"
                   : isMission
                   ? "text-indigo-600"
                   : isEncore
@@ -108,6 +113,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 className={`h-full rounded-full transition-all duration-300 ${
                   isExegesis
                     ? "bg-purple-600"
+                    : isSolace
+                    ? "bg-sky-600"
                     : isMission
                     ? "bg-indigo-600"
                     : isEncore
@@ -129,6 +136,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
           className={`p-5 rounded-2xl border text-stone-700 dark:text-stone-300 text-sm sm:text-base leading-relaxed space-y-2 ${
             isExegesis
               ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-300/30 dark:border-purple-700/30"
+              : isSolace
+              ? "bg-sky-500/5 dark:bg-sky-950/20 border-sky-300/30 dark:border-sky-700/30"
               : isMission
               ? "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-300/30 dark:border-indigo-700/30"
               : isEncore
@@ -142,6 +151,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
             className={`font-bold flex items-center gap-2 ${
               isExegesis
                 ? "text-purple-800 dark:text-purple-300"
+                : isSolace
+                ? "text-sky-800 dark:text-sky-300"
                 : isMission
                 ? "text-indigo-800 dark:text-indigo-300"
                 : isEncore
@@ -166,6 +177,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
           className={`w-5 h-5 shrink-0 rotate-180 ${
             isExegesis
               ? "text-purple-600 dark:text-purple-400"
+              : isSolace
+              ? "text-sky-600 dark:text-sky-400"
               : isMission
               ? "text-indigo-600 dark:text-indigo-400"
               : isEncore
@@ -184,6 +197,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
             className={`ml-2 text-xs sm:text-sm font-medium ${
               isExegesis
                 ? "text-purple-700 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-700 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
                 : isEncore
@@ -213,6 +228,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                 isToday
                   ? isExegesis
                     ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-500/70 dark:border-purple-600/70 shadow-md shadow-purple-500/5"
+                    : isSolace
+                    ? "bg-sky-500/5 dark:bg-sky-950/20 border-sky-500/70 dark:border-sky-600/70 shadow-md shadow-sky-500/5"
                     : isMission
                     ? "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-500/70 dark:border-indigo-600/70 shadow-md shadow-indigo-500/5"
                     : isEncore
@@ -232,6 +249,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                         isToday
                           ? isExegesis
                             ? "bg-purple-700 text-white"
+                            : isSolace
+                            ? "bg-sky-700 text-white"
                             : isMission
                             ? "bg-indigo-700 text-white"
                             : isEncore
@@ -249,6 +268,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                         className={`text-xs font-bold ${
                           isExegesis
                             ? "text-purple-700 dark:text-purple-400"
+                            : isSolace
+                            ? "text-sky-700 dark:text-sky-400"
                             : isMission
                             ? "text-indigo-700 dark:text-indigo-400"
                             : isEncore
@@ -283,6 +304,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                   className={`text-xs sm:text-sm font-semibold mb-1 ${
                     isExegesis
                       ? "text-purple-700 dark:text-purple-400"
+                      : isSolace
+                      ? "text-sky-700 dark:text-sky-400"
                       : isMission
                       ? "text-indigo-700 dark:text-indigo-400"
                       : isEncore
@@ -300,6 +323,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                   className={`font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100 transition-colors line-clamp-2 ${
                     isExegesis
                       ? "group-hover:text-purple-700 dark:group-hover:text-purple-400"
+                      : isSolace
+                      ? "group-hover:text-sky-700 dark:group-hover:text-sky-400"
                       : isMission
                       ? "group-hover:text-indigo-700 dark:group-hover:text-indigo-400"
                       : isEncore
@@ -330,6 +355,8 @@ export function WeeklyTimeline({ week, recommendedDayId }: WeeklyTimelineProps) 
                   className={`inline-flex items-center gap-1 py-1 font-semibold group-hover:translate-x-1 transition-transform ${
                     isExegesis
                       ? "text-purple-700 dark:text-purple-400"
+                      : isSolace
+                      ? "text-sky-700 dark:text-sky-400"
                       : isMission
                       ? "text-indigo-700 dark:text-indigo-400"
                       : isEncore

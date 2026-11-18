@@ -138,7 +138,14 @@ export function getStoredVersion(): DevotionalVersion {
   if (typeof window === "undefined") return "youth";
   try {
     const val = localStorage.getItem(VERSION_KEY);
-    if (val === "family" || val === "youth" || val === "encore" || val === "mission" || val === "exegesis") {
+    if (
+      val === "family" ||
+      val === "youth" ||
+      val === "encore" ||
+      val === "mission" ||
+      val === "solace" ||
+      val === "exegesis"
+    ) {
       return val;
     }
   } catch {

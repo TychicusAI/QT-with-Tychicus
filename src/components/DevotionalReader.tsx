@@ -15,6 +15,7 @@ import {
   Sparkle,
   Sun,
   Compass,
+  HeartHandshake,
   ScrollText
 } from "lucide-react";
 import { marked } from "marked";
@@ -62,7 +63,7 @@ interface DevotionalReaderProps {
 
 export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   const [fontSize, setFontSize] = useState<"normal" | "large" | "xlarge">(
-    week.version === "encore" ? "xlarge" : "large"
+    week.version === "encore" || week.version === "solace" ? "xlarge" : "large"
   );
 
   React.useEffect(() => {
@@ -71,7 +72,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
       if (saved === "normal" || saved === "large" || saved === "xlarge") {
         setFontSize(saved);
       } else {
-        setFontSize(week.version === "encore" ? "xlarge" : "large");
+        setFontSize(week.version === "encore" || week.version === "solace" ? "xlarge" : "large");
       }
     } catch {}
   }, [week.version]);
@@ -92,6 +93,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
   const isFamily = week.version === "family";
   const isEncore = week.version === "encore";
   const isMission = week.version === "mission";
+  const isSolace = week.version === "solace";
   const isExegesis = week.version === "exegesis";
 
   const chartMap: Record<string, React.ReactNode> = {
@@ -129,9 +131,21 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     fri: <RepentanceCascadeChart />,
     sat: <CovenantReconciliationChart />,
   };
-  const versionLabel = isExegesis ? "釋經版" : isMission ? "宣教版" : isEncore ? "樂齡版" : isFamily ? "家庭版" : "青年版";
+  const versionLabel = isExegesis
+    ? "釋經版"
+    : isSolace
+    ? "微光版"
+    : isMission
+    ? "宣教版"
+    : isEncore
+    ? "樂齡版"
+    : isFamily
+    ? "家庭版"
+    : "青年版";
   const readerThemeClass = isExegesis
     ? "exegesis-reader"
+    : isSolace
+    ? "solace-reader"
     : isMission
     ? "mission-reader"
     : isEncore
@@ -150,6 +164,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     { id: "family", label: "家庭版", Icon: Users, iconColor: "text-teal-600" },
     { id: "encore", label: "樂齡版", Icon: Sun, iconColor: "text-rose-600" },
     { id: "mission", label: "宣教版", Icon: Compass, iconColor: "text-indigo-600" },
+    { id: "solace", label: "微光版", Icon: HeartHandshake, iconColor: "text-sky-600" },
     { id: "exegesis", label: "釋經版", Icon: ScrollText, iconColor: "text-purple-600" },
   ];
 
@@ -166,7 +181,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     return getAdjacentDay(week.version, week.id, day.id);
   }, [week.version, week.id, day.id]);
 
-  // Font size classes - 預設為「中」字級 (large)
+  // Font size classes - 預設為「中」字級 (large)，樂齡與微光預設為「大」字級 (xlarge)
   const fontClasses = {
     normal: "text-base leading-relaxed sm:leading-loose",
     large: "text-lg leading-relaxed sm:leading-loose",
@@ -204,20 +219,22 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           <span className="font-semibold text-stone-800 dark:text-stone-200">{day.dayLabel}</span>
         </nav>
 
-        {/* Four-Track Version Switcher & Reader Controls */}
+        {/* Six-Track Version Switcher & Reader Controls */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-2 sm:gap-2.5 w-full sm:w-auto">
           {/* Quick Version Switcher for this day */}
-          <div className="grid grid-cols-5 sm:flex items-center gap-0.5 sm:gap-1 bg-stone-100 dark:bg-stone-800/80 p-1 sm:p-0.5 rounded-full border border-stone-200 dark:border-stone-700 w-full sm:w-auto shrink-0">
+          <div className="grid grid-cols-3 sm:flex items-center gap-1 bg-stone-100 dark:bg-stone-800/80 p-1 sm:p-0.5 rounded-2xl sm:rounded-full border border-stone-200 dark:border-stone-700 w-full sm:w-auto shrink-0">
             {versionOptions.map((opt) => {
               const active = opt.id === week.version;
               return (
                 <Link
                   key={opt.id}
                   href={`/devotional/${opt.id}/${week.id}/${day.id}`}
-                  className={`flex items-center justify-center gap-1 px-1 sm:px-3 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-semibold transition whitespace-nowrap ${
+                  className={`flex items-center justify-center gap-1 px-1.5 sm:px-3 py-2 sm:py-1.5 min-h-[38px] sm:min-h-[34px] rounded-full text-xs sm:text-[13px] font-semibold transition whitespace-nowrap ${
                     active
                       ? opt.id === "exegesis"
                         ? "bg-purple-700 text-white shadow-xs"
+                        : opt.id === "solace"
+                        ? "bg-sky-700 text-white shadow-xs"
                         : opt.id === "mission"
                         ? "bg-indigo-700 text-white shadow-xs"
                         : opt.id === "encore"
@@ -273,8 +290,6 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
               </button>
             </div>
 
-            
-
             <ThemeToggle
               iconSize="sm"
               className="p-1.5 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition cursor-pointer"
@@ -290,6 +305,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             className={`px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm ${
               isExegesis
                 ? "bg-purple-700 shadow-purple-700/20"
+                : isSolace
+                ? "bg-sky-700 shadow-sky-700/20"
                 : isMission
                 ? "bg-indigo-700 shadow-indigo-700/20"
                 : isEncore
@@ -305,6 +322,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             className={`text-xs font-semibold px-2.5 py-1 rounded-md border ${
               isExegesis
                 ? "text-purple-800 dark:text-purple-300 bg-purple-100/70 dark:bg-purple-950/60 border-purple-200 dark:border-purple-800"
+                : isSolace
+                ? "text-sky-800 dark:text-sky-300 bg-sky-100/70 dark:bg-sky-950/60 border-sky-200 dark:border-sky-800"
                 : isMission
                 ? "text-indigo-800 dark:text-indigo-300 bg-indigo-100/70 dark:bg-indigo-950/60 border-indigo-200 dark:border-indigo-800"
                 : isEncore
@@ -333,6 +352,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         className={`rounded-3xl p-6 sm:p-8 border relative overflow-hidden shadow-xs ${
           isExegesis
             ? "bg-purple-500/5 dark:bg-purple-950/20 border-purple-300/50 dark:border-purple-700/40"
+            : isSolace
+            ? "bg-sky-500/5 dark:bg-sky-950/20 border-sky-300/50 dark:border-sky-700/40"
             : isMission
             ? "bg-indigo-500/5 dark:bg-indigo-950/20 border-indigo-300/50 dark:border-indigo-700/40"
             : isEncore
@@ -347,6 +368,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             className={`w-5 h-5 shrink-0 ${
               isExegesis
                 ? "text-purple-600 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-600 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-600 dark:text-indigo-400"
                 : isEncore
@@ -417,12 +440,14 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         })()}
       </section>
 
-      {/* 3. Meditation Question Card */}
+      {/* 3. Meditation Question / Rest & Surrender Guide Card */}
       {day.meditationQuestion && (
         <section
           className={`rounded-2xl p-5 sm:p-6 border space-y-3 ${
             isExegesis
               ? "bg-purple-500/10 dark:bg-purple-950/30 border-purple-300/60 dark:border-purple-700/60"
+              : isSolace
+              ? "bg-sky-500/10 dark:bg-sky-950/30 border-sky-300/60 dark:border-sky-700/60"
               : isMission
               ? "bg-indigo-500/10 dark:bg-indigo-950/30 border-indigo-300/60 dark:border-indigo-700/60"
               : isEncore
@@ -433,20 +458,26 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
           }`}
         >
           <div className="flex items-center gap-2">
-            <Sparkles
-              className={`w-5 h-5 shrink-0 ${
-                isExegesis
-                  ? "text-purple-600 dark:text-purple-400"
-                  : isMission
-                  ? "text-indigo-600 dark:text-indigo-400"
-                  : isEncore
-                  ? "text-rose-600 dark:text-rose-400"
-                  : isFamily
-                  ? "text-teal-600 dark:text-teal-400"
-                  : "text-amber-600 dark:text-amber-400"
-              }`}
-            />
-            <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">默想反思</h3>
+            {isSolace ? (
+              <HeartHandshake className="w-5 h-5 shrink-0 text-sky-600 dark:text-sky-400" />
+            ) : (
+              <Sparkles
+                className={`w-5 h-5 shrink-0 ${
+                  isExegesis
+                    ? "text-purple-600 dark:text-purple-400"
+                    : isMission
+                    ? "text-indigo-600 dark:text-indigo-400"
+                    : isEncore
+                    ? "text-rose-600 dark:text-rose-400"
+                    : isFamily
+                    ? "text-teal-600 dark:text-teal-400"
+                    : "text-amber-600 dark:text-amber-400"
+                }`}
+              />
+            )}
+            <h3 className="font-bold text-base sm:text-lg text-stone-900 dark:text-stone-100">
+              {isSolace ? "安息交託引導" : "默想反思"}
+            </h3>
           </div>
           <div
             className={`${meditationClasses} text-stone-800 dark:text-stone-100 markdown-content ${readerThemeClass}`}
@@ -472,6 +503,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         className={`rounded-3xl p-6 sm:p-8 border space-y-4 ${
           isExegesis
             ? "bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-purple-100/20 dark:from-slate-900 dark:via-stone-900 dark:to-slate-950 border-purple-300/60 dark:border-purple-800/60"
+            : isSolace
+            ? "bg-gradient-to-br from-sky-500/10 via-cyan-500/5 to-sky-100/20 dark:from-slate-900 dark:via-stone-900 dark:to-slate-950 border-sky-300/60 dark:border-sky-800/60"
             : isMission
             ? "bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-indigo-100/20 dark:from-slate-900 dark:via-stone-900 dark:to-slate-950 border-indigo-300/60 dark:border-indigo-800/60"
             : isEncore
@@ -486,6 +519,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             className={`w-5 h-5 shrink-0 ${
               isExegesis
                 ? "text-purple-600 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-600 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-600 dark:text-indigo-400"
                 : isEncore
@@ -539,6 +574,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             className={`inline-flex items-center min-h-[40px] px-2 hover:underline shrink-0 text-center ${
               isExegesis
                 ? "text-purple-700 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-700 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-700 dark:text-indigo-400"
                 : isEncore
@@ -565,6 +602,8 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
             className={`order-2 sm:order-3 flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-3 min-h-[44px] rounded-xl text-white transition text-xs sm:text-sm font-semibold group shadow-md ${
               isExegesis
                 ? "bg-purple-700 hover:bg-purple-600 shadow-purple-700/20"
+                : isSolace
+                ? "bg-sky-700 hover:bg-sky-600 shadow-sky-700/20"
                 : isMission
                 ? "bg-indigo-700 hover:bg-indigo-600 shadow-indigo-700/20"
                 : isEncore
@@ -589,8 +628,7 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
         )}
       </footer>
 
-      
-          {/* Floating Copy & Share Toolbar on Text Selection */}
+      {/* Floating Copy & Share Toolbar on Text Selection */}
       <TextSelectionToolbar
         versionLabel={versionLabel}
         scriptureRef={day.scriptureRef}

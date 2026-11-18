@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { setStoredVersion } from "@/lib/storage";
-import { BookOpen, Flame, Sparkles, Users, Sparkle, Library, Calendar, Sun, Compass, ScrollText } from "lucide-react";
+import { BookOpen, Flame, Sparkles, Users, Sparkle, Library, Calendar, Sun, Compass, HeartHandshake, ScrollText } from "lucide-react";
 import { DevotionalVersion } from "@/types/devotional";
 import { useStreak } from "@/lib/storage";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -105,6 +105,18 @@ export function Navbar({
             >
               <Compass className="w-3.5 h-3.5" />
               <span>宣教版</span>
+            </button>
+
+            <button
+              onClick={() => handleVersionClick("solace")}
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-full transition cursor-pointer whitespace-nowrap ${
+                currentVersion === "solace"
+                  ? "bg-sky-700 text-white shadow-xs"
+                  : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
+              }`}
+            >
+              <HeartHandshake className="w-3.5 h-3.5" />
+              <span>微光版</span>
             </button>
 
             <button

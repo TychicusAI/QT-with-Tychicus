@@ -149,6 +149,19 @@ html {
   color: #818cf8; /* indigo-400 */
 }
 
+/* Solace version theme adaptation */
+.solace-reader .markdown-content em,
+.solace-reader.markdown-content em,
+.solace-reader em {
+  color: #0369a1; /* sky-700 */
+}
+
+.dark .solace-reader .markdown-content em,
+.dark .solace-reader.markdown-content em,
+.dark .solace-reader em {
+  color: #38bdf8; /* sky-400 */
+}
+
 /* Exegesis version theme adaptation */
 .exegesis-reader .markdown-content em,
 .exegesis-reader.markdown-content em,
@@ -186,6 +199,12 @@ html {
 .mission-reader.markdown-content blockquote,
 .mission-reader blockquote {
   border-left-color: #4338ca;
+}
+
+.solace-reader .markdown-content blockquote,
+.solace-reader.markdown-content blockquote,
+.solace-reader blockquote {
+  border-left-color: #0369a1;
 }
 
 .exegesis-reader .markdown-content blockquote,

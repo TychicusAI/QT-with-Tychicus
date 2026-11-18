@@ -42,6 +42,7 @@ export function AudioPlayer({
   const isFamily = version === "family";
   const isEncore = version === "encore";
   const isMission = version === "mission";
+  const isSolace = version === "solace";
   const isExegesis = version === "exegesis";
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const headerContainerRef = useRef<HTMLDivElement | null>(null);
@@ -57,6 +58,8 @@ export function AudioPlayer({
 
   const voiceName = isExegesis
     ? "釋經版伴讀（深沉學術聲）"
+    : isSolace
+    ? "微光版伴讀（溫和女聲）"
     : isMission
     ? "宣教版伴讀（溫厚男聲）"
     : isEncore
@@ -66,6 +69,8 @@ export function AudioPlayer({
     : "青年版伴讀（溫和女聲）";
   const versionTitle = isExegesis
     ? "釋經版靈修深研伴讀"
+    : isSolace
+    ? "微光版靈修伴讀"
     : isMission
     ? "宣教版靈修伴讀"
     : isEncore
@@ -185,6 +190,8 @@ export function AudioPlayer({
           className={`w-5 h-5 rotate-180 shrink-0 ${
             isExegesis
               ? "text-purple-600 dark:text-purple-400"
+              : isSolace
+              ? "text-sky-600 dark:text-sky-400"
               : isMission
               ? "text-indigo-600 dark:text-indigo-400"
               : isEncore
@@ -211,6 +218,18 @@ export function AudioPlayer({
         buttonHover: "hover:bg-purple-500/10 text-purple-700 dark:text-purple-300",
         speedActive: "bg-purple-700 text-white dark:bg-purple-600",
         playBtn: "bg-purple-700 hover:bg-purple-800 text-white dark:bg-purple-600 dark:hover:bg-purple-700 shadow-md",
+      }
+    : isSolace
+    ? {
+        badgeBg: "bg-sky-500/10 text-sky-800 dark:text-sky-200 border-sky-300/40 dark:border-sky-700/40",
+        pillActive: "bg-sky-700 text-white shadow-sm dark:bg-sky-600",
+        pillIdle: "bg-sky-500/10 text-sky-800 dark:text-sky-200 hover:bg-sky-500/20 border border-sky-300/50 dark:border-sky-700/50",
+        cardBg: "bg-sky-500/5 dark:bg-sky-950/20 border-sky-300/50 dark:border-sky-700/40",
+        accentColor: "accent-sky-700 dark:accent-sky-400",
+        progressColor: "bg-sky-700 dark:bg-sky-400",
+        buttonHover: "hover:bg-sky-500/10 text-sky-700 dark:text-sky-300",
+        speedActive: "bg-sky-700 text-white dark:bg-sky-600",
+        playBtn: "bg-sky-700 hover:bg-sky-800 text-white dark:bg-sky-600 dark:hover:bg-sky-700 shadow-md",
       }
     : isMission
     ? {
@@ -280,6 +299,8 @@ export function AudioPlayer({
             className={`w-5 h-5 rotate-180 shrink-0 ${
               isExegesis
                 ? "text-purple-600 dark:text-purple-400"
+                : isSolace
+                ? "text-sky-600 dark:text-sky-400"
                 : isMission
                 ? "text-indigo-600 dark:text-indigo-400"
                 : isEncore
@@ -449,6 +470,8 @@ export function AudioPlayer({
               className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                 isExegesis
                   ? "bg-purple-500 text-stone-950"
+                  : isSolace
+                  ? "bg-sky-500 text-stone-950"
                   : isMission
                   ? "bg-indigo-500 text-stone-950"
                   : isEncore

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Clock, Sparkles, Calendar, BookMarked, Users, Sun, Compass, ScrollText } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Sparkles, Calendar, BookMarked, Users, Sun, Compass, HeartHandshake, ScrollText } from "lucide-react";
 import { DevotionalWeek } from "@/types/devotional";
 import { formatWeekDateRange } from "@/lib/devotional-service";
 import { useIsDayCompleted, toggleDayCompleted } from "@/lib/storage";
@@ -20,6 +20,7 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
   const isFamily = week.version === "family";
   const isEncore = week.version === "encore";
   const isMission = week.version === "mission";
+  const isSolace = week.version === "solace";
   const isExegesis = week.version === "exegesis";
   const currentDay = week.days.find((d) => d.id === selectedDayId) || week.days[0];
   const completed = useIsDayCompleted(week.version, week.id, currentDay.id);
@@ -42,6 +43,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
       className={`relative overflow-hidden rounded-3xl border p-4 sm:p-8 md:p-10 shadow-xl transition-all ${
         isExegesis
           ? "bg-gradient-to-br from-purple-500/15 via-violet-500/10 to-purple-100/30 dark:from-purple-950/40 dark:via-slate-900/60 dark:to-slate-950 border-purple-300/40 dark:border-purple-700/40 shadow-purple-500/5"
+          : isSolace
+          ? "bg-gradient-to-br from-sky-500/15 via-cyan-500/10 to-sky-100/30 dark:from-sky-950/40 dark:via-slate-900/60 dark:to-slate-950 border-sky-300/40 dark:border-sky-700/40 shadow-sky-500/5"
           : isMission
           ? "bg-gradient-to-br from-indigo-500/15 via-violet-500/10 to-indigo-100/30 dark:from-indigo-950/40 dark:via-slate-900/60 dark:to-slate-950 border-indigo-300/40 dark:border-indigo-700/40 shadow-indigo-500/5"
           : isEncore
@@ -56,6 +59,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
         className={`absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl pointer-events-none ${
           isExegesis
             ? "bg-purple-400/20 dark:bg-purple-500/10"
+            : isSolace
+            ? "bg-sky-400/20 dark:bg-sky-500/10"
             : isMission
             ? "bg-indigo-400/20 dark:bg-indigo-500/10"
             : isEncore
@@ -69,6 +74,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
         className={`absolute -bottom-24 -left-24 w-72 h-72 rounded-full blur-3xl pointer-events-none ${
           isExegesis
             ? "bg-indigo-400/20 dark:bg-indigo-500/10"
+            : isSolace
+            ? "bg-cyan-400/20 dark:bg-cyan-500/10"
             : isMission
             ? "bg-violet-400/20 dark:bg-violet-500/10"
             : isEncore
@@ -86,6 +93,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow-sm shrink-0 ${
               isExegesis
                 ? "bg-purple-700 shadow-purple-700/30"
+                : isSolace
+                ? "bg-sky-700 shadow-sky-700/30"
                 : isMission
                 ? "bg-indigo-700 shadow-indigo-700/30"
                 : isEncore
@@ -97,6 +106,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
           >
             {isExegesis ? (
               <ScrollText className="w-3.5 h-3.5" />
+            ) : isSolace ? (
+              <HeartHandshake className="w-3.5 h-3.5" />
             ) : isMission ? (
               <Compass className="w-3.5 h-3.5" />
             ) : isEncore ? (
@@ -109,6 +120,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             <span>
               {isExegesis
                 ? "釋經版・今日特推"
+                : isSolace
+                ? "微光版・今日特推"
                 : isMission
                 ? "宣教版・今日特推"
                 : isEncore
@@ -136,6 +149,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
                   isSelected
                     ? isExegesis
                       ? "bg-purple-700 text-white shadow-xs"
+                      : isSolace
+                      ? "bg-sky-700 text-white shadow-xs"
                       : isMission
                       ? "bg-indigo-700 text-white shadow-xs"
                       : isEncore
@@ -160,6 +175,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             className={`inline-block text-xs sm:text-sm font-semibold tracking-wider px-2.5 py-0.5 rounded-md border ${
               isExegesis
                 ? "text-purple-800 dark:text-purple-300 bg-purple-100/80 dark:bg-purple-950/60 border-purple-200 dark:border-purple-800/80"
+                : isSolace
+                ? "text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/60 border-sky-200 dark:border-sky-800/80"
                 : isMission
                 ? "text-indigo-800 dark:text-indigo-300 bg-indigo-100/80 dark:bg-indigo-950/60 border-indigo-200 dark:border-indigo-800/80"
                 : isEncore
@@ -184,6 +201,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             className={`my-3 pl-4 border-l-2 text-stone-700 dark:text-stone-300 text-sm sm:text-base italic line-clamp-2 py-1.5 pr-2 rounded-r-lg ${
               isExegesis
                 ? "border-purple-600/60 bg-purple-50/40 dark:bg-stone-900/40"
+                : isSolace
+                ? "border-sky-600/60 bg-sky-50/40 dark:bg-stone-900/40"
                 : isMission
                 ? "border-indigo-600/60 bg-indigo-50/40 dark:bg-stone-900/40"
                 : isEncore
@@ -206,6 +225,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
                 className={`w-3.5 h-3.5 ${
                   isExegesis
                     ? "text-purple-600 dark:text-purple-400"
+                    : isSolace
+                    ? "text-sky-600 dark:text-sky-400"
                     : isMission
                     ? "text-indigo-600 dark:text-indigo-400"
                     : isEncore
@@ -215,7 +236,11 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
                     : "text-amber-600 dark:text-amber-400"
                 }`}
               />
-              {isExegesis ? "包含原文句法、動詞體貌與神學命題收斂" : "包含希臘原文解析與禱告導引"}
+              {isExegesis
+                ? "包含原文句法、動詞體貌與神學命題收斂"
+                : isSolace
+                ? "包含希臘原文解析、病榻安慰與安息交託引導"
+                : "包含希臘原文解析與禱告導引"}
             </span>
           </div>
         </div>
@@ -227,6 +252,8 @@ export function TodayHeroCard({ week, recommendedDayId }: TodayHeroCardProps) {
             className={`flex items-center justify-center gap-2 px-6 py-4 rounded-2xl active:scale-[0.98] text-white font-bold text-base shadow-lg transition group ${
               isExegesis
                 ? "bg-purple-700 hover:bg-purple-600 shadow-purple-700/30 hover:shadow-purple-600/40"
+                : isSolace
+                ? "bg-sky-700 hover:bg-sky-600 shadow-sky-700/30 hover:shadow-sky-600/40"
                 : isMission
                 ? "bg-indigo-700 hover:bg-indigo-600 shadow-indigo-700/30 hover:shadow-indigo-600/40"
                 : isEncore

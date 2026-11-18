@@ -30,6 +30,7 @@ export function PrayerAmenButton({ version, weekId, dayId }: PrayerAmenButtonPro
   const isFamily = version === "family";
   const isEncore = version === "encore";
   const isMission = version === "mission";
+  const isSolace = version === "solace";
   const isExegesis = version === "exegesis";
 
   return (
@@ -41,6 +42,8 @@ export function PrayerAmenButton({ version, weekId, dayId }: PrayerAmenButtonPro
             ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/30"
             : isExegesis
             ? "bg-purple-700 hover:bg-purple-600 text-white shadow-purple-700/30 hover:shadow-purple-600/40"
+            : isSolace
+            ? "bg-sky-700 hover:bg-sky-600 text-white shadow-sky-700/30 hover:shadow-sky-600/40"
             : isMission
             ? "bg-indigo-700 hover:bg-indigo-600 text-white shadow-indigo-700/30 hover:shadow-indigo-600/40"
             : isEncore
