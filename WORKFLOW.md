@@ -36,18 +36,18 @@
    * **硬性中斷保護**：在執行 `npm run sync` 時，系統會自動嚴格校驗全站所有延伸研讀經文的快取覆蓋率；若檢測到任何未收錄之經文，同步腳本將**強制拋錯並中斷退出（Exit Code 1）**，徹底阻斷缺失經文發布到前台，嚴防此項疏漏。
    * **排版格式防呆（No Literal \n Rule）**：經文文字與 Markdown 文件中所有換行必須為標準真實換行字元（`\n`），嚴禁帶有字面雙反斜線轉義字元（`\\n`），杜絕前台展開卡片或研經文件渲染出 raw `\n` 字樣。同步腳本與前台閱讀器已全面配置自動清洗過濾層。
 
-5. **釋經版向量圖解與高可讀性排版規範（Exegetical Discourse SVG Charts & Readability Policy）**：
+5. **釋經版響應式結構圖解與高可讀性排版規範（Exegetical Discourse Charts & Readability Policy）**：
    * **四大樂章小標題導航與短句呼吸（Four Movements & Readable Cadence）**：
      * 釋經版每篇信息採用**四個 `####` 樂章小標題**（如 `#### 一、...` 至 `#### 四、...`）引導結構推進，全文切分為 **12～15 個精煉自然段**（每段 120～180 字，單句黃金長度 20～38 字），徹底消除 500 字巨型段落與長難句。
      * **括號瘦身與張力先行**：括號內嚴禁塞入超過 3 個單詞的希臘文長句或長篇背景解釋（長解釋一律化為獨立正文短句）；行文採「經文懸念與神學張力先行 ➔ 原文語法作破案證據」節奏，每次僅聚焦 1～2 位最具代表性之學者洞見，並在第四樂章末段自然完成「文本原意 ➔ 十架救贖樞紐 ➔ 當代門徒呼召」的收束（不再於文末重複列出三點命題清單）。
-   * **視覺拓撲錨點**：當經文具備顯著篇章結構（交叉對稱樞紐 Chiasmus / Pivot Center、二元神學對決與語意分流如「依神憂愁 vs 世俗憂愁」、複雜文法論證鏈 Syntactic Flow 或宣教行旅時間軸）時，於該日釋經專文中配置專屬向量結構圖解。
-   * **佔位符架構（Markdown Placeholder Architecture，嚴禁內嵌原始多行 SVG）**：
-     1. 在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG XML**（避免 Markdown 解析器 `marked` 將 4 空格縮排標籤誤判為 `<pre><code>` 代碼塊而導致 SVG 渲染損壞中斷）。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），統一置於**第一樂章結束後、第二樂章 `#### 二、...` 標題之前**，作為開篇即見的視覺導航錨點。
+   * **視覺拓撲錨點**：當經文具備顯著篇章結構（交叉對稱樞紐 Chiasmus / Pivot Center、二元神學對決與語意分流如「依神憂愁 vs 世俗憂愁」、複雜文法論證鏈 Syntactic Flow 或宣教行旅時間軸）時，於該日釋經專文中配置專屬結構圖解。
+   * **佔位符架構（Markdown Placeholder Architecture，嚴禁內嵌原始多行 SVG/HTML）**：
+     1. 在 Markdown 檔案（`qt_for_exegesis.md`）中，**嚴格禁止直接貼入多行原始 SVG 或 HTML**。一律使用標準 HTML 註解佔位符：`<!-- CHART:<chart-id> -->`（例如 `<!-- CHART:two-sorrows -->`），統一置於**第一樂章結束後、第二樂章 `#### 二、...` 標題之前**，作為開篇即見的視覺導航錨點。
      2. **單一佔位符防重鐵律**：每篇專文**嚴格僅能包含 1 個圖解佔位符**，嚴禁重複連續插入，避免前台重複渲染雙重圖表。
-   * **純 React 向量元件實作三大鐵律**：圖表一律於 `src/components/charts/<ChartName>.tsx` 實作為純 React JSX 向量元件，配備：
-     1. **SVG `<text>` 純文字節點鐵律（嚴禁星號）**：SVG `<text>` 節點不解析 Markdown 標籤語法，**絕對禁止出現 Markdown 星號 `*`**（如必須寫作 `(stenochōreisthe)`，嚴禁寫成 `(*stenochōreisthe*)`），原文斜體一律由 CSS 樣式（如 `className="txt-greek"` 或 `fontStyle: "italic"`）統一掌控。
-     2. **圖塊空間分流與防溢出規範（Zoning & Anti-Overflow）**：所有 SVG 圖塊與浮動標籤（如氛圍標籤、過渡標籤）必須擁有**互不干擾的獨立垂直/水平空間帶（Zoning）**，嚴禁跨區遮擋相鄰卡片文本；中央推論樞紐方塊與長標題方塊必須預留足夠寬度（寬度建議至少 550px 以上），確保文字完全容納、絕不溢出邊框。
-     3. **響應式與主題自適應**：配備 `viewBox` 與 `style={{ width: "100%", height: "auto", aspectRatio: "..." }}` 自適應視區、外層橫向捲動保護容器（`min-w-[720px] overflow-x-auto`，確保手機端不壓扁變形、桌機端滿版舒展）及深色模式（Dark Mode）自適應色彩，並於 `DevotionalReader.tsx` 透過 `messageHtml.split(/(<!--\s*CHART:[a-z0-9-]+\s*-->)/g)` 與去重集合 `renderedChartIds` 自動精準掛載。
+   * **純 React 響應式 HTML + Tailwind 卡片元件實作三大鐵律**：圖表一律於 `src/components/charts/<ChartName>.tsx` 實作為響應式 HTML + Tailwind CSS Grid/Flex 結構卡片元件，配備：
+     1. **全面禁止固定座標 SVG `<rect>` + `<text>` 畫文字色框**：所有卡片、標題列、交叉層級與中希雙語文字一律使用 HTML `<div>` + Tailwind `grid` / `flex` / `break-words` 自然換行並自動撐開高度，搭配 `lucide-react` 方向箭頭（桌機橫向顯示右箭頭、手機縱向自動折疊並顯示下箭頭），從根本上杜絕文字溢框與手機端橫向捲動。
+     2. **JSX 語義斜體鐵律（嚴禁星號）**：JSX 文字節點中**絕對禁止出現 Markdown 星號 `*`**，希臘文音譯斜體一律使用 `<span className="italic">...</span>` 或 `<em>...</em>` 呈現。
+     3. **完整深色模式與容器掛載**：完整配置 `dark:` 深色模式配色，並於 `DevotionalReader.tsx` 透過 `ResponsiveChartWrapper` 自動掛載（同時支援全螢幕燈箱縮放與複製樣式表之開新分頁檢視）。
 
 ---
 

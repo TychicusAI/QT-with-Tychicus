@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Maximize2, X, ZoomIn, ZoomOut, RotateCcw, ExternalLink, MoveHorizontal } from "lucide-react";
+import { Maximize2, X, ZoomIn, ZoomOut, RotateCcw, ExternalLink } from "lucide-react";
 
 interface ResponsiveChartWrapperProps {
   children: React.ReactNode;
@@ -45,27 +45,26 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
     setIsOpen(false);
   };
 
-  const handleZoomOut = () => setScale((s) => Math.max(0.6, Number((s - 0.2).toFixed(1))));
-  const handleZoomIn = () => setScale((s) => Math.min(2.4, Number((s + 0.2).toFixed(1))));
+  const handleZoomOut = () => setScale((s) => Math.max(0.7, Number((s - 0.15).toFixed(2))));
+  const handleZoomIn = () => setScale((s) => Math.min(1.6, Number((s + 0.15).toFixed(2))));
   const handleResetZoom = () => setScale(1);
 
   const handleOpenNewWindow = () => {
     if (!containerRef.current) return;
-    const svgEl = containerRef.current.querySelector("svg");
-    if (!svgEl) return;
-
-    const svgClone = svgEl.cloneNode(true) as SVGElement;
-    svgClone.setAttribute("width", "100%");
-    svgClone.removeAttribute("height");
-    svgClone.style.maxWidth = "1100px";
-    svgClone.style.minWidth = "720px";
-    svgClone.style.margin = "0 auto";
-    svgClone.style.display = "block";
+    const chartContent = containerRef.current.querySelector("[data-chart-content]");
+    if (!chartContent) return;
 
     const isDark = document.documentElement.classList.contains("dark");
     const bgColor = isDark ? "#090d16" : "#fbfbf9";
     const fgColor = isDark ? "#f1f5f9" : "#1c1917";
     const chartTitle = title || "釋經語篇結構圖解";
+
+    // 複製當前頁面的樣式表（Tailwind CSS），確保開新分頁完整呈現 HTML/Tailwind 圖表與深色模式
+    const styleNodes = Array.from(
+      document.querySelectorAll('link[rel="stylesheet"], style')
+    )
+      .map((node) => node.outerHTML)
+      .join("\n");
 
     const newWin = window.open("", "_blank");
     if (newWin) {
@@ -76,23 +75,23 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>${chartTitle} - 靈修推基古</title>
+            ${styleNodes}
             <style>
               body {
                 margin: 0;
                 padding: 24px 16px;
                 background-color: ${bgColor};
                 color: ${fgColor};
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
                 min-height: 100vh;
                 box-sizing: border-box;
               }
-              .header {
-                max-width: 1100px;
+              .standalone-shell {
+                max-width: 1040px;
                 width: 100%;
-                margin-bottom: 20px;
+                margin: 0 auto;
+              }
+              .standalone-header {
+                margin-bottom: 16px;
                 padding-bottom: 12px;
                 border-bottom: 1px solid ${isDark ? "#334155" : "#e2e8f0"};
                 display: flex;
@@ -101,34 +100,17 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
                 align-items: center;
                 gap: 8px;
               }
-              .title {
-                font-size: 16px;
-                font-weight: 700;
-              }
-              .hint {
-                font-size: 12px;
-                color: ${isDark ? "#94a3b8" : "#64748b"};
-              }
-              .svg-container {
-                max-width: 1100px;
-                width: 100%;
-                background-color: ${isDark ? "#111827" : "#ffffff"};
-                border: 1px solid ${isDark ? "#374151" : "#e5e7eb"};
-                border-radius: 20px;
-                padding: 16px;
-                box-sizing: border-box;
-                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-                overflow-x: auto;
-              }
             </style>
           </head>
           <body>
-            <div class="header">
-              <div class="title">${chartTitle}</div>
-              <div class="hint">可雙指縮放或左右滑動檢視</div>
-            </div>
-            <div class="svg-container">
-              ${svgClone.outerHTML}
+            <div class="standalone-shell">
+              <div class="standalone-header">
+                <div style="font-size:16px;font-weight:700;">${chartTitle}</div>
+                <div style="font-size:12px;color:${isDark ? "#94a3b8" : "#64748b"};">釋經語篇結構圖解・響應式排版</div>
+              </div>
+              <div>
+                ${chartContent.innerHTML}
+              </div>
             </div>
           </body>
         </html>
@@ -140,14 +122,9 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
   return (
     <>
       <div className="chart-wrapper relative group/chart w-full min-w-0 mt-8 mb-8" ref={containerRef}>
-        {/* 獨立控制列置於圖表上方，避免桌面版壓到圖表標題膠囊 */}
+        {/* 獨立控制列置於圖表上方 */}
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-          <div className="sm:hidden inline-flex items-center gap-1.5 text-xs font-medium text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-200/70 dark:border-purple-800/50 px-2.5 py-1 rounded-full">
-            <MoveHorizontal className="w-3.5 h-3.5 shrink-0" />
-            <span>可左右滑動看全圖</span>
-          </div>
-
-          <div className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-stone-500 dark:text-stone-400">
+          <div className="inline-flex items-center gap-1.5 text-xs font-medium text-stone-500 dark:text-stone-400">
             <span>互動結構圖解（支援全螢幕放大）</span>
           </div>
 
@@ -173,8 +150,10 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
           </div>
         </div>
 
-        {/* 圖表本身（手機版保留 min-w-[720px] 於 overflow-x-auto 容器內平滑橫滑，維持字體清晰） */}
-        <div className="w-full min-w-0">{children}</div>
+        {/* 圖表內容（HTML + Tailwind 響應式結構卡片） */}
+        <div data-chart-content="true" className="w-full min-w-0">
+          {children}
+        </div>
       </div>
 
       {/* 全螢幕燈箱彈窗 (Lightbox Modal) */}
@@ -254,29 +233,27 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
             </div>
           </div>
 
-          {/* Modal Body with Smooth Pan & Vector Scaling */}
+          {/* Modal Body */}
           <div
             data-chart-modal="true"
             className="flex-1 w-full overflow-auto p-3 sm:p-8 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div
-              className="mx-auto my-auto bg-white dark:bg-stone-900 rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl border border-stone-200 dark:border-stone-800 transition-all duration-150"
+              className="mx-auto my-auto w-full max-w-5xl bg-white dark:bg-stone-900 rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl border border-stone-200 dark:border-stone-800 transition-transform duration-150 origin-top"
               style={{
-                width: `max(${Math.round(780 * scale)}px, ${Math.round(scale * 100)}%)`,
-                maxWidth: scale <= 1 ? "1024px" : "none",
+                transform: scale === 1 ? undefined : `scale(${scale})`,
               }}
             >
               {children}
             </div>
           </div>
 
-          {/* Modal Footer: 手機版專屬縮放列 + 提示 */}
+          {/* Modal Footer */}
           <div
             className="px-3 py-2.5 bg-stone-900/95 border-t border-stone-800 shrink-0 flex flex-wrap items-center justify-center sm:justify-between gap-2 text-xs text-stone-300"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* 手機版縮放控制列 */}
             <div className="flex sm:hidden items-center gap-1.5 bg-stone-800 rounded-xl p-1">
               <button
                 type="button"
@@ -308,8 +285,8 @@ export function ResponsiveChartWrapper({ children, title }: ResponsiveChartWrapp
             </div>
 
             <span className="text-center text-xs text-stone-400 w-full sm:w-auto">
-              <span className="sm:hidden">可上下左右滑動查看原圖・點擊右上「×」關閉</span>
-              <span className="hidden sm:inline">點擊背景或按 Esc 關閉・支援開新分頁觀看高解析原圖</span>
+              <span className="sm:hidden">點擊右上「×」關閉・支援開新分頁瀏覽</span>
+              <span className="hidden sm:inline">點擊背景或按 Esc 關閉・支援開新分頁獨立檢視</span>
             </span>
           </div>
         </div>

@@ -1,198 +1,123 @@
 import React from 'react';
+import { ArrowRight, ArrowDown, ArrowUp, RefreshCw } from 'lucide-react';
 
 export const PriestlyLeitourgiaDoxologyChart: React.FC = () => {
   return (
-    <div className="my-8 p-6 bg-gradient-to-br from-amber-50/90 via-stone-50 to-purple-50/50 dark:from-stone-900 dark:via-stone-900/95 dark:to-purple-950/20 rounded-2xl border border-amber-200/80 dark:border-amber-800/40 shadow-sm">
-      <div className="mb-4 text-center">
-        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-purple-800 dark:text-purple-300 bg-purple-100/80 dark:bg-purple-900/50 rounded-full mb-2">
+    <div className="my-6 p-4 sm:p-6 bg-gradient-to-br from-amber-50/90 via-stone-50 to-purple-50/50 dark:from-stone-900 dark:via-stone-900/95 dark:to-purple-950/20 rounded-2xl border border-amber-200/80 dark:border-amber-800/40 shadow-sm space-y-4">
+      <div className="text-center space-y-1.5">
+        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-purple-800 dark:text-purple-300 bg-purple-100/80 dark:bg-purple-900/50 rounded-full">
           祭司禮拜職任與終極頌榮圖解（哥林多後書 9:12-15）
         </span>
-        <h5 className="text-lg font-bold text-stone-800 dark:text-stone-100">
+        <h5 className="text-base sm:text-lg font-bold text-stone-800 dark:text-stone-100 leading-snug">
           「供給的祭司禮拜（Diakonia tēs Leitourgias）」水平與垂直雙向頌榮圖
         </h5>
-        <p className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-          從外邦與猶太教會的實質團契與切切代禱，直達「感謝神，因祂有說不盡的恩賜（anekdiēgētō autou dōrea）」之最高峰
+        <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          從外邦與猶太教會的實質團契與切切代禱，直達「感謝神，因祂有說不盡的恩賜（<span className="italic">anekdiēgētō autou dōrea</span>）」之最高峰
         </p>
       </div>
 
-      <div className="w-full overflow-x-auto">
-        <svg
-          viewBox="0 0 800 390"
-          className="w-full h-auto min-w-[640px]"
-          role="img"
-          aria-label="供給的祭司禮拜水平與垂直雙向頌榮圖"
-        >
-          <defs>
-            <marker
-              id="arrowGold"
-              viewBox="0 0 10 10"
-              refX="8"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto-start-reverse"
-            >
-              <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
-            </marker>
-            <marker
-              id="arrowPurple"
-              viewBox="0 0 10 10"
-              refX="8"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto-start-reverse"
-            >
-              <path d="M 0 1 L 10 5 L 0 9 z" fill="#7e22ce" />
-            </marker>
-          </defs>
+      {/* Top Pinnacle: V.15 Doxology */}
+      <div className="rounded-2xl bg-amber-100/90 dark:bg-amber-950/45 border-2 border-amber-500 dark:border-amber-600 px-4 py-3.5 text-center space-y-1.5">
+        <p className="text-sm font-bold text-amber-950 dark:text-amber-200 leading-snug">
+          第 15 節終極頌榮：「感謝神，因祂有說不盡的恩賜（<span className="italic">Charis tō theō epi tē anekdiēgētō autou dōrea</span>）！」
+        </p>
+        <p className="text-xs text-amber-900 dark:text-amber-300">
+          新約唯一孤立詞（<span className="italic">hapax legomenon</span>）：超越人類語言所能述說的最高禮物 — 基督自己（呼應 8:1, 8:9 首尾呼應）
+        </p>
+        <p className="text-xs font-semibold text-amber-800 dark:text-amber-300">
+          垂直向度：叫許多人越發感謝神（<span className="italic">perisseuousa dia pollōn eucharistiōn</span>）並將榮耀歸與神（<span className="italic">doxazontes ton theon</span>）
+        </p>
+      </div>
 
-          {/* Top Pinnacle: V.15 Doxology & Macro-Inclusio */}
-          <rect
-            x="140"
-            y="16"
-            width="520"
-            height="86"
-            rx="16"
-            fill="#fef3c7"
-            stroke="#d97706"
-            strokeWidth="2.5"
-          />
-          <text x="400" y="42" textAnchor="middle" className="text-sm font-bold" fill="#78350f">
-            第 15 節終極頌榮：「感謝神，因祂有說不盡的恩賜（Charis tō theō epi tē anekdiēgētō autou dōrea）！」
-          </text>
-          <text x="400" y="64" textAnchor="middle" className="text-xs" fill="#92400e">
-            新約唯一孤立詞（hapax legomenon）：超越人類語言所能述說的最高禮物 — 基督自己（呼應 8:1, 8:9 首尾呼應）
-          </text>
-          <text x="400" y="84" textAnchor="middle" className="text-xs font-semibold" fill="#b45309">
-            垂直向度：叫許多人越發感謝神（perisseuousa dia pollōn eucharistiōn）並將榮耀歸與神（doxazontes ton theon）
-          </text>
+      {/* Vertical Ascending Indicator */}
+      <div className="flex items-center justify-center gap-8 text-amber-600 dark:text-amber-400">
+        <ArrowUp className="w-5 h-5" />
+        <span className="text-xs font-semibold">歸榮耀與感謝升達天父寶座</span>
+        <ArrowUp className="w-5 h-5" />
+      </div>
 
-          {/* Vertical Arrows Going Up to God */}
-          <path
-            d="M 220 155 L 300 105"
-            stroke="#d97706"
-            strokeWidth="2.5"
-            markerEnd="url(#arrowGold)"
-          />
-          <path
-            d="M 580 155 L 500 105"
-            stroke="#d97706"
-            strokeWidth="2.5"
-            markerEnd="url(#arrowGold)"
-          />
-
-          {/* Center Altar: Diakonia tes Leitourgias (V.12) */}
-          <rect
-            x="275"
-            y="150"
-            width="250"
-            height="100"
-            rx="14"
-            fill="#f3e8ff"
-            stroke="#9333ea"
-            strokeWidth="2"
-          />
-          <text x="400" y="176" textAnchor="middle" className="text-sm font-bold" fill="#581c87">
-            這供給的祭司禮拜職任
-          </text>
-          <text x="400" y="196" textAnchor="middle" className="text-xs font-semibold" fill="#6b21a8">
-            hē diakonia tēs leitourgias tautēs
-          </text>
-          <text x="400" y="216" textAnchor="middle" className="text-xs" fill="#7e22ce">
-            結合「日常桌邊服事」與「聖殿神聖供職」
-          </text>
-          <text x="400" y="234" textAnchor="middle" className="text-xs" fill="#581c87">
-            以經過試驗的憑據（dokimē）印證福音順服
-          </text>
-
-          {/* Left Box: Gentile Corinth Church */}
-          <rect
-            x="30"
-            y="150"
-            width="210"
-            height="145"
-            rx="14"
-            fill="#ecfdf5"
-            stroke="#10b981"
-            strokeWidth="2"
-          />
-          <rect x="30" y="150" width="210" height="34" rx="14" fill="#059669" />
-          <text x="135" y="172" textAnchor="middle" className="text-xs font-bold" fill="#ffffff">
+      {/* Middle 3-Column Horizontal Flow */}
+      <div className="flex flex-col lg:flex-row items-stretch gap-3">
+        {/* Left: Gentile Corinth */}
+        <div className="flex-1 rounded-2xl bg-emerald-50/90 dark:bg-emerald-950/30 border-2 border-emerald-500/80 dark:border-emerald-700/70 overflow-hidden flex flex-col">
+          <div className="bg-emerald-600 dark:bg-emerald-700 text-white px-3.5 py-2 text-center text-xs sm:text-sm font-bold">
             外邦哥林多教會（施予方）
-          </text>
-          <text x="135" y="204" textAnchor="middle" className="text-xs font-bold" fill="#065f46">
-            • 承認基督福音而有的順服
-          </text>
-          <text x="135" y="222" textAnchor="middle" className="text-xs" fill="#047857">
-            hypotagē tēs homologias（源頭屬格）
-          </text>
-          <text x="135" y="250" textAnchor="middle" className="text-xs font-bold" fill="#065f46">
-            • 團契相交的慷慨分享
-          </text>
-          <text x="135" y="268" textAnchor="middle" className="text-xs" fill="#047857">
-            haplotēti tēs koinōnias（向他們與眾人）
-          </text>
+          </div>
+          <div className="p-3.5 space-y-2.5 text-center text-xs flex-1 flex flex-col justify-center">
+            <div>
+              <p className="font-bold text-emerald-900 dark:text-emerald-200">• 承認基督福音而有的順服</p>
+              <p className="text-emerald-800 dark:text-emerald-300 mt-0.5">
+                <span className="italic">hypotagē tēs homologias</span>（源頭屬格）
+              </p>
+            </div>
+            <div>
+              <p className="font-bold text-emerald-900 dark:text-emerald-200">• 團契相交的慷慨分享</p>
+              <p className="text-emerald-800 dark:text-emerald-300 mt-0.5">
+                <span className="italic">haplotēti tēs koinōnias</span>（向他們與眾人）
+              </p>
+            </div>
+          </div>
+        </div>
 
-          {/* Right Box: Jerusalem Jewish Saints */}
-          <rect
-            x="560"
-            y="150"
-            width="210"
-            height="145"
-            rx="14"
-            fill="#eff6ff"
-            stroke="#3b82f6"
-            strokeWidth="2"
-          />
-          <rect x="560" y="150" width="210" height="34" rx="14" fill="#2563eb" />
-          <text x="665" y="172" textAnchor="middle" className="text-xs font-bold" fill="#ffffff">
+        <div className="flex items-center justify-center shrink-0 text-purple-600 dark:text-purple-400">
+          <ArrowRight className="hidden lg:block w-5 h-5" />
+          <ArrowDown className="lg:hidden w-5 h-5" />
+        </div>
+
+        {/* Center: Priestly Altar */}
+        <div className="flex-1 rounded-2xl bg-purple-100/80 dark:bg-purple-950/40 border-2 border-purple-500 dark:border-purple-600 p-4 text-center flex flex-col justify-center space-y-1.5">
+          <p className="text-sm font-bold text-purple-950 dark:text-purple-200">
+            這供給的祭司禮拜職任
+          </p>
+          <p className="text-xs font-semibold italic text-purple-800 dark:text-purple-300">
+            hē diakonia tēs leitourgias tautēs
+          </p>
+          <p className="text-xs text-purple-800 dark:text-purple-300">
+            結合「日常桌邊服事」與「聖殿神聖供職」
+          </p>
+          <p className="text-xs text-purple-900 dark:text-purple-200">
+            以經過試驗的憑據（<span className="italic">dokimē</span>）印證福音順服
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center shrink-0 text-purple-600 dark:text-purple-400">
+          <ArrowRight className="hidden lg:block w-5 h-5" />
+          <ArrowDown className="lg:hidden w-5 h-5" />
+        </div>
+
+        {/* Right: Jerusalem Jewish Saints */}
+        <div className="flex-1 rounded-2xl bg-blue-50/90 dark:bg-blue-950/30 border-2 border-blue-500/80 dark:border-blue-700/70 overflow-hidden flex flex-col">
+          <div className="bg-blue-600 dark:bg-blue-700 text-white px-3.5 py-2 text-center text-xs sm:text-sm font-bold">
             耶路撒冷猶太聖徒（受惠方）
-          </text>
-          <text x="665" y="204" textAnchor="middle" className="text-xs font-bold" fill="#1e40af">
-            • 缺乏得著補足與添滿
-          </text>
-          <text x="665" y="222" textAnchor="middle" className="text-xs" fill="#1d4ed8">
-            prosanaplērousa ta hysterēmata
-          </text>
-          <text x="665" y="250" textAnchor="middle" className="text-xs font-bold" fill="#1e40af">
-            • 看見神超越一切的極大恩典
-          </text>
-          <text x="665" y="268" textAnchor="middle" className="text-xs" fill="#1d4ed8">
-            tēn hyperballousan charin tou theou
-          </text>
+          </div>
+          <div className="p-3.5 space-y-2.5 text-center text-xs flex-1 flex flex-col justify-center">
+            <div>
+              <p className="font-bold text-blue-900 dark:text-blue-200">• 缺乏得著補足與添滿</p>
+              <p className="italic text-blue-800 dark:text-blue-300 mt-0.5">
+                prosanaplērousa ta hysterēmata
+              </p>
+            </div>
+            <div>
+              <p className="font-bold text-blue-900 dark:text-blue-200">• 看見神超越一切的極大恩典</p>
+              <p className="italic text-blue-800 dark:text-blue-300 mt-0.5">
+                tēn hyperballousan charin tou theou
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          {/* Horizontal Arrows between Corinth and Jerusalem */}
-          <path
-            d="M 240 198 L 273 198"
-            stroke="#7e22ce"
-            strokeWidth="2"
-            markerEnd="url(#arrowPurple)"
-          />
-          <path
-            d="M 525 198 L 558 198"
-            stroke="#7e22ce"
-            strokeWidth="2"
-            markerEnd="url(#arrowPurple)"
-          />
-
-          {/* Bottom Prayer & Yearning Bridge (V.14) */}
-          <path
-            d="M 665 295 Q 400 375 135 298"
-            fill="none"
-            stroke="#2563eb"
-            strokeWidth="2.5"
-            strokeDasharray="6 4"
-            markerEnd="url(#arrowPurple)"
-          />
-          <rect x="175" y="320" width="450" height="50" rx="10" fill="#eff6ff" stroke="#60a5fa" />
-          <text x="400" y="342" textAnchor="middle" className="text-xs font-bold" fill="#1e3a8a">
-            第 14 節水平回流：耶路撒冷聖徒「在為你們的祈禱中切切想念你們（deēsei hyper hymōn epipothountōn hymas）」
-          </text>
-          <text x="400" y="360" textAnchor="middle" className="text-xs" fill="#1d4ed8">
-            跨越種族與地域鴻溝，外邦與猶太肢體在基督的恩典與代禱中合而為一
-          </text>
-        </svg>
+      {/* Bottom Prayer & Yearning Bridge (V.14) */}
+      <div className="rounded-xl bg-blue-50/90 dark:bg-blue-950/40 border border-dashed border-blue-400 dark:border-blue-600 px-4 py-3 text-center space-y-1">
+        <p className="text-xs sm:text-sm font-bold text-blue-950 dark:text-blue-200 flex items-center justify-center gap-1.5 flex-wrap">
+          <RefreshCw className="w-4 h-4 shrink-0 text-blue-600 dark:text-blue-400" />
+          <span>
+            第 14 節水平回流：耶路撒冷聖徒「在為你們的祈禱中切切想念你們（<span className="italic">deēsei hyper hymōn epipothountōn hymas</span>）」
+          </span>
+        </p>
+        <p className="text-xs text-blue-800 dark:text-blue-300">
+          跨越種族與地域鴻溝，外邦與猶太肢體在基督的恩典與代禱中合而為一
+        </p>
       </div>
     </div>
   );
