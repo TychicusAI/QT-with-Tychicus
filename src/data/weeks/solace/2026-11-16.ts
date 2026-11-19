@@ -49,7 +49,7 @@ export const solace_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "今天請試著在心裡對自己說：「我不需要靠做很多事，才配得天父的愛。」請閉上眼睛做幾次平緩的深呼吸，把心裡那份「因為生病無法服事或工作而產生的愧疚感」，像卸下沉重的背包一樣，輕輕放在主耶穌帶釘痕的雙手裡，允許自己今天安心地只做一個被主抱在懷裡的孩子。",
       "audioUrl": "/audio/2026-11-16/solace/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const solace_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "你或你的家人是否正獨自扛著某個快要喘不過氣的照護或病痛重擔，卻因為「怕麻煩別人」或「不好意思開口」而一直硬撐著？今天請在主面前放下「我必須自己全部搞定」的壓力，在心裡想一個你可以信任的教會肢體、牧者或親友的名字，允許自己在本週向對方說出一句真實的需要（哪怕只是請對方為你代禱，或陪你說說話）。",
       "audioUrl": "/audio/2026-11-16/solace/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const solace_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "今天你不需要勉強自己「振作起來」或「假裝很快樂」。請低頭看看自己的雙手，想像你手心裡握著那朵被病痛或疲憊捏皺的蒲公英（可能是你今天某個特別難受的症狀、某個讓你流淚的委屈、或是一份無力感）；請在心裡慢慢張開手掌，對天父說：「阿爸父，這是我今天僅有的樣子，我甘心把它交給祢。」然後安靜停留在天父接過這朵小花時對你微笑的眼神裡。",
       "audioUrl": "/audio/2026-11-16/solace/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const solace_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "今天當你的腦海又開始不由自主地推演下週、下個月或未來的病情與難處時，請輕輕把雙手合攏，像當年收容所裡的孩子握住那片睡前麵包一樣。請在心裡做一個簡單的交託動作：把所有「明天以後的事」先放進天父的籃子裡，只留下一句輕聲的宣告：「主啊，今天有祢今天的恩典就夠了，明天的事，留給明天的祢來負責。",
       "audioUrl": "/audio/2026-11-16/solace/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const solace_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "今天當你吃藥、喝水、或是吃下一口溫熱的食物時，請慢下來兩秒鐘，不要急著吞嚥或滑手機。請在心裡把這一口水或食物，當作天父在羅騰樹下親手為你烤熱的餅，並在心裡輕聲對祂說：「謝謝天父今天餵養我，我安心領受祢給我的休息。",
       "audioUrl": "/audio/2026-11-16/solace/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const solace_2026_11_16: DevotionalWeek = {
       ],
       "meditationQuestion": "今天當你覺得全身乏力、連想一句禱告詞都覺得吃力時，請完全放下「必須自己好好禱告」的壓力。請在床上找一個最舒服的姿勢躺好，閉上眼睛，想像你的床上方有一頂由弟兄姊妹的代禱與聖靈的嘆息所編織而成的溫暖天篷，而主耶穌正用祂那雙帶著釘痕的溫暖大手，從下面穩穩地托住你的後背；你只需要在心裡輕輕呼出一口氣，對祂說一聲：「謝謝主耶穌，有祢真好。",
       "audioUrl": "/audio/2026-11-16/solace/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-16",

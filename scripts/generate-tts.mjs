@@ -119,8 +119,12 @@ function parseMessagesFromMarkdown(content) {
 function resolveVoicePaths(versionKey) {
   const voicesDir = path.join(process.cwd(), "data", "voices");
   let voiceStem = "family_female";
-  if (versionKey === "youth" || versionKey === "family" || versionKey === "solace") {
+  if (versionKey === "youth" || versionKey === "family") {
     voiceStem = "family_female";
+  } else if (versionKey === "solace") {
+    voiceStem = fs.existsSync(path.join(voicesDir, "solace_female.wav"))
+      ? "solace_female"
+      : "family_female";
   } else if (versionKey === "encore" || versionKey === "mission" || versionKey === "exegesis") {
     voiceStem = "mission_male";
   }
