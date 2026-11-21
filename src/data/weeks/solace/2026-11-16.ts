@@ -248,5 +248,5 @@ export const solace_2026_11_16: DevotionalWeek = {
     }
   ],
   "publishedAt": "2026-11-16",
-  "isCurrentWeek": true
+  "isCurrentWeek": false
 };

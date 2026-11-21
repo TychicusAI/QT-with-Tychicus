@@ -54,6 +54,12 @@ import { SowingChiasmCheerfulGiverChart } from "@/components/charts/SowingChiasm
 import { AllGraceAutarkeiaPsalmChart } from "@/components/charts/AllGraceAutarkeiaPsalmChart";
 import { SeedBreadIsaiahHarvestChart } from "@/components/charts/SeedBreadIsaiahHarvestChart";
 import { PriestlyLeitourgiaDoxologyChart } from "@/components/charts/PriestlyLeitourgiaDoxologyChart";
+import { MeeknessIronyAppealChart } from "@/components/charts/MeeknessIronyAppealChart";
+import { SpiritualWarfareSiegeChart } from "@/components/charts/SpiritualWarfareSiegeChart";
+import { AuthorityEdificationConsistencyChart } from "@/components/charts/AuthorityEdificationConsistencyChart";
+import { SelfComparisonChiasmChart } from "@/components/charts/SelfComparisonChiasmChart";
+import { ApostolicKanonChiasmChart } from "@/components/charts/ApostolicKanonChiasmChart";
+import { BoastInLordDokimosChart } from "@/components/charts/BoastInLordDokimosChart";
 import { ResponsiveChartWrapper } from "@/components/ResponsiveChartWrapper";
 
 interface DevotionalReaderProps {
@@ -121,6 +127,12 @@ export function DevotionalReader({ week, day }: DevotionalReaderProps) {
     "all-grace-autarkeia-psalm": <AllGraceAutarkeiaPsalmChart />,
     "seed-bread-isaiah-harvest": <SeedBreadIsaiahHarvestChart />,
     "priestly-leitourgia-doxology": <PriestlyLeitourgiaDoxologyChart />,
+    "meekness-irony-appeal": <MeeknessIronyAppealChart />,
+    "spiritual-warfare-siege": <SpiritualWarfareSiegeChart />,
+    "authority-edification-consistency": <AuthorityEdificationConsistencyChart />,
+    "self-comparison-chiasm": <SelfComparisonChiasmChart />,
+    "apostolic-kanon-chiasm": <ApostolicKanonChiasmChart />,
+    "boast-in-lord-dokimos": <BoastInLordDokimosChart />,
   };
 
   const exegesisDayChartFallback: Record<string, React.ReactNode> = {
