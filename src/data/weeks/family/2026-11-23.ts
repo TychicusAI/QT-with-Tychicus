@@ -49,7 +49,7 @@ export const family_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "回想最近家裡發生的一次小小摩擦或語氣衝撞，當時我們是順著血氣把音量越拉越高，還是有人試著給出「柔和的回答」？今天晚餐或睡前，我們可以怎麼向彼此表達一個小小的體諒或道歉，為家裡多留一點基督的溫柔空間？",
       "audioUrl": "/audio/2026-11-23/family/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const family_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家裡，目前有沒有哪一道看不見的小小「柏林圍牆」（某個不敢提的話題、某件一直沒解開的舊心結，或某種習慣性的冷漠回應）正在阻斷家人間的溫暖流通？這週我們願意從哪一個微小的謙卑舉動開始，靠著主的恩典拆掉第一塊磚？",
       "audioUrl": "/audio/2026-11-23/family/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const family_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "作父母的可以誠實問問孩子（或彼此反思）：「在過去一個月裡，我哪一次的提醒或管教，讓你覺得是被『往下壓（敗壞）』？哪一次的對話或鼓勵，讓你真實感覺到是被『往上托住（造就）』？」聽聽彼此最真實的心聲，不急著辯解。",
       "audioUrl": "/audio/2026-11-23/family/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const family_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "今天晚餐時，我們全家可以輪流做一個小小的「無比較讚美」練習：不跟任何人比較、不提成績或工作表現，每個人為身旁的一位家人說出一句「我感謝神讓你成為我家人，因為我特別欣賞你身上的……」。",
       "audioUrl": "/audio/2026-11-23/family/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const family_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "在我們家目前的互動裡，父母有沒有哪件事可能稍微「越界管太多」，或者孩子有沒有哪份屬於自己的家庭責任需要更主動扛起來？今天晚上，我們可以溫和地一起討論並約定一條讓彼此都感到被尊重的「愛之界限」嗎？",
       "audioUrl": "/audio/2026-11-23/family/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const family_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "這個週末，我們全家可以一起回顧這一年裡發生的一件好事，練習用「指著主誇口」的方式重新說一次這個故事——具體數算天父是怎麼像媽媽握著孩子的手一樣，一步一步牽引我們全家走過來的？",
       "audioUrl": "/audio/2026-11-23/family/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-23",

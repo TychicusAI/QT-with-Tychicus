@@ -49,7 +49,7 @@ export const mission_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你近期面對異文化群體、不同立場的同事或尚未信主的鄰舍時，內心是否曾浮現隱微的「文化或道德優越感」，或因被誤解而想用強硬語氣反擊？今天你可以透過哪一個具體的溫柔行動，向身邊一位與你截然不同的人落下恩典的果實？",
       "audioUrl": "/audio/2026-11-23/mission/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const mission_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "在你的日常職場、校園或社區裡，哪一道「現代文化思維營壘」最讓你覺得難以開口分享信仰？本週你願意跨出哪一小步日常邊界（例如主動關心一位異質背景的同事、外籍鄰舍或留學生），為純正福音的見證預備友誼的橋樑？",
       "audioUrl": "/audio/2026-11-23/mission/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const mission_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "當我們評估一位牧者、宣教士或同工的事奉時，我們心裡是否還殘留著「看口才、看氣場、看履歷光環（*kata prosōpon*）」的世俗濾鏡？今天你可以為哪一位低調、缺乏掌聲卻忠心造就人的前線工人或本地同工，發出一封真誠的鼓勵訊息或提名代禱？",
       "audioUrl": "/audio/2026-11-23/mission/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const mission_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "當你閱讀宣教代禱信或看見其他教會、團契的事工見證時，心裡是否曾閃過「以數字與熱鬧程度論成敗」的比較念頭？今天你可以特別為哪一個正在「硬土禾場」上默默耕耘、短期內看不見亮眼數字的宣教工場或同工提名代禱？",
       "audioUrl": "/audio/2026-11-23/mission/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const mission_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你所在的教會、團契或個人生活，我們目前的資源與代禱有多大比例停留在「維護既有圈子」，又有多大比例正真實面向「我們以外的地方（*ta hyperekeina*）」？本週你可以如何像克倫族教會一樣，跨出一步支援一個你原本不熟悉的未得之民或前線工人？",
       "audioUrl": "/audio/2026-11-23/mission/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const mission_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "如果未來你在教會、職場或宣教事工上所付出的一切勞苦，都沒有被寫進任何公開報導、也沒有獲得世人的掌聲，你是否依然願意像那位緬甸船夫一樣「單為基督而去」？今天你可以為哪一件神藉著你微小的手所成就的恩典，單單指著主獻上讚美？",
       "audioUrl": "/audio/2026-11-23/mission/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-23",

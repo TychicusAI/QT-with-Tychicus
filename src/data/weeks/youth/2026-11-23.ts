@@ -49,7 +49,7 @@ export const youth_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "最近在職場、校園或人際互動中，有沒有哪一次讓你感覺「如果我不強硬反擊，就會被人當成好欺負」的時刻？如果當時你選擇先站穩在基督「寬容的溫柔」（*praütēs kai epieikeia*）裡，不失原則卻收起血氣尖刺，你的回應會有哪些具體的不同？",
       "audioUrl": "/audio/2026-11-23/youth/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const youth_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視最近一週在你腦海裡反覆盤旋、最消耗你心力的那個焦慮或防衛念頭，它背後隱藏著哪一道「攔阻你認識神恩典」的錯誤信念（堅固營壘）？如果今天你拿一句聖經真理來正面攔截它，你會對那個念頭宣告什麼？",
       "audioUrl": "/audio/2026-11-23/youth/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const youth_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "在你目前的人際圈、職場或教會群體中，你是否曾因為某人的外表、口才或低調風格而下意識輕看了他？另一方面，當你對別人提出批評或建議時，你的內心動機更偏向「展現自己的優越感（敗壞）」，還是像吉姆一樣「滿有恩典地托住對方（造就）」？",
       "audioUrl": "/audio/2026-11-23/youth/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const youth_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "最近哪一個領域（職涯薪資、外貌體態、感情進度或教會服事）最容易觸發你心裡那場「25 瓦與 50 瓦的比較大賽」？當你把這件事搬到基督十字架如正午太陽般的恩典真光下時，你看見了什麼不一樣的畫面？",
       "audioUrl": "/audio/2026-11-23/youth/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const youth_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視你目前所處的工作、學業或教會服事位置，有沒有哪個部分是你最近因為覺得「太小、不起眼」而敷衍應付的？如果把這個位置視為天父今天親手量給你的神聖界限（*kanōn*），你可以做出哪一個具體的忠心改變？",
       "audioUrl": "/audio/2026-11-23/youth/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const youth_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "如果把你現在的人生比作一場音樂獨奏會，坐在台下讓你最在意、最想討好他起立鼓掌的「兩千名觀眾」（例如特定親友、主管、社群追蹤者）是誰？今天你願意把哪一件你一直想靠自己證明的事交給主，練習只為台下那位唯一的主演奏？",
       "audioUrl": "/audio/2026-11-23/youth/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-23",

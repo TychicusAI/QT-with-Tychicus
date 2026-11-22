@@ -49,7 +49,7 @@ export const solace_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "今天當你心裡又冒出「我怎麼這麼沒用」、「我應該要更堅強才對」的自責念頭時，請輕輕把手放在胸口，在心裡慢慢複誦理查·西布斯那句溫柔的話：「既然基督如此滿有憐憫、連壓傷的我都不肯折斷，我今天也不自己折斷自己。」允許自己在主寬容的溫柔裡，安心喘一口氣。",
       "audioUrl": "/audio/2026-11-23/solace/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const solace_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "今天如果在白天或深夜，有一個特別讓你害怕、自責或絕望的念頭反覆纏繞你，請不要用力責怪自己「怎麼又胡思亂想」。請試著在心裡對那個念頭輕輕說一句：「你不是真理，我要把你交給耶穌。」然後把這句短話當作枕頭靠在心裡：「主耶穌，我把這個害怕的念頭交給祢，求祢替我看守我的心。",
       "audioUrl": "/audio/2026-11-23/solace/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const solace_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "今天你不需要在任何人面前硬撐著說「我很好、我沒事」。請在安靜中看著自己此刻真實的身體狀況，在心裡溫柔地對主耶穌說：「主啊，這就是我今天真實的樣子，有點虛弱、有點累，但我知道我深深屬於祢，謝謝祢不看外貌地愛著我。",
       "audioUrl": "/audio/2026-11-23/solace/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const solace_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "如果今天社群媒體或別人的近況讓你心裡泛起一絲酸楚或自卑，請允許自己暫時把手機放下幾分鐘。閉上眼睛，在心裡輕輕對自己說：「我的痛不用跟別人比大小，我的復原也不用跟別人比快慢；天父此時此刻就按著我真實的樣子愛我。",
       "audioUrl": "/audio/2026-11-23/solace/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const solace_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "今天請給自己一份「不愧疚的減法許可」。想想今天待辦清單裡，有沒有一兩件讓你覺得超出體力負荷、硬撐著會很不舒服的事？請在主面前允許自己把它暫時放下或延後，輕聲對天父說：「主啊，謝謝祢接納我今天的有限，我安心守在祢量給我的體力界限裡休息。",
       "audioUrl": "/audio/2026-11-23/solace/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const solace_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "週末的此刻，請給自己幾分鐘全然安靜的時間。閉上眼睛，在心裡把所有「想要表現得很堅強」的緊繃慢慢吐氣放鬆，想像主耶穌伸出祂帶著釘痕卻溫暖無比的手輕輕握住你，聽祂對你說：「孩子，你不必靠自己撐著；有力量的是我，你已經是我所稱許、所喜悅的孩子。」安然停留在這句稱許的微光裡。",
       "audioUrl": "/audio/2026-11-23/solace/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-23",

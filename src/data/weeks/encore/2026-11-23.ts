@@ -49,7 +49,7 @@ export const encore_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "走過人生大半旅程，最近在與成年子女、配偶或教會年輕一輩意見相左時，我們更常依賴「資歷與音量」來堅持己見，還是能操練基督那份「壓低重心、滿有寬容的溫柔定力」？今天你可以為哪一位晚輩獻上一句不帶指教、純粹祝福與肯定的話？",
       "audioUrl": "/audio/2026-11-23/encore/mon.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "tue",
@@ -88,7 +88,7 @@ export const encore_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視自己半生累積下來的生活習慣、對家人的既定印象或對教會的看法，有沒有哪一面「自以為最正確、最堅固的牆」，其實正悄悄阻礙了你與神或與家人的親密流通？今天你願意邀請主耶穌拆毀哪一個存在已久的舊成見？",
       "audioUrl": "/audio/2026-11-23/encore/tue.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "wed",
@@ -127,7 +127,7 @@ export const encore_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "在面對成年兒女、孫輩或教會年輕同工時，你目前有哪些互動還帶著一點「在上面掌控指導」的慣性？這週你可以透過哪一個具體的小舉動（例如單純傾聽不給建議、或真誠稱讚對方一個優點），操練「蹲在下面托住他們」的造就之愛？",
       "audioUrl": "/audio/2026-11-23/encore/wed.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "thu",
@@ -166,7 +166,7 @@ export const encore_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "步入人生下半場後，在老友聚會或親友往來中，哪一個話題（健康狀況、退休規劃、兒女近況或生活品質）最容易讓你心裡暗暗啟動「比較測光表」？如果把這個話題交到基督恩典的正午太陽下，你會如何用一句感恩的話來取代比較？",
       "audioUrl": "/audio/2026-11-23/encore/thu.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "fri",
@@ -205,7 +205,7 @@ export const encore_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "檢視神此刻為你人生下半場量定的新界限（包含你的時間、體力、家庭角色與教會位置），有哪些過去的重擔是你可以放心交棒不再硬撐的？又有哪一位年輕人、孫輩或宣教同工，是你可以透過代禱與支持托起他們走向「更遠之處」的對象？",
       "audioUrl": "/audio/2026-11-23/encore/fri.mp3",
-      "hasAudio": false
+      "hasAudio": true
     },
     {
       "id": "sat",
@@ -244,7 +244,7 @@ export const encore_2026_11_23: DevotionalWeek = {
       ],
       "meditationQuestion": "回顧你走過的大半生，如果今天要寫下一句「指著主誇口」的簡短生命墓誌銘或感恩見證，你最想把哪一件神手把手牽引你走過的恩典故事，留給兒孫與教會的後輩？",
       "audioUrl": "/audio/2026-11-23/encore/sat.mp3",
-      "hasAudio": false
+      "hasAudio": true
     }
   ],
   "publishedAt": "2026-11-23",
