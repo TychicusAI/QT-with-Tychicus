@@ -4,9 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { setStoredVersion } from "@/lib/storage";
-import { BookOpen, Flame, Sparkles, Users, Sparkle, Library, Calendar, Sun, Compass, HeartHandshake, ScrollText } from "lucide-react";
+import { BookOpen, Users, Sparkle, Library, Calendar, Sun, Compass, HeartHandshake, ScrollText, Mail } from "lucide-react";
 import { DevotionalVersion } from "@/types/devotional";
-import { useStreak } from "@/lib/storage";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface NavbarProps {
@@ -20,7 +19,6 @@ export function Navbar({
 }: NavbarProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const streak = useStreak();
 
   const handleVersionClick = (targetVersion: DevotionalVersion) => {
     setStoredVersion(targetVersion);
@@ -135,23 +133,18 @@ export function Navbar({
 
         {/* Right: Interactive Controls */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-          {/* Streak indicator badge */}
-          <div
-            title={`連續靈修打卡 ${streak} 天`}
-            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 min-h-[36px] sm:min-h-[34px] rounded-full bg-orange-100/80 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300 text-xs sm:text-[13px] font-semibold shrink-0"
-          >
-            <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500 animate-pulse" />
-            <span>{streak} 天</span>
-          </div>
-
-          {/* About / Introduction Page Link */}
+          {/* 阿咕信箱 (QA Mailbox) Link */}
           <Link
-            href="/about"
-            className="flex items-center justify-center gap-1 sm:gap-1.5 p-2 min-w-[36px] min-h-[38px] sm:min-h-[34px] sm:px-3 sm:py-1.5 rounded-full bg-purple-50 dark:bg-purple-950/50 hover:bg-purple-100 dark:hover:bg-purple-900/50 text-purple-700 dark:text-purple-300 border border-purple-200/70 dark:border-purple-800/60 text-xs sm:text-[13px] font-semibold transition cursor-pointer"
-            title="查閱「靈修推基古」平台架構、特色優勢與三方比較"
+            href="/qa"
+            className={`flex items-center justify-center gap-1 sm:gap-1.5 p-2 min-w-[36px] min-h-[38px] sm:min-h-[34px] sm:px-3 sm:py-1.5 rounded-full border text-xs sm:text-[13px] font-semibold transition cursor-pointer ${
+              pathname.startsWith("/qa")
+                ? "bg-[#1B365D] text-amber-200 border-[#1B365D] dark:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/50 shadow-xs"
+                : "bg-[#1B365D]/8 dark:bg-slate-800/90 hover:bg-[#1B365D]/15 dark:hover:bg-slate-700 text-[#1B365D] dark:text-amber-200 border-[#1B365D]/20 dark:border-slate-700"
+            }`}
+            title="前往「阿咕信箱」查閱推基咕的信仰與聖經問答回信"
           >
-            <Sparkles className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-purple-600 dark:text-purple-400 shrink-0" />
-            <span className="hidden sm:inline">平台簡介</span>
+            <Mail className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+            <span className="hidden sm:inline">阿咕信箱</span>
           </Link>
 
           {/* Devotional Archive Link */}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "chinese-culture",
+    "name": "華人文化與傳統習俗",
+    "description": "祭祖與孝道、民間信仰與禁忌、婚姻與傳宗接代——在信仰實踐最前線，帶著恩典與智慧回應華人家族張力。",
+    "accent": "amber",
+    "pastoralNotice": false
+  },
+  {
+    "id": "suffering-prayer",
+    "name": "苦難、禱告與神的作為",
+    "description": "苦難的意義、禱告未蒙應允、成功神學的落差——收起翅膀，安靜陪你在神義論與低谷裡仰望主。",
+    "accent": "slate",
+    "pastoralNotice": true
+  },
+  {
+    "id": "core-doctrine",
+    "name": "核心教義與宗派差異",
+    "description": "救恩與安全感、聖靈與靈恩現象、聖禮與教會觀——持守大公教會核心正統，對次要爭議保持謙卑與釐清。",
+    "accent": "navy",
+    "pastoralNotice": false
+  },
+  {
+    "id": "bible-exegesis",
+    "name": "聖經難題與解經方法",
+    "description": "舊約與新約的落差、文化背景與現代應用、科學與信仰的對話——飛回第一世紀現場，打開整本聖經的救贖大故事。",
+    "accent": "teal",
+    "pastoralNotice": false
+  },
+  {
+    "id": "modern-ethics",
+    "name": "現代生活倫理與身心健康",
+    "description": "金錢與奉獻、心理健康與靈性、職場與社會議題——在當代處境裡活出第五幕的忠心即興與整全關懷。",
+    "accent": "indigo",
+    "pastoralNotice": false
+  }
+]

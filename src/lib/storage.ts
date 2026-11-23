@@ -5,20 +5,7 @@ import { DevotionalVersion } from "@/types/devotional";
 
 const COMPLETED_KEY = "qt_completed_days";
 const NOTES_KEY = "qt_journal_notes";
-const STREAK_KEY = "qt_streak_info";
 const VERSION_KEY = "qt_preferred_version";
-
-export interface StreakInfo {
-  count: number;
-  lastDate: string; // YYYY-MM-DD
-}
-
-function getTodayDateString(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(
-    now.getDate()
-  ).padStart(2, "0")}`;
-}
 
 let cachedCompletedDaysRaw: string | null = null;
 let cachedCompletedDays: Record<string, boolean> = {};
@@ -51,63 +38,11 @@ export function toggleDayCompleted(version: DevotionalVersion, weekId: string, d
     completed[key] = nextState;
     localStorage.setItem(COMPLETED_KEY, JSON.stringify(completed));
 
-    // Update streak if newly completed today
-    if (nextState) {
-      updateStreak();
-    }
-
     // Trigger local event
     window.dispatchEvent(new Event("qt_progress_updated"));
     return nextState;
   } catch {
     return false;
-  }
-}
-
-function updateStreak() {
-  try {
-    const today = getTodayDateString();
-    const raw = localStorage.getItem(STREAK_KEY) || localStorage.getItem("qtyouth_streak_info");
-    const streakInfo: StreakInfo = raw ? JSON.parse(raw) : { count: 0, lastDate: "" };
-
-    if (streakInfo.lastDate === today) {
-      return;
-    }
-
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(yesterday.getDate()).padStart(2, "0")}`;
-
-    if (streakInfo.lastDate === yesterdayStr) {
-      streakInfo.count += 1;
-    } else {
-      streakInfo.count = 1;
-    }
-    streakInfo.lastDate = today;
-    localStorage.setItem(STREAK_KEY, JSON.stringify(streakInfo));
-  } catch {
-    // ignore
-  }
-}
-
-let cachedStreakRaw: string | null = null;
-let cachedStreakCount = 0;
-
-export function getStreakCount(): number {
-  if (typeof window === "undefined") return 0;
-  try {
-    const raw = localStorage.getItem(STREAK_KEY) || localStorage.getItem("qtyouth_streak_info");
-    if (raw !== cachedStreakRaw) {
-      cachedStreakRaw = raw;
-      const info: StreakInfo = raw ? JSON.parse(raw) : { count: 0, lastDate: "" };
-      cachedStreakCount = info.count || 0;
-    }
-    return cachedStreakCount;
-  } catch {
-    return 0;
   }
 }
 
@@ -181,14 +116,6 @@ export function useCompletedDays(): Record<string, boolean> {
     subscribeToStorage,
     getCompletedDays,
     () => ({})
-  );
-}
-
-export function useStreak(): number {
-  return useSyncExternalStore(
-    subscribeToStorage,
-    getStreakCount,
-    () => 0
   );
 }
 

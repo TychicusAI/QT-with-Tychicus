@@ -47,7 +47,6 @@ export interface DevotionalWeek {
 export interface UserQTProgress {
   completedDays: Record<string, boolean>; // key: `${version}-${weekId}-${dayId}`
   notes: Record<string, string>; // key: `${version}-${weekId}-${dayId}`
-  streak: number;
   lastCompletedDate?: string;
   lastSelectedVersion?: DevotionalVersion;
 }

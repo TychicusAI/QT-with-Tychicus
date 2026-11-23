@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { syncQA } from "./sync-qa.mjs";
 
 let BIBLE_CACHE = {};
 const bibleCachePath = path.join(process.cwd(), "data", "bible-cache.json");
@@ -959,3 +960,8 @@ export function getBibliographyByScripture(scripture?: string): BookBibliography
 
 fs.writeFileSync(booksServicePath, booksServiceCode, "utf-8");
 console.log(`✓ Updated books-service.ts with ${allBibliographies.length} bibliography collection(s)`);
+
+// ==========================================
+// QA / 阿咕信箱 Scanning Routine
+// ==========================================
+syncQA();
