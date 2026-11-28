@@ -140,6 +140,9 @@ export function syncQA() {
             ? String(meta.pastoralNotice).toLowerCase() === "true"
             : Boolean(catInfo?.pastoralNotice);
 
+        const eventContext = meta.eventContext ? String(meta.eventContext).trim() : undefined;
+        const featured = String(meta.featured || "").toLowerCase() === "true";
+
         articles.push({
           slug,
           category: resolvedCategory,
@@ -154,6 +157,8 @@ export function syncQA() {
           scriptures,
           readTimeMinutes: hasBody ? Math.max(2, Math.ceil(body.length / 320)) : 0,
           pastoralNotice,
+          ...(eventContext ? { eventContext } : {}),
+          ...(featured ? { featured } : {}),
           relatedLinks: parseRelatedLinks(meta.relatedLinks),
           body,
         });
@@ -161,9 +166,12 @@ export function syncQA() {
     }
   }
 
-  // Sort: published first, then by order asc, then publishedAt desc, then slug asc
+  // Sort: published first; for current-affairs sort by publishedAt desc first, otherwise order asc then publishedAt desc
   articles.sort((a, b) => {
     if (a.status !== b.status) return a.status === "published" ? -1 : 1;
+    if (a.category === "current-affairs" && b.category === "current-affairs") {
+      if (a.publishedAt !== b.publishedAt) return (b.publishedAt || "").localeCompare(a.publishedAt || "");
+    }
     if ((a.order ?? 999) !== (b.order ?? 999)) return (a.order ?? 999) - (b.order ?? 999);
     if (a.publishedAt !== b.publishedAt) return (b.publishedAt || "").localeCompare(a.publishedAt || "");
     return a.slug.localeCompare(b.slug);

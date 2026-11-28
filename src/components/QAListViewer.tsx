@@ -14,6 +14,8 @@ import {
   Scale,
   ArrowRight,
   Tag,
+  Newspaper,
+  Calendar,
 } from "lucide-react";
 import { QAArticle, QACategoryConfig } from "@/types/qa";
 import { TychiCooImage } from "@/components/TychiCooImage";
@@ -48,6 +50,14 @@ function getCategoryAccent(accent?: QACategoryConfig["accent"]) {
         tabActive:
           "bg-white dark:bg-slate-800 text-indigo-800 dark:text-indigo-300 shadow-xs font-bold",
         icon: <Scale className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />,
+      };
+    case "rose":
+      return {
+        badge:
+          "bg-rose-100/90 dark:bg-rose-950/60 text-rose-900 dark:text-rose-300 border-rose-300/70 dark:border-rose-800/60",
+        tabActive:
+          "bg-white dark:bg-slate-800 text-rose-800 dark:text-rose-300 shadow-xs font-bold",
+        icon: <Newspaper className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />,
       };
     case "slate":
       return {
@@ -96,8 +106,14 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
     [articles]
   );
 
+  const featuredArticles = useMemo(() => {
+    return articles
+      .filter((a) => a.status === "published" && a.featured)
+      .sort((a, b) => (b.publishedAt || "").localeCompare(a.publishedAt || ""));
+  }, [articles]);
+
   const filteredArticles = useMemo(() => {
-    return articles.filter((item) => {
+    const list = articles.filter((item) => {
       if (selectedCategory !== "all" && item.category !== selectedCategory) {
         return false;
       }
@@ -107,12 +123,20 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
           item.title.toLowerCase().includes(q) ||
           item.question.toLowerCase().includes(q) ||
           item.summary.toLowerCase().includes(q) ||
+          (item.eventContext?.toLowerCase().includes(q) ?? false) ||
           item.tags.some((t) => t.toLowerCase().includes(q)) ||
           item.scriptures.some((s) => s.toLowerCase().includes(q))
         );
       }
       return true;
     });
+    if (selectedCategory === "current-affairs") {
+      return [...list].sort((a, b) => {
+        if (a.status !== b.status) return a.status === "published" ? -1 : 1;
+        return (b.publishedAt || "").localeCompare(a.publishedAt || "");
+      });
+    }
+    return list;
   }, [articles, selectedCategory, searchQuery]);
 
   const activeCategoryConfig =
@@ -256,6 +280,55 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
         </div>
       </section>
 
+      {/* Featured Timely Dispatches */}
+      {selectedCategory === "all" && !searchQuery.trim() && featuredArticles.length > 0 && (
+        <section className="space-y-3">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-rose-800 dark:text-rose-300 px-1">
+            <Newspaper className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+            <span>近期加急回信</span>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            {featuredArticles.map((article) => (
+              <Link
+                key={`featured-${article.slug}`}
+                href={`/qa/${article.slug}`}
+                className="group p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-rose-50/90 via-white to-amber-50/50 dark:from-rose-950/30 dark:via-slate-950 dark:to-slate-900 border border-rose-200/80 dark:border-rose-900/60 hover:border-rose-400/80 dark:hover:border-rose-700 shadow-xs hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-100 dark:bg-rose-950/70 text-rose-900 dark:text-rose-300 border border-rose-300/70 dark:border-rose-800/60">
+                      <Newspaper className="w-3 h-3" />
+                      <span>{article.categoryLabel}</span>
+                    </span>
+                    {article.eventContext && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/80 dark:bg-slate-900 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700">
+                        <Calendar className="w-3 h-3 text-rose-500" />
+                        <span>{article.eventContext}</span>
+                      </span>
+                    )}
+                    {article.publishedAt && (
+                      <span className="text-xs text-stone-500 dark:text-stone-400">
+                        {article.publishedAt}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-50 group-hover:text-rose-800 dark:group-hover:text-rose-300 transition leading-snug">
+                    {article.title}
+                  </h2>
+                  <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed line-clamp-2">
+                    {article.summary}
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-rose-800 dark:text-rose-300 shrink-0">
+                  <span>拆封閱讀</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Letters Grid */}
       <section>
         {filteredArticles.length === 0 ? (
@@ -346,6 +419,13 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
                         <span>約 {article.readTimeMinutes} 分鐘閱讀</span>
                       </span>
                     </div>
+
+                    {article.eventContext && (
+                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-xs font-medium bg-rose-50/80 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800/50">
+                        <Calendar className="w-3 h-3" />
+                        <span>{article.eventContext}</span>
+                      </div>
+                    )}
 
                     <h2 className="text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-50 group-hover:text-[#1B365D] dark:group-hover:text-amber-300 transition leading-snug">
                       {article.title}

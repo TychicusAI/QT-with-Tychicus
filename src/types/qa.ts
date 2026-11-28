@@ -2,7 +2,7 @@ export interface QACategoryConfig {
   id: string;
   name: string;
   description: string;
-  accent: "navy" | "amber" | "teal" | "slate" | "indigo";
+  accent: "navy" | "amber" | "teal" | "slate" | "indigo" | "rose";
   pastoralNotice?: boolean;
 }
 
@@ -26,6 +26,8 @@ export interface QAArticle {
   scriptures: string[];
   readTimeMinutes: number;
   pastoralNotice?: boolean;
+  eventContext?: string;
+  featured?: boolean;
   relatedLinks: QARelatedLink[];
   body: string;
 }

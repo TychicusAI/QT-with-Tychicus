@@ -33,5 +33,12 @@
     "description": "金錢與奉獻、心理健康與靈性、職場與社會議題——在當代處境裡活出第五幕的忠心即興與整全關懷。",
     "accent": "indigo",
     "pastoralNotice": false
+  },
+  {
+    "id": "current-affairs",
+    "name": "時事快遞與公共信仰",
+    "description": "選舉、社會熱議、時代脈動與公共事件——一手拿聖經、一手讀報紙，在即時處境裡分辨天國的永恆視角。",
+    "accent": "rose",
+    "pastoralNotice": false
   }
 ]

@@ -12,6 +12,8 @@ import {
   Tag,
   Compass,
   Library,
+  Newspaper,
+  Calendar,
 } from "lucide-react";
 import { marked } from "marked";
 import { QAArticle } from "@/types/qa";
@@ -54,6 +56,7 @@ export function QADetailReader({
   }[fontSize];
 
   const isSufferingCare = Boolean(article.pastoralNotice);
+  const isCurrentAffairs = article.category === "current-affairs";
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
@@ -116,16 +119,27 @@ export function QADetailReader({
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold border ${
               isSufferingCare
                 ? "bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700"
+                : isCurrentAffairs
+                ? "bg-rose-100/90 dark:bg-rose-950/60 text-rose-900 dark:text-rose-300 border-rose-300/70 dark:border-rose-800/60"
                 : "bg-[#1B365D]/10 dark:bg-sky-950/60 text-[#1B365D] dark:text-amber-300 border-[#1B365D]/20 dark:border-sky-800/60"
             }`}
           >
             {isSufferingCare ? (
               <HeartHandshake className="w-3.5 h-3.5" />
+            ) : isCurrentAffairs ? (
+              <Newspaper className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
             ) : (
               <Mail className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             )}
             <span>{article.categoryLabel}</span>
           </span>
+
+          {article.eventContext && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200/80 dark:border-rose-800/50">
+              <Calendar className="w-3.5 h-3.5" />
+              <span>時事背景：{article.eventContext}</span>
+            </span>
+          )}
 
           {article.readTimeMinutes > 0 && (
             <span className="inline-flex items-center gap-1 text-xs sm:text-sm text-stone-500 dark:text-stone-400">
@@ -213,7 +227,10 @@ export function QADetailReader({
         <div
           className={`markdown-content space-y-5 text-stone-800 dark:text-stone-200 ${contentFontClass} [&_p]:mb-5 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_blockquote]:border-l-4 [&_blockquote]:border-amber-500/70 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-stone-600 dark:[&_blockquote]:text-stone-400`}
           dangerouslySetInnerHTML={{
-            __html: marked.parse(article.body, { breaks: true }) as string,
+            __html: marked.parse(
+              article.body.replace(/\*\*([^\n*]+?)\*\*/g, "<strong>$1</strong>"),
+              { breaks: true }
+            ) as string,
           }}
         />
       </article>

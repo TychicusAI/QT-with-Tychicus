@@ -2,16 +2,17 @@
 
 本資料夾存放「阿咕信箱」所有信仰問答的 Markdown 檔案。只要新增或編輯 `.md` 檔案並執行 `npm run sync`（`npm run dev` 與 `npm run build` 也會自動執行），網站就會自動生成對應的靜態頁面與列表卡片。
 
-## 五大分類資料夾結構
+## 六大分類資料夾結構
 
 ```text
 data/qa/
-├── categories.json           # 五大分類名稱、說明、配色與牧養提醒設定
+├── categories.json           # 六大分類名稱、說明、配色與牧養提醒設定
 ├── chinese-culture/          # 一、華人文化與傳統習俗（祭祖孝道、民間禁忌、婚姻傳宗接代）
 ├── suffering-prayer/         # 二、苦難、禱告與神的作為（苦難意義、禱告未應允、成功神學落差）
 ├── core-doctrine/            # 三、核心教義與宗派差異（救恩安全感、聖靈靈恩、聖禮教會觀）
 ├── bible-exegesis/           # 四、聖經難題與解經方法（舊新約落差、文化應用、科學與信仰）
-└── modern-ethics/            # 五、現代生活倫理與身心健康（金錢奉獻、心理健康、職場與社會）
+├── modern-ethics/            # 五、現代生活倫理與身心健康（金錢奉獻、心理健康、職場與社會）
+└── current-affairs/          # 六、時事快遞與公共信仰（選舉、社會熱議、時代脈動與公共事件）
 ```
 
 ## 單篇問答 Markdown 格式
@@ -25,6 +26,8 @@ question: 每次想到永生要在雲朵上穿白袍、彈豎琴唱詩到永遠�
 summary: 會覺得雲端彈豎琴很無聊，不是你屬靈光景不好，而是我們不小心把柏拉圖劇本錯當成聖經的新創造大結局了。
 publishedAt: 2026-11-22
 order: 1
+eventContext: 2026 臺灣九合一選舉  # （選填）時事分類可標註觸發的時空背景
+featured: false                    # （選填）設為 true 時會在列表頁頂部顯示為「近期加急回信」
 tags: 天國, 新創造, 永生, 啟示錄
 scriptures: 啟示錄 21:1-5, 路加福音 24:36-43
 pastoralNotice: false
