@@ -18,6 +18,26 @@ if (fs.existsSync(bibleCachePath)) {
 }
 
 const missingCacheVerses = [];
+const forbiddenIllustrationAttributions = [];
+
+const FORBIDDEN_ILLUSTRATION_BOOKS = [
+  "最佳講道例證集",
+  "1001 個觸動人心的例證",
+  "東尼·伊文斯例證集",
+  "熱門講道例證",
+  "Best Sermon Illustrations",
+  "1001 Illustrations That Connect",
+  "Hot Sermon Illustrations",
+  "Tony Evans' Book of Illustrations",
+  "Movie-Based Illustrations",
+];
+
+const FORBIDDEN_ILLUSTRATION_COMPILERS = [
+  "東尼·伊文斯",
+  "Tony Evans",
+  "東尼·盧埃林",
+  "Tony Llewellyn",
+];
 
 const DAY_MAP = {
   週一: { id: "mon", dayNumber: 1 },
@@ -182,6 +202,18 @@ function parseMarkdown(content, fileId, version, isCurrent = true) {
     const messageMatch = dayBody.match(/###\s*【信息】\s*\n+([\s\S]*?)(?=###\s*【建議禱告】|\n###(?!#)|$)/);
     if (messageMatch) {
       message = messageMatch[1].trim();
+      for (const term of FORBIDDEN_ILLUSTRATION_BOOKS) {
+        if (message.includes(term)) {
+          forbiddenIllustrationAttributions.push({ fileId, version, day: dayLabel, term });
+        }
+      }
+      if (fileId >= "2026-11-23") {
+        for (const term of FORBIDDEN_ILLUSTRATION_COMPILERS) {
+          if (message.includes(term)) {
+            forbiddenIllustrationAttributions.push({ fileId, version, day: dayLabel, term });
+          }
+        }
+      }
     }
 
     // Suggested Prayer
@@ -530,6 +562,19 @@ if (missingCacheVerses.length > 0) {
   process.exit(1);
 } else {
   console.log("✓ [Bible Cache Verified] 所有延伸研讀經文均已 100% 收錄於 data/bible-cache.json 中！");
+}
+
+if (forbiddenIllustrationAttributions.length > 0) {
+  console.error("\n=======================================================");
+  console.error("❌ [Illustration Attribution Check Failed] 檢測到【信息】正文出現禁止之《喻道推基古》書名或編者出處：");
+  forbiddenIllustrationAttributions.forEach(m => {
+    console.error(`  - [${m.fileId} ${m.version} ${m.day}] 禁用字詞：「${m.term}」`);
+  });
+  console.error("\n依專案規範，參考自《喻道推基古》的喻道故事與比喻不需標明書名或編者出處，請改為自然散文敘事後再同步。");
+  console.error("=======================================================\n");
+  process.exit(1);
+} else {
+  console.log("✓ [Illustration Attribution Verified] 所有信息正文均符合《喻道推基古》去出處化規範！");
 }
 
 // Generate devotional-service.ts
