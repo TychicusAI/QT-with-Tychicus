@@ -165,53 +165,21 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
         </div>
       </div>
 
-      {/* Hero Banner with Tychi-Coo IP */}
+      {/* Hero Banner */}
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#132642] via-[#1B365D] to-[#244572] text-stone-50 shadow-lg border border-[#2C4E80]/60">
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-          <div className="lg:col-span-7 p-6 sm:p-9 flex flex-col justify-center space-y-4">
-            <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-amber-400/15 text-amber-200 border border-amber-300/30">
-              <Mail className="w-3.5 h-3.5 text-amber-300" />
-              <span>推基咕（Tychi-Coo）信仰問答專欄</span>
-            </div>
-
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white">
-              阿咕信箱
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-200/95 leading-relaxed">
-              戴著圓框眼鏡、圍著深藍圍巾的跨時空信鴿特使——專門往返於第一世紀的聖經現場與二十一世紀的書桌之間，把架在長頸鹿高度的神學，叼回小羊吃得到的地方。
-            </p>
-
-            {/* Tychi-Coo Mini Identity Card */}
-            <div className="pt-2 flex items-center gap-3.5">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden ring-2 ring-amber-300/60 shadow-md shrink-0 bg-[#FAF8F5]">
-                <TychiCooImage
-                  src="/images/tychicoo/avatar.jpg"
-                  alt="推基咕 (Tychi-Coo) 頭像"
-                  variant="avatar"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="text-xs sm:text-sm text-slate-200/90 space-y-0.5">
-                <p className="font-bold text-amber-200">
-                  推基咕 Tychi-Coo・跨時空信鴿特使
-                </p>
-                <p className="text-slate-300">
-                  救贖五幕劇視野 × 牧者雙重聆聽 × 說人話的書房回信
-                </p>
-              </div>
-            </div>
+        <div className="p-6 sm:p-9 flex flex-col justify-center space-y-4">
+          <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-amber-400/15 text-amber-200 border border-amber-300/30">
+            <Mail className="w-3.5 h-3.5 text-amber-300" />
+            <span>推基咕（Tychi-Coo）信仰問答專欄</span>
           </div>
 
-          <div className="lg:col-span-5 relative min-h-[210px] sm:min-h-[260px] lg:min-h-full">
-            <TychiCooImage
-              src="/images/tychicoo/mailbox-hero.jpg"
-              alt="阿咕信箱書房橫幅插畫"
-              variant="hero"
-              className="w-full h-full object-cover object-center"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#132642]/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#1B365D] lg:via-transparent lg:to-transparent" />
-          </div>
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white">
+            阿咕信箱
+          </h1>
+
+          <p className="text-sm sm:text-base text-slate-200/95 leading-relaxed max-w-3xl">
+            戴著圓框眼鏡、圍著深藍圍巾的跨時空信鴿特使——專門往返於第一世紀的聖經現場與二十一世紀的書桌之間，把架在長頸鹿高度的神學，叼回小羊吃得到的地方。
+          </p>
         </div>
       </section>
 
