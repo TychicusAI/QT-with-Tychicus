@@ -45,10 +45,10 @@ export function Navbar({
               </span>
             </div>
             <p
-              title="v. 5.0 循序讀經"
+              title="v. 6.0 循序讀經"
               className="text-xs text-stone-500 dark:text-stone-400 truncate sm:max-w-none"
             >
-              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />5.0</span>{" "}
+              <span className="font-semibold text-amber-700 dark:text-amber-400">v.<span className="inline-block w-0.5" />6.0</span>{" "}
               循序讀經
             </p>
           </div>

@@ -17,6 +17,7 @@ import {
   Headphones,
   FileText,
   Scale,
+  Mail,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { usePreferredVersion } from "@/lib/storage";
@@ -347,6 +348,47 @@ export function AboutViewer() {
           </div>
         </section>
 
+        {/* 3.5. Tychi-Coo Mailbox (阿咕信箱) */}
+        <section className="space-y-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-400">
+              <Mail className="w-4 h-4" />
+              <span>信仰問答專欄</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100">
+              阿咕信箱（推基咕 Tychi-Coo 信仰問答）
+            </h2>
+            <p className="text-sm text-stone-600 dark:text-stone-400 max-w-2xl">
+              除了每日靈修外，本平台亦設有「阿咕信箱」問答專欄，直面華人基督徒在教義、讀經、苦難、文化習俗與當代時事中的真實困惑。
+            </p>
+          </div>
+
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#132642] via-[#1B365D] to-[#244572] text-stone-50 border border-[#2C4E80]/60 shadow-lg space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-2 max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-400/15 text-amber-200 border border-amber-300/30">
+                  <Mail className="w-3.5 h-3.5 text-amber-300" />
+                  <span>救贖五幕劇視野 × 牧者雙重聆聽</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                  把架在長頸鹿高度的神學，叼回小羊吃得到的地方
+                </h3>
+                <p className="text-sm sm:text-base text-slate-200/95 leading-relaxed">
+                  每封回信均奠基於聖經文本與學術神學資源，拒絕冰冷教條與廉價心靈雞湯；一手拿聖經、一手讀報紙，涵蓋<strong>時事快遞與公共信仰</strong>、<strong>華人文化與傳統習俗</strong>、<strong>苦難、禱告與神的作為</strong>、<strong>核心教義與宗派差異</strong>、<strong>聖經難題與解經方法</strong>及<strong>現代生活倫理與身心健康</strong>六大主題。
+                </p>
+              </div>
+              <Link
+                href="/qa"
+                className="shrink-0 self-start sm:self-center text-xs sm:text-sm font-bold px-5 py-3 min-h-[44px] rounded-xl bg-amber-400 hover:bg-amber-300 text-[#132642] transition shadow-sm flex items-center gap-1.5"
+              >
+                <Mail className="w-4 h-4" />
+                <span>進入阿咕信箱</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* 4. Core Strengths & Tech Highlights */}
         <section className="space-y-6">
           <div className="space-y-2">
@@ -526,7 +568,7 @@ export function AboutViewer() {
                     純文字對話窗口，需自行外接語音或筆記工具。
                   </td>
                   <td className="py-3.5 px-4 bg-purple-50/40 dark:bg-purple-950/20 font-semibold text-purple-900 dark:text-purple-200">
-                    原生響應式網頁、深色模式、連續打卡進度追蹤、F5-TTS 語音無縫伴讀。
+                    原生響應式網頁、深色模式、連續打卡進度追蹤、原生語音無縫伴讀，並整合「阿咕信箱」信仰問答專欄。
                   </td>
                 </tr>
               </tbody>
@@ -552,6 +594,14 @@ export function AboutViewer() {
             >
               <Sparkles className="w-4 h-4" />
               <span>進入最新當週靈修</span>
+            </Link>
+
+            <Link
+              href="/qa"
+              className="px-5 py-3 min-h-[44px] rounded-xl bg-[#1B365D] hover:bg-[#132642] text-white font-bold text-sm transition shadow-sm flex items-center gap-1.5"
+            >
+              <Mail className="w-4 h-4 text-amber-300" />
+              <span>前往阿咕信箱</span>
             </Link>
 
             <Link
