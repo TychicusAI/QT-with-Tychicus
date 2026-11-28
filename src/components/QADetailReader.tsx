@@ -26,6 +26,17 @@ interface QADetailReaderProps {
   nextArticle: QAArticle | null;
 }
 
+function formatCurrentAffairsMonth(article: QAArticle): string | null {
+  if (article.category !== "current-affairs") return null;
+  const raw = (article.askedAt || article.publishedAt || "").trim();
+  if (!raw) return null;
+  const match = raw.match(/^(\d{4})[-/](\d{1,2})/);
+  if (match) {
+    return `${match[1]}/${match[2].padStart(2, "0")}`;
+  }
+  return raw;
+}
+
 export function QADetailReader({
   article,
   prevArticle,
@@ -57,6 +68,7 @@ export function QADetailReader({
 
   const isSufferingCare = Boolean(article.pastoralNotice);
   const isCurrentAffairs = article.category === "current-affairs";
+  const currentAffairsMonth = formatCurrentAffairsMonth(article);
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
@@ -134,9 +146,15 @@ export function QADetailReader({
             <span>{article.categoryLabel}</span>
           </span>
 
+          {currentAffairsMonth && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-rose-100/80 dark:bg-rose-950/60 text-rose-900 dark:text-rose-200 border border-rose-200/80 dark:border-rose-800/60">
+              <Calendar className="w-3.5 h-3.5" />
+              <span>提問時間：{currentAffairsMonth}</span>
+            </span>
+          )}
+
           {article.eventContext && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200/80 dark:border-rose-800/50">
-              <Calendar className="w-3.5 h-3.5" />
               <span>時事背景：{article.eventContext}</span>
             </span>
           )}
@@ -148,7 +166,7 @@ export function QADetailReader({
             </span>
           )}
 
-          {article.publishedAt && (
+          {!isCurrentAffairs && article.publishedAt && (
             <span className="text-xs sm:text-sm text-stone-400 dark:text-stone-500">
               ・{article.publishedAt}
             </span>
@@ -163,7 +181,7 @@ export function QADetailReader({
         {article.question && article.question !== article.title && (
           <div className="p-4 sm:p-5 rounded-2xl bg-stone-100/90 dark:bg-slate-900/80 border-l-4 border-[#1B365D] dark:border-amber-500 text-stone-700 dark:text-stone-300 text-sm sm:text-base leading-relaxed">
             <p className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-1.5">
-              來信提問
+              來信提問{currentAffairsMonth ? `・${currentAffairsMonth}` : ""}
             </p>
             <p>{article.question}</p>
           </div>

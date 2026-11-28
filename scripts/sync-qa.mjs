@@ -141,6 +141,7 @@ export function syncQA() {
             : Boolean(catInfo?.pastoralNotice);
 
         const eventContext = meta.eventContext ? String(meta.eventContext).trim() : undefined;
+        const askedAt = meta.askedAt ? String(meta.askedAt).trim() : undefined;
         const featured = String(meta.featured || "").toLowerCase() === "true";
 
         articles.push({
@@ -152,6 +153,7 @@ export function syncQA() {
           summary,
           status,
           publishedAt: meta.publishedAt || "",
+          ...(askedAt ? { askedAt } : {}),
           order: Number.isNaN(orderNum) ? 999 : orderNum,
           tags,
           scriptures,

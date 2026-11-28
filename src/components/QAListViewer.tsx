@@ -25,6 +25,17 @@ interface QAListViewerProps {
   articles: QAArticle[];
 }
 
+function formatCurrentAffairsMonth(article: QAArticle): string | null {
+  if (article.category !== "current-affairs") return null;
+  const raw = (article.askedAt || article.publishedAt || "").trim();
+  if (!raw) return null;
+  const match = raw.match(/^(\d{4})[-/](\d{1,2})/);
+  if (match) {
+    return `${match[1]}/${match[2].padStart(2, "0")}`;
+  }
+  return raw;
+}
+
 function getCategoryAccent(accent?: QACategoryConfig["accent"]) {
   switch (accent) {
     case "amber":
@@ -256,43 +267,51 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
             <span>近期加急回信</span>
           </div>
           <div className="grid grid-cols-1 gap-4">
-            {featuredArticles.map((article) => (
-              <Link
-                key={`featured-${article.slug}`}
-                href={`/qa/${article.slug}`}
-                className="group p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-rose-50/90 via-white to-amber-50/50 dark:from-rose-950/30 dark:via-slate-950 dark:to-slate-900 border border-rose-200/80 dark:border-rose-900/60 hover:border-rose-400/80 dark:hover:border-rose-700 shadow-xs hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-              >
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-100 dark:bg-rose-950/70 text-rose-900 dark:text-rose-300 border border-rose-300/70 dark:border-rose-800/60">
-                      <Newspaper className="w-3 h-3" />
-                      <span>{article.categoryLabel}</span>
-                    </span>
-                    {article.eventContext && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/80 dark:bg-slate-900 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700">
-                        <Calendar className="w-3 h-3 text-rose-500" />
-                        <span>{article.eventContext}</span>
+            {featuredArticles.map((article) => {
+              const monthStamp = formatCurrentAffairsMonth(article);
+              return (
+                <Link
+                  key={`featured-${article.slug}`}
+                  href={`/qa/${article.slug}`}
+                  className="group p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-rose-50/90 via-white to-amber-50/50 dark:from-rose-950/30 dark:via-slate-950 dark:to-slate-900 border border-rose-200/80 dark:border-rose-900/60 hover:border-rose-400/80 dark:hover:border-rose-700 shadow-xs hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-100 dark:bg-rose-950/70 text-rose-900 dark:text-rose-300 border border-rose-300/70 dark:border-rose-800/60">
+                        <Newspaper className="w-3 h-3" />
+                        <span>{article.categoryLabel}</span>
                       </span>
-                    )}
-                    {article.publishedAt && (
-                      <span className="text-xs text-stone-500 dark:text-stone-400">
-                        {article.publishedAt}
-                      </span>
-                    )}
+                      {monthStamp && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-100/80 dark:bg-rose-950/60 text-rose-900 dark:text-rose-200 border border-rose-200/80 dark:border-rose-800/60">
+                          <Calendar className="w-3 h-3 text-rose-600 dark:text-rose-400" />
+                          <span>提問時間 {monthStamp}</span>
+                        </span>
+                      )}
+                      {article.eventContext && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/80 dark:bg-slate-900 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700">
+                          <span>{article.eventContext}</span>
+                        </span>
+                      )}
+                      {!monthStamp && article.publishedAt && (
+                        <span className="text-xs text-stone-500 dark:text-stone-400">
+                          {article.publishedAt}
+                        </span>
+                      )}
+                    </div>
+                    <h2 className="text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-50 group-hover:text-rose-800 dark:group-hover:text-rose-300 transition leading-snug">
+                      {article.title}
+                    </h2>
+                    <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed line-clamp-2">
+                      {article.summary}
+                    </p>
                   </div>
-                  <h2 className="text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-50 group-hover:text-rose-800 dark:group-hover:text-rose-300 transition leading-snug">
-                    {article.title}
-                  </h2>
-                  <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed line-clamp-2">
-                    {article.summary}
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-rose-800 dark:text-rose-300 shrink-0">
-                  <span>拆封閱讀</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
+                  <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-rose-800 dark:text-rose-300 shrink-0">
+                    <span>拆封閱讀</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
@@ -321,6 +340,7 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
               const cat = categoryMap.get(article.category);
               const style = getCategoryAccent(cat?.accent);
               const isPublished = article.status === "published";
+              const monthStamp = formatCurrentAffairsMonth(article);
 
               if (!isPublished) {
                 return (
@@ -388,10 +408,19 @@ export function QAListViewer({ categories, articles }: QAListViewerProps) {
                       </span>
                     </div>
 
-                    {article.eventContext && (
-                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-xs font-medium bg-rose-50/80 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800/50">
-                        <Calendar className="w-3 h-3" />
-                        <span>{article.eventContext}</span>
+                    {(monthStamp || article.eventContext) && (
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {monthStamp && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-rose-100/80 dark:bg-rose-950/60 text-rose-900 dark:text-rose-200 border border-rose-200/80 dark:border-rose-800/60">
+                            <Calendar className="w-3 h-3" />
+                            <span>提問時間 {monthStamp}</span>
+                          </span>
+                        )}
+                        {article.eventContext && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-xs font-medium bg-rose-50/80 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800/50">
+                            <span>{article.eventContext}</span>
+                          </span>
+                        )}
                       </div>
                     )}
 

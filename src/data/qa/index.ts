@@ -149,6 +149,7 @@ export const allQAArticles: QAArticle[] = [
     "summary": "選票能決定誰暫時治理這座城市，卻從未改寫誰坐在宇宙寶座上；基督徒既不把政治人物當成救主，也不躲進屬靈象牙塔，而是為執政者禱告、以天國公民的品格持續求這城的平安。",
     "status": "published",
     "publishedAt": "2026-11-28",
+    "askedAt": "2026/11",
     "order": 1,
     "tags": [
       "選舉",

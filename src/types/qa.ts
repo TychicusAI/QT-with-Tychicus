@@ -21,6 +21,7 @@ export interface QAArticle {
   summary: string;
   status: "published" | "upcoming";
   publishedAt?: string;
+  askedAt?: string;
   order?: number;
   tags: string[];
   scriptures: string[];
